@@ -510,12 +510,12 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
                 <div class="chip-cm">SW CM: <span class="chip-cm-name">Ranjani V · Madhura</span></div>
               </div>
               <div class="chip-card a" onclick="openChip('t268')">
-                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">ThorZ</div><span class="ca">MG Active ⚠️</span></div>
-                <div class="chip-phase">Post-silicon · BNB Done ✅ 5/8 · MG/SIT Active</div>
-                <div class="chip-gate">Next gate: <span class="a">QS · Q4 '26</span></div>
-                <div class="chip-bar"><div class="chip-bar-fill" style="width:70%;background:var(--amber)"></div></div>
-                <div class="chip-stat-row"><span>BNB: <span class="g">✓ 5/8</span> · SIT: <span class="ca">67%</span></span><span class="r">3 bugs</span></div>
-                <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--amber);font-size:10px">MBIST Vmax ceiling issue — GPCLK RCA ongoing</span></div>
+                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">ThorZ</div><span class="ca">SW BNB Done · SCG 85% ⚠️</span></div>
+                <div class="chip-phase">Post-silicon · SW BNB ✅ · SCG BNB In Progress</div>
+                <div class="chip-gate">Next gate: <span class="a">BNB (SCG) · 5/27 ⚠️</span></div>
+                <div class="chip-bar"><div class="chip-bar-fill" style="width:65%;background:var(--amber)"></div></div>
+                <div class="chip-stat-row"><span>SW BNB: <span class="g">✓ Done</span> · SCG: <span class="ca">85%</span></span><span class="r">2 bugs</span></div>
+                <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--amber);font-size:10px">SCG BNB targeting 5/27 · MNB/CS 6/13 · CPU Soft Lock up active</span></div>
                 <div class="chip-cm">SW CM: <span class="chip-cm-name">Mayank Kapoor</span></div>
               </div>
               <div class="chip-card a" onclick="openChip('tb500')">
@@ -528,12 +528,12 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
                 <div class="chip-cm">SW CM: <span class="chip-cm-name" style="color:var(--muted);font-weight:400">TBD</span></div>
               </div>
               <div class="chip-card r" onclick="openChip('t354')">
-                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">N2x / T354</div><span class="cr">RTL At Risk ⚠️</span></div>
-                <div class="chip-phase">Pre-silicon · POR ✅ · RTL Phase</div>
-                <div class="chip-gate">Next gate: <span class="r">RTL · Q3 '26 ⚠️</span></div>
-                <div class="chip-bar"><div class="chip-bar-fill" style="width:25%;background:var(--red)"></div></div>
-                <div class="chip-stat-row"><span>POR: <span class="g">✓ Done</span></span><span>0 bugs</span></div>
-                <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--red);font-size:10px">RTL Freeze at risk — 2 blocks behind</span></div>
+                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">N2x / T354</div><span class="cr">FPGA Active · H3 Delayed ⚠️</span></div>
+                <div class="chip-phase">Pre-silicon · FPGA H2.07 Active · H3 6/5</div>
+                <div class="chip-gate">Next gate: <span class="r">Tape-out · Q4 '26</span></div>
+                <div class="chip-bar"><div class="chip-bar-fill" style="width:30%;background:var(--red)"></div></div>
+                <div class="chip-stat-row"><span>FPGA H2.07: <span class="g">Stable</span> · FNL: <span class="ca">6/30</span></span><span class="r">2 bugs</span></div>
+                <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--red);font-size:10px">H3 netlist delayed to 6/5 · DIA HW bugs active</span></div>
                 <div class="chip-cm">SW CM: <span class="chip-cm-name">Vivek Desikan</span></div>
               </div>
               <div class="chip-card g" onclick="openChip('tb600')">
@@ -861,13 +861,13 @@ const CHIPS = {
     risks:[{level:'l',text:'MP production — all major gates cleared'},{level:'l',text:'Ongoing monitoring for field issues'},{level:'l',text:'WAR items resolved — no active P0 blockers'},{level:'l',text:'PCIe & DDR5 issues resolved in production'}],
     actions:[{icon:'📊',text:'Generate MP production report'},{icon:'📋',text:'Review field issue tracker'},{icon:'📧',text:'Send MP completion exec update'},{icon:'🔍',text:'Monitor production yield metrics'},{icon:'📝',text:'Archive ES2 gate documentation'}]
   },
-  t268:{id:'t268',code:'ThorZ',name:'ThorZ',sc:'sc-a',statusCls:'nav-a',statusBadge:'<span class="ca">MG Active ⚠️</span>',cm:'Mayank Kapoor',phase:'Post-silicon · BNB Done · MG/SIT Active',silicon:'ES1 ✅',progress:70,nextGate:'QS',nextGateDate:"Q4 '26",nextGateCls:'a',bugs_count:3,
-    milestones:[{n:'POR',s:'done',d:'✓'},{n:'RTL',s:'done',d:'✓'},{n:'Tape-out',s:'done',d:'✓'},{n:'Bringup',s:'done',d:'✓'},{n:'ES',s:'done',d:'✓'},{n:'BNB',s:'done',d:'✓ 5/8'},{n:'MG',s:'now',d:'SIT 67% ⚠️'},{n:'QS',d:"Q4 '26"},{n:'PS',d:"Q1 '27"},{n:'PRel',d:"Q2 '27"}],
-    bugs:[{id:'6165928',pri:'P0',stat:'Blocked',title:'NVLink lane drop at enumeration on av-h10',next:'FW v3.1 patch in flight · ETA May 22',war:false},{id:'6165939',pri:'P0',stat:'Blocked',title:'Kernel panic on DDR5 init — memory vendor bug',next:'WAR in progress · Memory vendor response pending',war:true},{id:'6165950',pri:'P1',stat:'In Prog',title:'NVLink FW handshake timeout >500ms',next:'FW team debugging · May 24 target',war:false}],
-    reviews:[{doc:'NVLink FW v3.1 Design Spec',owner:'T. Nguyen',due:'May 22',ds:'late'},{doc:'DDR5 WAR Plan',owner:'K. Chen',due:'May 25',ds:'soon'},{doc:'ES1 Gate Review',owner:'TBD',due:'Jun 10',ds:'ok'}],
-    bringup:{type:'post',silicon:'1 lot',boards:'2/2 up',failing:2,tests:[{n:'POST',p:44,f:0,s:'pass'},{n:'DDR5 Init',p:24,f:0,s:'pass'},{n:'PCIe',p:12,f:0,s:'pass'},{n:'NVLink',p:14,f:2,s:'fail'},{n:'Thermal',p:10,f:0,s:'pass'},{n:'DV regression',p:82,f:18,s:'warn'}],next:'NVLink FW v3.1 patch · May 22 · Resolves NVBug 6165928'},
-    risks:[{level:'h',text:'NVLink P0 bugs — 2 blocked, patch in flight'},{level:'m',text:'DDR5 WAR — memory vendor turnaround risk'},{level:'l',text:'DV regression 82% — on track for ES2'}],
-    actions:[{icon:'🐛',text:'Track NVBug 6165928 patch progress'},{icon:'📞',text:'Escalate DDR5 to memory vendor'},{icon:'📋',text:'Draft ES1 gate checklist'},{icon:'📊',text:'Run DV regression report'},{icon:'🔍',text:'Review NVLink FW patch diff'}]
+  t268:{id:'t268',code:'ThorZ',name:'ThorZ',sc:'sc-a',statusCls:'nav-a',statusBadge:'<span class="ca">SW BNB Done · SCG 85% ⚠️</span>',cm:'Mayank Kapoor',phase:'Post-silicon · SW BNB ✅ · SCG BNB In Progress',silicon:'ES1 ✅',progress:65,nextGate:'BNB (SCG)',nextGateDate:'5/27 ⚠️',nextGateCls:'a',bugs_count:2,
+    milestones:[{n:'POR',s:'done',d:'✓'},{n:'RTL',s:'done',d:'✓'},{n:'Tape-out',s:'done',d:'✓'},{n:'Bringup',s:'done',d:'✓'},{n:'ES',s:'done',d:'✓'},{n:'BNB',s:'now',d:'SCG 85% ⚠️'},{n:'MG',d:"Q4 '26"},{n:'QS',d:"Q1 '27"},{n:'PS',d:"Q2 '27"},{n:'PRel',d:"Q3 '27"}],
+    bugs:[{id:'6124878',pri:'P1',stat:'Active',title:'CPU Soft Lock up on ThorZ — intermittent hang',next:'SW team debugging · root cause TBD',war:false},{id:'6178454',pri:'P1',stat:'In Prog',title:'MODS QS Qual release blocking — targeting 6/5',next:'MODS team executing qual plan · ETA 6/5',war:false}],
+    reviews:[{doc:'ThorZ BNB Gate Review',owner:'Mayank Kapoor',due:'May 27',ds:'soon'},{doc:'SCG BNB Coverage Report',owner:'TBD',due:'May 27',ds:'soon'},{doc:'MODS QS Qual Plan',owner:'TBD',due:'Jun 5',ds:'ok'}],
+    bringup:{type:'post',silicon:'ES1',boards:'2/2 up',failing:1,tests:[{n:'SW BNB Signoff',p:100,f:0,s:'pass'},{n:'SCG BNB Coverage',p:85,f:15,s:'warn'},{n:'HWQA MNB Coverage',p:100,f:0,s:'pass'},{n:'HWQA MNB Pass Rate',p:97,f:3,s:'warn'},{n:'Overall SCG Coverage',p:47,f:53,s:'warn'},{n:'MODS QS Qual',p:0,f:0,s:'wait'}],next:'SCG BNB completion targeting 5/27 · MNB/CS 6/13 · MODS QS Qual 6/5'},
+    risks:[{level:'h',text:'SCG BNB 85% — chip BNB gated on SCG completion by 5/27'},{level:'m',text:'MNB/CS slipped 6/7→6/13 — Speed checkouts 5/25, HSIO checkouts 5/27'},{level:'m',text:'CPU Soft Lock up active — Bug 6124878, root cause TBD'},{level:'l',text:'FMAX change may impact test schedule'},{level:'l',text:'QBAA noise issue under investigation'}],
+    actions:[{icon:'📊',text:'Track SCG BNB coverage — target 5/27'},{icon:'🐛',text:'Resolve CPU Soft Lock up — Bug 6124878'},{icon:'📋',text:'MODS QS Qual release — Bug 6178454, target 6/5'},{icon:'⚡',text:'Speed checkouts 5/25 · HSIO checkouts 5/27'},{icon:'🔍',text:'Monitor QBAA noise issue'}]
   },
   tb500:{id:'tb500',code:'TB500',name:'Vera',sc:'sc-a',statusCls:'nav-a',statusBadge:'<span class="ca">QS Active ⚠️</span>',cm:'TBD',phase:'Post-silicon · MG→QS Active',silicon:'ES1 (A01Y)',progress:92,nextGate:'QS (M-pkg)',nextGateDate:"Q2 '26 ⚠️",nextGateCls:'a',bugs_count:1,
     milestones:[{n:'POR',s:'done',d:'✓'},{n:'RTL',s:'done',d:'✓'},{n:'Tape-out',s:'done',d:'✓'},{n:'Bringup',s:'done',d:'✓'},{n:'ES',s:'done',d:'✓'},{n:'BNB',s:'done',d:'✓'},{n:'MG',s:'now',d:'73% 🔵'},{n:'QS',d:"M-pkg 69% ⚠️"},{n:'PS',d:"Q3 '26"},{n:'PRel',d:"Q3 '26"}],
@@ -877,13 +877,13 @@ const CHIPS = {
     risks:[{level:'h',text:'QS-M delayed — 2x QBAA boards setup pending, SW QA pending Hui Fu'},{level:'m',text:'A01Z parts supply gap — 20x expected 5/25, balance mid-June from wf10/wf11'},{level:'m',text:'TB500-M SHTOL delay — Package ID issue resolved, SLT in-progress (Bug 6166265)'},{level:'l',text:'P-Rel BWAT on track — started 5/11, trending to complete 6/19'}],
     actions:[{icon:'🔧',text:'Track QS-M QBAA board setup — ETA 5/21'},{icon:'📦',text:'Follow up on A01Z parts delivery (5/25)'},{icon:'🐛',text:'Monitor SHTOL SLT progress — Bug 6166265'},{icon:'✅',text:'P-Rel BWAT execution — target 6/19'},{icon:'📊',text:'Confirm A01Z VF pre-silicon data from TSMC (Ashish Dash)'}]
   },
-  t354:{id:'t354',code:'T354',name:'N2x',sc:'sc-r',statusCls:'nav-r',statusBadge:'<span class="cr">RTL Freeze At Risk ⚠️</span>',cm:'Vivek Desikan',phase:'Pre-silicon · RTL Freeze At Risk',silicon:'Pre-Si',progress:25,nextGate:'RTL',nextGateDate:"Q3 '26 ⚠️",nextGateCls:'r',bugs_count:0,
-    milestones:[{n:'POR',s:'done',d:'✓'},{n:'RTL',s:'now',d:"Q3 '26 ⚠️"},{n:'Tape-out',d:"Q4 '26"},{n:'Bringup',d:"Q1 '27"},{n:'ES',d:"Q2 '27"},{n:'BNB',d:"Q3 '27"},{n:'MG',d:"Q4 '27"},{n:'QS',d:"Q2 '28"},{n:'PS',d:"Q3 '28"},{n:'PRel',d:"Q4 '28"}],
-    bugs:[],
-    reviews:[{doc:'Ctrl Arch Spec v0.8',owner:'R. Patel',due:'Jun 10',ds:'ok'},{doc:'Memory Subsystem Spec',owner:'TBD',due:'Jun 15',ds:'ok'},{doc:'SW Arch Alignment',owner:'TBD',due:'Jun 20',ds:'ok'}],
-    bringup:{type:'pre',items:[{n:'Spec & Arch Freeze',sub:'Complete — signed off',s:'done',label:'Complete'},{n:'RTL Freeze',sub:"Q3 '26 — at risk, 2 blocks pending",s:'risk',label:'At Risk ⚠️'},{n:'DV Planning',sub:'In progress — tracking RTL',s:'prog',label:'In Progress'},{n:'Tapeout',sub:"Q4 '26 — depends on RTL Freeze",s:'wait',label:'At Risk'},{n:'SW Bringup Spec',sub:'Draft in progress',s:'prog',label:'In Progress'}]},
-    risks:[{level:'h',text:'RTL Freeze at risk — 2 blocks behind schedule'},{level:'h',text:'Tapeout Q4 at risk if RTL Freeze slips'},{level:'m',text:'SW CM not assigned — ownership gap'},{level:'m',text:'DV plan dependent on RTL freeze completion'}],
-    actions:[{icon:'👤',text:'Assign SW CM for N2x program'},{icon:'🚨',text:'Escalate RTL Freeze blockers to RTL lead'},{icon:'📋',text:'Create N2x risk mitigation plan'},{icon:'📅',text:'Schedule RTL Freeze review'},{icon:'📊',text:'Generate N2x status report'}]
+  t354:{id:'t354',code:'T354',name:'N2x',sc:'sc-r',statusCls:'nav-r',statusBadge:'<span class="cr">FPGA Active · H3 Delayed ⚠️</span>',cm:'Vivek Desikan',phase:'Pre-silicon · FPGA H2.07 Active · H3 6/5',silicon:'Pre-Si',progress:30,nextGate:'Tape-out',nextGateDate:"Q4 '26",nextGateCls:'r',bugs_count:2,
+    milestones:[{n:'POR',s:'done',d:'✓'},{n:'RTL',s:'now',d:"Q3 '26"},{n:'Tape-out',d:"Q4 '26"},{n:'Bringup',d:"Q1 '27"},{n:'ES',d:"Q2 '27"},{n:'BNB',d:"Q3 '27"},{n:'MG',d:"Q4 '27"},{n:'QS',d:"Q2 '28"},{n:'PS',d:"Q3 '28"},{n:'PRel',d:"Q4 '28"}],
+    bugs:[{id:'6187150',pri:'P1',stat:'Active',title:'Display BAR0 instability on N2x FPGA',next:'HW team investigating · fix targeted pre-tapeout',war:false},{id:'6037871',pri:'P1',stat:'In Prog',title:'Front door SOC+GPU boot simulation failure',next:'DV team debugging · FPGA H3 dependency',war:false}],
+    reviews:[{doc:'IAS/GFD v0.7 Review',owner:'Multiple',due:'Jun 15',ds:'ok'},{doc:'POR Update (USB4v2/iEP drops)',owner:'Vivek Desikan',due:'Jun 10',ds:'ok'},{doc:'N2x CVB Bringup Plan',owner:'TBD',due:'Jun 30',ds:'ok'}],
+    bringup:{type:'pre',items:[{n:'POR Aligned',sub:'USB4v2 dropped · USB iEP dropped · Meta-DIV15 adopted',s:'done',label:'Complete'},{n:'FPGA H2.07',sub:'Stable — all SW teams executing test plans · FNL 6/30',s:'prog',label:'Active'},{n:'FPGA H3 Netlist',sub:'Delayed 5/11→5/28→6/5 (VIC VPR failure) · IPP FPGA 6/15',s:'risk',label:'At Risk ⚠️'},{n:'A00 E-board CVB',sub:'First N2x board — early July',s:'wait',label:'Planned'},{n:'N1x CVM on N2x CVB',sub:'Early September',s:'wait',label:'Planned'}]},
+    risks:[{level:'h',text:'FPGA H3 netlist delayed to 6/5 — VIC VPR failure, IPP FPGA 6/15'},{level:'h',text:'DIA HW bugs blocking validation — active investigation'},{level:'m',text:'Windows boot not up on FPGA — gap in coverage'},{level:'m',text:'Display BAR0 instability (Bug 6187150) — pre-tapeout fix needed'},{level:'l',text:'Testplan L0:10% L1:5% — 26 IAS/GFD 0.7 reviews pending'}],
+    actions:[{icon:'🔧',text:'Track FPGA H3 netlist — VIC VPR fix, target 6/5'},{icon:'🐛',text:'Resolve Display BAR0 instability — Bug 6187150'},{icon:'🖥️',text:'Bring up Windows boot on FPGA'},{icon:'📋',text:'Drive IAS/GFD 0.7 reviews — 26 pending'},{icon:'📅',text:'Coordinate A00 E-board CVB — early July target'}]
   },
   tb600:{id:'tb600',code:'TB600',name:'Vera Ultra',sc:'sc-g',statusCls:'nav-g',statusBadge:'<span class="cb">Bring-up 🔵</span>',cm:'Hui Fu',phase:'Bring-up · Power On Active',silicon:'ES1',progress:40,nextGate:'ES',nextGateDate:"Q4 '26",nextGateCls:'a',bugs_count:0,
     milestones:[{n:'POR',s:'done',d:'✓'},{n:'RTL',s:'done',d:'✓'},{n:'Tape-out',s:'done',d:'✓'},{n:'Bringup',s:'now',d:'Active 🔵'},{n:'ES',d:"Q4 '26"},{n:'BNB',d:"Q2 '27"},{n:'MG',d:"Q3 '27"},{n:'QS',d:"Q4 '27"},{n:'PS',d:"Q1 '28"},{n:'PRel',d:"Q2 '28"}],
