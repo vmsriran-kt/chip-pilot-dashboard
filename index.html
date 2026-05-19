@@ -54,7 +54,8 @@ body{background:transparent;color:var(--text);font-family:'Segoe UI',system-ui,s
 .main{background:transparent!important}
 
 /* HEADER */
-.hdr{background:var(--bg-hdr);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;gap:12px;flex-shrink:0;box-shadow:var(--shadow)}
+.hdr{background:rgba(22,26,31,0.88);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;gap:12px;flex-shrink:0;box-shadow:var(--shadow)}
+body.light .hdr{background:rgba(248,250,253,0.88)}
 .logo{color:var(--green);font-weight:800;font-size:15px;letter-spacing:.5px;white-space:nowrap}
 .logo span{color:var(--logo-span)}
 .prog-sel{background:var(--bg-sel);border:1px solid var(--border);color:var(--text);padding:6px 10px;border-radius:6px;font-size:12px;min-width:200px}
@@ -1214,7 +1215,7 @@ document.addEventListener('click', e=>{
     const dark = isDark();
     if(n.color==='blue')  return dark ? `rgba(58,120,176,${alpha})`  : `rgba(26,92,160,${alpha})`;
     if(n.color==='green') return dark ? `rgba(94,140,0,${alpha})`    : `rgba(58,94,0,${alpha})`;
-                          return dark ? `rgba(32,120,136,${alpha})`  : `rgba(0,92,104,${alpha})`;
+                          return dark ? `rgba(32,120,136,${alpha})`  : `rgba(0,112,128,${alpha})`;
   }
 
   function draw(){
@@ -1229,8 +1230,8 @@ document.addEventListener('click', e=>{
       vg.addColorStop(0,'rgba(0,0,0,0)');
       vg.addColorStop(1,'rgba(0,0,0,0.35)');
     } else {
-      vg.addColorStop(0,'rgba(0,0,0,0)');
-      vg.addColorStop(1,'rgba(0,0,0,0.06)');
+      vg.addColorStop(0,'rgba(240,243,248,0)');
+      vg.addColorStop(1,'rgba(200,210,225,0.25)');
     }
     ctx.fillStyle = vg;
     ctx.fillRect(0,0,W,H);
@@ -1245,7 +1246,7 @@ document.addEventListener('click', e=>{
         const dist=Math.sqrt(dx*dx+dy*dy);
         if(dist<LINK_DIST){
           const fade = 1-(dist/LINK_DIST);
-          const baseAlpha = dark ? 0.09 : 0.06;
+          const baseAlpha = dark ? 0.09 : 0.10;
           const alpha = fade*baseAlpha;
           /* use the color of the closer-to-center node */
           const col = a.color==='green'||b.color==='green' ? nodeColor(a.color==='green'?a:b, alpha)
@@ -1254,7 +1255,7 @@ document.addEventListener('click', e=>{
           ctx.moveTo(a.x,a.y);
           ctx.lineTo(b.x,b.y);
           ctx.strokeStyle = col;
-          ctx.lineWidth = fade*(dark?0.8:0.5);
+          ctx.lineWidth = fade*(dark?0.8:0.9);
           ctx.stroke();
         }
       }
@@ -1263,7 +1264,7 @@ document.addEventListener('click', e=>{
     /* draw nodes */
     for(const n of nodes){
       const pulse = 0.5+0.5*Math.sin(t*1.2+n.pulse);
-      const alpha = dark ? (0.22+0.18*pulse) : (0.18+0.12*pulse);
+      const alpha = dark ? (0.22+0.18*pulse) : (0.28+0.18*pulse);
       const radius = n.r*(1+0.25*pulse);
       ctx.beginPath();
       ctx.arc(n.x, n.y, radius, 0, Math.PI*2);
