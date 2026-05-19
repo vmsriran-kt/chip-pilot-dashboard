@@ -360,12 +360,15 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
   <select class="prog-sel" id="prog-sel">
     <option value="">All chip programs</option>
     <option value="gr10x">GR10x / Rubin</option>
-    <option value="t268">T268 / Thor Ultra</option>
+    <option value="t268">T268 / ThorZ</option>
     <option value="tb500">TB500 / Vera</option>
     <option value="t354">T354 / N2x</option>
     <option value="tb600">TB600 / Vera Ultra</option>
     <option value="t257">T257 / Monet</option>
     <option value="nr10x">NR10x / NVLink Fusion</option>
+    <option value="tcx10">TCX10</option>
+    <option value="t374">T374 / Beacon</option>
+    <option value="t294">T294 / Magni</option>
   </select>
   <div class="badge-multi">MULTI-CHIP · ACTIVE</div>
   <button class="cp-launch-btn" disabled title="ChipPilot Agent — coming soon" style="opacity:.35;cursor:not-allowed;filter:grayscale(.6)">
@@ -396,7 +399,7 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
       <div class="chip-nav-bar"><div class="chip-nav-bar-fill" style="width:95%;background:var(--green)"></div></div>
     </div>
     <div class="chip-nav-item nav-a" data-chip="t268">
-      <div class="chip-nav-code">T268</div><div class="chip-nav-name">Thor Ultra</div>
+      <div class="chip-nav-code">T268</div><div class="chip-nav-name">ThorZ</div>
       <div class="chip-nav-status">MG Active ⚠️</div>
       <div class="chip-nav-bar"><div class="chip-nav-bar-fill" style="width:70%;background:var(--amber)"></div></div>
     </div>
@@ -424,6 +427,21 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
       <div class="chip-nav-code">NR10x</div><div class="chip-nav-name">NVLink Fusion</div>
       <div class="chip-nav-status">POR Active</div>
       <div class="chip-nav-bar"><div class="chip-nav-bar-fill" style="width:12%;background:var(--green)"></div></div>
+    </div>
+    <div class="chip-nav-item nav-w" data-chip="tcx10">
+      <div class="chip-nav-code">TCX10</div><div class="chip-nav-name">TCX10</div>
+      <div class="chip-nav-status">Planning</div>
+      <div class="chip-nav-bar"><div class="chip-nav-bar-fill" style="width:5%;background:#9b59b6"></div></div>
+    </div>
+    <div class="chip-nav-item nav-w" data-chip="t374">
+      <div class="chip-nav-code">T374</div><div class="chip-nav-name">Beacon</div>
+      <div class="chip-nav-status">Planning</div>
+      <div class="chip-nav-bar"><div class="chip-nav-bar-fill" style="width:5%;background:#9b59b6"></div></div>
+    </div>
+    <div class="chip-nav-item nav-w" data-chip="t294">
+      <div class="chip-nav-code">T294</div><div class="chip-nav-name">Magni</div>
+      <div class="chip-nav-status">Planning</div>
+      <div class="chip-nav-bar"><div class="chip-nav-bar-fill" style="width:5%;background:#9b59b6"></div></div>
     </div>
   </div>
 
@@ -455,14 +473,14 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
               <div class="kpi-label">Chips at risk</div>
               <div class="kpi-val r">2</div>
               <div style="margin-top:5px;display:flex;flex-direction:column;gap:3px">
-                <span style="color:var(--red);font-weight:700;font-size:11px">Thor Ultra · BNB ⚠️</span>
+                <span style="color:var(--red);font-weight:700;font-size:11px">ThorZ · BNB ⚠️</span>
                 <span style="color:var(--red);font-weight:700;font-size:11px">N2x · RTL ⚠️</span>
               </div>
             </div>
             <div class="kpi">
               <div class="kpi-label">Open bugs (all chips)</div>
               <div class="kpi-val" style="color:var(--text)">10</div>
-              <div class="kpi-sub">GR10x 7 · Thor Ultra 3</div>
+              <div class="kpi-sub">GR10x 7 · ThorZ 3</div>
             </div>
             <div class="kpi">
               <div class="kpi-label">Bring-up progress</div>
@@ -489,16 +507,16 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
                 <div class="chip-bar"><div class="chip-bar-fill" style="width:95%;background:var(--amber)"></div></div>
                 <div class="chip-stat-row"><span>QS: <span class="g">✓ Done</span> · PS: <span class="ca">Active</span></span><span class="r">7 bugs</span></div>
                 <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--amber);font-size:10px">PS validation underway — PRel target Q3 '26</span></div>
-                <div class="chip-cm">SW CM: <span class="chip-cm-name">Ranjani V</span></div>
+                <div class="chip-cm">SW CM: <span class="chip-cm-name">Ranjani V · Madhura</span></div>
               </div>
               <div class="chip-card a" onclick="openChip('t268')">
-                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">T268 / Thor Ultra</div><span class="ca">MG Active ⚠️</span></div>
+                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">T268 / ThorZ</div><span class="ca">MG Active ⚠️</span></div>
                 <div class="chip-phase">Post-silicon · BNB Done ✅ 5/8 · MG/SIT Active</div>
                 <div class="chip-gate">Next gate: <span class="a">QS · Q4 '26</span></div>
                 <div class="chip-bar"><div class="chip-bar-fill" style="width:70%;background:var(--amber)"></div></div>
                 <div class="chip-stat-row"><span>BNB: <span class="g">✓ 5/8</span> · SIT: <span class="ca">67%</span></span><span class="r">3 bugs</span></div>
                 <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--amber);font-size:10px">MBIST Vmax ceiling issue — GPCLK RCA ongoing</span></div>
-                <div class="chip-cm">SW CM: <span class="chip-cm-name" style="color:var(--muted);font-weight:400">TBD</span></div>
+                <div class="chip-cm">SW CM: <span class="chip-cm-name">Mayank Kapoor</span></div>
               </div>
               <div class="chip-card a" onclick="openChip('tb500')">
                 <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">TB500 / Vera</div><span class="ca">QS Active ⚠️</span></div>
@@ -516,7 +534,7 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
                 <div class="chip-bar"><div class="chip-bar-fill" style="width:25%;background:var(--red)"></div></div>
                 <div class="chip-stat-row"><span>POR: <span class="g">✓ Done</span></span><span>0 bugs</span></div>
                 <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--red);font-size:10px">RTL Freeze at risk — 2 blocks behind</span></div>
-                <div class="chip-cm">SW CM: <span class="chip-cm-name" style="color:var(--muted);font-weight:400">TBD</span></div>
+                <div class="chip-cm">SW CM: <span class="chip-cm-name">Vivek Desikan</span></div>
               </div>
               <div class="chip-card g" onclick="openChip('tb600')">
                 <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">Vera Ultra / TB600</div><span class="cb">Bringup 🔵</span></div>
@@ -534,7 +552,7 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
                 <div class="chip-bar"><div class="chip-bar-fill" style="width:10%;background:#9b59b6"></div></div>
                 <div class="chip-stat-row"><span>POR: <span class="a">● Active</span></span><span>0 bugs</span></div>
                 <div class="chip-stat-row" style="margin-top:3px"><span style="color:#9b59b6;font-size:10px">RTL Q3 '26 · Tape-out Q4 '26</span></div>
-                <div class="chip-cm">SW CM: <span class="chip-cm-name" style="color:var(--muted);font-weight:400">TBD</span></div>
+                <div class="chip-cm">SW CM: <span class="chip-cm-name">Vivek Desikan</span></div>
               </div>
               <div class="chip-card g" onclick="openChip('nr10x')">
                 <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">NVLink Fusion / NR10x</div><span class="cg">On Track</span></div>
@@ -544,6 +562,33 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
                 <div class="chip-stat-row"><span>POR: <span class="a">● Active</span></span><span>0 bugs</span></div>
                 <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--muted);font-size:10px">NVLink protocol spec in review</span></div>
                 <div class="chip-cm">SW CM: <span class="chip-cm-name" style="color:var(--muted);font-weight:400">TBD</span></div>
+              </div>
+              <div class="chip-card w" onclick="openChip('tcx10')">
+                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">TCX10</div><span class="cw">Planning</span></div>
+                <div class="chip-phase">Pre-silicon · Planning Phase</div>
+                <div class="chip-gate">Next gate: <span class="a">POR · TBD</span></div>
+                <div class="chip-bar"><div class="chip-bar-fill" style="width:5%;background:#9b59b6"></div></div>
+                <div class="chip-stat-row"><span>Status: <span class="cw">● Planning</span></span><span>0 bugs</span></div>
+                <div class="chip-stat-row" style="margin-top:3px"><span style="color:#9b59b6;font-size:10px">Program kick-off in progress</span></div>
+                <div class="chip-cm">SW CM: <span class="chip-cm-name">Roopa</span></div>
+              </div>
+              <div class="chip-card w" onclick="openChip('t374')">
+                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">T374 / Beacon</div><span class="cw">Planning</span></div>
+                <div class="chip-phase">Pre-silicon · Planning Phase</div>
+                <div class="chip-gate">Next gate: <span class="a">POR · TBD</span></div>
+                <div class="chip-bar"><div class="chip-bar-fill" style="width:5%;background:#9b59b6"></div></div>
+                <div class="chip-stat-row"><span>Status: <span class="cw">● Planning</span></span><span>0 bugs</span></div>
+                <div class="chip-stat-row" style="margin-top:3px"><span style="color:#9b59b6;font-size:10px">Program kick-off in progress</span></div>
+                <div class="chip-cm">SW CM: <span class="chip-cm-name">Roopa</span></div>
+              </div>
+              <div class="chip-card w" onclick="openChip('t294')">
+                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">T294 / Magni</div><span class="cw">Planning</span></div>
+                <div class="chip-phase">Pre-silicon · Planning Phase</div>
+                <div class="chip-gate">Next gate: <span class="a">POR · TBD</span></div>
+                <div class="chip-bar"><div class="chip-bar-fill" style="width:5%;background:#9b59b6"></div></div>
+                <div class="chip-stat-row"><span>Status: <span class="cw">● Planning</span></span><span>0 bugs</span></div>
+                <div class="chip-stat-row" style="margin-top:3px"><span style="color:#9b59b6;font-size:10px">Program kick-off in progress</span></div>
+                <div class="chip-cm">SW CM: <span class="chip-cm-name">Roopa</span></div>
               </div>
             </div>
           </div>
@@ -556,12 +601,12 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
               </div>
               <div class="bug-row">
                 <div><span class="bug-id">NVBug 6165928</span><span style="font-size:10px;color:var(--muted);margin-left:6px">T268</span><span class="bug-tag">P0 · Blocked</span></div>
-                <div class="bug-title">Thor Ultra av-h10 — NVLink lane drop at enumeration</div>
+                <div class="bug-title">ThorZ av-h10 — NVLink lane drop at enumeration</div>
                 <div class="bug-next">FW v3.1 patch in flight · ETA May 22 · FW team</div>
               </div>
               <div class="bug-row">
                 <div><span class="bug-id">NVBug 6165939</span><span style="font-size:10px;color:var(--muted);margin-left:6px">T268</span><span class="bug-tag">P0 · Blocked</span></div>
-                <div class="bug-title">Thor Ultra av-h10 — kernel panic on DDR5 init</div>
+                <div class="bug-title">ThorZ av-h10 — kernel panic on DDR5 init</div>
                 <div class="bug-next">WAR in progress · Memory vendor response pending</div>
               </div>
               <div class="bug-footer">8 additional P1/P2 bugs open — View all ↗</div>
@@ -579,7 +624,7 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
                   <tr><td class="a">Thermal TDP</td><td style="color:var(--muted)">GR10x</td><td class="slack-pos">+2d</td><td><span class="ca">At risk</span></td></tr>
                   <tr><td>RTL block gaps</td><td style="color:var(--muted)">Vera</td><td class="slack-pos">+3d</td><td><span class="cn">Watch</span></td></tr>
                   <tr><td>DDR5 spec TBD</td><td style="color:var(--muted)">N2x</td><td class="slack-pos">+4d</td><td><span class="cn">Watch</span></td></tr>
-                  <tr><td>NVLink FW handshake</td><td style="color:var(--muted)">Thor Ultra</td><td class="slack-pos">+5d</td><td><span class="cb">In prog</span></td></tr>
+                  <tr><td>NVLink FW handshake</td><td style="color:var(--muted)">ThorZ</td><td class="slack-pos">+5d</td><td><span class="cb">In prog</span></td></tr>
                   <tr><td>PD timeline slip</td><td style="color:var(--muted)">Monet</td><td class="slack-pos">+6d</td><td><span class="cb">Monitor</span></td></tr>
                   <tr><td>Emulation regression</td><td style="color:var(--muted)">GR10x</td><td class="slack-pos">+7d</td><td><span class="cg">On track</span></td></tr>
                 </tbody>
@@ -612,7 +657,7 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
             </div>
             <div class="card">
               <div class="card-hdr">
-                <span class="card-title">Bringup Trends · Thor Ultra <span style="color:var(--cyan);font-weight:700;font-size:10px;border:1px solid rgba(0,200,200,.3);background:rgba(0,200,200,.08);border-radius:4px;padding:1px 6px;margin-left:4px">BNB</span></span>
+                <span class="card-title">Bringup Trends · ThorZ <span style="color:var(--cyan);font-weight:700;font-size:10px;border:1px solid rgba(0,200,200,.3);background:rgba(0,200,200,.08);border-radius:4px;padding:1px 6px;margin-left:4px">BNB</span></span>
                 <span class="cg">Boot stable</span>
               </div>
               <div class="war-stats">
@@ -637,7 +682,7 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
                 <span style="font-size:10px;color:var(--muted)">impact × likelihood</span>
               </div>
               <table class="hm-table">
-                <thead><tr><th>Domain</th><th>GR10x</th><th>Thor Ultra</th><th>Vera</th><th>N2x</th><th>V·Ultra</th><th>Monet</th></tr></thead>
+                <thead><tr><th>Domain</th><th>GR10x</th><th>ThorZ</th><th>Vera</th><th>N2x</th><th>V·Ultra</th><th>Monet</th></tr></thead>
                 <tbody id="hm-body"></tbody>
               </table>
               <div class="hm-legend">
@@ -673,7 +718,7 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
             <span style="font-size:10px;color:var(--muted)">May 19</span>
           </div>
           <div class="feed-item r"><div class="feed-time">09:14</div><div class="feed-title">PCIe P0 bug filed</div><div class="feed-sub">NVBug 4721839 · GR10x</div></div>
-          <div class="feed-item g"><div class="feed-time">10:02</div><div class="feed-title">NVLink FW handshake ✓</div><div class="feed-sub">Thor Ultra · FW team</div></div>
+          <div class="feed-item g"><div class="feed-time">10:02</div><div class="feed-title">NVLink FW handshake ✓</div><div class="feed-sub">ThorZ · FW team</div></div>
           <div class="feed-item n"><div class="feed-time">11:30</div><div class="feed-title">Thermal ECO #847 opened</div><div class="feed-sub">GR10x · PKG team</div></div>
           <div class="feed-item r"><div class="feed-time">13:45</div><div class="feed-title">Vera RTL freeze +2 blks</div><div class="feed-sub">Vera · RTL team</div></div>
           <div class="feed-item g"><div class="feed-time">14:20</div><div class="feed-title">Sched confidence ↑72%</div><div class="feed-sub">All programs · PM</div></div>
@@ -796,7 +841,7 @@ hmData.forEach(([name,vals])=>{
 
 /* ===== CHIP DATA ===== */
 const CHIPS = {
-  gr10x:{id:'gr10x',code:'GR10x',name:'Rubin',sc:'sc-g',statusCls:'nav-g',statusBadge:'<span class="ca">PS/PRel Active 🔵</span>',cm:'Ranjani V',phase:'Post-silicon · QS Done · PS/PRel In Progress',silicon:'QS ✅',progress:95,nextGate:'PRel',nextGateDate:"Q3 '26",nextGateCls:'a',bugs_count:7,
+  gr10x:{id:'gr10x',code:'GR10x',name:'Rubin',sc:'sc-g',statusCls:'nav-g',statusBadge:'<span class="ca">PS/PRel Active 🔵</span>',cm:'Ranjani V · Madhura',phase:'Post-silicon · QS Done · PS/PRel In Progress',silicon:'QS ✅',progress:95,nextGate:'PRel',nextGateDate:"Q3 '26",nextGateCls:'a',bugs_count:7,
     milestones:[{n:'POR',s:'done',d:'✓'},{n:'RTL',s:'done',d:'✓'},{n:'Tape-out',s:'done',d:'✓'},{n:'Bringup',s:'done',d:'✓'},{n:'ES',s:'done',d:'✓'},{n:'BNB',s:'done',d:'✓'},{n:'MG',s:'done',d:'✓'},{n:'QS',s:'done',d:'✓'},{n:'PS',s:'now',d:'In Progress 🔵'},{n:'PRel',d:"Q3 '26"}],
     bugs:[
       {id:'4721839',pri:'P0',stat:'Blocked',title:'PCIe Gen5 yield degradation on av-h10 boards',next:'Foundry escalation in progress · May 22 ETA',war:true},
@@ -816,7 +861,7 @@ const CHIPS = {
     risks:[{level:'l',text:'MP production — all major gates cleared'},{level:'l',text:'Ongoing monitoring for field issues'},{level:'l',text:'WAR items resolved — no active P0 blockers'},{level:'l',text:'PCIe & DDR5 issues resolved in production'}],
     actions:[{icon:'📊',text:'Generate MP production report'},{icon:'📋',text:'Review field issue tracker'},{icon:'📧',text:'Send MP completion exec update'},{icon:'🔍',text:'Monitor production yield metrics'},{icon:'📝',text:'Archive ES2 gate documentation'}]
   },
-  t268:{id:'t268',code:'T268',name:'Thor Ultra',sc:'sc-a',statusCls:'nav-a',statusBadge:'<span class="ca">MG Active ⚠️</span>',cm:'TBD',phase:'Post-silicon · BNB Done · MG/SIT Active',silicon:'ES1 ✅',progress:70,nextGate:'QS',nextGateDate:"Q4 '26",nextGateCls:'a',bugs_count:3,
+  t268:{id:'t268',code:'T268',name:'ThorZ',sc:'sc-a',statusCls:'nav-a',statusBadge:'<span class="ca">MG Active ⚠️</span>',cm:'Mayank Kapoor',phase:'Post-silicon · BNB Done · MG/SIT Active',silicon:'ES1 ✅',progress:70,nextGate:'QS',nextGateDate:"Q4 '26",nextGateCls:'a',bugs_count:3,
     milestones:[{n:'POR',s:'done',d:'✓'},{n:'RTL',s:'done',d:'✓'},{n:'Tape-out',s:'done',d:'✓'},{n:'Bringup',s:'done',d:'✓'},{n:'ES',s:'done',d:'✓'},{n:'BNB',s:'done',d:'✓ 5/8'},{n:'MG',s:'now',d:'SIT 67% ⚠️'},{n:'QS',d:"Q4 '26"},{n:'PS',d:"Q1 '27"},{n:'PRel',d:"Q2 '27"}],
     bugs:[{id:'6165928',pri:'P0',stat:'Blocked',title:'NVLink lane drop at enumeration on av-h10',next:'FW v3.1 patch in flight · ETA May 22',war:false},{id:'6165939',pri:'P0',stat:'Blocked',title:'Kernel panic on DDR5 init — memory vendor bug',next:'WAR in progress · Memory vendor response pending',war:true},{id:'6165950',pri:'P1',stat:'In Prog',title:'NVLink FW handshake timeout >500ms',next:'FW team debugging · May 24 target',war:false}],
     reviews:[{doc:'NVLink FW v3.1 Design Spec',owner:'T. Nguyen',due:'May 22',ds:'late'},{doc:'DDR5 WAR Plan',owner:'K. Chen',due:'May 25',ds:'soon'},{doc:'ES1 Gate Review',owner:'TBD',due:'Jun 10',ds:'ok'}],
@@ -832,7 +877,7 @@ const CHIPS = {
     risks:[{level:'h',text:'QS-M delayed — 2x QBAA boards setup pending, SW QA pending Hui Fu'},{level:'m',text:'A01Z parts supply gap — 20x expected 5/25, balance mid-June from wf10/wf11'},{level:'m',text:'TB500-M SHTOL delay — Package ID issue resolved, SLT in-progress (Bug 6166265)'},{level:'l',text:'P-Rel BWAT on track — started 5/11, trending to complete 6/19'}],
     actions:[{icon:'🔧',text:'Track QS-M QBAA board setup — ETA 5/21'},{icon:'📦',text:'Follow up on A01Z parts delivery (5/25)'},{icon:'🐛',text:'Monitor SHTOL SLT progress — Bug 6166265'},{icon:'✅',text:'P-Rel BWAT execution — target 6/19'},{icon:'📊',text:'Confirm A01Z VF pre-silicon data from TSMC (Ashish Dash)'}]
   },
-  t354:{id:'t354',code:'T354',name:'N2x',sc:'sc-r',statusCls:'nav-r',statusBadge:'<span class="cr">RTL Freeze At Risk ⚠️</span>',cm:'TBD',phase:'Pre-silicon · RTL Freeze At Risk',silicon:'Pre-Si',progress:25,nextGate:'RTL',nextGateDate:"Q3 '26 ⚠️",nextGateCls:'r',bugs_count:0,
+  t354:{id:'t354',code:'T354',name:'N2x',sc:'sc-r',statusCls:'nav-r',statusBadge:'<span class="cr">RTL Freeze At Risk ⚠️</span>',cm:'Vivek Desikan',phase:'Pre-silicon · RTL Freeze At Risk',silicon:'Pre-Si',progress:25,nextGate:'RTL',nextGateDate:"Q3 '26 ⚠️",nextGateCls:'r',bugs_count:0,
     milestones:[{n:'POR',s:'done',d:'✓'},{n:'RTL',s:'now',d:"Q3 '26 ⚠️"},{n:'Tape-out',d:"Q4 '26"},{n:'Bringup',d:"Q1 '27"},{n:'ES',d:"Q2 '27"},{n:'BNB',d:"Q3 '27"},{n:'MG',d:"Q4 '27"},{n:'QS',d:"Q2 '28"},{n:'PS',d:"Q3 '28"},{n:'PRel',d:"Q4 '28"}],
     bugs:[],
     reviews:[{doc:'Ctrl Arch Spec v0.8',owner:'R. Patel',due:'Jun 10',ds:'ok'},{doc:'Memory Subsystem Spec',owner:'TBD',due:'Jun 15',ds:'ok'},{doc:'SW Arch Alignment',owner:'TBD',due:'Jun 20',ds:'ok'}],
@@ -848,7 +893,7 @@ const CHIPS = {
     risks:[{level:'m',text:'Power On active — early bringup issues expected'},{level:'m',text:'ES1 gate Q4 — tight timeline, monitoring'},{level:'l',text:'SW CM assigned (Hui Fu) — ownership solid'},{level:'l',text:'All Power On tests passing — healthy start'}],
     actions:[{icon:'📋',text:'Create TB600 ES1 gate checklist'},{icon:'📊',text:'Generate TB600 bringup status report'},{icon:'🔍',text:'Review Power On test results'},{icon:'📅',text:'Schedule ES1 gate review for Q4'}]
   },
-  t257:{id:'t257',code:'T257',name:'Monet',sc:'sc-w',statusCls:'nav-w',statusBadge:'<span class="cw">Watching</span>',cm:'TBD',phase:'Pre-silicon · Tapeout Q4 2026',silicon:'Pre-Si',progress:10,nextGate:'POR',nextGateDate:"Jun '26",nextGateCls:'a',bugs_count:0,
+  t257:{id:'t257',code:'T257',name:'Monet',sc:'sc-w',statusCls:'nav-w',statusBadge:'<span class="cw">Watching</span>',cm:'Vivek Desikan',phase:'Pre-silicon · Tapeout Q4 2026',silicon:'Pre-Si',progress:10,nextGate:'POR',nextGateDate:"Jun '26",nextGateCls:'a',bugs_count:0,
     milestones:[{n:'POR',s:'now',d:"Jun '26"},{n:'RTL',d:"Q3 '26"},{n:'Tape-out',d:"Q4 '26"},{n:'Bringup',d:"Q1 '27"},{n:'ES',d:"Q2 '27"},{n:'BNB',d:"Q4 '27"},{n:'MG',d:"Q1 '28"},{n:'QS',d:"Q2 '28"},{n:'PS',d:"Q3 '28"},{n:'PRel',d:"Q4 '28"}],
     bugs:[],
     reviews:[{doc:'PD Kick-off Package',owner:'TBD',due:'Jun 5',ds:'ok'},{doc:'Timeline Risk Assessment',owner:'TBD',due:'Jun 10',ds:'ok'}],
@@ -863,6 +908,30 @@ const CHIPS = {
     bringup:{type:'pre',items:[{n:'NVLink Protocol Spec',sub:'v0.5 in review — on track',s:'prog',label:'In Review'},{n:'Fusion Arch Doc',sub:'Early draft',s:'prog',label:'In Progress'},{n:'RTL Planning',sub:'Post arch freeze',s:'wait',label:'Pending'},{n:'SW Interface Spec',sub:'Not started',s:'wait',label:'Pending'},{n:'SW CM Assignment',sub:'Not assigned yet',s:'risk',label:'Gap'}]},
     risks:[{level:'m',text:'SW CM not assigned — ownership gap'},{level:'l',text:'Protocol spec in review — on track'},{level:'l',text:'No blockers — healthy early phase'}],
     actions:[{icon:'👤',text:'Assign SW CM for NR10x program'},{icon:'📋',text:'Create NR10x arch review package'},{icon:'📊',text:'Draft NVLink protocol coverage plan'},{icon:'📅',text:'Schedule arch freeze timeline review'}]
+  },
+  tcx10:{id:'tcx10',code:'TCX10',name:'TCX10',sc:'sc-w',statusCls:'nav-w',statusBadge:'<span class="cw">Planning</span>',cm:'Roopa',phase:'Pre-silicon · Planning Phase',silicon:'Pre-Si',progress:5,nextGate:'POR',nextGateDate:"TBD",nextGateCls:'a',bugs_count:0,
+    milestones:[{n:'POR',s:'now',d:"TBD"},{n:'RTL',d:"TBD"},{n:'Tape-out',d:"TBD"},{n:'Bringup',d:"TBD"},{n:'ES',d:"TBD"},{n:'BNB',d:"TBD"},{n:'MG',d:"TBD"},{n:'QS',d:"TBD"},{n:'PS',d:"TBD"},{n:'PRel',d:"TBD"}],
+    bugs:[],
+    reviews:[{doc:'POR Planning Doc',owner:'TBD',due:'TBD',ds:'ok'}],
+    bringup:{type:'pre',items:[{n:'POR Kickoff',sub:'Planning in progress',s:'prog',label:'In Progress'},{n:'Arch Spec',sub:'Not started',s:'wait',label:'Pending'},{n:'RTL Planning',sub:'Not started',s:'wait',label:'Pending'}]},
+    risks:[{level:'m',text:'Early planning — SW CM assigned, program kicking off'},{level:'l',text:'No blockers identified yet'}],
+    actions:[{icon:'📋',text:'Kick off TCX10 POR planning'},{icon:'📅',text:'Define chip program milestones and schedule'},{icon:'👥',text:'Identify SW leads for each module'}]
+  },
+  t374:{id:'t374',code:'T374',name:'Beacon',sc:'sc-w',statusCls:'nav-w',statusBadge:'<span class="cw">Planning</span>',cm:'Roopa',phase:'Pre-silicon · Planning Phase',silicon:'Pre-Si',progress:5,nextGate:'POR',nextGateDate:"TBD",nextGateCls:'a',bugs_count:0,
+    milestones:[{n:'POR',s:'now',d:"TBD"},{n:'RTL',d:"TBD"},{n:'Tape-out',d:"TBD"},{n:'Bringup',d:"TBD"},{n:'ES',d:"TBD"},{n:'BNB',d:"TBD"},{n:'MG',d:"TBD"},{n:'QS',d:"TBD"},{n:'PS',d:"TBD"},{n:'PRel',d:"TBD"}],
+    bugs:[],
+    reviews:[{doc:'POR Planning Doc',owner:'TBD',due:'TBD',ds:'ok'}],
+    bringup:{type:'pre',items:[{n:'POR Kickoff',sub:'Planning in progress',s:'prog',label:'In Progress'},{n:'Arch Spec',sub:'Not started',s:'wait',label:'Pending'},{n:'RTL Planning',sub:'Not started',s:'wait',label:'Pending'}]},
+    risks:[{level:'m',text:'Early planning — SW CM assigned, program kicking off'},{level:'l',text:'No blockers identified yet'}],
+    actions:[{icon:'📋',text:'Kick off Beacon POR planning'},{icon:'📅',text:'Define T374 milestone schedule'},{icon:'👥',text:'Identify SW module leads'}]
+  },
+  t294:{id:'t294',code:'T294',name:'Magni',sc:'sc-w',statusCls:'nav-w',statusBadge:'<span class="cw">Planning</span>',cm:'Roopa',phase:'Pre-silicon · Planning Phase',silicon:'Pre-Si',progress:5,nextGate:'POR',nextGateDate:"TBD",nextGateCls:'a',bugs_count:0,
+    milestones:[{n:'POR',s:'now',d:"TBD"},{n:'RTL',d:"TBD"},{n:'Tape-out',d:"TBD"},{n:'Bringup',d:"TBD"},{n:'ES',d:"TBD"},{n:'BNB',d:"TBD"},{n:'MG',d:"TBD"},{n:'QS',d:"TBD"},{n:'PS',d:"TBD"},{n:'PRel',d:"TBD"}],
+    bugs:[],
+    reviews:[{doc:'POR Planning Doc',owner:'TBD',due:'TBD',ds:'ok'}],
+    bringup:{type:'pre',items:[{n:'POR Kickoff',sub:'Planning in progress',s:'prog',label:'In Progress'},{n:'Arch Spec',sub:'Not started',s:'wait',label:'Pending'},{n:'RTL Planning',sub:'Not started',s:'wait',label:'Pending'}]},
+    risks:[{level:'m',text:'Early planning — SW CM assigned, program kicking off'},{level:'l',text:'No blockers identified yet'}],
+    actions:[{icon:'📋',text:'Kick off Magni POR planning'},{icon:'📅',text:'Define T294 milestone schedule'},{icon:'👥',text:'Identify SW module leads'}]
   }
 };
 
