@@ -76,6 +76,7 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
 .chip-nav-item.active{background:var(--nav-active)}
 .chip-nav-item.nav-g{border-left-color:var(--green)}
 .chip-nav-item.nav-r{border-left-color:var(--red)}
+.chip-nav-item.nav-a{border-left-color:var(--amber)}
 .chip-nav-item.nav-w{border-left-color:#9b59b6}
 .chip-nav-code{font-size:11px;font-weight:700;color:var(--text-code);line-height:1.2}
 .chip-nav-name{font-size:9px;color:var(--muted);line-height:1.2}
@@ -85,6 +86,8 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
 .chip-nav-item.nav-g .chip-nav-status::before{background:var(--green)}
 .chip-nav-item.nav-r .chip-nav-status{color:var(--red)}
 .chip-nav-item.nav-r .chip-nav-status::before{background:var(--red)}
+.chip-nav-item.nav-a .chip-nav-status{color:var(--amber)}
+.chip-nav-item.nav-a .chip-nav-status::before{background:var(--amber)}
 .chip-nav-item.nav-w .chip-nav-status{color:#c39bd3}
 .chip-nav-item.nav-w .chip-nav-status::before{background:#9b59b6}
 .chip-nav-bar{height:2px;background:var(--border);border-radius:1px;margin-top:4px;overflow:hidden}
@@ -231,6 +234,7 @@ body.light .bug-war-tag{color:#a06010}
 .chip-hero-code{font-size:28px;font-weight:800;letter-spacing:-.5px;line-height:1}
 .chip-hero-code.sc-g{color:var(--green)}
 .chip-hero-code.sc-r{color:var(--red)}
+.chip-hero-code.sc-a{color:var(--amber)}
 .chip-hero-code.sc-w{color:#9b59b6}
 .chip-hero-divider{width:1px;height:40px;background:var(--border)}
 .chip-hero-info{display:flex;flex-direction:column;gap:4px}
@@ -396,10 +400,10 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
       <div class="chip-nav-status">BNB At Risk ⚠️</div>
       <div class="chip-nav-bar"><div class="chip-nav-bar-fill" style="width:55%;background:var(--red)"></div></div>
     </div>
-    <div class="chip-nav-item nav-w" data-chip="tb500">
+    <div class="chip-nav-item nav-a" data-chip="tb500">
       <div class="chip-nav-code">TB500</div><div class="chip-nav-name">Vera</div>
-      <div class="chip-nav-status">Planning · RTL Q4</div>
-      <div class="chip-nav-bar"><div class="chip-nav-bar-fill" style="width:15%;background:#9b59b6"></div></div>
+      <div class="chip-nav-status">QS Active ⚠️</div>
+      <div class="chip-nav-bar"><div class="chip-nav-bar-fill" style="width:92%;background:var(--amber)"></div></div>
     </div>
     <div class="chip-nav-item nav-r" data-chip="t354">
       <div class="chip-nav-code">T354</div><div class="chip-nav-name">N2x</div>
@@ -496,13 +500,13 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
                 <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--red);font-size:10px">NVLink P0 bugs — BNB gate at risk</span></div>
                 <div class="chip-cm">SW CM: <span class="chip-cm-name" style="color:var(--muted);font-weight:400">TBD</span></div>
               </div>
-              <div class="chip-card w" onclick="openChip('tb500')">
-                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">Vera / TB500</div><span class="cw">Planning</span></div>
-                <div class="chip-phase">Pre-silicon · POR ✅ · RTL Phase</div>
-                <div class="chip-gate">Next gate: <span class="a">RTL · Q4 '26</span></div>
-                <div class="chip-bar"><div class="chip-bar-fill" style="width:15%;background:#9b59b6"></div></div>
-                <div class="chip-stat-row"><span>POR: <span class="g">✓ Done</span></span><span>0 bugs</span></div>
-                <div class="chip-stat-row" style="margin-top:3px"><span style="color:#9b59b6;font-size:10px">RTL in progress — Tape-out Q1 '27</span></div>
+              <div class="chip-card a" onclick="openChip('tb500')">
+                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">TB500 / Vera</div><span class="ca">QS Active ⚠️</span></div>
+                <div class="chip-phase">Post-silicon · ES1 (A01Y) · MG→QS Active</div>
+                <div class="chip-gate">Milestone: <span class="a">QS-M · Delayed ⚠️ · P-Rel BWAT Active</span></div>
+                <div class="chip-bar"><div class="chip-bar-fill" style="width:92%;background:var(--amber)"></div></div>
+                <div class="chip-stat-row"><span>MG: <span class="ca">73%</span> · QS-M: <span class="ca">69%</span></span><span class="r">1 bug</span></div>
+                <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--amber);font-size:10px">P-Rel BWAT started 5/11 — QS-M QBAA boards pending</span></div>
                 <div class="chip-cm">SW CM: <span class="chip-cm-name" style="color:var(--muted);font-weight:400">TBD</span></div>
               </div>
               <div class="chip-card r" onclick="openChip('t354')">
@@ -820,13 +824,13 @@ const CHIPS = {
     risks:[{level:'h',text:'NVLink P0 bugs — 2 blocked, patch in flight'},{level:'m',text:'DDR5 WAR — memory vendor turnaround risk'},{level:'l',text:'DV regression 82% — on track for ES2'}],
     actions:[{icon:'🐛',text:'Track NVBug 6165928 patch progress'},{icon:'📞',text:'Escalate DDR5 to memory vendor'},{icon:'📋',text:'Draft ES1 gate checklist'},{icon:'📊',text:'Run DV regression report'},{icon:'🔍',text:'Review NVLink FW patch diff'}]
   },
-  tb500:{id:'tb500',code:'TB500',name:'Vera',sc:'sc-w',statusCls:'nav-w',statusBadge:'<span class="cw">Planning</span>',cm:'TBD',phase:'Pre-silicon · Planning Phase',silicon:'Pre-Si',progress:15,nextGate:'RTL',nextGateDate:"Q4 '26",nextGateCls:'a',bugs_count:0,
-    milestones:[{n:'POR',s:'done',d:'✓'},{n:'RTL',s:'now',d:"Q4 '26"},{n:'Tape-out',d:"Q1 '27"},{n:'Bringup',d:"Q2 '27"},{n:'ES',d:"Q3 '27"},{n:'BNB',d:"Q4 '27"},{n:'MG',d:"Q1 '28"},{n:'QS',d:"Q2 '28"},{n:'PS',d:"Q3 '28"},{n:'PRel',d:"Q4 '28"}],
-    bugs:[],
-    reviews:[{doc:'RTL Block Coverage Plan',owner:'M. Shah',due:'May 25',ds:'soon'},{doc:'DV Plan v1.0',owner:'TBD',due:'Jun 1',ds:'ok'},{doc:'Tapeout Checklist',owner:'TBD',due:'Jun 15',ds:'ok'},{doc:'SW Bringup Spec',owner:'TBD',due:'Jun 20',ds:'ok'}],
-    bringup:{type:'pre',items:[{n:'Arch Spec',sub:'Fully signed off',s:'done',label:'Complete'},{n:'RTL Start',sub:'In progress — targeting Q4 RTL Freeze',s:'prog',label:'In Progress'},{n:'RTL Freeze',sub:"Planned Q4 '26 — on plan",s:'prog',label:'On Plan'},{n:'DV Plan',sub:'Early planning stage',s:'prog',label:'Planning'},{n:'SW Bringup Spec',sub:'Not started yet',s:'wait',label:'Pending'},{n:'Physical Design',sub:'Awaiting RTL freeze Q4',s:'wait',label:'Blocked'}]},
-    risks:[{level:'m',text:'RTL Freeze Q4 2026 — planning phase, tracking closely'},{level:'m',text:'SW CM not assigned — program ownership gap'},{level:'l',text:'DV planning early stage — needs prioritization'},{level:'l',text:'Arch fully signed off — solid foundation'}],
-    actions:[{icon:'👤',text:'Assign SW CM for Vera program'},{icon:'📋',text:'Finalize RTL Freeze plan for Q4'},{icon:'🔍',text:'Kick off DV planning'},{icon:'📊',text:'Generate Vera planning report'},{icon:'📅',text:'Schedule RTL Freeze milestone review'}]
+  tb500:{id:'tb500',code:'TB500',name:'Vera',sc:'sc-a',statusCls:'nav-a',statusBadge:'<span class="ca">QS Active ⚠️</span>',cm:'TBD',phase:'Post-silicon · MG→QS Active',silicon:'ES1 (A01Y)',progress:92,nextGate:'QS (M-pkg)',nextGateDate:"Q2 '26 ⚠️",nextGateCls:'a',bugs_count:1,
+    milestones:[{n:'POR',s:'done',d:'✓'},{n:'RTL',s:'done',d:'✓'},{n:'Tape-out',s:'done',d:'✓'},{n:'Bringup',s:'done',d:'✓'},{n:'ES',s:'done',d:'✓'},{n:'BNB',s:'done',d:'✓'},{n:'MG',s:'now',d:'73% 🔵'},{n:'QS',d:"M-pkg 69% ⚠️"},{n:'PS',d:"Q3 '26"},{n:'PRel',d:"Q3 '26"}],
+    bugs:[{id:'6166265',pri:'P1',title:'SLT TB500-M UPHY C2C Timeout/Boot Hangs',owner:'TBD',age:5}],
+    reviews:[{doc:'QS-M Qual Report',owner:'S. Bhimanapalli',due:'May 21',ds:'soon'},{doc:'P-Rel BWAT Execution Plan',owner:'TBD',due:'Jun 19',ds:'ok'},{doc:'A01Z DTS Release Plan',owner:'A. Dash',due:'Jun 1',ds:'ok'},{doc:'Arizona Qual SCG Assessment',owner:'TBD',due:'May 30',ds:'soon'}],
+    bringup:{type:'post',silicon:'ES1 (A01Y/A01Z)',boards:'8/8 SIT',failing:1,tests:[{n:'MG Progress',p:73,f:27,s:'warn'},{n:'QS-M Qual',p:69,f:31,s:'warn'},{n:'DTS Release (M-pkg)',p:100,f:0,s:'pass'},{n:'P-Rel BWAT',p:30,f:0,s:'pass'},{n:'SHTOL SLT',p:50,f:1,s:'warn'}],next:'QS-M completion — QBAA boards setup ETA 5/21 · P-Rel BWAT trending 6/19'},
+    risks:[{level:'h',text:'QS-M delayed — 2x QBAA boards setup pending, SW QA pending Hui Fu'},{level:'m',text:'A01Z parts supply gap — 20x expected 5/25, balance mid-June from wf10/wf11'},{level:'m',text:'TB500-M SHTOL delay — Package ID issue resolved, SLT in-progress (Bug 6166265)'},{level:'l',text:'P-Rel BWAT on track — started 5/11, trending to complete 6/19'}],
+    actions:[{icon:'🔧',text:'Track QS-M QBAA board setup — ETA 5/21'},{icon:'📦',text:'Follow up on A01Z parts delivery (5/25)'},{icon:'🐛',text:'Monitor SHTOL SLT progress — Bug 6166265'},{icon:'✅',text:'P-Rel BWAT execution — target 6/19'},{icon:'📊',text:'Confirm A01Z VF pre-silicon data from TSMC (Ashish Dash)'}]
   },
   t354:{id:'t354',code:'T354',name:'N2x',sc:'sc-r',statusCls:'nav-r',statusBadge:'<span class="cr">RTL Freeze At Risk ⚠️</span>',cm:'TBD',phase:'Pre-silicon · RTL Freeze At Risk',silicon:'Pre-Si',progress:25,nextGate:'RTL',nextGateDate:"Q3 '26 ⚠️",nextGateCls:'r',bugs_count:0,
     milestones:[{n:'POR',s:'done',d:'✓'},{n:'RTL',s:'now',d:"Q3 '26 ⚠️"},{n:'Tape-out',d:"Q4 '26"},{n:'Bringup',d:"Q1 '27"},{n:'ES',d:"Q2 '27"},{n:'BNB',d:"Q3 '27"},{n:'MG',d:"Q4 '27"},{n:'QS',d:"Q2 '28"},{n:'PS',d:"Q3 '28"},{n:'PRel',d:"Q4 '28"}],
