@@ -50,6 +50,7 @@ body.light{
 }
 
 body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;min-height:100vh;display:flex;flex-direction:column;transition:background .2s,color .2s}
+.hdr,.body-wrap,.left-nav,.main-panel,.sidebar{position:relative;z-index:1}
 
 /* HEADER */
 .hdr{background:var(--bg-hdr);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;gap:12px;flex-shrink:0;box-shadow:var(--shadow)}
@@ -354,6 +355,7 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
 </style>
 </head>
 <body>
+<canvas id="neural-bg" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
 
 <!-- HEADER -->
 <div class="hdr">
@@ -1169,6 +1171,128 @@ document.addEventListener('click', e=>{
   const btn = e.target.closest('[data-launch-chip]');
   if(btn) launchAgent(btn.dataset.launchChip);
 });
+</script>
+<script>
+(function(){
+  const canvas = document.getElementById('neural-bg');
+  const ctx = canvas.getContext('2d');
+  let W, H, nodes, raf;
+  const DARK_BG   = '#1a1e24';
+  const LIGHT_BG  = '#f0f3f8';
+  const NODE_COUNT = 72;
+  const LINK_DIST  = 160;
+  const NODE_SPEED = 0.22;
+
+  function isDark(){ return !document.body.classList.contains('light'); }
+
+  function resize(){
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  function mkNode(){
+    const angle = Math.random()*Math.PI*2;
+    const speed = NODE_SPEED*(0.4+Math.random()*0.6);
+    return {
+      x: Math.random()*W, y: Math.random()*H,
+      vx: Math.cos(angle)*speed, vy: Math.sin(angle)*speed,
+      r: 0.8+Math.random()*1.4,
+      pulse: Math.random()*Math.PI*2,
+      color: Math.random()<0.65 ? 'blue' : Math.random()<0.6 ? 'green' : 'teal'
+    };
+  }
+
+  function init(){
+    resize();
+    nodes = Array.from({length:NODE_COUNT}, mkNode);
+  }
+
+  function nodeColor(n, alpha){
+    const dark = isDark();
+    if(n.color==='blue')  return dark ? `rgba(58,120,176,${alpha})`  : `rgba(26,92,160,${alpha})`;
+    if(n.color==='green') return dark ? `rgba(94,140,0,${alpha})`    : `rgba(58,94,0,${alpha})`;
+                          return dark ? `rgba(32,120,136,${alpha})`  : `rgba(0,92,104,${alpha})`;
+  }
+
+  function draw(){
+    const dark = isDark();
+    ctx.clearRect(0,0,W,H);
+
+    /* subtle vignette — optional depth */
+    const vg = ctx.createRadialGradient(W/2,H/2,H*0.1,W/2,H/2,H*0.85);
+    if(dark){
+      vg.addColorStop(0,'rgba(0,0,0,0)');
+      vg.addColorStop(1,'rgba(0,0,0,0.35)');
+    } else {
+      vg.addColorStop(0,'rgba(0,0,0,0)');
+      vg.addColorStop(1,'rgba(0,0,0,0.06)');
+    }
+    ctx.fillStyle = vg;
+    ctx.fillRect(0,0,W,H);
+
+    const t = Date.now()/1000;
+
+    /* draw links */
+    for(let i=0;i<nodes.length;i++){
+      for(let j=i+1;j<nodes.length;j++){
+        const a=nodes[i], b=nodes[j];
+        const dx=a.x-b.x, dy=a.y-b.y;
+        const dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<LINK_DIST){
+          const fade = 1-(dist/LINK_DIST);
+          const baseAlpha = dark ? 0.09 : 0.06;
+          const alpha = fade*baseAlpha;
+          /* use the color of the closer-to-center node */
+          const col = a.color==='green'||b.color==='green' ? nodeColor(a.color==='green'?a:b, alpha)
+                                                           : nodeColor(a, alpha);
+          ctx.beginPath();
+          ctx.moveTo(a.x,a.y);
+          ctx.lineTo(b.x,b.y);
+          ctx.strokeStyle = col;
+          ctx.lineWidth = fade*(dark?0.8:0.5);
+          ctx.stroke();
+        }
+      }
+    }
+
+    /* draw nodes */
+    for(const n of nodes){
+      const pulse = 0.5+0.5*Math.sin(t*1.2+n.pulse);
+      const alpha = dark ? (0.22+0.18*pulse) : (0.18+0.12*pulse);
+      const radius = n.r*(1+0.25*pulse);
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, radius, 0, Math.PI*2);
+      ctx.fillStyle = nodeColor(n, alpha);
+      ctx.fill();
+    }
+
+    /* move nodes */
+    for(const n of nodes){
+      n.x += n.vx; n.y += n.vy;
+      if(n.x<-20)  n.x=W+20;
+      if(n.x>W+20) n.x=-20;
+      if(n.y<-20)  n.y=H+20;
+      if(n.y>H+20) n.y=-20;
+    }
+
+    raf = requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', ()=>{ resize(); });
+
+  /* pause when tab hidden for perf */
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden){ cancelAnimationFrame(raf); }
+    else { draw(); }
+  });
+
+  init();
+  draw();
+
+  /* re-init on theme toggle so vignette colour updates */
+  const obs = new MutationObserver(()=>{ cancelAnimationFrame(raf); draw(); });
+  obs.observe(document.body, {attributes:true, attributeFilter:['class']});
+})();
 </script>
 </body>
 </html>
