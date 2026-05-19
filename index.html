@@ -7,45 +7,46 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 
-/* ===== DARK THEME (default) ===== */
+/* ===== DARK THEME (default) — NVIDIA GTC "I Am AI" palette ===== */
 :root{
-  --green:#76b900;--amber:#e8a020;--red:#e05050;--blue:#4a9eff;--cyan:#00c8c8;
-  --card:#151922;--border:#1f2535;--muted:#7a8499;
-  --bg:#0c0f14;--bg-hdr:#0f1117;--bg-nav:#0c0f14;--bg-inner:#0f1520;
-  --bg-sel:#1c2333;--bg-strip:#0f1520;
-  --bg-bug:#1a0f0f;--bg-exec-r:#1a1220;--bg-exec-a:#1a1610;
-  --text:#d0d6e8;--text-strong:#d0d6e8;--text-code:#d0d6e8;
-  --nav-hover:rgba(255,255,255,.04);--nav-active:rgba(255,255,255,.06);
-  --nav-sep:rgba(31,37,53,.5);
-  --chip-card-bg:#0f1520;
-  --exec-name-r:#e8c0c0;--exec-name-a:#e8d0a0;
-  --feed-r:#e89090;--feed-g:#a0d070;--feed-b:#90b8f0;--feed-n:#c0c8d8;
-  --ms-strip-bg:#151922;
-  --logo-span:#fff;
-  --cp-badge-bg:rgba(0,200,200,.07);--cp-badge-border:rgba(0,200,200,.2);
-  --action-bg:#0f1520;
-  --toggle-bg:#1c2333;--toggle-color:#d0d6e8;
+  --green:#76b900;--amber:#b87e18;--red:#a03030;--blue:#3478c0;--cyan:#00a0a8;
+  --card:#0c1018;--border:#171f2e;--muted:#3a4e66;
+  --bg:#07090d;--bg-hdr:#050709;--bg-nav:#080b10;--bg-inner:#10151f;
+  --bg-sel:#141a26;--bg-strip:#10151f;
+  --bg-bug:#0e0a0a;--bg-exec-r:#0e0a10;--bg-exec-a:#0e0c08;
+  --text:#a8b8cc;--text-strong:#c0cedf;--text-code:#a8b8cc;
+  --nav-hover:rgba(255,255,255,.02);--nav-active:rgba(118,185,0,.05);
+  --nav-sep:rgba(23,31,46,.7);
+  --chip-card-bg:#0c1018;
+  --exec-name-r:#b87878;--exec-name-a:#b89060;
+  --feed-r:#906060;--feed-g:#608030;--feed-b:#5880a0;--feed-n:#708090;
+  --ms-strip-bg:#0c1018;
+  --logo-span:#c0cedf;
+  --cp-badge-bg:rgba(0,160,168,.06);--cp-badge-border:rgba(0,160,168,.18);
+  --action-bg:#10151f;
+  --toggle-bg:#141a26;--toggle-color:#a8b8cc;
   --shadow:none;
 }
 
 /* ===== LIGHT THEME ===== */
 body.light{
-  --card:#ffffff;--border:#dde2ed;--muted:#8090a4;
-  --bg:#f0f2f7;--bg-hdr:#ffffff;--bg-nav:#f5f6fa;--bg-inner:#f5f7fc;
-  --bg-sel:#eef0f5;--bg-strip:#ffffff;
-  --bg-bug:#fff5f5;--bg-exec-r:#fff0f3;--bg-exec-a:#fffbee;
-  --text:#1e2330;--text-strong:#1e2330;--text-code:#1e2330;
-  --nav-hover:rgba(0,0,0,.04);--nav-active:rgba(118,185,0,.07);
-  --nav-sep:rgba(200,210,225,.5);
-  --chip-card-bg:#f8faff;
-  --exec-name-r:#c03040;--exec-name-a:#a06020;
-  --feed-r:#c03040;--feed-g:#3a7800;--feed-b:#2060b8;--feed-n:#404860;
+  --green:#3a5e00;--amber:#6a4000;--red:#6e2020;--blue:#1a5ca0;--cyan:#005c68;
+  --card:#ffffff;--border:#d8dfe9;--muted:#3a4e65;
+  --bg:#f0f3f8;--bg-hdr:#f8fafd;--bg-nav:#f4f6fb;--bg-inner:#f0f3f8;
+  --bg-sel:#e8ecf4;--bg-strip:#ffffff;
+  --bg-bug:#f8f0f0;--bg-exec-r:#f8f0f3;--bg-exec-a:#f8f5e8;
+  --text:#0f1825;--text-strong:#080e18;--text-code:#0f1825;
+  --nav-hover:rgba(0,0,0,.03);--nav-active:rgba(58,94,0,.06);
+  --nav-sep:rgba(216,223,233,.8);
+  --chip-card-bg:#ffffff;
+  --exec-name-r:#6e2020;--exec-name-a:#6a4000;
+  --feed-r:#6e2020;--feed-g:#3a5e00;--feed-b:#1a5ca0;--feed-n:#3a4e65;
   --ms-strip-bg:#ffffff;
-  --logo-span:#1e2330;
-  --cp-badge-bg:rgba(0,180,180,.06);--cp-badge-border:rgba(0,180,180,.25);
-  --action-bg:#f0f4fc;
-  --toggle-bg:#e8eaf0;--toggle-color:#404860;
-  --shadow:0 1px 3px rgba(0,0,0,.08);
+  --logo-span:#080e18;
+  --cp-badge-bg:rgba(0,92,104,.05);--cp-badge-border:rgba(0,92,104,.2);
+  --action-bg:#f0f3f8;
+  --toggle-bg:#e8ecf4;--toggle-color:#0f1825;
+  --shadow:0 1px 3px rgba(0,0,0,.06);
 }
 
 body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;min-height:100vh;display:flex;flex-direction:column;transition:background .2s,color .2s}
