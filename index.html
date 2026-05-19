@@ -810,7 +810,7 @@ hmData.forEach(([name,vals])=>{
 /* ===== CHIP DATA ===== */
 const CHIPS = {
   gr10x:{id:'gr10x',code:'GR10x',name:'Rubin',sc:'sc-g',statusCls:'nav-g',statusBadge:'<span class="cg">MP Complete ✅</span>',cm:'Ranjani V',phase:'Post-silicon · MP Complete',silicon:'MP',progress:100,nextGate:'—',nextGateDate:'—',nextGateCls:'g',bugs_count:7,
-    milestones:[{n:'POR',s:'done',d:'✓'},{n:'RTL',s:'done',d:'✓'},{n:'Tape-out',s:'done',d:'✓'},{n:'Bringup',s:'done',d:'✓'},{n:'ES',s:'done',d:'✓'},{n:'BNB',s:'done',d:'✓'},{n:'MG',s:'done',d:'✓'},{n:'QS',s:'now',d:'✓ Done'}],
+    milestones:[{n:'POR',s:'done',d:'✓'},{n:'RTL',s:'done',d:'✓'},{n:'Tape-out',s:'done',d:'✓'},{n:'Bringup',s:'done',d:'✓'},{n:'ES',s:'done',d:'✓'},{n:'BNB',s:'done',d:'✓'},{n:'MG',s:'done',d:'✓'},{n:'QS',s:'done',d:'✓'},{n:'PS',s:'now',d:'✓ Done'},{n:'PRel',d:"Q3 '26"}],
     bugs:[
       {id:'4721839',pri:'P0',stat:'Blocked',title:'PCIe Gen5 yield degradation on av-h10 boards',next:'Foundry escalation in progress · May 22 ETA',war:true},
       {id:'6165928',pri:'P0',stat:'Blocked',title:'NVLink lane drop at enumeration (cross-chip)',next:'FW v3.1 patch in flight · ETA May 22',war:false},
@@ -830,7 +830,7 @@ const CHIPS = {
     actions:[{icon:'📊',text:'Generate MP production report'},{icon:'📋',text:'Review field issue tracker'},{icon:'📧',text:'Send MP completion exec update'},{icon:'🔍',text:'Monitor production yield metrics'},{icon:'📝',text:'Archive ES2 gate documentation'}]
   },
   t268:{id:'t268',code:'T268',name:'N1x',sc:'sc-r',statusCls:'nav-r',statusBadge:'<span class="cr">ES2 At Risk ⚠️</span>',cm:'TBD',phase:'Post-silicon · ES2 At Risk',silicon:'ES1 ✅',progress:55,nextGate:'BNB',nextGateDate:"Q3 '26 ⚠️",nextGateCls:'r',bugs_count:3,
-    milestones:[{n:'POR',s:'done',d:'✓'},{n:'RTL',s:'done',d:'✓'},{n:'Tape-out',s:'done',d:'✓'},{n:'Bringup',s:'done',d:'✓'},{n:'ES',s:'done',d:'✓'},{n:'BNB',s:'now',d:"Q3 '26 ⚠️"},{n:'MG',d:"Q4 '26"},{n:'QS',d:"Q3 '27"}],
+    milestones:[{n:'POR',s:'done',d:'✓'},{n:'RTL',s:'done',d:'✓'},{n:'Tape-out',s:'done',d:'✓'},{n:'Bringup',s:'done',d:'✓'},{n:'ES',s:'done',d:'✓'},{n:'BNB',s:'now',d:"Q3 '26 ⚠️"},{n:'MG',d:"Q4 '26"},{n:'QS',d:"Q3 '27"},{n:'PS',d:"Q4 '27"},{n:'PRel',d:"Q1 '28"}],
     bugs:[{id:'6165928',pri:'P0',stat:'Blocked',title:'NVLink lane drop at enumeration on av-h10',next:'FW v3.1 patch in flight · ETA May 22',war:false},{id:'6165939',pri:'P0',stat:'Blocked',title:'Kernel panic on DDR5 init — memory vendor bug',next:'WAR in progress · Memory vendor response pending',war:true},{id:'6165950',pri:'P1',stat:'In Prog',title:'NVLink FW handshake timeout >500ms',next:'FW team debugging · May 24 target',war:false}],
     reviews:[{doc:'NVLink FW v3.1 Design Spec',owner:'T. Nguyen',due:'May 22',ds:'late'},{doc:'DDR5 WAR Plan',owner:'K. Chen',due:'May 25',ds:'soon'},{doc:'ES1 Gate Review',owner:'TBD',due:'Jun 10',ds:'ok'}],
     bringup:{type:'post',silicon:'1 lot',boards:'2/2 up',failing:2,tests:[{n:'POST',p:44,f:0,s:'pass'},{n:'DDR5 Init',p:24,f:0,s:'pass'},{n:'PCIe',p:12,f:0,s:'pass'},{n:'NVLink',p:14,f:2,s:'fail'},{n:'Thermal',p:10,f:0,s:'pass'},{n:'DV regression',p:82,f:18,s:'warn'}],next:'NVLink FW v3.1 patch · May 22 · Resolves NVBug 6165928'},
@@ -838,7 +838,7 @@ const CHIPS = {
     actions:[{icon:'🐛',text:'Track NVBug 6165928 patch progress'},{icon:'📞',text:'Escalate DDR5 to memory vendor'},{icon:'📋',text:'Draft ES1 gate checklist'},{icon:'📊',text:'Run DV regression report'},{icon:'🔍',text:'Review NVLink FW patch diff'}]
   },
   tb500:{id:'tb500',code:'TB500',name:'Vera',sc:'sc-w',statusCls:'nav-w',statusBadge:'<span class="cw">Planning</span>',cm:'TBD',phase:'Pre-silicon · Planning Phase',silicon:'Pre-Si',progress:15,nextGate:'RTL',nextGateDate:"Q4 '26",nextGateCls:'a',bugs_count:0,
-    milestones:[{n:'POR',s:'done',d:'✓'},{n:'RTL',s:'now',d:"Q4 '26"},{n:'Tape-out',d:"Q1 '27"},{n:'Bringup',d:"Q2 '27"},{n:'ES',d:"Q3 '27"},{n:'BNB',d:"Q4 '27"},{n:'MG',d:"Q1 '28"},{n:'QS',d:"Q2 '28"}],
+    milestones:[{n:'POR',s:'done',d:'✓'},{n:'RTL',s:'now',d:"Q4 '26"},{n:'Tape-out',d:"Q1 '27"},{n:'Bringup',d:"Q2 '27"},{n:'ES',d:"Q3 '27"},{n:'BNB',d:"Q4 '27"},{n:'MG',d:"Q1 '28"},{n:'QS',d:"Q2 '28"},{n:'PS',d:"Q3 '28"},{n:'PRel',d:"Q4 '28"}],
     bugs:[],
     reviews:[{doc:'RTL Block Coverage Plan',owner:'M. Shah',due:'May 25',ds:'soon'},{doc:'DV Plan v1.0',owner:'TBD',due:'Jun 1',ds:'ok'},{doc:'Tapeout Checklist',owner:'TBD',due:'Jun 15',ds:'ok'},{doc:'SW Bringup Spec',owner:'TBD',due:'Jun 20',ds:'ok'}],
     bringup:{type:'pre',items:[{n:'Arch Spec',sub:'Fully signed off',s:'done',label:'Complete'},{n:'RTL Start',sub:'In progress — targeting Q4 RTL Freeze',s:'prog',label:'In Progress'},{n:'RTL Freeze',sub:"Planned Q4 '26 — on plan",s:'prog',label:'On Plan'},{n:'DV Plan',sub:'Early planning stage',s:'prog',label:'Planning'},{n:'SW Bringup Spec',sub:'Not started yet',s:'wait',label:'Pending'},{n:'Physical Design',sub:'Awaiting RTL freeze Q4',s:'wait',label:'Blocked'}]},
@@ -846,7 +846,7 @@ const CHIPS = {
     actions:[{icon:'👤',text:'Assign SW CM for Vera program'},{icon:'📋',text:'Finalize RTL Freeze plan for Q4'},{icon:'🔍',text:'Kick off DV planning'},{icon:'📊',text:'Generate Vera planning report'},{icon:'📅',text:'Schedule RTL Freeze milestone review'}]
   },
   t354:{id:'t354',code:'T354',name:'N2x',sc:'sc-r',statusCls:'nav-r',statusBadge:'<span class="cr">RTL Freeze At Risk ⚠️</span>',cm:'TBD',phase:'Pre-silicon · RTL Freeze At Risk',silicon:'Pre-Si',progress:25,nextGate:'RTL',nextGateDate:"Q3 '26 ⚠️",nextGateCls:'r',bugs_count:0,
-    milestones:[{n:'POR',s:'done',d:'✓'},{n:'RTL',s:'now',d:"Q3 '26 ⚠️"},{n:'Tape-out',d:"Q4 '26"},{n:'Bringup',d:"Q1 '27"},{n:'ES',d:"Q2 '27"},{n:'BNB',d:"Q3 '27"},{n:'MG',d:"Q4 '27"},{n:'QS',d:"Q2 '28"}],
+    milestones:[{n:'POR',s:'done',d:'✓'},{n:'RTL',s:'now',d:"Q3 '26 ⚠️"},{n:'Tape-out',d:"Q4 '26"},{n:'Bringup',d:"Q1 '27"},{n:'ES',d:"Q2 '27"},{n:'BNB',d:"Q3 '27"},{n:'MG',d:"Q4 '27"},{n:'QS',d:"Q2 '28"},{n:'PS',d:"Q3 '28"},{n:'PRel',d:"Q4 '28"}],
     bugs:[],
     reviews:[{doc:'Ctrl Arch Spec v0.8',owner:'R. Patel',due:'Jun 10',ds:'ok'},{doc:'Memory Subsystem Spec',owner:'TBD',due:'Jun 15',ds:'ok'},{doc:'SW Arch Alignment',owner:'TBD',due:'Jun 20',ds:'ok'}],
     bringup:{type:'pre',items:[{n:'Spec & Arch Freeze',sub:'Complete — signed off',s:'done',label:'Complete'},{n:'RTL Freeze',sub:"Q3 '26 — at risk, 2 blocks pending",s:'risk',label:'At Risk ⚠️'},{n:'DV Planning',sub:'In progress — tracking RTL',s:'prog',label:'In Progress'},{n:'Tapeout',sub:"Q4 '26 — depends on RTL Freeze",s:'wait',label:'At Risk'},{n:'SW Bringup Spec',sub:'Draft in progress',s:'prog',label:'In Progress'}]},
@@ -854,7 +854,7 @@ const CHIPS = {
     actions:[{icon:'👤',text:'Assign SW CM for N2x program'},{icon:'🚨',text:'Escalate RTL Freeze blockers to RTL lead'},{icon:'📋',text:'Create N2x risk mitigation plan'},{icon:'📅',text:'Schedule RTL Freeze review'},{icon:'📊',text:'Generate N2x status report'}]
   },
   tb600:{id:'tb600',code:'TB600',name:'Vera Ultra',sc:'sc-g',statusCls:'nav-g',statusBadge:'<span class="cb">Bring-up 🔵</span>',cm:'Hui Fu',phase:'Bring-up · Power On Active',silicon:'ES1',progress:40,nextGate:'ES',nextGateDate:"Q4 '26",nextGateCls:'a',bugs_count:0,
-    milestones:[{n:'POR',s:'done',d:'✓'},{n:'RTL',s:'done',d:'✓'},{n:'Tape-out',s:'done',d:'✓'},{n:'Bringup',s:'now',d:'Active 🔵'},{n:'ES',d:"Q4 '26"},{n:'BNB',d:"Q2 '27"},{n:'MG',d:"Q3 '27"},{n:'QS',d:"Q4 '27"}],
+    milestones:[{n:'POR',s:'done',d:'✓'},{n:'RTL',s:'done',d:'✓'},{n:'Tape-out',s:'done',d:'✓'},{n:'Bringup',s:'now',d:'Active 🔵'},{n:'ES',d:"Q4 '26"},{n:'BNB',d:"Q2 '27"},{n:'MG',d:"Q3 '27"},{n:'QS',d:"Q4 '27"},{n:'PS',d:"Q1 '28"},{n:'PRel',d:"Q2 '28"}],
     bugs:[],
     reviews:[{doc:'TB600 Feature Roadmap',owner:'Hui Fu',due:'Jun 5',ds:'ok'},{doc:'Arch Planning Doc',owner:'P. Wong',due:'Jun 20',ds:'ok'},{doc:'SW Bringup Roadmap',owner:'Hui Fu',due:'Jul 1',ds:'ok'}],
     bringup:{type:'post',silicon:'ES1 lot 1',boards:'2/2 up',failing:0,tests:[{n:'POST self-test',p:22,f:0,s:'pass'},{n:'DDR5 training',p:18,f:0,s:'pass'},{n:'PCIe enumeration',p:12,f:0,s:'pass'},{n:'NVLink init',p:10,f:0,s:'pass'},{n:'Thermal monitor',p:8,f:0,s:'pass'},{n:'GPU compute',p:14,f:0,s:'pass'}],next:'ES1 gate validation — Q4 2026 target · Hui Fu leading'},
@@ -862,7 +862,7 @@ const CHIPS = {
     actions:[{icon:'📋',text:'Create TB600 ES1 gate checklist'},{icon:'📊',text:'Generate TB600 bringup status report'},{icon:'🔍',text:'Review Power On test results'},{icon:'📅',text:'Schedule ES1 gate review for Q4'}]
   },
   t257:{id:'t257',code:'T257',name:'Monet',sc:'sc-w',statusCls:'nav-w',statusBadge:'<span class="cw">Watching</span>',cm:'TBD',phase:'Pre-silicon · Tapeout Q4 2026',silicon:'Pre-Si',progress:10,nextGate:'POR',nextGateDate:"Jun '26",nextGateCls:'a',bugs_count:0,
-    milestones:[{n:'POR',s:'now',d:"Jun '26"},{n:'RTL',d:"Q3 '26"},{n:'Tape-out',d:"Q4 '26"},{n:'Bringup',d:"Q1 '27"},{n:'ES',d:"Q2 '27"},{n:'BNB',d:"Q4 '27"},{n:'MG',d:"Q1 '28"},{n:'QS',d:"Q2 '28"}],
+    milestones:[{n:'POR',s:'now',d:"Jun '26"},{n:'RTL',d:"Q3 '26"},{n:'Tape-out',d:"Q4 '26"},{n:'Bringup',d:"Q1 '27"},{n:'ES',d:"Q2 '27"},{n:'BNB',d:"Q4 '27"},{n:'MG',d:"Q1 '28"},{n:'QS',d:"Q2 '28"},{n:'PS',d:"Q3 '28"},{n:'PRel',d:"Q4 '28"}],
     bugs:[],
     reviews:[{doc:'PD Kick-off Package',owner:'TBD',due:'Jun 5',ds:'ok'},{doc:'Timeline Risk Assessment',owner:'TBD',due:'Jun 10',ds:'ok'}],
     bringup:{type:'pre',items:[{n:'Spec & Architecture',sub:'Complete — well reviewed',s:'done',label:'Complete'},{n:'PD Kick-off',sub:'June target — monitoring',s:'prog',label:'Monitoring'},{n:'PD Timeline',sub:'Slipping — 2-week risk',s:'risk',label:'At Risk'},{n:'RTL Planning',sub:'Depends on PD',s:'wait',label:'Pending'},{n:'SW CM Assignment',sub:'Not assigned yet',s:'risk',label:'Gap'}]},
@@ -870,7 +870,7 @@ const CHIPS = {
     actions:[{icon:'👤',text:'Assign SW CM for Monet program'},{icon:'📅',text:'Track PD kick-off timeline weekly'},{icon:'📊',text:'Generate Monet watching report'},{icon:'🔍',text:'Assess 2-week PD slip impact'}]
   },
   nr10x:{id:'nr10x',code:'NR10x',name:'NVLink Fusion',sc:'sc-g',statusCls:'nav-g',statusBadge:'<span class="cg">On Track</span>',cm:'TBD',phase:'Pre-silicon · Spec Phase',silicon:'Pre-Si',progress:12,nextGate:'RTL',nextGateDate:"Q4 '26",nextGateCls:'g',bugs_count:0,
-    milestones:[{n:'POR',s:'now',d:"Q3 '26"},{n:'RTL',d:"Q4 '26"},{n:'Tape-out',d:"Q2 '27"},{n:'Bringup',d:"Q4 '27"},{n:'ES',d:"Q1 '28"},{n:'BNB',d:"Q3 '28"},{n:'MG',d:"Q4 '28"},{n:'QS',d:"Q1 '29"}],
+    milestones:[{n:'POR',s:'now',d:"Q3 '26"},{n:'RTL',d:"Q4 '26"},{n:'Tape-out',d:"Q2 '27"},{n:'Bringup',d:"Q4 '27"},{n:'ES',d:"Q1 '28"},{n:'BNB',d:"Q3 '28"},{n:'MG',d:"Q4 '28"},{n:'QS',d:"Q1 '29"},{n:'PS',d:"Q2 '29"},{n:'PRel',d:"Q3 '29"}],
     bugs:[],
     reviews:[{doc:'NVLink Protocol Spec v0.5',owner:'S. Iyer',due:'Jun 15',ds:'ok'},{doc:'Fusion Architecture Doc',owner:'TBD',due:'Jul 1',ds:'ok'}],
     bringup:{type:'pre',items:[{n:'NVLink Protocol Spec',sub:'v0.5 in review — on track',s:'prog',label:'In Review'},{n:'Fusion Arch Doc',sub:'Early draft',s:'prog',label:'In Progress'},{n:'RTL Planning',sub:'Post arch freeze',s:'wait',label:'Pending'},{n:'SW Interface Spec',sub:'Not started',s:'wait',label:'Pending'},{n:'SW CM Assignment',sub:'Not assigned yet',s:'risk',label:'Gap'}]},
