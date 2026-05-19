@@ -356,7 +356,7 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
   <select class="prog-sel" id="prog-sel">
     <option value="">All chip programs</option>
     <option value="gr10x">GR10x / Rubin</option>
-    <option value="t268">T268 / ThorZ</option>
+    <option value="t268">T268 / N1x</option>
     <option value="tb500">TB500 / Vera</option>
     <option value="t354">T354 / N2x</option>
     <option value="tb600">TB600 / Vera Ultra</option>
@@ -479,65 +479,65 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
             </div>
             <div class="chips-grid">
               <div class="chip-card g" onclick="openChip('gr10x')">
-                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">GR10x / Rubin</div><span class="cg">On Track</span></div>
-                <div class="chip-phase">Post-silicon · Production</div>
-                <div class="chip-gate">Next gate: CS · <span class="a">Jun 6</span></div>
-                <div class="chip-bar"><div class="chip-bar-fill" style="width:72%;background:var(--green)"></div></div>
-                <div class="chip-stat-row"><span>Boot: <span class="g">UEFI · OS</span></span><span class="r">7 bugs</span></div>
-                <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--amber);font-size:10px">PCIe yield — WAR in progress</span></div>
+                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">GR10x / Rubin</div><span class="cg">MP Complete ✅</span></div>
+                <div class="chip-phase">Post-silicon · QS → PS Active</div>
+                <div class="chip-gate">Milestone: <span class="g">PS · In Progress</span></div>
+                <div class="chip-bar"><div class="chip-bar-fill" style="width:100%;background:var(--green)"></div></div>
+                <div class="chip-stat-row"><span>POR→QS: <span class="g">✓ All Done</span></span><span class="r">7 bugs</span></div>
+                <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--green);font-size:10px">Production monitoring — all gates cleared</span></div>
                 <div class="chip-cm">SW CM: <span class="chip-cm-name">Ranjani V</span></div>
               </div>
-              <div class="chip-card g" onclick="openChip('t268')">
-                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">ThorZ / T268</div><span class="cg">On Track</span></div>
-                <div class="chip-phase">Post-silicon · ES2+</div>
-                <div class="chip-gate">Next gate: CS+ · <span class="a">Aug</span></div>
-                <div class="chip-bar"><div class="chip-bar-fill" style="width:55%;background:var(--green)"></div></div>
-                <div class="chip-stat-row"><span>NVLink FW: <span class="g">✓ ES2</span></span><span class="a">3 bugs</span></div>
-                <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--muted);font-size:10px">DV regression 82% complete</span></div>
+              <div class="chip-card r" onclick="openChip('t268')">
+                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">N1x / T268</div><span class="cr">BNB At Risk ⚠️</span></div>
+                <div class="chip-phase">Post-silicon · ES ✅ · BNB Phase</div>
+                <div class="chip-gate">Next gate: <span class="r">BNB · Q3 '26 ⚠️</span></div>
+                <div class="chip-bar"><div class="chip-bar-fill" style="width:55%;background:var(--red)"></div></div>
+                <div class="chip-stat-row"><span>ES: <span class="g">✓ Done</span></span><span class="r">3 bugs</span></div>
+                <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--red);font-size:10px">NVLink P0 bugs — BNB gate at risk</span></div>
                 <div class="chip-cm">SW CM: <span class="chip-cm-name" style="color:var(--muted);font-weight:400">TBD</span></div>
               </div>
-              <div class="chip-card r" onclick="openChip('tb500')">
-                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">Vera / TB500</div><span class="cr">At Risk</span></div>
-                <div class="chip-phase">Pre-silicon · Tapeout Q3</div>
-                <div class="chip-gate">Next gate: RTL Freeze · <span class="r">Jun 30</span></div>
-                <div class="chip-bar"><div class="chip-bar-fill" style="width:30%;background:var(--red)"></div></div>
-                <div class="chip-stat-row"><span>RTL: <span class="r">● In prog</span></span><span>0 bugs</span></div>
-                <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--red);font-size:10px">RTL block gaps · DV not started</span></div>
+              <div class="chip-card w" onclick="openChip('tb500')">
+                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">Vera / TB500</div><span class="cw">Planning</span></div>
+                <div class="chip-phase">Pre-silicon · POR ✅ · RTL Phase</div>
+                <div class="chip-gate">Next gate: <span class="a">RTL · Q4 '26</span></div>
+                <div class="chip-bar"><div class="chip-bar-fill" style="width:15%;background:#9b59b6"></div></div>
+                <div class="chip-stat-row"><span>POR: <span class="g">✓ Done</span></span><span>0 bugs</span></div>
+                <div class="chip-stat-row" style="margin-top:3px"><span style="color:#9b59b6;font-size:10px">RTL in progress — Tape-out Q1 '27</span></div>
                 <div class="chip-cm">SW CM: <span class="chip-cm-name" style="color:var(--muted);font-weight:400">TBD</span></div>
               </div>
               <div class="chip-card r" onclick="openChip('t354')">
-                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">N2x / T354</div><span class="cr">At Risk</span></div>
-                <div class="chip-phase">Pre-silicon · Tapeout Q3</div>
-                <div class="chip-gate">Next gate: Arch Freeze · <span class="r">Jun 15</span></div>
-                <div class="chip-bar"><div class="chip-bar-fill" style="width:20%;background:var(--red)"></div></div>
-                <div class="chip-stat-row"><span>RTL: <span class="a">●</span></span><span>0 bugs</span></div>
-                <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--red);font-size:10px">Early — ctrl spec not finalized</span></div>
+                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">N2x / T354</div><span class="cr">RTL At Risk ⚠️</span></div>
+                <div class="chip-phase">Pre-silicon · POR ✅ · RTL Phase</div>
+                <div class="chip-gate">Next gate: <span class="r">RTL · Q3 '26 ⚠️</span></div>
+                <div class="chip-bar"><div class="chip-bar-fill" style="width:25%;background:var(--red)"></div></div>
+                <div class="chip-stat-row"><span>POR: <span class="g">✓ Done</span></span><span>0 bugs</span></div>
+                <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--red);font-size:10px">RTL Freeze at risk — 2 blocks behind</span></div>
                 <div class="chip-cm">SW CM: <span class="chip-cm-name" style="color:var(--muted);font-weight:400">TBD</span></div>
               </div>
               <div class="chip-card g" onclick="openChip('tb600')">
-                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">Vera Ultra / TB600</div><span class="cg">On Track</span></div>
-                <div class="chip-phase">Pre-silicon · TO Q2 '27</div>
-                <div class="chip-gate">Next gate: Arch Review · <span class="g">Q3</span></div>
-                <div class="chip-bar"><div class="chip-bar-fill" style="width:15%;background:var(--green)"></div></div>
-                <div class="chip-stat-row"><span>RTL: <span class="g">✓</span></span><span>0 bugs</span></div>
-                <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--muted);font-size:10px">Spec planning underway</span></div>
+                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">Vera Ultra / TB600</div><span class="cb">Bringup 🔵</span></div>
+                <div class="chip-phase">Bring-up · Tape-out ✅ · Bringup Active</div>
+                <div class="chip-gate">Next gate: <span class="a">ES · Q4 '26</span></div>
+                <div class="chip-bar"><div class="chip-bar-fill" style="width:40%;background:var(--blue)"></div></div>
+                <div class="chip-stat-row"><span>Bringup: <span class="cb">● Active</span></span><span>0 bugs</span></div>
+                <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--blue);font-size:10px">Power On complete — all tests passing</span></div>
                 <div class="chip-cm">SW CM: <span class="chip-cm-name">Hui Fu</span></div>
               </div>
               <div class="chip-card w" onclick="openChip('t257')">
                 <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">Monet / T257</div><span class="cw">Watching</span></div>
-                <div class="chip-phase">Pre-silicon · TO Q4 '26</div>
-                <div class="chip-gate">Next gate: PD Kick-off · <span class="a">Jun</span></div>
+                <div class="chip-phase">Pre-silicon · POR Phase</div>
+                <div class="chip-gate">Next gate: <span class="a">POR · Jun '26</span></div>
                 <div class="chip-bar"><div class="chip-bar-fill" style="width:10%;background:#9b59b6"></div></div>
-                <div class="chip-stat-row"><span>RTL: <span class="g">✓</span></span><span>0 bugs</span></div>
-                <div class="chip-stat-row" style="margin-top:3px"><span style="color:#9b59b6;font-size:10px">PD timeline slipping — monitoring</span></div>
+                <div class="chip-stat-row"><span>POR: <span class="a">● Active</span></span><span>0 bugs</span></div>
+                <div class="chip-stat-row" style="margin-top:3px"><span style="color:#9b59b6;font-size:10px">RTL Q3 '26 · Tape-out Q4 '26</span></div>
                 <div class="chip-cm">SW CM: <span class="chip-cm-name" style="color:var(--muted);font-weight:400">TBD</span></div>
               </div>
               <div class="chip-card g" onclick="openChip('nr10x')">
                 <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">NVLink Fusion / NR10x</div><span class="cg">On Track</span></div>
-                <div class="chip-phase">Pre-silicon · Spec Phase</div>
-                <div class="chip-gate">Next gate: Arch Freeze · <span class="g">Q3</span></div>
+                <div class="chip-phase">Pre-silicon · POR Phase</div>
+                <div class="chip-gate">Next gate: <span class="g">RTL · Q4 '26</span></div>
                 <div class="chip-bar"><div class="chip-bar-fill" style="width:12%;background:var(--green)"></div></div>
-                <div class="chip-stat-row"><span>RTL: <span class="a">● Early</span></span><span>0 bugs</span></div>
+                <div class="chip-stat-row"><span>POR: <span class="a">● Active</span></span><span>0 bugs</span></div>
                 <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--muted);font-size:10px">NVLink protocol spec in review</span></div>
                 <div class="chip-cm">SW CM: <span class="chip-cm-name" style="color:var(--muted);font-weight:400">TBD</span></div>
               </div>
@@ -552,12 +552,12 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
               </div>
               <div class="bug-row">
                 <div><span class="bug-id">NVBug 6165928</span><span style="font-size:10px;color:var(--muted);margin-left:6px">T268</span><span class="bug-tag">P0 · Blocked</span></div>
-                <div class="bug-title">ThorZ av-h10 — NVLink lane drop at enumeration</div>
+                <div class="bug-title">N1x av-h10 — NVLink lane drop at enumeration</div>
                 <div class="bug-next">FW v3.1 patch in flight · ETA May 22 · FW team</div>
               </div>
               <div class="bug-row">
                 <div><span class="bug-id">NVBug 6165939</span><span style="font-size:10px;color:var(--muted);margin-left:6px">T268</span><span class="bug-tag">P0 · Blocked</span></div>
-                <div class="bug-title">ThorZ av-h10 — kernel panic on DDR5 init</div>
+                <div class="bug-title">N1x av-h10 — kernel panic on DDR5 init</div>
                 <div class="bug-next">WAR in progress · Memory vendor response pending</div>
               </div>
               <div class="bug-footer">8 additional P1/P2 bugs open — View all ↗</div>
@@ -575,7 +575,7 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
                   <tr><td class="a">Thermal TDP</td><td style="color:var(--muted)">GR10x</td><td class="slack-pos">+2d</td><td><span class="ca">At risk</span></td></tr>
                   <tr><td>RTL block gaps</td><td style="color:var(--muted)">Vera</td><td class="slack-pos">+3d</td><td><span class="cn">Watch</span></td></tr>
                   <tr><td>DDR5 spec TBD</td><td style="color:var(--muted)">N2x</td><td class="slack-pos">+4d</td><td><span class="cn">Watch</span></td></tr>
-                  <tr><td>NVLink FW handshake</td><td style="color:var(--muted)">ThorZ</td><td class="slack-pos">+5d</td><td><span class="cb">In prog</span></td></tr>
+                  <tr><td>NVLink FW handshake</td><td style="color:var(--muted)">N1x</td><td class="slack-pos">+5d</td><td><span class="cb">In prog</span></td></tr>
                   <tr><td>PD timeline slip</td><td style="color:var(--muted)">Monet</td><td class="slack-pos">+6d</td><td><span class="cb">Monitor</span></td></tr>
                   <tr><td>Emulation regression</td><td style="color:var(--muted)">GR10x</td><td class="slack-pos">+7d</td><td><span class="cg">On track</span></td></tr>
                 </tbody>
@@ -587,7 +587,7 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
           <div class="bottom-row">
             <div class="card">
               <div class="card-hdr">
-                <span class="card-title">Bringup Trends · GR10x <span style="color:var(--cyan);font-weight:700;font-size:10px;border:1px solid rgba(0,200,200,.3);background:rgba(0,200,200,.08);border-radius:4px;padding:1px 6px;margin-left:4px">ES2</span></span>
+                <span class="card-title">Bringup Trends · GR10x <span style="color:var(--cyan);font-weight:700;font-size:10px;border:1px solid rgba(0,200,200,.3);background:rgba(0,200,200,.08);border-radius:4px;padding:1px 6px;margin-left:4px">PS</span></span>
                 <span class="cg">Boot stable</span>
               </div>
               <div class="war-stats">
@@ -598,17 +598,17 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
                 <thead><tr><th>Test Suite</th><th>Pass</th><th>Fail</th><th>Status</th></tr></thead>
                 <tbody>
                   <tr><td>POST self-test</td><td class="pass">48</td><td>0</td><td><span class="cg">Pass</span></td></tr>
-                  <tr><td>DDR5 training</td><td class="pass">22</td><td class="fail">3</td><td><span class="cr">Fail</span></td></tr>
-                  <tr><td>PCIe enumeration</td><td class="pass">14</td><td class="fail">4</td><td><span class="cr">Fail</span></td></tr>
+                  <tr><td>DDR5 training</td><td class="pass">25</td><td>0</td><td><span class="cg">Pass</span></td></tr>
+                  <tr><td>PCIe enumeration</td><td class="pass">18</td><td>0</td><td><span class="cg">Pass</span></td></tr>
                   <tr><td>NVLink init</td><td class="pass">16</td><td>0</td><td><span class="cg">Pass</span></td></tr>
-                  <tr><td>Thermal monitor</td><td class="pass">8</td><td class="warn">2</td><td><span class="ca">Warn</span></td></tr>
+                  <tr><td>Thermal monitor</td><td class="pass">10</td><td>0</td><td><span class="cg">Pass</span></td></tr>
                 </tbody>
               </table>
-              <div class="war-next"><div class="war-next-label">Next experiment</div>PCIe yield WAR deploy · May 21 · PCIe-SV team</div>
+              <div class="war-next"><div class="war-next-label">Status</div>MP production — all gates cleared ✅ · PS monitoring active</div>
             </div>
             <div class="card">
               <div class="card-hdr">
-                <span class="card-title">Bringup Trends · ThorZ <span style="color:var(--cyan);font-weight:700;font-size:10px;border:1px solid rgba(0,200,200,.3);background:rgba(0,200,200,.08);border-radius:4px;padding:1px 6px;margin-left:4px">ES1</span></span>
+                <span class="card-title">Bringup Trends · N1x <span style="color:var(--cyan);font-weight:700;font-size:10px;border:1px solid rgba(0,200,200,.3);background:rgba(0,200,200,.08);border-radius:4px;padding:1px 6px;margin-left:4px">BNB</span></span>
                 <span class="cg">Boot stable</span>
               </div>
               <div class="war-stats">
@@ -633,7 +633,7 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
                 <span style="font-size:10px;color:var(--muted)">impact × likelihood</span>
               </div>
               <table class="hm-table">
-                <thead><tr><th>Domain</th><th>GR10x</th><th>ThorZ</th><th>Vera</th><th>N2x</th><th>V·Ultra</th><th>Monet</th></tr></thead>
+                <thead><tr><th>Domain</th><th>GR10x</th><th>N1x</th><th>Vera</th><th>N2x</th><th>V·Ultra</th><th>Monet</th></tr></thead>
                 <tbody id="hm-body"></tbody>
               </table>
               <div class="hm-legend">
@@ -669,7 +669,7 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
             <span style="font-size:10px;color:var(--muted)">May 19</span>
           </div>
           <div class="feed-item r"><div class="feed-time">09:14</div><div class="feed-title">PCIe P0 bug filed</div><div class="feed-sub">NVBug 4721839 · GR10x</div></div>
-          <div class="feed-item g"><div class="feed-time">10:02</div><div class="feed-title">NVLink FW handshake ✓</div><div class="feed-sub">ThorZ · FW team</div></div>
+          <div class="feed-item g"><div class="feed-time">10:02</div><div class="feed-title">NVLink FW handshake ✓</div><div class="feed-sub">N1x · FW team</div></div>
           <div class="feed-item n"><div class="feed-time">11:30</div><div class="feed-title">Thermal ECO #847 opened</div><div class="feed-sub">GR10x · PKG team</div></div>
           <div class="feed-item r"><div class="feed-time">13:45</div><div class="feed-title">Vera RTL freeze +2 blks</div><div class="feed-sub">Vera · RTL team</div></div>
           <div class="feed-item g"><div class="feed-time">14:20</div><div class="feed-title">Sched confidence ↑72%</div><div class="feed-sub">All programs · PM</div></div>
@@ -942,7 +942,7 @@ function openChip(chipId){
   document.getElementById('tab-chip').classList.add('tab-active');
   document.getElementById('view-overview').style.display='none';
   document.getElementById('view-chip').style.display='flex';
-  document.getElementById('ms-strip').style.opacity='.4';
+  // ms-strip removed
   renderChipView(chip);
   document.getElementById('prog-sel').value=chipId;
 }
@@ -953,7 +953,7 @@ function showOverview(){
   document.getElementById('tab-chip').classList.remove('tab-active');
   document.getElementById('tab-chip').style.display='none';
   document.querySelectorAll('.chip-nav-item').forEach(e=>e.classList.remove('active'));
-  document.getElementById('ms-strip').style.opacity='1';
+  // ms-strip removed
   document.getElementById('prog-sel').value='';
 }
 document.querySelectorAll('.chip-nav-item').forEach(el=>{el.addEventListener('click',()=>openChip(el.dataset.chip));});
