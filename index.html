@@ -392,8 +392,8 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
     <div class="left-nav-hdr">Chips</div>
     <div class="chip-nav-item nav-g active" data-chip="gr10x">
       <div class="chip-nav-code">GR10x</div><div class="chip-nav-name">Rubin</div>
-      <div class="chip-nav-status">MP Complete ✅</div>
-      <div class="chip-nav-bar"><div class="chip-nav-bar-fill" style="width:100%;background:var(--green)"></div></div>
+      <div class="chip-nav-status">PS/PRel Active 🔵</div>
+      <div class="chip-nav-bar"><div class="chip-nav-bar-fill" style="width:95%;background:var(--green)"></div></div>
     </div>
     <div class="chip-nav-item nav-r" data-chip="t268">
       <div class="chip-nav-code">T268</div><div class="chip-nav-name">N1x</div>
@@ -482,13 +482,13 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
               <span style="font-size:10px;color:var(--muted)">Click a chip for details · Updated May 19, 2026</span>
             </div>
             <div class="chips-grid">
-              <div class="chip-card g" onclick="openChip('gr10x')">
-                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">GR10x / Rubin</div><span class="cg">MP Complete ✅</span></div>
-                <div class="chip-phase">Post-silicon · QS → PS Active</div>
-                <div class="chip-gate">Milestone: <span class="g">PS · In Progress</span></div>
-                <div class="chip-bar"><div class="chip-bar-fill" style="width:100%;background:var(--green)"></div></div>
-                <div class="chip-stat-row"><span>POR→QS: <span class="g">✓ All Done</span></span><span class="r">7 bugs</span></div>
-                <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--green);font-size:10px">Production monitoring — all gates cleared</span></div>
+              <div class="chip-card a" onclick="openChip('gr10x')">
+                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">GR10x / Rubin</div><span class="ca">PS/PRel Active 🔵</span></div>
+                <div class="chip-phase">Post-silicon · QS Done ✅ · PS/PRel In Progress</div>
+                <div class="chip-gate">Next gate: <span class="a">PRel · Q3 '26</span></div>
+                <div class="chip-bar"><div class="chip-bar-fill" style="width:95%;background:var(--amber)"></div></div>
+                <div class="chip-stat-row"><span>QS: <span class="g">✓ Done</span> · PS: <span class="ca">Active</span></span><span class="r">7 bugs</span></div>
+                <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--amber);font-size:10px">PS validation underway — PRel target Q3 '26</span></div>
                 <div class="chip-cm">SW CM: <span class="chip-cm-name">Ranjani V</span></div>
               </div>
               <div class="chip-card r" onclick="openChip('t268')">
@@ -796,8 +796,8 @@ hmData.forEach(([name,vals])=>{
 
 /* ===== CHIP DATA ===== */
 const CHIPS = {
-  gr10x:{id:'gr10x',code:'GR10x',name:'Rubin',sc:'sc-g',statusCls:'nav-g',statusBadge:'<span class="cg">MP Complete ✅</span>',cm:'Ranjani V',phase:'Post-silicon · MP Complete',silicon:'MP',progress:100,nextGate:'—',nextGateDate:'—',nextGateCls:'g',bugs_count:7,
-    milestones:[{n:'POR',s:'done',d:'✓'},{n:'RTL',s:'done',d:'✓'},{n:'Tape-out',s:'done',d:'✓'},{n:'Bringup',s:'done',d:'✓'},{n:'ES',s:'done',d:'✓'},{n:'BNB',s:'done',d:'✓'},{n:'MG',s:'done',d:'✓'},{n:'QS',s:'done',d:'✓'},{n:'PS',s:'now',d:'✓ Done'},{n:'PRel',d:"Q3 '26"}],
+  gr10x:{id:'gr10x',code:'GR10x',name:'Rubin',sc:'sc-g',statusCls:'nav-g',statusBadge:'<span class="ca">PS/PRel Active 🔵</span>',cm:'Ranjani V',phase:'Post-silicon · QS Done · PS/PRel In Progress',silicon:'QS ✅',progress:95,nextGate:'PRel',nextGateDate:"Q3 '26",nextGateCls:'a',bugs_count:7,
+    milestones:[{n:'POR',s:'done',d:'✓'},{n:'RTL',s:'done',d:'✓'},{n:'Tape-out',s:'done',d:'✓'},{n:'Bringup',s:'done',d:'✓'},{n:'ES',s:'done',d:'✓'},{n:'BNB',s:'done',d:'✓'},{n:'MG',s:'done',d:'✓'},{n:'QS',s:'done',d:'✓'},{n:'PS',s:'now',d:'In Progress 🔵'},{n:'PRel',d:"Q3 '26"}],
     bugs:[
       {id:'4721839',pri:'P0',stat:'Blocked',title:'PCIe Gen5 yield degradation on av-h10 boards',next:'Foundry escalation in progress · May 22 ETA',war:true},
       {id:'6165928',pri:'P0',stat:'Blocked',title:'NVLink lane drop at enumeration (cross-chip)',next:'FW v3.1 patch in flight · ETA May 22',war:false},
