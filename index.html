@@ -7,24 +7,24 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 
-/* ===== DARK THEME (default) — NVIDIA GTC "I Am AI" palette ===== */
+/* ===== DARK THEME (default) — NVIDIA executive dark grey palette ===== */
 :root{
-  --green:#76b900;--amber:#b87e18;--red:#a03030;--blue:#3478c0;--cyan:#00a0a8;
-  --card:#0c1018;--border:#171f2e;--muted:#3a4e66;
-  --bg:#07090d;--bg-hdr:#050709;--bg-nav:#080b10;--bg-inner:#10151f;
-  --bg-sel:#141a26;--bg-strip:#10151f;
-  --bg-bug:#0e0a0a;--bg-exec-r:#0e0a10;--bg-exec-a:#0e0c08;
-  --text:#a8b8cc;--text-strong:#c0cedf;--text-code:#a8b8cc;
-  --nav-hover:rgba(255,255,255,.02);--nav-active:rgba(118,185,0,.05);
-  --nav-sep:rgba(23,31,46,.7);
-  --chip-card-bg:#0c1018;
-  --exec-name-r:#b87878;--exec-name-a:#b89060;
-  --feed-r:#906060;--feed-g:#608030;--feed-b:#5880a0;--feed-n:#708090;
-  --ms-strip-bg:#0c1018;
-  --logo-span:#c0cedf;
-  --cp-badge-bg:rgba(0,160,168,.06);--cp-badge-border:rgba(0,160,168,.18);
-  --action-bg:#10151f;
-  --toggle-bg:#141a26;--toggle-color:#a8b8cc;
+  --green:#5e8c00;--amber:#967010;--red:#883030;--blue:#3a78b0;--cyan:#207888;
+  --card:#1e2329;--border:#2a3342;--muted:#485868;
+  --bg:#1a1e24;--bg-hdr:#161a1f;--bg-nav:#181c22;--bg-inner:#222830;
+  --bg-sel:#252c38;--bg-strip:#222830;
+  --bg-bug:#211a1a;--bg-exec-r:#201820;--bg-exec-a:#201e16;
+  --text:#8898a8;--text-strong:#a8b8c8;--text-code:#8898a8;
+  --nav-hover:rgba(255,255,255,.02);--nav-active:rgba(94,140,0,.06);
+  --nav-sep:rgba(42,51,66,.7);
+  --chip-card-bg:#1e2329;
+  --exec-name-r:#a07070;--exec-name-a:#a08858;
+  --feed-r:#806060;--feed-g:#507020;--feed-b:#4878a0;--feed-n:#607080;
+  --ms-strip-bg:#1e2329;
+  --logo-span:#a8b8c8;
+  --cp-badge-bg:rgba(32,120,136,.06);--cp-badge-border:rgba(32,120,136,.18);
+  --action-bg:#222830;
+  --toggle-bg:#252c38;--toggle-color:#8898a8;
   --shadow:none;
 }
 
@@ -78,7 +78,7 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
 .chip-nav-item.nav-g{border-left-color:var(--green)}
 .chip-nav-item.nav-r{border-left-color:var(--red)}
 .chip-nav-item.nav-a{border-left-color:var(--amber)}
-.chip-nav-item.nav-w{border-left-color:#9b59b6}
+.chip-nav-item.nav-w{border-left-color:#3a78b0}
 .chip-nav-code{font-size:11px;font-weight:700;color:var(--text-code);line-height:1.2}
 .chip-nav-name{font-size:9px;color:var(--muted);line-height:1.2}
 .chip-nav-status{font-size:9px;font-weight:600;margin-top:3px;display:flex;align-items:center;gap:4px}
@@ -89,8 +89,8 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
 .chip-nav-item.nav-r .chip-nav-status::before{background:var(--red)}
 .chip-nav-item.nav-a .chip-nav-status{color:var(--amber)}
 .chip-nav-item.nav-a .chip-nav-status::before{background:var(--amber)}
-.chip-nav-item.nav-w .chip-nav-status{color:#c39bd3}
-.chip-nav-item.nav-w .chip-nav-status::before{background:#9b59b6}
+.chip-nav-item.nav-w .chip-nav-status{color:#6aa0d0}
+.chip-nav-item.nav-w .chip-nav-status::before{background:#3a78b0}
 .chip-nav-bar{height:2px;background:var(--border);border-radius:1px;margin-top:4px;overflow:hidden}
 .chip-nav-bar-fill{height:100%;border-radius:1px}
 
@@ -129,8 +129,8 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
 .cb{background:rgba(74,158,255,.15);color:var(--blue);border:1px solid rgba(74,158,255,.3)}
 .cc{background:rgba(0,200,200,.15);color:var(--cyan);border:1px solid rgba(0,200,200,.3)}
 .cn{background:rgba(122,132,153,.15);color:var(--muted);border:1px solid rgba(122,132,153,.3)}
-.cw{background:rgba(155,89,182,.15);color:#c39bd3;border:1px solid rgba(155,89,182,.3)}
-body.light .cw{color:#8040a0}
+.cw{background:rgba(58,120,176,.12);color:#6aa0d0;border:1px solid rgba(58,120,176,.28)}
+body.light .cw{color:#1a5ca0}
 
 /* CHIPS GRID */
 .chips-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
@@ -139,7 +139,7 @@ body.light .cw{color:#8040a0}
 .chip-card.g{border-left-color:var(--green)}
 .chip-card.a{border-left-color:var(--amber)}
 .chip-card.r{border-left-color:var(--red)}
-.chip-card.w{border-left-color:#9b59b6}
+.chip-card.w{border-left-color:#3a78b0}
 .chip-name{font-weight:700;font-size:13px;margin-bottom:2px;color:var(--text)}
 .chip-phase{font-size:10px;color:var(--muted);margin-bottom:6px}
 .chip-gate{font-size:10px;margin-bottom:6px}
@@ -236,7 +236,7 @@ body.light .bug-war-tag{color:#a06010}
 .chip-hero-code.sc-g{color:var(--green)}
 .chip-hero-code.sc-r{color:var(--red)}
 .chip-hero-code.sc-a{color:var(--amber)}
-.chip-hero-code.sc-w{color:#9b59b6}
+.chip-hero-code.sc-w{color:#3a78b0}
 .chip-hero-divider{width:1px;height:40px;background:var(--border)}
 .chip-hero-info{display:flex;flex-direction:column;gap:4px}
 .chip-hero-name{font-size:16px;font-weight:700;color:var(--text)}
@@ -422,7 +422,7 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
     <div class="chip-nav-item nav-w" data-chip="t257">
       <div class="chip-nav-code">T257</div><div class="chip-nav-name">Monet</div>
       <div class="chip-nav-status">POR Active</div>
-      <div class="chip-nav-bar"><div class="chip-nav-bar-fill" style="width:10%;background:#9b59b6"></div></div>
+      <div class="chip-nav-bar"><div class="chip-nav-bar-fill" style="width:10%;background:#3a78b0"></div></div>
     </div>
     <div class="chip-nav-item nav-g" data-chip="nr10x">
       <div class="chip-nav-code">NR10x</div><div class="chip-nav-name">NVLink Fusion</div>
@@ -432,17 +432,17 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
     <div class="chip-nav-item nav-w" data-chip="tcx10">
       <div class="chip-nav-code">TCX10</div><div class="chip-nav-name">TCX10</div>
       <div class="chip-nav-status">Planning</div>
-      <div class="chip-nav-bar"><div class="chip-nav-bar-fill" style="width:5%;background:#9b59b6"></div></div>
+      <div class="chip-nav-bar"><div class="chip-nav-bar-fill" style="width:5%;background:#3a78b0"></div></div>
     </div>
     <div class="chip-nav-item nav-w" data-chip="t374">
       <div class="chip-nav-code">T374</div><div class="chip-nav-name">Beacon</div>
       <div class="chip-nav-status">Planning</div>
-      <div class="chip-nav-bar"><div class="chip-nav-bar-fill" style="width:5%;background:#9b59b6"></div></div>
+      <div class="chip-nav-bar"><div class="chip-nav-bar-fill" style="width:5%;background:#3a78b0"></div></div>
     </div>
     <div class="chip-nav-item nav-w" data-chip="t294">
       <div class="chip-nav-code">T294</div><div class="chip-nav-name">Magni</div>
       <div class="chip-nav-status">Planning</div>
-      <div class="chip-nav-bar"><div class="chip-nav-bar-fill" style="width:5%;background:#9b59b6"></div></div>
+      <div class="chip-nav-bar"><div class="chip-nav-bar-fill" style="width:5%;background:#3a78b0"></div></div>
     </div>
   </div>
 
@@ -550,9 +550,9 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
                 <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">Monet / T257</div><span class="cw">Watching</span></div>
                 <div class="chip-phase">Pre-silicon · POR Phase</div>
                 <div class="chip-gate">Next gate: <span class="a">POR · Jun '26</span></div>
-                <div class="chip-bar"><div class="chip-bar-fill" style="width:10%;background:#9b59b6"></div></div>
+                <div class="chip-bar"><div class="chip-bar-fill" style="width:10%;background:#3a78b0"></div></div>
                 <div class="chip-stat-row"><span>POR: <span class="a">● Active</span></span><span>0 bugs</span></div>
-                <div class="chip-stat-row" style="margin-top:3px"><span style="color:#9b59b6;font-size:10px">RTL Q3 '26 · Tape-out Q4 '26</span></div>
+                <div class="chip-stat-row" style="margin-top:3px"><span style="color:#3a78b0;font-size:10px">RTL Q3 '26 · Tape-out Q4 '26</span></div>
                 <div class="chip-cm">SW CM: <span class="chip-cm-name">Vivek Desikan</span></div>
               </div>
               <div class="chip-card g" onclick="openChip('nr10x')">
@@ -568,27 +568,27 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
                 <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">TCX10</div><span class="cw">Planning</span></div>
                 <div class="chip-phase">Pre-silicon · Planning Phase</div>
                 <div class="chip-gate">Next gate: <span class="a">POR · TBD</span></div>
-                <div class="chip-bar"><div class="chip-bar-fill" style="width:5%;background:#9b59b6"></div></div>
+                <div class="chip-bar"><div class="chip-bar-fill" style="width:5%;background:#3a78b0"></div></div>
                 <div class="chip-stat-row"><span>Status: <span class="cw">● Planning</span></span><span>0 bugs</span></div>
-                <div class="chip-stat-row" style="margin-top:3px"><span style="color:#9b59b6;font-size:10px">Program kick-off in progress</span></div>
+                <div class="chip-stat-row" style="margin-top:3px"><span style="color:#3a78b0;font-size:10px">Program kick-off in progress</span></div>
                 <div class="chip-cm">SW CM: <span class="chip-cm-name">Roopa</span></div>
               </div>
               <div class="chip-card w" onclick="openChip('t374')">
                 <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">T374 / Beacon</div><span class="cw">Planning</span></div>
                 <div class="chip-phase">Pre-silicon · Planning Phase</div>
                 <div class="chip-gate">Next gate: <span class="a">POR · TBD</span></div>
-                <div class="chip-bar"><div class="chip-bar-fill" style="width:5%;background:#9b59b6"></div></div>
+                <div class="chip-bar"><div class="chip-bar-fill" style="width:5%;background:#3a78b0"></div></div>
                 <div class="chip-stat-row"><span>Status: <span class="cw">● Planning</span></span><span>0 bugs</span></div>
-                <div class="chip-stat-row" style="margin-top:3px"><span style="color:#9b59b6;font-size:10px">Program kick-off in progress</span></div>
+                <div class="chip-stat-row" style="margin-top:3px"><span style="color:#3a78b0;font-size:10px">Program kick-off in progress</span></div>
                 <div class="chip-cm">SW CM: <span class="chip-cm-name">Roopa</span></div>
               </div>
               <div class="chip-card w" onclick="openChip('t294')">
                 <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">T294 / Magni</div><span class="cw">Planning</span></div>
                 <div class="chip-phase">Pre-silicon · Planning Phase</div>
                 <div class="chip-gate">Next gate: <span class="a">POR · TBD</span></div>
-                <div class="chip-bar"><div class="chip-bar-fill" style="width:5%;background:#9b59b6"></div></div>
+                <div class="chip-bar"><div class="chip-bar-fill" style="width:5%;background:#3a78b0"></div></div>
                 <div class="chip-stat-row"><span>Status: <span class="cw">● Planning</span></span><span>0 bugs</span></div>
-                <div class="chip-stat-row" style="margin-top:3px"><span style="color:#9b59b6;font-size:10px">Program kick-off in progress</span></div>
+                <div class="chip-stat-row" style="margin-top:3px"><span style="color:#3a78b0;font-size:10px">Program kick-off in progress</span></div>
                 <div class="chip-cm">SW CM: <span class="chip-cm-name">Roopa</span></div>
               </div>
             </div>
@@ -970,7 +970,7 @@ function buildActions(actions, chipId){
 
 /* ===== RENDER CHIP VIEW ===== */
 function renderChipView(chip){
-  const barColor=chip.sc==='sc-g'?'var(--green)':chip.sc==='sc-r'?'var(--red)':'#9b59b6';
+  const barColor=chip.sc==='sc-g'?'var(--green)':chip.sc==='sc-r'?'var(--red)':chip.sc==='sc-a'?'var(--amber)':chip.sc==='sc-b'?'var(--blue)':'var(--blue)';
   const el=document.getElementById('view-chip');
   el.innerHTML=`
     <div class="chip-hero">
