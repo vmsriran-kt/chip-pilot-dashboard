@@ -360,7 +360,7 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
   <select class="prog-sel" id="prog-sel">
     <option value="">All chip programs</option>
     <option value="gr10x">GR10x / Rubin</option>
-    <option value="t268">T268 / ThorZ</option>
+    <option value="t268">ThorZ</option>
     <option value="tb500">TB500 / Vera</option>
     <option value="t354">T354 / N2x</option>
     <option value="tb600">TB600 / Vera Ultra</option>
@@ -399,7 +399,7 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
       <div class="chip-nav-bar"><div class="chip-nav-bar-fill" style="width:95%;background:var(--green)"></div></div>
     </div>
     <div class="chip-nav-item nav-a" data-chip="t268">
-      <div class="chip-nav-code">T268</div><div class="chip-nav-name">ThorZ</div>
+      <div class="chip-nav-code">ThorZ</div><div class="chip-nav-name">ThorZ</div>
       <div class="chip-nav-status">MG Active ⚠️</div>
       <div class="chip-nav-bar"><div class="chip-nav-bar-fill" style="width:70%;background:var(--amber)"></div></div>
     </div>
@@ -510,7 +510,7 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
                 <div class="chip-cm">SW CM: <span class="chip-cm-name">Ranjani V · Madhura</span></div>
               </div>
               <div class="chip-card a" onclick="openChip('t268')">
-                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">T268 / ThorZ</div><span class="ca">MG Active ⚠️</span></div>
+                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">ThorZ</div><span class="ca">MG Active ⚠️</span></div>
                 <div class="chip-phase">Post-silicon · BNB Done ✅ 5/8 · MG/SIT Active</div>
                 <div class="chip-gate">Next gate: <span class="a">QS · Q4 '26</span></div>
                 <div class="chip-bar"><div class="chip-bar-fill" style="width:70%;background:var(--amber)"></div></div>
@@ -600,12 +600,12 @@ body.light .cp-btn-primary{color:#007090;border-color:rgba(0,170,170,.4)}
                 <span class="cr" style="padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700">2 open</span>
               </div>
               <div class="bug-row">
-                <div><span class="bug-id">NVBug 6165928</span><span style="font-size:10px;color:var(--muted);margin-left:6px">T268</span><span class="bug-tag">P0 · Blocked</span></div>
+                <div><span class="bug-id">NVBug 6165928</span><span style="font-size:10px;color:var(--muted);margin-left:6px">ThorZ</span><span class="bug-tag">P0 · Blocked</span></div>
                 <div class="bug-title">ThorZ av-h10 — NVLink lane drop at enumeration</div>
                 <div class="bug-next">FW v3.1 patch in flight · ETA May 22 · FW team</div>
               </div>
               <div class="bug-row">
-                <div><span class="bug-id">NVBug 6165939</span><span style="font-size:10px;color:var(--muted);margin-left:6px">T268</span><span class="bug-tag">P0 · Blocked</span></div>
+                <div><span class="bug-id">NVBug 6165939</span><span style="font-size:10px;color:var(--muted);margin-left:6px">ThorZ</span><span class="bug-tag">P0 · Blocked</span></div>
                 <div class="bug-title">ThorZ av-h10 — kernel panic on DDR5 init</div>
                 <div class="bug-next">WAR in progress · Memory vendor response pending</div>
               </div>
@@ -861,7 +861,7 @@ const CHIPS = {
     risks:[{level:'l',text:'MP production — all major gates cleared'},{level:'l',text:'Ongoing monitoring for field issues'},{level:'l',text:'WAR items resolved — no active P0 blockers'},{level:'l',text:'PCIe & DDR5 issues resolved in production'}],
     actions:[{icon:'📊',text:'Generate MP production report'},{icon:'📋',text:'Review field issue tracker'},{icon:'📧',text:'Send MP completion exec update'},{icon:'🔍',text:'Monitor production yield metrics'},{icon:'📝',text:'Archive ES2 gate documentation'}]
   },
-  t268:{id:'t268',code:'T268',name:'ThorZ',sc:'sc-a',statusCls:'nav-a',statusBadge:'<span class="ca">MG Active ⚠️</span>',cm:'Mayank Kapoor',phase:'Post-silicon · BNB Done · MG/SIT Active',silicon:'ES1 ✅',progress:70,nextGate:'QS',nextGateDate:"Q4 '26",nextGateCls:'a',bugs_count:3,
+  t268:{id:'t268',code:'ThorZ',name:'ThorZ',sc:'sc-a',statusCls:'nav-a',statusBadge:'<span class="ca">MG Active ⚠️</span>',cm:'Mayank Kapoor',phase:'Post-silicon · BNB Done · MG/SIT Active',silicon:'ES1 ✅',progress:70,nextGate:'QS',nextGateDate:"Q4 '26",nextGateCls:'a',bugs_count:3,
     milestones:[{n:'POR',s:'done',d:'✓'},{n:'RTL',s:'done',d:'✓'},{n:'Tape-out',s:'done',d:'✓'},{n:'Bringup',s:'done',d:'✓'},{n:'ES',s:'done',d:'✓'},{n:'BNB',s:'done',d:'✓ 5/8'},{n:'MG',s:'now',d:'SIT 67% ⚠️'},{n:'QS',d:"Q4 '26"},{n:'PS',d:"Q1 '27"},{n:'PRel',d:"Q2 '27"}],
     bugs:[{id:'6165928',pri:'P0',stat:'Blocked',title:'NVLink lane drop at enumeration on av-h10',next:'FW v3.1 patch in flight · ETA May 22',war:false},{id:'6165939',pri:'P0',stat:'Blocked',title:'Kernel panic on DDR5 init — memory vendor bug',next:'WAR in progress · Memory vendor response pending',war:true},{id:'6165950',pri:'P1',stat:'In Prog',title:'NVLink FW handshake timeout >500ms',next:'FW team debugging · May 24 target',war:false}],
     reviews:[{doc:'NVLink FW v3.1 Design Spec',owner:'T. Nguyen',due:'May 22',ds:'late'},{doc:'DDR5 WAR Plan',owner:'K. Chen',due:'May 25',ds:'soon'},{doc:'ES1 Gate Review',owner:'TBD',due:'Jun 10',ds:'ok'}],
