@@ -788,6 +788,7 @@ body:not(.light) .hero-water-bar::after{background:linear-gradient(to bottom,rgb
   <select class="prog-sel" id="prog-sel">
     <option value="">All chip programs</option>
     <option value="gr10x">GR10x / Rubin</option>
+    <option value="fn10x">FN10x / Feynman</option>
     <option value="t268">ThorZ</option>
     <option value="tb500">TB500 / Vera</option>
     <option value="t354">T354 / N2x</option>
@@ -832,10 +833,10 @@ body:not(.light) .hero-water-bar::after{background:linear-gradient(to bottom,rgb
           <div class="chip-nav-status">PS/PRel Active 🔵</div>
           <div class="chip-nav-bar"><div class="chip-nav-bar-fill" style="width:95%;background:var(--green)"></div></div>
         </div>
-        <div class="chip-nav-item nav-w" data-chip="fn10x">
-          <div class="chip-nav-code">FN10x</div><div class="chip-nav-name">Fenrir</div>
-          <div class="chip-nav-status">Planning</div>
-          <div class="chip-nav-bar"><div class="chip-nav-bar-fill" style="width:4%;background:#3a78b0"></div></div>
+        <div class="chip-nav-item nav-a" data-chip="fn10x">
+          <div class="chip-nav-code">FN10x</div><div class="chip-nav-name">Feynman</div>
+          <div class="chip-nav-status">RTL Active ⚠️</div>
+          <div class="chip-nav-bar"><div class="chip-nav-bar-fill" style="width:38%;background:var(--amber)"></div></div>
         </div>
       </div>
     </div>
@@ -961,6 +962,15 @@ body:not(.light) .hero-water-bar::after{background:linear-gradient(to bottom,rgb
                 <div class="chip-stat-row"><span>QS: <span class="g">✓ Done</span> · PS: <span class="ca">Active</span></span><span class="r">7 bugs</span></div>
                 <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--amber);font-size:10px">PS validation underway — PRel target Q3 '26</span></div>
                 <div class="chip-cm">SW CM: <span class="chip-cm-name">Ranjani V · Madhura</span></div>
+              </div>
+              <div class="chip-card a" onclick="openChip('fn10x')">
+                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">FN10x / Feynman</div><span class="ca">RTL Active ⚠️</span></div>
+                <div class="chip-phase">Pre-silicon · Multi-dielet RTL · Phys Final NL In Progress</div>
+                <div class="chip-gate">Next gate: <span class="a">Final NL RTL · Jul '26</span></div>
+                <div class="chip-bar"><div class="chip-bar-fill" style="width:38%;background:var(--amber)"></div></div>
+                <div class="chip-stat-row"><span>1st NL RTL: <span class="g">✓ Done</span> · Phys Final: <span class="cb">Active</span></span><span class="r">4 bugs</span></div>
+                <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--amber);font-size:10px">PRI_HUB delays · Phase 21 SECHUB unblocks May 15</span></div>
+                <div class="chip-cm">SW CM: <span class="chip-cm-name">TBD</span></div>
               </div>
               <div class="chip-card a" onclick="openChip('t268')">
                 <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">ThorZ</div><span class="ca">SW BNB Done · SCG 85% ⚠️</span></div>
@@ -1190,7 +1200,7 @@ function toggleTheme(){
 /* Columns: GR10x · ThorZ · Vera · N2x · V·Ultra · Monet · NR10x · TCX10 · Beacon · Magni */
 const hmCols=[
   {code:'GR10x',  rI:1},  /* 0=green,1=amber,2=red,3=blue — SW risk category */
-  {code:'FN10x',  rI:3},
+  {code:'FN10x',  rI:1},
   {code:'ThorZ',  rI:2},
   {code:'Vera',   rI:1},
   {code:'N2x',    rI:2},
@@ -1203,16 +1213,16 @@ const hmCols=[
 const hmData=[
   /* SW-domain heatmap — 1=Low 2=Med 3=High */
   //                  GR  FN  TZ  Vra N2x VU  NR  Bea TX  Mag
-  ["SW Bringup",     [1,  1,  1,  2,  2,  2,  1,  1,  1,  1]],
-  ["Boot / Power-on",[1,  1,  1,  2,  2,  2,  1,  1,  1,  1]],
-  ["Driver / OS",    [1,  1,  3,  2,  3,  1,  1,  1,  1,  1]],
-  ["Firmware",       [2,  1,  3,  2,  2,  1,  1,  1,  1,  1]],
-  ["DV / Emulation", [1,  1,  1,  3,  3,  2,  1,  1,  1,  1]],
+  ["SW Bringup",     [1,  2,  1,  2,  2,  2,  1,  1,  1,  1]],
+  ["Boot / Power-on",[1,  2,  1,  2,  2,  2,  1,  1,  1,  1]],
+  ["Driver / OS",    [1,  2,  3,  2,  3,  1,  1,  1,  1,  1]],
+  ["Firmware",       [2,  2,  3,  2,  2,  1,  1,  1,  1,  1]],
+  ["DV / Emulation", [1,  2,  1,  3,  3,  2,  1,  1,  1,  1]],
   ["Test Coverage",  [2,  1,  2,  2,  3,  2,  1,  1,  1,  1]],
   ["MODS / Qual",    [1,  1,  3,  2,  1,  1,  1,  1,  1,  1]],
   ["SW Release",     [2,  1,  2,  3,  2,  1,  1,  1,  1,  1]],
   ["WAR / WNF",      [3,  1,  1,  1,  1,  1,  1,  1,  1,  1]],
-  ["SW CM Owner",    [1,  1,  1,  1,  1,  1,  1,  1,  1,  1]],
+  ["SW CM Owner",    [1,  2,  1,  1,  1,  1,  1,  1,  1,  1]],
 ];
 const hmCellCls=["hm-l-cell","hm-m-cell","hm-h-cell"];
 /* Risk colours indexed by rI: green, amber, red, blue */
@@ -1342,13 +1352,46 @@ const CHIPS = {
     risks:[{level:'m',text:'Early planning — SW CM assigned, program kicking off'},{level:'l',text:'No blockers identified yet'}],
     actions:[{icon:'📋',text:'Kick off Magni POR planning'},{icon:'📅',text:'Define T294 milestone schedule'},{icon:'👥',text:'Identify SW module leads'}]
   },
-  fn10x:{id:'fn10x',code:'FN10x',name:'Fenrir',sc:'sc-w',statusCls:'nav-w',statusBadge:'<span class="cw">Planning</span>',cm:'TBD',phase:'Pre-silicon · Planning Phase',silicon:'Pre-Si',progress:4,nextGate:'POR',nextGateDate:"TBD",nextGateCls:'a',bugs_count:0,
-    milestones:[{n:'POR',s:'now',d:"TBD"},{n:'RTL',d:"TBD"},{n:'Tape-out',d:"TBD"},{n:'Bringup',d:"TBD"},{n:'ES',d:"TBD"},{n:'BNB',d:"TBD"},{n:'MG',d:"TBD"},{n:'QS',d:"TBD"},{n:'PS',d:"TBD"},{n:'PRel',d:"TBD"}],
-    bugs:[],
-    reviews:[{doc:'POR Planning Doc',owner:'TBD',due:'TBD',ds:'ok'}],
-    bringup:{type:'pre',items:[{n:'POR Kickoff',sub:'Planning in progress',s:'prog',label:'In Progress'},{n:'Arch Spec',sub:'Not started',s:'wait',label:'Pending'},{n:'RTL Planning',sub:'Not started',s:'wait',label:'Pending'}]},
-    risks:[{level:'m',text:'Early planning — program kick-off in progress'},{level:'l',text:'No blockers identified yet'}],
-    actions:[{icon:'📋',text:'Kick off FN10x POR planning'},{icon:'📅',text:'Define FN10x milestone schedule'},{icon:'👤',text:'Assign SW CM for FN10x'},{icon:'👥',text:'Identify SW module leads'}]
+  fn10x:{id:'fn10x',code:'FN10x',name:'Feynman',sc:'sc-a',statusCls:'nav-a',statusBadge:'<span class="ca">RTL Active ⚠️</span>',cm:'TBD',phase:'Pre-silicon · Multi-dielet RTL · Phys Final NL In Progress',silicon:'Pre-Si · 1st NL RTL ✅',progress:38,nextGate:'Final NL RTL',nextGateDate:"Jul '26",nextGateCls:'a',bugs_count:4,
+    milestones:[{n:'POR',s:'done',d:'✓'},{n:'Trial NL RTL',s:'done',d:'Aug \'25 ✓'},{n:'Stable FP NL',s:'done',d:'Oct \'25 ✓'},{n:'1st NL RTL',s:'done',d:'Jan \'26 ✓'},{n:'Phys Final NL',s:'now',d:'Apr \'26 🔵'},{n:'Final NL RTL',d:"Jul '26"},{n:'Tape-out',d:"Sep '26 (cHBM)"},{n:'Bringup',d:"Q1 '27"},{n:'ES',d:"Q2 '27"},{n:'PRel',d:"TBD"}],
+    bugs:[
+      {id:'6052109',pri:'P1',stat:'Active',title:'FN526 — IODS Self-boot failure',next:'SW team investigating IODS SECHUB path · May 15 unblock ETA',war:false},
+      {id:'6042175',pri:'P1',stat:'In Prog',title:'Priv_sec / decode_trap support post PGRAPH relocation',next:'Solution being discussed by PRI_HUB team · Initial SW RTL Snap blocker',war:false},
+      {id:'5967553',pri:'P1',stat:'Active',title:'FN836 — IODN Floor-Sweeping Support for FN10x',next:'EMU priority POR — enablement at 1st NL RTL Snap at risk',war:false},
+      {id:'5967420',pri:'P1',stat:'Active',title:'FN662 — 0-GPC config support',next:'EMU priority POR — timeline delayed, impact under evaluation',war:false},
+    ],
+    reviews:[
+      {doc:'Multi-dielet Phase 12 — Discovery Flow HW',owner:'TBD',due:'Apr 30',ds:'soon'},
+      {doc:'Phase 21 — IODS SECHUB Bringup',owner:'Shrutee Kamat',due:'May 15',ds:'soon'},
+      {doc:'Phase 28 — IODS FBHUB_NIC Functional',owner:'TBD',due:'May 20',ds:'soon'},
+      {doc:'FN10x Final Netlist RTL Gate Review',owner:'TBD',due:"Jul '26",ds:'ok'},
+    ],
+    bringup:{type:'pre',items:[
+      {n:'Trial Netlist RTL',sub:'cHBM — Completed Aug 10, 2025',s:'done',label:'Complete'},
+      {n:'Stable Floorplan NL RTL',sub:'cHBM — Completed Oct 30, 2025',s:'done',label:'Complete'},
+      {n:'1st Netlist RTL Snap',sub:'cHBM — Completed Jan 20, 2026 · Phases 1–10 done',s:'done',label:'Complete'},
+      {n:'Phys Final Netlist RTL',sub:'cHBM — Apr 14, 2026 · Multi-dielet phases in progress',s:'prog',label:'In Progress 🔵'},
+      {n:'Phase 12 — Discovery Flow',sub:'Initial SW RTL Snap blocker · Submission ETA Apr 30',s:'risk',label:'At Risk ⚠️'},
+      {n:'Phase 21 — IODS SECHUB',sub:'1st NL RTL Snap · Unblocks May 15',s:'risk',label:'At Risk ⚠️'},
+      {n:'Phase 28 — FBHUB_NIC',sub:'1st NL RTL Snap · Unblocks post Apr 20',s:'risk',label:'At Risk ⚠️'},
+      {n:'Final Netlist RTL (cHBM)',sub:'Target Jul 7, 2026',s:'wait',label:'Planned'},
+      {n:'Tape-out (cHBM / uGD)',sub:'Sep 15, 2026 / Mar 31, 2027',s:'wait',label:'Planned'},
+    ]},
+    risks:[
+      {level:'h',text:'PRI_HUB unit delays (>1 month) blocking Phase 23/24 — GPC + SYS PRI path enablement for 1st NL RTL Snap'},
+      {level:'h',text:'Phase 21 (IODS SECHUB bringup) blocked until May 15 — 1st NL RTL Snap dependency'},
+      {level:'m',text:'Phase 12 (Discovery flow HW enablement) — submission WIP, ETA Apr 30, Initial SW RTL Snap blocker'},
+      {level:'m',text:'Phase 6.A Priv_sec / decode_trap support post PGRAPH relocation — solution still under discussion'},
+      {level:'l',text:'Multi-dielet architecture first for NVIDIA GPU — execution complexity across IODS, UGD, CPD dielets'},
+      {level:'l',text:'SW CM not yet assigned — ownership gap for program management'},
+    ],
+    actions:[
+      {icon:'👤',text:'Assign SW CM for FN10x / Feynman program'},
+      {icon:'🔧',text:'Track Phase 12 Discovery Flow submission — ETA Apr 30'},
+      {icon:'🐛',text:'Resolve IODS Self-boot failure — Bug 6052109'},
+      {icon:'📋',text:'Coordinate Phase 21 IODS SECHUB unblock — May 15'},
+      {icon:'📅',text:'Monitor Final Netlist RTL gate — Jul 7, 2026'},
+    ]
   }
 };
 
