@@ -105,12 +105,38 @@ body.light .chip-nav-bar{background:rgba(0,0,0,0.06);border:1px solid rgba(0,0,0
 
 /* ── NAV ACCORDION GROUPS ── */
 .chip-nav-group{border-bottom:1px solid var(--nav-sep)}
-.chip-nav-group-hdr{display:flex;align-items:center;justify-content:space-between;padding:8px 12px 7px;cursor:pointer;font-size:9px;font-weight:800;letter-spacing:1.1px;text-transform:uppercase;color:var(--muted);user-select:none;transition:background .15s}
-.chip-nav-group-hdr:hover{background:var(--nav-hover)}
-.chip-nav-group-hdr .nav-grp-arrow{font-size:9px;transition:transform .22s;display:inline-block;opacity:.6}
+.chip-nav-group-hdr{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:9px 12px 8px;cursor:pointer;user-select:none;
+  font-size:10px;font-weight:800;letter-spacing:.9px;text-transform:uppercase;
+  color:var(--text-strong);
+  background:rgba(255,255,255,0.04);
+  border-left:3px solid transparent;
+  transition:background .15s,border-color .15s,box-shadow .15s;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.06),inset 0 -1px 0 rgba(0,0,0,0.10)
+}
+body.light .chip-nav-group-hdr{
+  background:rgba(12,78,158,0.05);
+  color:var(--text-strong);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.80),inset 0 -1px 0 rgba(180,200,224,0.25)
+}
+.chip-nav-group-hdr:hover{
+  background:rgba(255,255,255,0.08);
+  border-left-color:var(--blue);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.10),inset 0 -1px 0 rgba(0,0,0,0.12),-3px 0 12px rgba(78,154,224,.12)
+}
+body.light .chip-nav-group-hdr:hover{background:rgba(12,78,158,0.10);border-left-color:var(--blue)}
+/* Open state — accent left border to show which bucket is expanded */
+.chip-nav-group:not(.collapsed) .chip-nav-group-hdr{
+  border-left-color:var(--green);
+  background:rgba(126,194,0,0.07);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.10),inset 0 -1px 0 rgba(0,0,0,0.12),-3px 0 14px rgba(126,194,0,.14)
+}
+body.light .chip-nav-group:not(.collapsed) .chip-nav-group-hdr{background:rgba(26,120,34,0.07);border-left-color:var(--green)}
+.chip-nav-group-hdr .nav-grp-arrow{font-size:9px;transition:transform .22s;display:inline-block;opacity:.55}
 .chip-nav-group.collapsed .nav-grp-arrow{transform:rotate(-90deg)}
-.chip-nav-group-hdr .nav-grp-label{display:flex;align-items:center;gap:6px}
-.chip-nav-group-hdr .nav-grp-icon{font-size:11px;opacity:.8}
+.chip-nav-group-hdr .nav-grp-label{display:flex;align-items:center;gap:7px}
+.chip-nav-group-hdr .nav-grp-icon{font-size:13px}
 .chip-nav-group-chips{overflow:hidden;max-height:600px;transition:max-height .28s ease}
 .chip-nav-group.collapsed .chip-nav-group-chips{max-height:0}
 /* Remove bottom border from last item inside group */
@@ -752,7 +778,7 @@ body:not(.light) .hero-water-bar::after{background:linear-gradient(to bottom,rgb
     <div class="left-nav-hdr">Chips</div>
 
     <!-- ── GPU BUCKET ── -->
-    <div class="chip-nav-group" id="grp-gpu">
+    <div class="chip-nav-group collapsed" id="grp-gpu">
       <div class="chip-nav-group-hdr" onclick="toggleNavGroup('grp-gpu')">
         <span class="nav-grp-label"><span class="nav-grp-icon">⚡</span>GPU</span>
         <span class="nav-grp-arrow">▾</span>
@@ -772,7 +798,7 @@ body:not(.light) .hero-water-bar::after{background:linear-gradient(to bottom,rgb
     </div>
 
     <!-- ── CPU BUCKET ── -->
-    <div class="chip-nav-group" id="grp-cpu">
+    <div class="chip-nav-group collapsed" id="grp-cpu">
       <div class="chip-nav-group-hdr" onclick="toggleNavGroup('grp-cpu')">
         <span class="nav-grp-label"><span class="nav-grp-icon">🖥️</span>CPU</span>
         <span class="nav-grp-arrow">▾</span>
@@ -812,9 +838,9 @@ body:not(.light) .hero-water-bar::after{background:linear-gradient(to bottom,rgb
     </div>
 
     <!-- ── FUSION BUCKET ── -->
-    <div class="chip-nav-group" id="grp-fusion">
+    <div class="chip-nav-group collapsed" id="grp-fusion">
       <div class="chip-nav-group-hdr" onclick="toggleNavGroup('grp-fusion')">
-        <span class="nav-grp-label"><span class="nav-grp-icon">🔗</span>Fusion</span>
+        <span class="nav-grp-label"><span class="nav-grp-icon">⚛️</span>Fusion</span>
         <span class="nav-grp-arrow">▾</span>
       </div>
       <div class="chip-nav-group-chips">
