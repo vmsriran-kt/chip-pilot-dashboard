@@ -193,17 +193,31 @@ body.light .bug-war-tag{color:#a06010}
 .war-next-label{color:var(--blue);font-size:9px;text-transform:uppercase;font-weight:700;margin-bottom:2px}
 
 /* RISK HEATMAP */
-.hm-table{width:100%;border-collapse:collapse;font-size:10px}
-.hm-table th{padding:3px 5px;border-bottom:1px solid var(--border);color:var(--muted);font-size:9px;text-align:center}
-.hm-table th:first-child{text-align:left}
-.hm-table td{padding:3px 5px;border-bottom:1px solid var(--border);text-align:center}
-.hm-table td:first-child{text-align:left;font-weight:600;color:var(--text)}
-.hm-l{display:inline-block;width:18px;height:18px;border-radius:4px;background:rgba(118,185,0,.55);border:1px solid rgba(118,185,0,.7)}
-.hm-m{display:inline-block;width:18px;height:18px;border-radius:4px;background:rgba(232,160,32,.55);border:1px solid rgba(232,160,32,.7)}
-.hm-h{display:inline-block;width:18px;height:18px;border-radius:4px;background:rgba(224,80,80,.6);border:1px solid rgba(224,80,80,.8)}
-.hm-legend{display:flex;gap:14px;margin-top:8px;font-size:10px;color:var(--muted);align-items:center}
+/* HEATMAP MATRIX */
+.hm-table{width:100%;border-collapse:separate;border-spacing:3px;font-size:10px;table-layout:fixed}
+.hm-table colgroup col:first-child{width:80px}
+.hm-table th{padding:4px 2px;font-size:8px;font-weight:700;text-align:center;letter-spacing:.4px;vertical-align:middle}
+.hm-table th:first-child{text-align:left;color:var(--muted);font-size:9px;padding-left:2px;font-weight:600;text-transform:uppercase;letter-spacing:.6px}
+.hm-chip-hdr{display:block;border-radius:6px;padding:3px 4px;font-size:8px;font-weight:800;letter-spacing:.5px;text-align:center}
+.hm-table td{padding:0;text-align:center;vertical-align:middle}
+.hm-table td:first-child{background:transparent!important;padding:0 4px 0 2px;font-size:10px;font-weight:600;color:var(--text-strong);text-align:left;vertical-align:middle;white-space:nowrap}
+.hm-cell{display:flex;align-items:center;justify-content:center;height:24px;border-radius:6px;font-size:9px;font-weight:800;letter-spacing:.4px;cursor:default;transition:filter .15s,transform .15s;position:relative}
+.hm-cell:hover{filter:brightness(1.25);transform:scale(1.06);z-index:2}
+/* dark mode cell fills */
+.hm-l-cell{background:rgba(60,180,80,.28);color:#70d888;border:1px solid rgba(60,180,80,.45)}
+.hm-m-cell{background:rgba(210,150,0,.30);color:#d4a830;border:1px solid rgba(210,150,0,.48)}
+.hm-h-cell{background:rgba(220,55,55,.32);color:#ee7070;border:1px solid rgba(220,55,55,.52)}
+/* light mode cell fills */
+body.light .hm-l-cell{background:rgba(26,120,34,.14);color:#1a7822;border:1px solid rgba(26,120,34,.35)}
+body.light .hm-m-cell{background:rgba(168,96,0,.14);color:#a86000;border:1px solid rgba(168,96,0,.35)}
+body.light .hm-h-cell{background:rgba(184,30,30,.15);color:#b81e1e;border:1px solid rgba(184,30,30,.36)}
+/* score row at bottom */
+.hm-score-cell{background:rgba(255,255,255,.06);color:var(--text-strong);border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;height:22px;font-size:9px;font-weight:800}
+body.light .hm-score-cell{background:rgba(12,78,158,.06)}
+.hm-table tr:last-child td:first-child{color:var(--muted);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.hm-legend{display:flex;gap:10px;margin-top:8px;font-size:10px;color:var(--muted);align-items:center;flex-wrap:wrap}
 .hm-legend span{display:flex;align-items:center;gap:5px}
-.leg-dot{width:14px;height:14px;border-radius:3px}
+.leg-dot{width:12px;height:12px;border-radius:3px}
 
 /* SIDEBAR */
 .sb-section-title{font-size:10px;font-weight:700;letter-spacing:.8px;color:var(--muted);text-transform:uppercase;margin-bottom:6px}
@@ -665,14 +679,23 @@ body.light .nav-toggle{background:rgba(255,255,255,0.6);border:1px solid rgba(25
                 <span style="font-size:10px;color:var(--muted)">impact × likelihood</span>
               </div>
               <table class="hm-table">
-                <thead><tr><th>Domain</th><th><span style="color:var(--amber);font-weight:700">GR10x</span></th><th><span style="color:var(--amber);font-weight:700">ThorZ</span></th><th><span style="color:var(--green);font-weight:700">Vera</span></th><th><span style="color:var(--red);font-weight:700">N2x</span></th><th><span style="color:var(--blue);font-weight:700">V·Ultra</span></th><th><span style="color:var(--blue);font-weight:700">Monet</span></th></tr></thead>
+                <colgroup><col/><col/><col/><col/><col/><col/><col/></colgroup>
+                <thead><tr>
+                  <th>Domain</th>
+                  <th><span class="hm-chip-hdr" style="background:rgba(208,152,0,.18);color:var(--amber)">GR10x</span></th>
+                  <th><span class="hm-chip-hdr" style="background:rgba(208,152,0,.18);color:var(--amber)">ThorZ</span></th>
+                  <th><span class="hm-chip-hdr" style="background:rgba(126,194,0,.16);color:var(--green)">Vera</span></th>
+                  <th><span class="hm-chip-hdr" style="background:rgba(204,68,68,.18);color:var(--red)">N2x</span></th>
+                  <th><span class="hm-chip-hdr" style="background:rgba(78,154,224,.16);color:var(--blue)">V·Ultra</span></th>
+                  <th><span class="hm-chip-hdr" style="background:rgba(78,154,224,.16);color:var(--blue)">Monet</span></th>
+                </tr></thead>
                 <tbody id="hm-body"></tbody>
               </table>
               <div class="hm-legend">
-                <span style="color:var(--muted);font-size:9px;text-transform:uppercase;margin-right:2px">Legend:</span>
-                <span><div class="leg-dot" style="background:rgba(118,185,0,.55);border:1px solid rgba(118,185,0,.7)"></div>Low</span>
-                <span><div class="leg-dot" style="background:rgba(232,160,32,.55);border:1px solid rgba(232,160,32,.7)"></div>Med</span>
-                <span><div class="leg-dot" style="background:rgba(224,80,80,.6);border:1px solid rgba(224,80,80,.8)"></div>High</span>
+                <span style="color:var(--muted);font-size:9px;text-transform:uppercase;margin-right:2px">Risk:</span>
+                <span><div class="leg-dot hm-l-cell" style="border:none"></div>Low</span>
+                <span><div class="leg-dot hm-m-cell" style="border:none"></div>Medium</span>
+                <span><div class="leg-dot hm-h-cell" style="border:none"></div>High</span>
               </div>
             </div>
           </div>
@@ -814,13 +837,25 @@ const hmData=[
   ["Validation", [2,2,2,2,2,2]],
   ["Mfg/Yield",  [3,1,1,1,1,1]],
 ];
-const hmcls=["hm-l","hm-m","hm-h"];
+const hmCellCls=["hm-l-cell","hm-m-cell","hm-h-cell"];
+const hmLabels=["L","M","H"];
+const hmScoreColor=["#70d888","#d4a830","#ee7070"];
 const hmbody=document.getElementById("hm-body");
+const colSums=Array(6).fill(0);
 hmData.forEach(([name,vals])=>{
   const tr=document.createElement("tr");
-  tr.innerHTML=`<td>${name}</td>`+vals.map(v=>`<td><span class="${hmcls[v-1]}"></span></td>`).join("");
+  vals.forEach((v,i)=>colSums[i]+=v);
+  tr.innerHTML=`<td>${name}</td>`+vals.map(v=>`<td><div class="hm-cell ${hmCellCls[v-1]}">${hmLabels[v-1]}</div></td>`).join("");
   hmbody.appendChild(tr);
 });
+/* Risk score summary row */
+const maxScore=colSums.map(s=>Math.min(3,Math.round(s/hmData.length)));
+const scoreTr=document.createElement("tr");
+scoreTr.innerHTML=`<td>Risk score</td>`+maxScore.map((s,i)=>{
+  const cl=hmCellCls[s-1]; const lbl=hmLabels[s-1];
+  return `<td><div class="hm-cell hm-score-cell ${cl}">${lbl}</div></td>`;
+}).join("");
+hmbody.appendChild(scoreTr);
 
 /* ===== CHIP DATA ===== */
 const CHIPS = {
