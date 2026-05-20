@@ -9,29 +9,29 @@
 
 /* ===== DARK THEME (default) — NVIDIA executive dark grey palette ===== */
 :root{
-  --green:#5e8c00;--amber:#967010;--red:#883030;--blue:#3a78b0;--cyan:#207888;
-  --card:#1e2329;--border:#2a3342;--muted:#485868;
+  --green:#7ec200;--amber:#d09800;--red:#cc4444;--blue:#4e9ae0;--cyan:#14b8cc;
+  --card:#1a2232;--border:#2e3d56;--muted:#607888;
   --bg:#0e1118;--bg-hdr:#0b0e14;--bg-nav:#0d1016;--bg-inner:#141820;
-  --bg-sel:#252c38;--bg-strip:#222830;
-  --bg-bug:#211a1a;--bg-exec-r:#201820;--bg-exec-a:#201e16;
-  --text:#8898a8;--text-strong:#a8b8c8;--text-code:#8898a8;
-  --nav-hover:rgba(255,255,255,.02);--nav-active:rgba(94,140,0,.06);
-  --nav-sep:rgba(42,51,66,.7);
-  --chip-card-bg:#1e2329;
-  --exec-name-r:#a07070;--exec-name-a:#a08858;
-  --feed-r:#806060;--feed-g:#507020;--feed-b:#4878a0;--feed-n:#607080;
-  --ms-strip-bg:#1e2329;
-  --logo-span:#a8b8c8;
-  --cp-badge-bg:rgba(32,120,136,.06);--cp-badge-border:rgba(32,120,136,.18);
-  --action-bg:#222830;
-  --toggle-bg:#252c38;--toggle-color:#8898a8;
+  --bg-sel:#1e2a3a;--bg-strip:#1a2232;
+  --bg-bug:#221a1a;--bg-exec-r:#211620;--bg-exec-a:#211e14;
+  --text:#b8cede;--text-strong:#d8eaf8;--text-code:#b8cede;
+  --nav-hover:rgba(255,255,255,.03);--nav-active:rgba(126,194,0,.08);
+  --nav-sep:rgba(46,61,86,.8);
+  --chip-card-bg:#1a2232;
+  --exec-name-r:#cc7070;--exec-name-a:#c09848;
+  --feed-r:#aa4444;--feed-g:#6a9c00;--feed-b:#4e9ae0;--feed-n:#607888;
+  --ms-strip-bg:#1a2232;
+  --logo-span:#d8eaf8;
+  --cp-badge-bg:rgba(20,184,204,.08);--cp-badge-border:rgba(20,184,204,.22);
+  --action-bg:#1e2a3a;
+  --toggle-bg:#1e2a3a;--toggle-color:#b8cede;
   --shadow:none;
 }
 
 /* ===== LIGHT THEME ===== */
 body.light{
-  --green:#3a5e00;--amber:#6a4000;--red:#6e2020;--blue:#1a5ca0;--cyan:#005c68;
-  --card:#ffffff;--border:#d8dfe9;--muted:#3a4e65;
+  --green:#3d6e00;--amber:#8a5200;--red:#b02828;--blue:#1460b0;--cyan:#006e80;
+  --card:#ffffff;--border:#c8d4e4;--muted:#2e4260;
   --bg:#f0f3f8;--bg-hdr:#f8fafd;--bg-nav:#f4f6fb;--bg-inner:#f0f3f8;
   --bg-sel:#e8ecf4;--bg-strip:#ffffff;
   --bg-bug:#f8f0f0;--bg-exec-r:#f8f0f3;--bg-exec-a:#f8f5e8;
@@ -100,7 +100,7 @@ body.light .left-nav{background:rgba(244,246,251,0.88)}
 
 /* MAIN PANEL */
 .main-panel{flex:1;display:flex;flex-direction:column;overflow:hidden}
-.main{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:12px}
+.main{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:14px}
 .sidebar{width:220px;background:rgba(24,28,34,0.82);border-left:1px solid var(--border);padding:12px;display:flex;flex-direction:column;gap:12px;overflow-y:auto;flex-shrink:0;transition:background .2s}
 body.light .sidebar{background:rgba(244,246,251,0.88)}
 
@@ -114,14 +114,14 @@ body.light .sidebar{background:rgba(244,246,251,0.88)}
 .tab-plugin-badge{display:inline-flex;align-items:center;gap:4px;background:var(--cp-badge-bg);border:1px solid var(--cp-badge-border);border-radius:10px;padding:1px 7px;font-size:9px;font-weight:700;color:var(--cyan);letter-spacing:.5px;margin-left:8px}
 
 /* CARDS */
-.card{background:rgba(30,35,41,0.87);border:1px solid var(--border);border-radius:8px;padding:12px;box-shadow:var(--shadow)}
-body.light .card{background:rgba(255,255,255,0.88)}
+.card{background:rgba(22,32,50,0.93);border:1px solid var(--border);border-radius:8px;padding:14px;box-shadow:var(--shadow)}
+body.light .card{background:rgba(255,255,255,0.92)}
 .card-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.card-title{font-size:11px;font-weight:700;letter-spacing:.8px;color:var(--muted);text-transform:uppercase}
+.card-title{font-size:11px;font-weight:700;letter-spacing:.8px;color:var(--text);text-transform:uppercase}
 
 /* FLIGHT DECK */
-.flight-deck{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.kpi{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px;box-shadow:var(--shadow)}
+.flight-deck{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.kpi{background:rgba(22,32,50,0.93);border:1px solid var(--border);border-radius:8px;padding:14px;box-shadow:var(--shadow)}
 .kpi-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px}
 .kpi-val{font-size:26px;font-weight:700;line-height:1.1}
 .kpi-sub{font-size:10px;color:var(--muted);margin-top:3px}
@@ -129,24 +129,24 @@ body.light .card{background:rgba(255,255,255,0.88)}
 
 /* STATUS CHIPS */
 .cg,.ca,.cr,.cb,.cc,.cn,.cw{padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600;white-space:nowrap;display:inline-block}
-.cg{background:rgba(118,185,0,.15);color:var(--green);border:1px solid rgba(118,185,0,.3)}
-.ca{background:rgba(232,160,32,.15);color:var(--amber);border:1px solid rgba(232,160,32,.3)}
-.cr{background:rgba(224,80,80,.15);color:var(--red);border:1px solid rgba(224,80,80,.3)}
-.cb{background:rgba(74,158,255,.15);color:var(--blue);border:1px solid rgba(74,158,255,.3)}
-.cc{background:rgba(0,200,200,.15);color:var(--cyan);border:1px solid rgba(0,200,200,.3)}
-.cn{background:rgba(122,132,153,.15);color:var(--muted);border:1px solid rgba(122,132,153,.3)}
-.cw{background:rgba(58,120,176,.12);color:#6aa0d0;border:1px solid rgba(58,120,176,.28)}
+.cg{background:rgba(126,194,0,.22);color:var(--green);border:1px solid rgba(126,194,0,.50)}
+.ca{background:rgba(208,152,0,.22);color:var(--amber);border:1px solid rgba(208,152,0,.50)}
+.cr{background:rgba(204,68,68,.22);color:var(--red);border:1px solid rgba(204,68,68,.50)}
+.cb{background:rgba(78,154,224,.22);color:var(--blue);border:1px solid rgba(78,154,224,.50)}
+.cc{background:rgba(20,184,204,.22);color:var(--cyan);border:1px solid rgba(20,184,204,.50)}
+.cn{background:rgba(96,120,136,.20);color:var(--muted);border:1px solid rgba(96,120,136,.40)}
+.cw{background:rgba(78,154,224,.18);color:#78b8e8;border:1px solid rgba(78,154,224,.44)}
 body.light .cw{color:#1a5ca0}
 
 /* CHIPS GRID */
-.chips-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.chip-card{background:var(--chip-card-bg);border:1px solid var(--border);border-radius:8px;padding:10px;border-left:3px solid transparent;cursor:pointer;transition:background .15s;box-shadow:var(--shadow)}
+.chips-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.chip-card{background:rgba(20,30,46,0.92);border:1px solid var(--border);border-radius:8px;padding:12px;border-left:3px solid transparent;cursor:pointer;transition:background .15s;box-shadow:var(--shadow)}
 .chip-card:hover{filter:brightness(1.04)}
 .chip-card.g{border-left-color:var(--green)}
 .chip-card.a{border-left-color:var(--amber)}
 .chip-card.r{border-left-color:var(--red)}
 .chip-card.w{border-left-color:#3a78b0}
-.chip-name{font-weight:700;font-size:13px;margin-bottom:2px;color:var(--text)}
+.chip-name{font-weight:700;font-size:13px;margin-bottom:2px;color:var(--text-strong)}
 .chip-phase{font-size:10px;color:var(--muted);margin-bottom:6px}
 .chip-gate{font-size:10px;margin-bottom:6px}
 .chip-bar{height:3px;background:var(--border);border-radius:2px;margin-bottom:6px;overflow:hidden}
