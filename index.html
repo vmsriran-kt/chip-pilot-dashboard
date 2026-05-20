@@ -62,8 +62,11 @@ body.light .hdr{background:rgba(255,255,255,0.88);backdrop-filter:blur(32px) sat
 .badge-multi{background:rgba(118,185,0,.15);color:var(--green);border:1px solid rgba(118,185,0,.3);padding:4px 10px;border-radius:12px;font-size:11px;font-weight:600;white-space:nowrap}
 .conf-wrap{margin-left:auto;display:flex;align-items:center;gap:8px;white-space:nowrap}
 .conf-label{color:var(--muted);font-size:11px}
-.conf-bar{width:100px;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
-.conf-fill{height:100%;background:var(--green);border-radius:3px}
+.conf-bar{width:110px;height:10px;background:rgba(255,255,255,0.06);border-radius:5px;overflow:hidden;position:relative;border:1px solid rgba(255,255,255,0.14);box-shadow:inset 0 1px 4px rgba(0,0,0,0.35),inset 0 -1px 0 rgba(255,255,255,0.04)}
+body.light .conf-bar{background:rgba(40,80,160,0.07);border:1px solid rgba(40,80,160,0.18);box-shadow:inset 0 1px 3px rgba(0,0,0,0.10)}
+.conf-fill{position:relative;height:100%;background:var(--green);border-radius:5px;overflow:hidden}
+.conf-fill::before{content:'';position:absolute;top:-5px;left:0;width:200%;height:14px;border-radius:45%;background:rgba(255,255,255,0.22);animation:waveRoll 2.6s linear infinite}
+.conf-fill::after{content:'';position:absolute;top:-3px;left:-20%;width:200%;height:12px;border-radius:42%;background:rgba(255,255,255,0.12);animation:waveRoll 3.8s linear infinite reverse}
 .conf-pct{color:var(--green);font-weight:700;font-size:13px}
 
 /* THEME TOGGLE */
@@ -95,8 +98,10 @@ body.light .left-nav{background:rgba(255,255,255,0.84);backdrop-filter:blur(28px
 .chip-nav-item.nav-a .chip-nav-status::before{background:var(--amber)}
 .chip-nav-item.nav-w .chip-nav-status{color:#6aa0d0}
 .chip-nav-item.nav-w .chip-nav-status::before{background:#3a78b0}
-.chip-nav-bar{height:2px;background:var(--border);border-radius:1px;margin-top:4px;overflow:hidden}
-.chip-nav-bar-fill{height:100%;border-radius:1px}
+.chip-nav-bar{height:5px;background:rgba(255,255,255,0.06);border-radius:3px;margin-top:5px;overflow:hidden;position:relative;border:1px solid rgba(255,255,255,0.11);box-shadow:inset 0 1px 3px rgba(0,0,0,0.30)}
+body.light .chip-nav-bar{background:rgba(40,80,160,0.06);border:1px solid rgba(40,80,160,0.15)}
+.chip-nav-bar-fill{position:relative;height:100%;border-radius:3px;overflow:hidden}
+.chip-nav-bar-fill::before{content:'';position:absolute;top:-3px;left:0;width:200%;height:8px;border-radius:44%;background:rgba(255,255,255,0.20);animation:waveRoll 2.4s linear infinite}
 
 /* MAIN PANEL */
 .main-panel{flex:1;display:flex;flex-direction:column;overflow:hidden}
@@ -152,8 +157,11 @@ body.light .chip-card{background:rgba(255,255,255,0.80);backdrop-filter:blur(24p
 .chip-name{font-weight:700;font-size:13px;margin-bottom:2px;color:var(--text-strong)}
 .chip-phase{font-size:10px;color:var(--muted);margin-bottom:6px}
 .chip-gate{font-size:10px;margin-bottom:6px}
-.chip-bar{height:3px;background:var(--border);border-radius:2px;margin-bottom:6px;overflow:hidden}
-.chip-bar-fill{height:100%;border-radius:2px}
+.chip-bar{height:10px;background:rgba(255,255,255,0.06);border-radius:5px;margin-bottom:6px;overflow:hidden;position:relative;border:1px solid rgba(255,255,255,0.13);box-shadow:inset 0 1px 4px rgba(0,0,0,0.32),inset 0 -1px 0 rgba(255,255,255,0.04)}
+body.light .chip-bar{background:rgba(40,80,160,0.07);border:1px solid rgba(40,80,160,0.17);box-shadow:inset 0 1px 3px rgba(0,0,0,0.09)}
+.chip-bar-fill{position:relative;height:100%;border-radius:5px;overflow:hidden}
+.chip-bar-fill::before{content:'';position:absolute;top:-5px;left:0;width:200%;height:14px;border-radius:45%;background:rgba(255,255,255,0.22);animation:waveRoll 2.8s linear infinite}
+.chip-bar-fill::after{content:'';position:absolute;top:-3px;left:-15%;width:200%;height:11px;border-radius:40%;background:rgba(255,255,255,0.11);animation:waveRoll 4.2s linear infinite reverse}
 .chip-stat-row{display:flex;align-items:center;justify-content:space-between;font-size:10px}
 .chip-cm{font-size:10px;color:var(--muted);margin-top:5px;padding-top:5px;border-top:1px solid var(--border)}
 .chip-cm-name{color:var(--cyan);font-weight:700}
@@ -409,6 +417,29 @@ body.light .nav-toggle{background:rgba(255,255,255,0.6);border:1px solid rgba(25
   .chips-grid{grid-template-columns:1fr}
   .flight-deck{grid-template-columns:1fr}
 }
+
+/* ===== WATER INDICATOR ANIMATION ===== */
+@keyframes waveRoll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* Glass tube highlight — top reflection on water bars */
+.chip-bar::after,.conf-bar::after,.chip-nav-bar::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:40%;
+  background:linear-gradient(to bottom,rgba(255,255,255,0.14),transparent);
+  border-radius:5px 5px 0 0;pointer-events:none;z-index:3
+}
+
+/* Hero detail water bar */
+.hero-water-bar{
+  width:200px;height:14px;background:rgba(255,255,255,0.06);border-radius:7px;
+  overflow:hidden;position:relative;border:1px solid rgba(255,255,255,0.14);
+  box-shadow:inset 0 1px 5px rgba(0,0,0,0.38),inset 0 -1px 0 rgba(255,255,255,0.04);
+  margin-top:6px
+}
+body.light .hero-water-bar{background:rgba(40,80,160,0.07);border:1px solid rgba(40,80,160,0.18);box-shadow:inset 0 1px 4px rgba(0,0,0,0.10)}
+.hero-water-bar::after{content:'';position:absolute;top:0;left:0;right:0;height:38%;background:linear-gradient(to bottom,rgba(255,255,255,0.16),transparent);border-radius:7px 7px 0 0;pointer-events:none;z-index:3}
+.hero-water-fill{position:relative;height:100%;border-radius:7px;overflow:hidden}
+.hero-water-fill::before{content:'';position:absolute;top:-6px;left:0;width:200%;height:18px;border-radius:45%;background:rgba(255,255,255,0.22);animation:waveRoll 2.4s linear infinite}
+.hero-water-fill::after{content:'';position:absolute;top:-4px;left:-20%;width:200%;height:15px;border-radius:42%;background:rgba(255,255,255,0.12);animation:waveRoll 3.6s linear infinite reverse}
 </style>
 </head>
 <body>
@@ -1006,7 +1037,7 @@ function renderChipView(chip){
           <div class="chip-hero-kpi"><div class="chip-hero-kpi-val ${chip.bugs_count>0?'r':''}">${chip.bugs_count}</div><div class="chip-hero-kpi-lbl">Open Bugs</div></div>
         </div>
         <div style="font-size:11px;color:var(--muted)">Next gate: <strong class="${chip.nextGateCls}">${chip.nextGate} · ${chip.nextGateDate}</strong></div>
-        <div style="width:180px;height:4px;background:var(--border);border-radius:2px;overflow:hidden"><div style="width:${chip.progress}%;height:100%;background:${barColor};border-radius:2px"></div></div>
+        <div class="hero-water-bar"><div class="hero-water-fill" style="width:${chip.progress}%;background:${barColor}"></div></div>
       </div>
     </div>
     <div class="ms-strip">${buildMilestones(chip.milestones)}</div>
