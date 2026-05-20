@@ -158,40 +158,32 @@ body.light .cw{color:#1a5ca0}
   transition:transform .22s ease,box-shadow .22s ease,filter .15s;
   box-shadow:0 2px 0 rgba(255,255,255,0.10) inset,0 8px 36px rgba(0,0,0,0.46),0 2px 6px rgba(0,0,0,0.24)
 }
-/* ── LIGHT MODE: Acrylic painting frame — warm ivory gallery ── */
+/* ── LIGHT MODE: Executive glass — cool blue-white acrylic ── */
 body.light .chip-card{
-  /* Warm art-paper ivory — heavier presence than pure white */
-  background:rgba(252,249,244,0.94);
-  backdrop-filter:blur(30px) saturate(200%);-webkit-backdrop-filter:blur(30px) saturate(200%);
+  background:rgba(246,249,255,0.94);
+  backdrop-filter:blur(30px) saturate(180%);-webkit-backdrop-filter:blur(30px) saturate(180%);
   border:1px solid rgba(255,255,255,1);border-radius:14px;
-  /* Thick acrylic frame: bright top-left edge, soft bottom-right weight, deep gallery drop */
   box-shadow:
-    0 0 0 2px rgba(200,215,240,0.22),
+    0 0 0 1px rgba(160,190,240,0.20),
     inset 0 2px 0 rgba(255,255,255,1),
     inset 2px 0 0 rgba(255,255,255,0.95),
-    inset 0 -2px 0 rgba(140,165,210,0.32),
-    inset -2px 0 0 rgba(140,165,210,0.20),
-    0 30px 80px rgba(60,80,140,0.18),
-    0 12px 30px rgba(60,80,140,0.12),
-    0 3px 8px rgba(60,80,140,0.08)
+    inset 0 -2px 0 rgba(120,150,210,0.28),
+    inset -2px 0 0 rgba(120,150,210,0.16),
+    0 28px 72px rgba(50,70,130,0.16),
+    0 10px 26px rgba(50,70,130,0.10),
+    0 2px 6px rgba(50,70,130,0.07)
 }
 
-/* Light neural — vivid watercolour washes, mixed warm + cool palette */
+/* Light neural — blue/grey/white water-wash only, no warm tones */
 body.light .chip-card::before{
   content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:0;
   background:
-    /* Periwinkle — top-left anchor */
-    radial-gradient(ellipse at 12% 20%,rgba(100,138,240,.32) 0%,transparent 50%),
-    /* Warm rose-lavender — bottom-right */
-    radial-gradient(ellipse at 86% 80%,rgba(200,148,220,.26) 0%,transparent 46%),
-    /* Sky wash — top-center */
-    radial-gradient(ellipse at 55% 5%, rgba(78,158,228,.24) 0%,transparent 42%),
-    /* Soft sage — bottom-left */
-    radial-gradient(ellipse at 5%  90%,rgba(88,188,160,.22) 0%,transparent 40%),
-    /* Warm honey — center drift */
-    radial-gradient(ellipse at 48% 54%,rgba(228,198,110,.18) 0%,transparent 36%),
-    /* Coral accent — top-right */
-    radial-gradient(ellipse at 90% 16%,rgba(228,152,138,.22) 0%,transparent 38%);
+    radial-gradient(ellipse at 12% 20%,rgba(80,115,210,.22) 0%,transparent 50%),
+    radial-gradient(ellipse at 86% 80%,rgba(100,135,225,.16) 0%,transparent 46%),
+    radial-gradient(ellipse at 55% 5%, rgba(60,100,200,.18) 0%,transparent 42%),
+    radial-gradient(ellipse at 5%  90%,rgba(110,145,220,.14) 0%,transparent 40%),
+    radial-gradient(ellipse at 48% 54%,rgba(130,160,230,.10) 0%,transparent 36%),
+    radial-gradient(ellipse at 90% 16%,rgba(90,125,215,.16) 0%,transparent 38%);
   animation:neuralBreath 6.5s ease-in-out infinite
 }
 body.light .chip-card:nth-child(2)::before{animation-delay:-2.1s}
@@ -202,37 +194,37 @@ body.light .chip-card:nth-child(6)::before{animation-delay:-3.0s}
 body.light .chip-card:nth-child(7)::before{animation-delay:-0.7s;animation-duration:7.2s}
 body.light .chip-card:nth-child(8)::before{animation-delay:-4.8s}
 
-/* Inner acrylic mat — cream picture-frame insert */
+/* Inner acrylic mat — glass insert */
 body.light .chip-card::after{
   content:'';position:absolute;inset:5px;border-radius:10px;
-  border:1px solid rgba(150,165,210,0.24);
+  border:1px solid rgba(130,160,225,0.20);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.96),
-    inset 1px 0 0 rgba(255,255,255,0.80),
-    inset 0 -1px 0 rgba(140,165,210,0.18),
-    inset 0 0 22px rgba(80,100,160,0.06);
+    inset 0 1px 0 rgba(255,255,255,0.98),
+    inset 1px 0 0 rgba(255,255,255,0.85),
+    inset 0 -1px 0 rgba(110,140,210,0.14),
+    inset 0 0 20px rgba(60,90,180,0.04);
   pointer-events:none;z-index:20
 }
 
-/* Hover — lift off wall, deepen gallery shadow */
+/* Hover — lift, deepen glass shadow */
 body.light .chip-card:hover{
   transform:translateY(-3px) scale(1.007);
   box-shadow:
-    0 0 0 2px rgba(180,200,240,0.30),
+    0 0 0 1px rgba(140,175,240,0.28),
     inset 0 2px 0 rgba(255,255,255,1),
     inset 2px 0 0 rgba(255,255,255,0.98),
-    inset 0 -2px 0 rgba(120,150,200,0.40),
-    inset -2px 0 0 rgba(120,150,200,0.26),
-    0 44px 100px rgba(60,80,140,0.24),
-    0 18px 44px rgba(60,80,140,0.16),
-    0 4px 12px rgba(60,80,140,0.10)
+    inset 0 -2px 0 rgba(100,135,210,0.36),
+    inset -2px 0 0 rgba(100,135,210,0.22),
+    0 40px 96px rgba(50,70,130,0.22),
+    0 16px 40px rgba(50,70,130,0.14),
+    0 4px 10px rgba(50,70,130,0.09)
 }
 body.light .chip-card:hover::before{animation-play-state:paused}
 
 /* Status left-edge glow — light mode */
-body.light .chip-card.g{box-shadow:0 0 0 2px rgba(200,215,240,0.22),inset 0 2px 0 rgba(255,255,255,1),inset 2px 0 0 rgba(255,255,255,0.95),inset 0 -2px 0 rgba(140,165,210,0.32),inset -2px 0 0 rgba(140,165,210,0.20),-5px 0 20px rgba(26,120,34,.18),0 30px 80px rgba(60,80,140,0.18),0 12px 30px rgba(60,80,140,0.12)}
-body.light .chip-card.a{box-shadow:0 0 0 2px rgba(200,215,240,0.22),inset 0 2px 0 rgba(255,255,255,1),inset 2px 0 0 rgba(255,255,255,0.95),inset 0 -2px 0 rgba(140,165,210,0.32),inset -2px 0 0 rgba(140,165,210,0.20),-5px 0 20px rgba(168,96,0,.18),0 30px 80px rgba(60,80,140,0.18),0 12px 30px rgba(60,80,140,0.12)}
-body.light .chip-card.r{box-shadow:0 0 0 2px rgba(200,215,240,0.22),inset 0 2px 0 rgba(255,255,255,1),inset 2px 0 0 rgba(255,255,255,0.95),inset 0 -2px 0 rgba(140,165,210,0.32),inset -2px 0 0 rgba(140,165,210,0.20),-5px 0 20px rgba(184,30,30,.18),0 30px 80px rgba(60,80,140,0.18),0 12px 30px rgba(60,80,140,0.12)}
+body.light .chip-card.g{box-shadow:0 0 0 1px rgba(160,190,240,0.20),inset 0 2px 0 rgba(255,255,255,1),inset 2px 0 0 rgba(255,255,255,0.95),inset 0 -2px 0 rgba(120,150,210,0.28),inset -2px 0 0 rgba(120,150,210,0.16),-5px 0 18px rgba(26,120,34,.16),0 28px 72px rgba(50,70,130,0.16),0 10px 26px rgba(50,70,130,0.10)}
+body.light .chip-card.a{box-shadow:0 0 0 1px rgba(160,190,240,0.20),inset 0 2px 0 rgba(255,255,255,1),inset 2px 0 0 rgba(255,255,255,0.95),inset 0 -2px 0 rgba(120,150,210,0.28),inset -2px 0 0 rgba(120,150,210,0.16),-5px 0 18px rgba(168,96,0,.16),0 28px 72px rgba(50,70,130,0.16),0 10px 26px rgba(50,70,130,0.10)}
+body.light .chip-card.r{box-shadow:0 0 0 1px rgba(160,190,240,0.20),inset 0 2px 0 rgba(255,255,255,1),inset 2px 0 0 rgba(255,255,255,0.95),inset 0 -2px 0 rgba(120,150,210,0.28),inset -2px 0 0 rgba(120,150,210,0.16),-5px 0 18px rgba(184,30,30,.16),0 28px 72px rgba(50,70,130,0.16),0 10px 26px rgba(50,70,130,0.10)}
 
 /* ── DARK MODE: Acrylic painting frame — deep space ── */
 body:not(.light) .chip-card{
@@ -366,10 +358,7 @@ body.light .bug-war-tag{color:#a06010}
 body.light .hm-l-cell{background:rgba(26,120,34,.14);color:#1a7822;border:1px solid rgba(26,120,34,.35)}
 body.light .hm-m-cell{background:rgba(168,96,0,.14);color:#a86000;border:1px solid rgba(168,96,0,.35)}
 body.light .hm-h-cell{background:rgba(184,30,30,.15);color:#b81e1e;border:1px solid rgba(184,30,30,.36)}
-/* score row at bottom */
-.hm-score-cell{background:rgba(255,255,255,.06);color:var(--text-strong);border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;height:22px;font-size:9px;font-weight:800}
-body.light .hm-score-cell{background:rgba(12,78,158,.06)}
-.hm-table tr:last-child td:first-child{color:var(--muted);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.hm-risk-lbl{display:block;font-size:6.5px;font-weight:800;text-align:center;margin-top:2px;letter-spacing:.5px;opacity:.88}
 .hm-legend{display:flex;gap:10px;margin-top:8px;font-size:10px;color:var(--muted);align-items:center;flex-wrap:wrap}
 .hm-legend span{display:flex;align-items:center;gap:5px}
 .leg-dot{width:12px;height:12px;border-radius:3px}
@@ -1116,19 +1105,22 @@ const colSums=Array(hmCols.length).fill(0);
 hmData.forEach(([,vals])=>vals.forEach((v,i)=>colSums[i]+=v));
 const colRisk=colSums.map(s=>Math.min(3,Math.round(s/N))); /* 1=L 2=M 3=H */
 
-/* Build thead dynamically — headers coloured by computed overall risk */
+/* Build thead — chip code + computed overall risk label in header */
 const hmHead=document.getElementById("hm-head");
 const hdrTr=document.createElement("tr");
+const riskText=['LOW','MED','HIGH'];
 hdrTr.innerHTML=`<th>Domain</th>`+hmCols.map((c,i)=>{
-  /* Use computed risk (colRisk) to colour; fallback to chip's natural colour (rI) */
-  const riskIdx=colRisk[i]-1;                        /* 0/1/2 */
-  const bg   = hmRiskBg[riskIdx];
-  const color= hmRiskColor[riskIdx];
-  return `<th><span class="hm-chip-hdr" style="background:${bg};color:${color}">${c.code}</span></th>`;
+  const riskIdx=colRisk[i]-1;          /* 0=Low 1=Med 2=High */
+  const bg   =hmRiskBg[riskIdx];
+  const color=hmRiskColor[riskIdx];
+  return `<th>
+    <span class="hm-chip-hdr" style="background:${bg};color:${color}">${c.code}</span>
+    <span class="hm-risk-lbl" style="color:${color}">${riskText[riskIdx]}</span>
+  </th>`;
 }).join("");
 hmHead.appendChild(hdrTr);
 
-/* Build body rows — no risk score footer row */
+/* Build body rows — no score footer */
 const hmbody=document.getElementById("hm-body");
 hmData.forEach(([name,vals])=>{
   const tr=document.createElement("tr");
