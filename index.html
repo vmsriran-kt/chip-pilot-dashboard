@@ -147,16 +147,97 @@ body.light .cw{color:#1a5ca0}
 
 /* CHIPS GRID */
 .chips-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.chip-card{background:rgba(255,255,255,0.09);backdrop-filter:blur(24px) saturate(155%);-webkit-backdrop-filter:blur(24px) saturate(155%);border:1px solid rgba(255,255,255,0.18);border-radius:13px;padding:12px;border-left:3px solid transparent;cursor:pointer;transition:filter .15s,transform .15s;box-shadow:0 2px 0 rgba(255,255,255,0.10) inset,0 8px 36px rgba(0,0,0,0.46),0 2px 6px rgba(0,0,0,0.24)}
-body.light .chip-card{background:rgba(255,255,255,0.80);backdrop-filter:blur(24px) saturate(200%);-webkit-backdrop-filter:blur(24px) saturate(200%);border:1px solid rgba(255,255,255,0.98);border-radius:13px;box-shadow:0 1px 0 rgba(255,255,255,1) inset,0 8px 32px rgba(40,80,160,0.11),0 2px 6px rgba(40,80,160,0.07)}
-.chip-card:hover{filter:brightness(1.04)}
+
+/* Base chip card — position+overflow required for pseudo-element layers */
+.chip-card{
+  position:relative;overflow:hidden;
+  background:rgba(255,255,255,0.09);
+  backdrop-filter:blur(24px) saturate(155%);-webkit-backdrop-filter:blur(24px) saturate(155%);
+  border:1px solid rgba(255,255,255,0.18);border-radius:14px;padding:13px;
+  border-left:3px solid transparent;cursor:pointer;
+  transition:transform .22s ease,box-shadow .22s ease,filter .15s;
+  box-shadow:0 2px 0 rgba(255,255,255,0.10) inset,0 8px 36px rgba(0,0,0,0.46),0 2px 6px rgba(0,0,0,0.24)
+}
+body.light .chip-card{background:rgba(255,255,255,0.80);backdrop-filter:blur(24px) saturate(200%);-webkit-backdrop-filter:blur(24px) saturate(200%);border:1px solid rgba(255,255,255,0.98);border-radius:14px;box-shadow:0 1px 0 rgba(255,255,255,1) inset,0 8px 32px rgba(40,80,160,0.11),0 2px 6px rgba(40,80,160,0.07)}
+body.light .chip-card:hover{filter:brightness(1.04)}
+
+/* ── DARK MODE: Acrylic painting frame ── */
+body:not(.light) .chip-card{
+  background:rgba(5,11,28,.88);
+  backdrop-filter:blur(28px) saturate(148%);-webkit-backdrop-filter:blur(28px) saturate(148%);
+  border:1px solid rgba(255,255,255,0.20);
+  /* Acrylic frame: top-left highlight + bottom-right shadow + deep gallery shadow */
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.06),
+    inset 0 1px 0 rgba(255,255,255,0.28),
+    inset 1px 0 0 rgba(255,255,255,0.13),
+    inset 0 -1px 0 rgba(0,0,0,0.52),
+    inset -1px 0 0 rgba(0,0,0,0.24),
+    0 26px 68px rgba(0,0,0,0.74),
+    0 10px 28px rgba(0,0,0,0.52),
+    0 3px 7px rgba(0,0,0,0.36)
+}
+
+/* Neural brain synaptic glow — painted canvas behind card content */
+body:not(.light) .chip-card::before{
+  content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse at 14% 22%,rgba(0,52,150,.56) 0%,transparent 46%),
+    radial-gradient(ellipse at 84% 78%,rgba(0,38,112,.48) 0%,transparent 42%),
+    radial-gradient(ellipse at 58% 6%, rgba(14,68,162,.40) 0%,transparent 38%),
+    radial-gradient(ellipse at 6%  88%,rgba(0,28,84, .36) 0%,transparent 36%),
+    radial-gradient(ellipse at 50% 52%,rgba(8,36,96, .28) 0%,transparent 32%),
+    radial-gradient(ellipse at 92% 18%,rgba(20,60,140,.32) 0%,transparent 34%);
+  animation:neuralBreath 6.5s ease-in-out infinite
+}
+/* Stagger pulse timing per card position for organic feel */
+body:not(.light) .chip-card:nth-child(2)::before{animation-delay:-2.1s}
+body:not(.light) .chip-card:nth-child(3)::before{animation-delay:-4.4s;animation-duration:7.8s}
+body:not(.light) .chip-card:nth-child(4)::before{animation-delay:-1.3s}
+body:not(.light) .chip-card:nth-child(5)::before{animation-delay:-5.2s;animation-duration:8.2s}
+body:not(.light) .chip-card:nth-child(6)::before{animation-delay:-3.0s}
+body:not(.light) .chip-card:nth-child(7)::before{animation-delay:-0.7s;animation-duration:7.2s}
+body:not(.light) .chip-card:nth-child(8)::before{animation-delay:-4.8s}
+
+/* Inner acrylic mat — a floating frame inside the painting */
+body:not(.light) .chip-card::after{
+  content:'';position:absolute;inset:6px;border-radius:9px;
+  border:1px solid rgba(255,255,255,0.07);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.10),inset 0 0 18px rgba(0,0,0,0.22);
+  pointer-events:none;z-index:20
+}
+
+/* Hover — lift off wall, deepen shadows, intensify neural */
+body:not(.light) .chip-card:hover{
+  transform:translateY(-3px) scale(1.007);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.10),
+    inset 0 1px 0 rgba(255,255,255,0.34),
+    inset 1px 0 0 rgba(255,255,255,0.16),
+    inset 0 -1px 0 rgba(0,0,0,0.60),
+    inset -1px 0 0 rgba(0,0,0,0.28),
+    0 40px 90px rgba(0,0,0,0.80),
+    0 16px 40px rgba(0,0,0,0.60),
+    0 4px 10px rgba(0,0,0,0.42)
+}
+body:not(.light) .chip-card:hover::before{
+  animation-play-state:paused;opacity:1.15
+}
+
+/* Status accent — left-edge glow color-matched */
 .chip-card.g{border-left-color:var(--green)}
 .chip-card.a{border-left-color:var(--amber)}
 .chip-card.r{border-left-color:var(--red)}
 .chip-card.w{border-left-color:#3a78b0}
-.chip-name{font-weight:700;font-size:13px;margin-bottom:2px;color:var(--text-strong)}
-.chip-phase{font-size:10px;color:var(--muted);margin-bottom:6px}
-.chip-gate{font-size:10px;margin-bottom:6px}
+body:not(.light) .chip-card.g{box-shadow:inset 0 1px 0 rgba(255,255,255,0.28),inset 1px 0 0 rgba(255,255,255,0.13),inset 0 -1px 0 rgba(0,0,0,0.52),inset -1px 0 0 rgba(0,0,0,0.24),0 0 0 1px rgba(255,255,255,0.06),-5px 0 22px rgba(126,194,0,.22),0 26px 68px rgba(0,0,0,0.74),0 10px 28px rgba(0,0,0,0.52)}
+body:not(.light) .chip-card.a{box-shadow:inset 0 1px 0 rgba(255,255,255,0.28),inset 1px 0 0 rgba(255,255,255,0.13),inset 0 -1px 0 rgba(0,0,0,0.52),inset -1px 0 0 rgba(0,0,0,0.24),0 0 0 1px rgba(255,255,255,0.06),-5px 0 22px rgba(208,152,0,.22),0 26px 68px rgba(0,0,0,0.74),0 10px 28px rgba(0,0,0,0.52)}
+body:not(.light) .chip-card.r{box-shadow:inset 0 1px 0 rgba(255,255,255,0.28),inset 1px 0 0 rgba(255,255,255,0.13),inset 0 -1px 0 rgba(0,0,0,0.52),inset -1px 0 0 rgba(0,0,0,0.24),0 0 0 1px rgba(255,255,255,0.06),-5px 0 22px rgba(204,68,68,.24),0 26px 68px rgba(0,0,0,0.74),0 10px 28px rgba(0,0,0,0.52)}
+.chip-name{position:relative;z-index:1;font-weight:700;font-size:13px;margin-bottom:2px;color:var(--text-strong)}
+.chip-phase{position:relative;z-index:1;font-size:10px;color:var(--muted);margin-bottom:6px}
+.chip-gate{position:relative;z-index:1;font-size:10px;margin-bottom:6px}
+.chip-bar{position:relative;z-index:1}
+.chip-stat-row{position:relative;z-index:1}
+.chip-cm{position:relative;z-index:1}
 .chip-bar{height:10px;background:rgba(255,255,255,0.06);border-radius:5px;margin-bottom:6px;overflow:hidden;position:relative;border:1px solid rgba(255,255,255,0.13);box-shadow:inset 0 1px 4px rgba(0,0,0,0.32),inset 0 -1px 0 rgba(255,255,255,0.04)}
 body.light .chip-bar{background:rgba(40,80,160,0.07);border:1px solid rgba(40,80,160,0.17);box-shadow:inset 0 1px 3px rgba(0,0,0,0.09)}
 .chip-bar-fill{position:relative;height:100%;border-radius:5px;overflow:hidden}
@@ -420,6 +501,15 @@ body.light .nav-toggle{background:rgba(255,255,255,0.6);border:1px solid rgba(25
 
 /* ===== WATER INDICATOR ANIMATION ===== */
 @keyframes waveRoll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ===== NEURAL BRAIN CARD ANIMATION ===== */
+@keyframes neuralBreath{
+  0%  {opacity:.52;transform:scale(1)}
+  28% {opacity:.82;transform:scale(1.04)}
+  55% {opacity:.65;transform:scale(1.01)}
+  78% {opacity:.88;transform:scale(1.03)}
+  100%{opacity:.52;transform:scale(1)}
+}
 
 /* Glass tube highlight — top reflection on water bars */
 .chip-bar::after,.conf-bar::after,.chip-nav-bar::after{
