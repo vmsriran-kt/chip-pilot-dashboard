@@ -55,7 +55,7 @@ body{background:transparent;color:var(--text);font-family:'Segoe UI',system-ui,s
 
 /* HEADER */
 .hdr{background:rgba(255,255,255,0.08);backdrop-filter:blur(32px) saturate(160%);-webkit-backdrop-filter:blur(32px) saturate(160%);border-bottom:1px solid rgba(255,255,255,0.16);padding:10px 16px;display:flex;align-items:center;gap:12px;flex-shrink:0;box-shadow:0 1px 0 rgba(255,255,255,0.10) inset,0 4px 24px rgba(0,0,0,0.40)}
-body.light .hdr{background:rgba(210,222,240,0.96);backdrop-filter:blur(32px) saturate(155%);-webkit-backdrop-filter:blur(32px) saturate(155%);border-bottom:1px solid rgba(255,255,255,0.86);box-shadow:inset 0 1px 0 rgba(255,255,255,0.94),0 4px 16px rgba(70,92,145,0.10)}
+body.light .hdr{background:rgba(255,255,255,0.90);backdrop-filter:blur(36px) saturate(180%);-webkit-backdrop-filter:blur(36px) saturate(180%);border-bottom:1px solid rgba(220,226,234,0.60);box-shadow:inset 0 1px 0 rgba(255,255,255,1),0 1px 0 rgba(210,218,230,0.40),0 4px 18px rgba(0,0,0,0.06)}
 .logo{color:var(--green);font-weight:800;font-size:15px;letter-spacing:.5px;white-space:nowrap}
 .logo span{color:var(--logo-span)}
 .prog-sel{background:var(--bg-sel);border:1px solid var(--border);color:var(--text);padding:6px 10px;border-radius:6px;font-size:12px;min-width:200px}
@@ -63,7 +63,7 @@ body.light .hdr{background:rgba(210,222,240,0.96);backdrop-filter:blur(32px) sat
 .conf-wrap{margin-left:auto;display:flex;align-items:center;gap:8px;white-space:nowrap}
 .conf-label{color:var(--muted);font-size:11px}
 .conf-bar{width:110px;height:10px;background:rgba(255,255,255,0.06);border-radius:5px;overflow:hidden;position:relative;border:1px solid rgba(255,255,255,0.14);box-shadow:inset 0 1px 4px rgba(0,0,0,0.35),inset 0 -1px 0 rgba(255,255,255,0.04)}
-body.light .conf-bar{background:rgba(40,80,160,0.07);border:1px solid rgba(40,80,160,0.18);box-shadow:inset 0 1px 3px rgba(0,0,0,0.10)}
+body.light .conf-bar{background:rgba(0,0,0,0.06);border:1px solid rgba(0,0,0,0.09);box-shadow:inset 0 1px 3px rgba(0,0,0,0.07)}
 .conf-fill{position:relative;height:100%;background:var(--green);border-radius:5px;overflow:hidden}
 .conf-fill::before{content:'';position:absolute;top:-5px;left:0;width:200%;height:14px;border-radius:45%;background:rgba(255,255,255,0.22);animation:waveRoll 2.6s linear infinite}
 .conf-fill::after{content:'';position:absolute;top:-3px;left:-20%;width:200%;height:12px;border-radius:42%;background:rgba(255,255,255,0.12);animation:waveRoll 3.8s linear infinite reverse}
@@ -77,7 +77,7 @@ body.light .conf-bar{background:rgba(40,80,160,0.07);border:1px solid rgba(40,80
 /* LAYOUT */
 .body-wrap{display:flex;flex:1;overflow:hidden}
 .left-nav{width:168px;flex-shrink:0;background:rgba(255,255,255,0.07);backdrop-filter:blur(28px) saturate(155%);-webkit-backdrop-filter:blur(28px) saturate(155%);border-right:1px solid rgba(255,255,255,0.14);display:flex;flex-direction:column;overflow-y:auto;transition:left .25s,background .2s;box-shadow:1px 0 0 rgba(255,255,255,0.08) inset,6px 0 28px rgba(0,0,0,0.32)}
-body.light .left-nav{background:rgba(208,220,238,0.96);backdrop-filter:blur(28px) saturate(155%);-webkit-backdrop-filter:blur(28px) saturate(155%);border-right:1px solid rgba(255,255,255,0.84);box-shadow:inset -1px 0 0 rgba(255,255,255,0.60),6px 0 20px rgba(70,92,145,0.09)}
+body.light .left-nav{background:rgba(248,250,253,0.94);backdrop-filter:blur(28px) saturate(175%);-webkit-backdrop-filter:blur(28px) saturate(175%);border-right:1px solid rgba(218,224,234,0.55);box-shadow:inset -1px 0 0 rgba(255,255,255,0.80),4px 0 16px rgba(0,0,0,0.05)}
 .left-nav-hdr{padding:12px 12px 8px;font-size:9px;font-weight:700;letter-spacing:.9px;color:var(--muted);text-transform:uppercase;border-bottom:1px solid var(--border)}
 .chip-nav-item{padding:9px 12px;cursor:pointer;border-left:3px solid transparent;transition:background .15s;display:flex;flex-direction:column;gap:2px;border-bottom:1px solid var(--nav-sep)}
 .chip-nav-item:hover{background:var(--nav-hover)}
@@ -99,7 +99,7 @@ body.light .left-nav{background:rgba(208,220,238,0.96);backdrop-filter:blur(28px
 .chip-nav-item.nav-w .chip-nav-status{color:#6aa0d0}
 .chip-nav-item.nav-w .chip-nav-status::before{background:#3a78b0}
 .chip-nav-bar{height:5px;background:rgba(255,255,255,0.06);border-radius:3px;margin-top:5px;overflow:hidden;position:relative;border:1px solid rgba(255,255,255,0.11);box-shadow:inset 0 1px 3px rgba(0,0,0,0.30)}
-body.light .chip-nav-bar{background:rgba(40,80,160,0.06);border:1px solid rgba(40,80,160,0.15)}
+body.light .chip-nav-bar{background:rgba(0,0,0,0.06);border:1px solid rgba(0,0,0,0.08)}
 .chip-nav-bar-fill{position:relative;height:100%;border-radius:3px;overflow:hidden}
 .chip-nav-bar-fill::before{content:'';position:absolute;top:-3px;left:0;width:200%;height:8px;border-radius:44%;background:rgba(255,255,255,0.20);animation:waveRoll 2.4s linear infinite}
 
@@ -121,7 +121,7 @@ body.light .tab-bar{background:rgba(255,255,255,0.86);backdrop-filter:blur(28px)
 
 /* CARDS — GLASS */
 .card{background:rgba(255,255,255,0.10);backdrop-filter:blur(28px) saturate(160%);-webkit-backdrop-filter:blur(28px) saturate(160%);border:1px solid rgba(255,255,255,0.20);border-radius:16px;padding:14px;box-shadow:0 2px 0 rgba(255,255,255,0.12) inset,0 -1px 0 rgba(0,100,200,0.10) inset,0 12px 48px rgba(0,0,0,0.52),0 2px 8px rgba(0,0,0,0.28)}
-body.light .card{background:rgba(220,230,244,0.94);backdrop-filter:blur(28px) saturate(155%);-webkit-backdrop-filter:blur(28px) saturate(155%);border:1px solid rgba(255,255,255,0.90);border-radius:16px;box-shadow:0 0 0 1px rgba(162,182,218,0.22),inset 0 1px 0 rgba(255,255,255,0.95),inset 0 -1px 0 rgba(145,165,208,0.28),0 12px 40px rgba(70,92,145,0.13),0 3px 8px rgba(70,92,145,0.08)}
+body.light .card{background:rgba(255,255,255,0.82);backdrop-filter:blur(32px) saturate(175%);-webkit-backdrop-filter:blur(32px) saturate(175%);border:1px solid rgba(230,234,240,0.70);border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,1),inset 0 -1px 0 rgba(210,216,226,0.30),0 8px 32px rgba(0,0,0,0.07),0 2px 6px rgba(0,0,0,0.04)}
 .card-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .card-title{font-size:11px;font-weight:700;letter-spacing:.8px;color:var(--text);text-transform:uppercase}
 
@@ -158,68 +158,61 @@ body.light .cw{color:#1a5ca0}
   transition:transform .22s ease,box-shadow .22s ease,filter .15s;
   box-shadow:0 2px 0 rgba(255,255,255,0.10) inset,0 8px 36px rgba(0,0,0,0.46),0 2px 6px rgba(0,0,0,0.24)
 }
-/* ── LIGHT MODE: Slate-grey + blue-tinge acrylic — top exec ── */
+/* ── LIGHT MODE: White glass acrylic — CEO / board ready ── */
 body.light .chip-card{
-  background:rgba(216,226,242,0.96);
-  backdrop-filter:blur(32px) saturate(155%);-webkit-backdrop-filter:blur(32px) saturate(155%);
-  border:1px solid rgba(255,255,255,0.88);border-radius:14px;
+  background:rgba(255,255,255,0.86);
+  backdrop-filter:blur(36px) saturate(175%);-webkit-backdrop-filter:blur(36px) saturate(175%);
+  border:1px solid rgba(230,234,240,0.75);border-radius:14px;
   box-shadow:
-    0 0 0 1px rgba(165,185,220,0.24),
-    inset 0 1px 0 rgba(255,255,255,0.95),
-    inset 1px 0 0 rgba(255,255,255,0.78),
-    inset 0 -1px 0 rgba(148,168,210,0.32),
-    inset -1px 0 0 rgba(148,168,210,0.20),
-    0 18px 48px rgba(74,96,148,0.14),
-    0 6px 18px rgba(74,96,148,0.09),
-    0 2px 5px rgba(74,96,148,0.06)
+    inset 0 1px 0 rgba(255,255,255,1),
+    inset 1px 0 0 rgba(255,255,255,0.85),
+    inset 0 -1px 0 rgba(210,216,226,0.28),
+    inset -1px 0 0 rgba(210,216,226,0.16),
+    0 1px 0 rgba(210,216,226,0.50),
+    0 12px 36px rgba(0,0,0,0.08),
+    0 4px 10px rgba(0,0,0,0.05),
+    0 1px 3px rgba(0,0,0,0.04)
 }
-/* Neural — barely-there depth texture, slate-toned */
+/* Very subtle light-wash neural — like a watermark on fine paper */
 body.light .chip-card::before{
   content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:0;
   background:
-    radial-gradient(ellipse at 10% 18%,rgba(96,120,185,.07) 0%,transparent 56%),
-    radial-gradient(ellipse at 88% 82%,rgba(106,130,195,.05) 0%,transparent 52%),
-    radial-gradient(ellipse at 52% 4%, rgba(86,112,182,.06) 0%,transparent 48%),
-    radial-gradient(ellipse at 6%  88%,rgba(112,136,196,.05) 0%,transparent 46%);
-  animation:neuralBreath 9s ease-in-out infinite
+    radial-gradient(ellipse at 14% 20%,rgba(100,140,200,.05) 0%,transparent 58%),
+    radial-gradient(ellipse at 86% 82%,rgba(110,148,210,.04) 0%,transparent 54%),
+    radial-gradient(ellipse at 50% 4%, rgba(90,130,195,.04) 0%,transparent 50%);
+  animation:neuralBreath 10s ease-in-out infinite
 }
-body.light .chip-card:nth-child(2)::before{animation-delay:-3.0s}
-body.light .chip-card:nth-child(3)::before{animation-delay:-6.1s;animation-duration:11s}
+body.light .chip-card:nth-child(2)::before{animation-delay:-3.3s}
+body.light .chip-card:nth-child(3)::before{animation-delay:-6.5s;animation-duration:12s}
 body.light .chip-card:nth-child(4)::before{animation-delay:-1.8s}
-body.light .chip-card:nth-child(5)::before{animation-delay:-7.4s;animation-duration:12s}
-body.light .chip-card:nth-child(6)::before{animation-delay:-4.2s}
-body.light .chip-card:nth-child(7)::before{animation-delay:-1.0s;animation-duration:10s}
-body.light .chip-card:nth-child(8)::before{animation-delay:-5.8s}
-/* Inner acrylic mat — refined glass insert */
+body.light .chip-card:nth-child(5)::before{animation-delay:-8.2s;animation-duration:13s}
+body.light .chip-card:nth-child(6)::before{animation-delay:-4.6s}
+body.light .chip-card:nth-child(7)::before{animation-delay:-1.2s;animation-duration:11s}
+body.light .chip-card:nth-child(8)::before{animation-delay:-7.0s}
+/* Acrylic inner mat — thin etched frame inside the glass */
 body.light .chip-card::after{
   content:'';position:absolute;inset:5px;border-radius:10px;
-  border:1px solid rgba(185,202,228,0.30);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.88),
-    inset 1px 0 0 rgba(255,255,255,0.68),
-    inset 0 -1px 0 rgba(148,168,212,0.16),
-    inset 0 0 18px rgba(88,112,172,0.04);
+  border:1px solid rgba(215,220,230,0.45);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.90),inset 0 0 14px rgba(0,0,0,0.02);
   pointer-events:none;z-index:20
 }
-/* Hover — lift cleanly off surface */
+/* Hover — float off the surface */
 body.light .chip-card:hover{
   transform:translateY(-3px) scale(1.007);
-  background:rgba(222,232,246,0.98);
   box-shadow:
-    0 0 0 1px rgba(148,175,225,0.32),
     inset 0 1px 0 rgba(255,255,255,1),
-    inset 1px 0 0 rgba(255,255,255,0.88),
-    inset 0 -1px 0 rgba(130,155,205,0.40),
-    inset -1px 0 0 rgba(130,155,205,0.26),
-    0 28px 68px rgba(64,88,145,0.20),
-    0 10px 26px rgba(64,88,145,0.13),
-    0 3px 8px rgba(64,88,145,0.09)
+    inset 1px 0 0 rgba(255,255,255,0.92),
+    inset 0 -1px 0 rgba(200,208,220,0.35),
+    inset -1px 0 0 rgba(200,208,220,0.20),
+    0 24px 60px rgba(0,0,0,0.12),
+    0 8px 20px rgba(0,0,0,0.07),
+    0 2px 6px rgba(0,0,0,0.05)
 }
 body.light .chip-card:hover::before{animation-play-state:paused}
-/* Status left-edge accent — slate base + status glow */
-body.light .chip-card.g{box-shadow:0 0 0 1px rgba(165,185,220,0.24),inset 0 1px 0 rgba(255,255,255,0.95),inset 1px 0 0 rgba(255,255,255,0.78),inset 0 -1px 0 rgba(148,168,210,0.32),inset -1px 0 0 rgba(148,168,210,0.20),-5px 0 16px rgba(26,120,34,.18),0 18px 48px rgba(74,96,148,0.14),0 6px 18px rgba(74,96,148,0.09)}
-body.light .chip-card.a{box-shadow:0 0 0 1px rgba(165,185,220,0.24),inset 0 1px 0 rgba(255,255,255,0.95),inset 1px 0 0 rgba(255,255,255,0.78),inset 0 -1px 0 rgba(148,168,210,0.32),inset -1px 0 0 rgba(148,168,210,0.20),-5px 0 16px rgba(168,96,0,.18),0 18px 48px rgba(74,96,148,0.14),0 6px 18px rgba(74,96,148,0.09)}
-body.light .chip-card.r{box-shadow:0 0 0 1px rgba(165,185,220,0.24),inset 0 1px 0 rgba(255,255,255,0.95),inset 1px 0 0 rgba(255,255,255,0.78),inset 0 -1px 0 rgba(148,168,210,0.32),inset -1px 0 0 rgba(148,168,210,0.20),-5px 0 16px rgba(184,30,30,.18),0 18px 48px rgba(74,96,148,0.14),0 6px 18px rgba(74,96,148,0.09)}
+/* Status left-edge — clean white glass + soft status glow */
+body.light .chip-card.g{box-shadow:inset 0 1px 0 rgba(255,255,255,1),inset 1px 0 0 rgba(255,255,255,0.85),inset 0 -1px 0 rgba(210,216,226,0.28),inset -1px 0 0 rgba(210,216,226,0.16),0 1px 0 rgba(210,216,226,0.50),-5px 0 14px rgba(26,140,50,.14),0 12px 36px rgba(0,0,0,0.08),0 4px 10px rgba(0,0,0,0.05)}
+body.light .chip-card.a{box-shadow:inset 0 1px 0 rgba(255,255,255,1),inset 1px 0 0 rgba(255,255,255,0.85),inset 0 -1px 0 rgba(210,216,226,0.28),inset -1px 0 0 rgba(210,216,226,0.16),0 1px 0 rgba(210,216,226,0.50),-5px 0 14px rgba(180,110,0,.14),0 12px 36px rgba(0,0,0,0.08),0 4px 10px rgba(0,0,0,0.05)}
+body.light .chip-card.r{box-shadow:inset 0 1px 0 rgba(255,255,255,1),inset 1px 0 0 rgba(255,255,255,0.85),inset 0 -1px 0 rgba(210,216,226,0.28),inset -1px 0 0 rgba(210,216,226,0.16),0 1px 0 rgba(210,216,226,0.50),-5px 0 14px rgba(195,40,40,.14),0 12px 36px rgba(0,0,0,0.08),0 4px 10px rgba(0,0,0,0.05)}
 
 /* ── DARK MODE: Acrylic painting frame — deep space ── */
 body:not(.light) .chip-card{
@@ -292,7 +285,7 @@ body:not(.light) .chip-card.r{box-shadow:inset 0 1px 0 rgba(255,255,255,0.28),in
 .chip-stat-row{position:relative;z-index:1}
 .chip-cm{position:relative;z-index:1}
 .chip-bar{height:10px;background:rgba(255,255,255,0.06);border-radius:5px;margin-bottom:6px;overflow:hidden;position:relative;border:1px solid rgba(255,255,255,0.13);box-shadow:inset 0 1px 4px rgba(0,0,0,0.32),inset 0 -1px 0 rgba(255,255,255,0.04)}
-body.light .chip-bar{background:rgba(40,80,160,0.07);border:1px solid rgba(40,80,160,0.17);box-shadow:inset 0 1px 3px rgba(0,0,0,0.09)}
+body.light .chip-bar{background:rgba(0,0,0,0.06);border:1px solid rgba(0,0,0,0.09);box-shadow:inset 0 1px 3px rgba(0,0,0,0.07)}
 .chip-bar-fill{position:relative;height:100%;border-radius:5px;overflow:hidden}
 .chip-bar-fill::before{content:'';position:absolute;top:-5px;left:0;width:200%;height:14px;border-radius:45%;background:rgba(255,255,255,0.22);animation:waveRoll 2.8s linear infinite}
 .chip-bar-fill::after{content:'';position:absolute;top:-3px;left:-15%;width:200%;height:11px;border-radius:40%;background:rgba(255,255,255,0.11);animation:waveRoll 4.2s linear infinite reverse}
@@ -575,11 +568,56 @@ body.light .nav-toggle{background:rgba(255,255,255,0.6);border:1px solid rgba(25
   box-shadow:inset 0 1px 5px rgba(0,0,0,0.38),inset 0 -1px 0 rgba(255,255,255,0.04);
   margin-top:6px
 }
-body.light .hero-water-bar{background:rgba(40,80,160,0.07);border:1px solid rgba(40,80,160,0.18);box-shadow:inset 0 1px 4px rgba(0,0,0,0.10)}
+body.light .hero-water-bar{background:rgba(0,0,0,0.06);border:1px solid rgba(0,0,0,0.09);box-shadow:inset 0 1px 4px rgba(0,0,0,0.07)}
 .hero-water-bar::after{content:'';position:absolute;top:0;left:0;right:0;height:38%;background:linear-gradient(to bottom,rgba(255,255,255,0.16),transparent);border-radius:7px 7px 0 0;pointer-events:none;z-index:3}
 .hero-water-fill{position:relative;height:100%;border-radius:7px;overflow:hidden}
 .hero-water-fill::before{content:'';position:absolute;top:-6px;left:0;width:200%;height:18px;border-radius:45%;background:rgba(255,255,255,0.22);animation:waveRoll 2.4s linear infinite}
 .hero-water-fill::after{content:'';position:absolute;top:-4px;left:-20%;width:200%;height:15px;border-radius:42%;background:rgba(255,255,255,0.12);animation:waveRoll 3.6s linear infinite reverse}
+
+/* ===== LIGHT MODE — SOFT WATERCOLOUR FLUID FILLS ===== */
+/* Translucent gradient washes — fluid, painterly, not neon */
+body.light .chip-bar-fill[style*="--green"],
+body.light .chip-nav-bar-fill[style*="--green"],
+body.light .hero-water-fill[style*="--green"]{
+  background:linear-gradient(to bottom,rgba(130,200,105,.78) 0%,rgba(88,168,68,.70) 55%,rgba(62,145,46,.65) 100%)!important;
+  box-shadow:0 0 12px rgba(90,170,65,.28) inset
+}
+body.light .conf-fill{
+  background:linear-gradient(to bottom,rgba(130,200,105,.78) 0%,rgba(88,168,68,.70) 55%,rgba(62,145,46,.65) 100%)!important;
+  box-shadow:0 0 12px rgba(90,170,65,.28) inset
+}
+body.light .chip-bar-fill[style*="--amber"],
+body.light .chip-nav-bar-fill[style*="--amber"],
+body.light .hero-water-fill[style*="--amber"]{
+  background:linear-gradient(to bottom,rgba(228,178,52,.78) 0%,rgba(196,145,28,.70) 55%,rgba(165,118,12,.65) 100%)!important;
+  box-shadow:0 0 12px rgba(196,148,30,.28) inset
+}
+body.light .chip-bar-fill[style*="--red"],
+body.light .chip-nav-bar-fill[style*="--red"],
+body.light .hero-water-fill[style*="--red"]{
+  background:linear-gradient(to bottom,rgba(215,100,92,.78) 0%,rgba(182,64,58,.70) 55%,rgba(155,40,36,.65) 100%)!important;
+  box-shadow:0 0 12px rgba(185,65,60,.28) inset
+}
+body.light .chip-bar-fill[style*="--blue"],
+body.light .chip-nav-bar-fill[style*="--blue"],
+body.light .hero-water-fill[style*="--blue"]{
+  background:linear-gradient(to bottom,rgba(88,158,225,.78) 0%,rgba(55,126,205,.70) 55%,rgba(32,98,178,.65) 100%)!important;
+  box-shadow:0 0 12px rgba(55,125,205,.28) inset
+}
+body.light .chip-bar-fill[style*="3a78b0"],
+body.light .chip-nav-bar-fill[style*="3a78b0"],
+body.light .hero-water-fill[style*="3a78b0"]{
+  background:linear-gradient(to bottom,rgba(72,138,210,.76) 0%,rgba(44,106,185,.68) 55%,rgba(24,78,158,.62) 100%)!important;
+  box-shadow:0 0 12px rgba(44,106,185,.26) inset
+}
+/* Wave shimmer — soft translucent white on watercolour fills */
+body.light .chip-bar-fill::before,body.light .conf-fill::before,
+body.light .hero-water-fill::before,body.light .chip-nav-bar-fill::before{background:rgba(255,255,255,0.38)}
+body.light .chip-bar-fill::after,body.light .conf-fill::after,
+body.light .hero-water-fill::after{background:rgba(255,255,255,0.20)}
+/* Tube reflection override for light mode */
+body.light .chip-bar::after,body.light .conf-bar::after,
+body.light .chip-nav-bar::after,body.light .hero-water-bar::after{background:linear-gradient(to bottom,rgba(255,255,255,0.55),transparent)}
 
 /* ===== DARK MODE — GLASS LIQUID v2: per-colour luminous gradients ===== */
 /* Inline background is overridden with !important gradient top→bottom + colored inset glow */
@@ -1566,7 +1604,7 @@ document.addEventListener('click', e=>{
     ctx.fillStyle=sg;ctx.fillRect(0,H*.41,W,H*.04);
   }
   function drawLightWatercolor(){
-    paintBlobs(WC_LIGHT,'#f4f6fb','rgba(250,252,255,.08)','rgba(215,228,248,.14)');
+    paintBlobs(WC_LIGHT,'#f8f9fb','rgba(255,255,255,.06)','rgba(220,226,238,.10)');
   }
 
   function draw(){ isDark()?drawDarkWatercolor():drawLightWatercolor(); }
