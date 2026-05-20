@@ -60,7 +60,9 @@ body.light .hdr{background:rgba(255,255,255,0.90);backdrop-filter:blur(36px) sat
 .logo span{color:var(--logo-span)}
 .prog-sel{background:var(--bg-sel);border:1px solid var(--border);color:var(--text);padding:6px 10px;border-radius:6px;font-size:12px;min-width:200px}
 .badge-multi{background:rgba(118,185,0,.15);color:var(--green);border:1px solid rgba(118,185,0,.3);padding:4px 10px;border-radius:12px;font-size:11px;font-weight:600;white-space:nowrap}
-.badge-risk{background:rgba(204,68,68,.14);color:var(--red);border:1px solid rgba(204,68,68,.32);padding:4px 10px;border-radius:12px;font-size:11px;font-weight:600;white-space:nowrap;display:flex;align-items:center;gap:5px}
+.badge-risk{background:rgba(204,68,68,.14);color:var(--red);border:1px solid rgba(204,68,68,.32);padding:4px 10px;border-radius:12px;font-size:11px;font-weight:600;white-space:nowrap;display:flex;align-items:center;gap:5px;transition:background .15s,transform .15s,box-shadow .15s}
+.badge-risk:hover{background:rgba(204,68,68,.26);transform:translateY(-1px);box-shadow:0 3px 10px rgba(204,68,68,.25)}
+.badge-risk:active{transform:translateY(0)}
 .badge-risk-num{font-size:15px;font-weight:800;line-height:1}
 body.light .badge-risk{background:rgba(184,30,30,.09);border-color:rgba(184,30,30,.28)}
 .conf-wrap{margin-left:auto;display:flex;align-items:center;gap:8px;white-space:nowrap}
@@ -797,7 +799,7 @@ body:not(.light) .hero-water-bar::after{background:linear-gradient(to bottom,rgb
     <option value="t294">T294 / Magni</option>
   </select>
   <div class="badge-multi">MULTI-CHIP · ACTIVE</div>
-  <div class="badge-risk"><span class="badge-risk-num">2</span> Chips at Risk &nbsp;⚠️</div>
+  <div class="badge-risk" onclick="openChip('t268');openChip('t354');" title="Open both at-risk chips" style="cursor:pointer"><span class="badge-risk-num">2</span> Chips at Risk &nbsp;⚠️</div>
   <button class="cp-launch-btn" disabled title="ChipPilot Agent — coming soon" style="opacity:.35;cursor:not-allowed;filter:grayscale(.6)">
     <span class="cp-launch-btn-dot" style="animation:none;opacity:.4"></span>
     ⚡ ChipPilot Agent
