@@ -76,7 +76,7 @@ body.light .conf-bar{background:rgba(0,0,0,0.06);border:1px solid rgba(0,0,0,0.0
 
 /* LAYOUT */
 .body-wrap{display:flex;flex:1;overflow:hidden}
-.left-nav{width:168px;flex-shrink:0;background:rgba(255,255,255,0.07);backdrop-filter:blur(28px) saturate(155%);-webkit-backdrop-filter:blur(28px) saturate(155%);border-right:1px solid rgba(255,255,255,0.14);display:flex;flex-direction:column;overflow-y:auto;transition:left .25s,background .2s;box-shadow:1px 0 0 rgba(255,255,255,0.08) inset,6px 0 28px rgba(0,0,0,0.32)}
+.left-nav{width:186px;flex-shrink:0;background:rgba(255,255,255,0.07);backdrop-filter:blur(28px) saturate(155%);-webkit-backdrop-filter:blur(28px) saturate(155%);border-right:1px solid rgba(255,255,255,0.14);display:flex;flex-direction:column;overflow-y:auto;transition:left .25s,background .2s;box-shadow:1px 0 0 rgba(255,255,255,0.08) inset,6px 0 28px rgba(0,0,0,0.32)}
 body.light .left-nav{background:rgba(248,250,253,0.94);backdrop-filter:blur(28px) saturate(175%);-webkit-backdrop-filter:blur(28px) saturate(175%);border-right:1px solid rgba(218,224,234,0.55);box-shadow:inset -1px 0 0 rgba(255,255,255,0.80),4px 0 16px rgba(0,0,0,0.05)}
 .left-nav-hdr{padding:12px 12px 8px;font-size:9px;font-weight:700;letter-spacing:.9px;color:var(--muted);text-transform:uppercase;border-bottom:1px solid var(--border)}
 .chip-nav-item{padding:9px 12px;cursor:pointer;border-left:3px solid transparent;transition:background .15s;display:flex;flex-direction:column;gap:2px;border-bottom:1px solid var(--nav-sep)}
@@ -141,6 +141,28 @@ body.light .chip-nav-group:not(.collapsed) .chip-nav-group-hdr{background:rgba(2
 .chip-nav-group.collapsed .chip-nav-group-chips{max-height:0}
 /* Remove bottom border from last item inside group */
 .chip-nav-group-chips .chip-nav-item:last-child{border-bottom:none}
+
+/* ── NAV PANEL BODY (Attn + Feed sections inside left nav) ── */
+.nav-panel-body{padding:8px 10px 10px}
+/* Exec / Attn items */
+.nav-exec-item{background:var(--bg-exec-r);border:1px solid rgba(224,80,80,.18);border-left:2px solid var(--red);border-radius:5px;padding:6px 8px;margin-bottom:6px}
+.nav-exec-item.amber{background:var(--bg-exec-a);border-color:rgba(232,160,32,.18);border-left-color:var(--amber)}
+.nav-exec-name{font-weight:700;font-size:10px;color:var(--exec-name-r);line-height:1.3}
+.nav-exec-name.amber{color:var(--exec-name-a)}
+.nav-exec-sub{font-size:9px;color:var(--muted);margin-top:2px}
+.nav-exec-due{font-size:9px;margin-top:3px;font-weight:600}
+.nav-exec-due.r{color:var(--red)}
+.nav-exec-due.a{color:var(--amber)}
+/* Feed items */
+.nav-feed-item{padding:5px 0;border-bottom:1px solid var(--nav-sep)}
+.nav-feed-item:last-child{border-bottom:none}
+.nav-feed-time{font-size:8px;color:var(--muted)}
+.nav-feed-title{font-size:10px;font-weight:600;margin:1px 0;color:var(--text)}
+.nav-feed-sub{font-size:9px;color:var(--muted)}
+.nav-feed-item.r .nav-feed-title{color:var(--feed-r)}
+.nav-feed-item.g .nav-feed-title{color:var(--feed-g)}
+.nav-feed-item.b .nav-feed-title{color:var(--feed-b)}
+.nav-feed-item.n .nav-feed-title{color:var(--feed-n)}
 
 /* MAIN PANEL */
 .main-panel{flex:1;display:flex;flex-direction:column;overflow:hidden}
@@ -857,18 +879,54 @@ body:not(.light) .hero-water-bar::after{background:linear-gradient(to bottom,rgb
       </div>
     </div>
 
+    <!-- ── NEED CHIP MGMT ATTN ── -->
+    <div class="chip-nav-group collapsed" id="grp-attn">
+      <div class="chip-nav-group-hdr" onclick="toggleNavGroup('grp-attn')" style="border-left-color:var(--red)!important">
+        <span class="nav-grp-label"><span class="nav-grp-icon">🚨</span>Chip Mgmt Attn</span>
+        <span style="display:flex;align-items:center;gap:5px">
+          <span style="background:rgba(224,80,80,.22);color:var(--red);border-radius:7px;padding:1px 6px;font-size:9px;font-weight:700;line-height:1.4">3</span>
+          <span class="nav-grp-arrow">▾</span>
+        </span>
+      </div>
+      <div class="chip-nav-group-chips">
+        <div class="nav-panel-body">
+          <div class="nav-exec-item"><div class="nav-exec-name">PCIe Gen5 yield</div><div class="nav-exec-sub">Foundry escalation · HW</div><div class="nav-exec-due r">Due May 20</div></div>
+          <div class="nav-exec-item amber"><div class="nav-exec-name amber">Thermal TDP waivers</div><div class="nav-exec-sub">VP sign-off · PKG</div><div class="nav-exec-due a">Due May 23</div></div>
+          <div class="nav-exec-item amber"><div class="nav-exec-name amber">DDR5 IP respin budget</div><div class="nav-exec-sub">Budget approval · Finance</div><div class="nav-exec-due a">Due May 25</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── WHAT CHANGED TODAY ── -->
+    <div class="chip-nav-group collapsed" id="grp-feed">
+      <div class="chip-nav-group-hdr" onclick="toggleNavGroup('grp-feed')">
+        <span class="nav-grp-label"><span class="nav-grp-icon">📋</span>Changed Today</span>
+        <span style="display:flex;align-items:center;gap:5px">
+          <span style="font-size:9px;color:var(--muted);white-space:nowrap">May 19</span>
+          <span class="nav-grp-arrow">▾</span>
+        </span>
+      </div>
+      <div class="chip-nav-group-chips">
+        <div class="nav-panel-body">
+          <div class="nav-feed-item r"><div class="nav-feed-time">09:14</div><div class="nav-feed-title">PCIe P0 bug filed</div><div class="nav-feed-sub">NVBug 4721839 · GR10x</div></div>
+          <div class="nav-feed-item g"><div class="nav-feed-time">10:02</div><div class="nav-feed-title">NVLink FW handshake ✓</div><div class="nav-feed-sub">ThorZ · FW team</div></div>
+          <div class="nav-feed-item n"><div class="nav-feed-time">11:30</div><div class="nav-feed-title">Thermal ECO #847 opened</div><div class="nav-feed-sub">GR10x · PKG team</div></div>
+          <div class="nav-feed-item r"><div class="nav-feed-time">13:45</div><div class="nav-feed-title">Vera RTL freeze +2 blks</div><div class="nav-feed-sub">Vera · RTL team</div></div>
+          <div class="nav-feed-item g"><div class="nav-feed-time">14:20</div><div class="nav-feed-title">Sched confidence ↑72%</div><div class="nav-feed-sub">All programs · PM</div></div>
+          <div class="nav-feed-item r"><div class="nav-feed-time">15:55</div><div class="nav-feed-title">DDR5 training fail ×3</div><div class="nav-feed-sub">GR10x · PHY team</div></div>
+          <div class="nav-feed-item g"><div class="nav-feed-time">16:40</div><div class="nav-feed-title">Monet TO plan +8% done</div><div class="nav-feed-sub">Monet · PD team</div></div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <!-- MAIN PANEL -->
   <div class="main-panel">
-    <!-- TAB BAR -->
+    <!-- TAB BAR — multi-tab: dynamic chips injected here -->
     <div class="tab-bar">
       <div class="tab-btn tab-active" id="tab-overview" onclick="showOverview()">Overview</div>
-      <div class="tab-btn" id="tab-chip" style="display:none" onclick="showOverview()">
-        <span id="tab-chip-name">—</span>
-        <span class="tab-close" title="Close">×</span>
-        <span class="tab-plugin-badge">⚡ ChipPilot</span>
-      </div>
+      <div id="dyn-tabs" style="display:contents"></div>
     </div>
 
     <div style="display:flex;flex:1;overflow:hidden">
@@ -1050,31 +1108,7 @@ body:not(.light) .hero-water-bar::after{background:linear-gradient(to bottom,rgb
 
       </div><!-- /main -->
 
-      <!-- RIGHT SIDEBAR -->
-      <div class="sidebar">
-        <div>
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-            <div class="sb-section-title">Needs Exec Help</div>
-            <span style="background:rgba(224,80,80,.2);color:var(--red);border-radius:8px;padding:1px 7px;font-size:10px;font-weight:700">3</span>
-          </div>
-          <div class="exec-item"><div class="exec-name">PCIe Gen5 yield</div><div class="exec-sub">Foundry escalation · HW</div><div class="exec-due">Due May 20</div></div>
-          <div class="exec-item amber"><div class="exec-name amber">Thermal TDP waivers</div><div class="exec-sub">VP sign-off · PKG</div><div class="exec-due amber">Due May 23</div></div>
-          <div class="exec-item amber"><div class="exec-name amber">DDR5 IP respin budget</div><div class="exec-sub">Budget approval · Finance</div><div class="exec-due amber">Due May 25</div></div>
-        </div>
-        <div>
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-            <div class="sb-section-title">What Changed Today</div>
-            <span style="font-size:10px;color:var(--muted)">May 19</span>
-          </div>
-          <div class="feed-item r"><div class="feed-time">09:14</div><div class="feed-title">PCIe P0 bug filed</div><div class="feed-sub">NVBug 4721839 · GR10x</div></div>
-          <div class="feed-item g"><div class="feed-time">10:02</div><div class="feed-title">NVLink FW handshake ✓</div><div class="feed-sub">ThorZ · FW team</div></div>
-          <div class="feed-item n"><div class="feed-time">11:30</div><div class="feed-title">Thermal ECO #847 opened</div><div class="feed-sub">GR10x · PKG team</div></div>
-          <div class="feed-item r"><div class="feed-time">13:45</div><div class="feed-title">Vera RTL freeze +2 blks</div><div class="feed-sub">Vera · RTL team</div></div>
-          <div class="feed-item g"><div class="feed-time">14:20</div><div class="feed-title">Sched confidence ↑72%</div><div class="feed-sub">All programs · PM</div></div>
-          <div class="feed-item r"><div class="feed-time">15:55</div><div class="feed-title">DDR5 training fail ×3</div><div class="feed-sub">GR10x · PHY team</div></div>
-          <div class="feed-item g"><div class="feed-time">16:40</div><div class="feed-title">Monet TO plan +8% done</div><div class="feed-sub">Monet · PD team</div></div>
-        </div>
-      </div>
+      <!-- sidebar removed — panels moved to left nav -->
     </div>
   </div><!-- /main-panel -->
 
@@ -1401,29 +1435,63 @@ function renderChipView(chip){
 }
 
 /* ===== NAVIGATION ===== */
+/* ===== MULTI-TAB SYSTEM ===== */
+let _openTabs=[];      /* [{chipId, tabEl}] — ordered list of open chip tabs */
+let _activeChipId=null;
+
 function openChip(chipId){
   const chip=CHIPS[chipId];if(!chip)return;
+  /* Create tab if not already open */
+  if(!_openTabs.find(t=>t.chipId===chipId)){
+    const tabEl=document.createElement('div');
+    tabEl.className='tab-btn';
+    tabEl.id='tab-'+chipId;
+    tabEl.innerHTML=`<span>${chip.code}</span><span class="tab-close" title="Close" onclick="closeChipTab('${chipId}',event)">×</span>`;
+    tabEl.addEventListener('click',()=>activateChipTab(chipId));
+    document.getElementById('dyn-tabs').appendChild(tabEl);
+    _openTabs.push({chipId,tabEl});
+  }
+  activateChipTab(chipId);
+}
+function activateChipTab(chipId){
+  const chip=CHIPS[chipId];if(!chip)return;
+  _activeChipId=chipId;
+  /* Nav highlight */
   document.querySelectorAll('.chip-nav-item').forEach(e=>e.classList.remove('active'));
   const navEl=document.querySelector(`[data-chip="${chipId}"]`);
   if(navEl)navEl.classList.add('active');
-  document.getElementById('tab-chip-name').textContent=chip.code+' · '+chip.name;
-  document.getElementById('tab-chip').style.display='flex';
+  /* Tab active states */
   document.getElementById('tab-overview').classList.remove('tab-active');
-  document.getElementById('tab-chip').classList.add('tab-active');
+  _openTabs.forEach(t=>t.tabEl.classList.remove('tab-active'));
+  const tab=_openTabs.find(t=>t.chipId===chipId);
+  if(tab)tab.tabEl.classList.add('tab-active');
+  /* Show chip view */
   document.getElementById('view-overview').style.display='none';
   document.getElementById('view-chip').style.display='flex';
-  // ms-strip removed
   renderChipView(chip);
   document.getElementById('prog-sel').value=chipId;
 }
+function closeChipTab(chipId,evt){
+  evt&&evt.stopPropagation();
+  const idx=_openTabs.findIndex(t=>t.chipId===chipId);
+  if(idx===-1)return;
+  _openTabs[idx].tabEl.remove();
+  _openTabs.splice(idx,1);
+  if(_activeChipId===chipId){
+    if(_openTabs.length>0){
+      activateChipTab(_openTabs[Math.min(idx,_openTabs.length-1)].chipId);
+    } else {
+      showOverview();
+    }
+  }
+}
 function showOverview(){
+  _activeChipId=null;
   document.getElementById('view-overview').style.display='flex';
   document.getElementById('view-chip').style.display='none';
   document.getElementById('tab-overview').classList.add('tab-active');
-  document.getElementById('tab-chip').classList.remove('tab-active');
-  document.getElementById('tab-chip').style.display='none';
+  _openTabs.forEach(t=>t.tabEl.classList.remove('tab-active'));
   document.querySelectorAll('.chip-nav-item').forEach(e=>e.classList.remove('active'));
-  // ms-strip removed
   document.getElementById('prog-sel').value='';
 }
 /* ===== NAV GROUP ACCORDION ===== */
