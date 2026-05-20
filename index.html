@@ -229,6 +229,12 @@ body.light .cw{color:#1a5ca0}
 /* CHIPS GRID */
 .chips-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 
+/* COCKPIT SECTIONS (CPU / GPU / Fusion groupings) */
+.cockpit-section{margin-bottom:18px}
+.cockpit-section:last-child{margin-bottom:0}
+.cockpit-label{display:flex;align-items:center;gap:7px;font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);padding:5px 2px 7px;border-bottom:1px solid var(--border);margin-bottom:10px}
+.cockpit-icon{font-size:13px}
+
 /* Base chip card — position+overflow required for pseudo-element layers */
 .chip-card{
   position:relative;overflow:hidden;
@@ -948,11 +954,15 @@ body:not(.light) .hero-water-bar::after{background:linear-gradient(to bottom,rgb
         <div id="view-overview">
 
 
-          <div class="card">
-            <div class="card-hdr">
-              <span class="card-title">All Chips — SW Bringup</span>
-              <span style="font-size:10px;color:var(--muted)">Click a chip for details · Updated May 19, 2026</span>
-            </div>
+          <!-- CHIP COCKPIT header -->
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px;padding:0 2px">
+            <span style="font-size:11px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--text-strong)">Chip Cockpit — SW Bringup</span>
+            <span style="font-size:10px;color:var(--muted)">Click a chip for details · Updated May 19, 2026</span>
+          </div>
+
+          <!-- ── GPU ── -->
+          <div class="cockpit-section">
+            <div class="cockpit-label"><span class="cockpit-icon">⚡</span>GPU</div>
             <div class="chips-grid">
               <div class="chip-card a" onclick="openChip('gr10x')">
                 <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">GR10x / Rubin</div><span class="ca">PS/PRel Active 🔵</span></div>
@@ -972,6 +982,13 @@ body:not(.light) .hero-water-bar::after{background:linear-gradient(to bottom,rgb
                 <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--amber);font-size:10px">PRI_HUB delays · Phase 21 SECHUB unblocks May 15</span></div>
                 <div class="chip-cm">SW CM: <span class="chip-cm-name">TBD</span></div>
               </div>
+            </div>
+          </div>
+
+          <!-- ── CPU ── -->
+          <div class="cockpit-section">
+            <div class="cockpit-label"><span class="cockpit-icon">🖥️</span>CPU</div>
+            <div class="chips-grid">
               <div class="chip-card a" onclick="openChip('t268')">
                 <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">ThorZ</div><span class="ca">SW BNB Done · SCG 85% ⚠️</span></div>
                 <div class="chip-phase">Post-silicon · SW BNB ✅ · SCG BNB In Progress</div>
@@ -988,16 +1005,7 @@ body:not(.light) .hero-water-bar::after{background:linear-gradient(to bottom,rgb
                 <div class="chip-bar"><div class="chip-bar-fill" style="width:92%;background:var(--amber)"></div></div>
                 <div class="chip-stat-row"><span>MG: <span class="ca">73%</span> · QS-M: <span class="ca">69%</span></span><span class="r">1 bug</span></div>
                 <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--amber);font-size:10px">P-Rel BWAT started 5/11 — QS-M QBAA boards pending</span></div>
-                <div class="chip-cm">SW CM: <span class="chip-cm-name" style="color:var(--muted);font-weight:400">TBD</span></div>
-              </div>
-              <div class="chip-card r" onclick="openChip('t354')">
-                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">N2x / T354</div><span class="cr">FPGA Active · H3 Delayed ⚠️</span></div>
-                <div class="chip-phase">Pre-silicon · FPGA H2.07 Active · H3 6/5</div>
-                <div class="chip-gate">Next gate: <span class="r">Tape-out · Q4 '26</span></div>
-                <div class="chip-bar"><div class="chip-bar-fill" style="width:30%;background:var(--red)"></div></div>
-                <div class="chip-stat-row"><span>FPGA H2.07: <span class="g">Stable</span> · FNL: <span class="ca">6/30</span></span><span class="r">2 bugs</span></div>
-                <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--red);font-size:10px">H3 netlist delayed to 6/5 · DIA HW bugs active</span></div>
-                <div class="chip-cm">SW CM: <span class="chip-cm-name">Vivek Desikan</span></div>
+                <div class="chip-cm">SW CM: <span class="chip-cm-name">Sowjanya</span></div>
               </div>
               <div class="chip-card g" onclick="openChip('tb600')">
                 <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">Vera Ultra / TB600</div><span class="cb">Bringup 🔵</span></div>
@@ -1008,23 +1016,14 @@ body:not(.light) .hero-water-bar::after{background:linear-gradient(to bottom,rgb
                 <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--blue);font-size:10px">Power On complete — all tests passing</span></div>
                 <div class="chip-cm">SW CM: <span class="chip-cm-name">Hui Fu</span></div>
               </div>
-              <div class="chip-card w" onclick="openChip('t257')">
-                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">Monet / T257</div><span class="cw">Watching</span></div>
-                <div class="chip-phase">Pre-silicon · POR Phase</div>
-                <div class="chip-gate">Next gate: <span class="a">POR · Jun '26</span></div>
-                <div class="chip-bar"><div class="chip-bar-fill" style="width:10%;background:#3a78b0"></div></div>
-                <div class="chip-stat-row"><span>POR: <span class="a">● Active</span></span><span>0 bugs</span></div>
-                <div class="chip-stat-row" style="margin-top:3px"><span style="color:#3a78b0;font-size:10px">RTL Q3 '26 · Tape-out Q4 '26</span></div>
+              <div class="chip-card r" onclick="openChip('t354')">
+                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">N2x / T354</div><span class="cr">FPGA Active · H3 Delayed ⚠️</span></div>
+                <div class="chip-phase">Pre-silicon · FPGA H2.07 Active · H3 6/5</div>
+                <div class="chip-gate">Next gate: <span class="r">Tape-out · Q4 '26</span></div>
+                <div class="chip-bar"><div class="chip-bar-fill" style="width:30%;background:var(--red)"></div></div>
+                <div class="chip-stat-row"><span>FPGA H2.07: <span class="g">Stable</span> · FNL: <span class="ca">6/30</span></span><span class="r">2 bugs</span></div>
+                <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--red);font-size:10px">H3 netlist delayed to 6/5 · DIA HW bugs active</span></div>
                 <div class="chip-cm">SW CM: <span class="chip-cm-name">Vivek Desikan</span></div>
-              </div>
-              <div class="chip-card g" onclick="openChip('nr10x')">
-                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">NVLink Fusion / NR10x</div><span class="cg">On Track</span></div>
-                <div class="chip-phase">Pre-silicon · POR Phase</div>
-                <div class="chip-gate">Next gate: <span class="g">RTL · Q4 '26</span></div>
-                <div class="chip-bar"><div class="chip-bar-fill" style="width:12%;background:var(--green)"></div></div>
-                <div class="chip-stat-row"><span>POR: <span class="a">● Active</span></span><span>0 bugs</span></div>
-                <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--muted);font-size:10px">NVLink protocol spec in review</span></div>
-                <div class="chip-cm">SW CM: <span class="chip-cm-name" style="color:var(--muted);font-weight:400">TBD</span></div>
               </div>
               <div class="chip-card w" onclick="openChip('tcx10')">
                 <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">TCX10</div><span class="cw">Planning</span></div>
@@ -1035,8 +1034,17 @@ body:not(.light) .hero-water-bar::after{background:linear-gradient(to bottom,rgb
                 <div class="chip-stat-row" style="margin-top:3px"><span style="color:#3a78b0;font-size:10px">Program kick-off in progress</span></div>
                 <div class="chip-cm">SW CM: <span class="chip-cm-name">Roopa</span></div>
               </div>
-              <div class="chip-card w" onclick="openChip('t374')">
-                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">T374 / Beacon</div><span class="cw">Planning</span></div>
+              <div class="chip-card w" onclick="openChip('t257')">
+                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">Monet / T257</div><span class="cw">Watching</span></div>
+                <div class="chip-phase">Pre-silicon · POR Phase</div>
+                <div class="chip-gate">Next gate: <span class="a">POR · Jun '26</span></div>
+                <div class="chip-bar"><div class="chip-bar-fill" style="width:10%;background:#3a78b0"></div></div>
+                <div class="chip-stat-row"><span>POR: <span class="a">● Active</span></span><span>0 bugs</span></div>
+                <div class="chip-stat-row" style="margin-top:3px"><span style="color:#3a78b0;font-size:10px">RTL Q3 '26 · Tape-out Q4 '26</span></div>
+                <div class="chip-cm">SW CM: <span class="chip-cm-name">Vivek Desikan</span></div>
+              </div>
+              <div class="chip-card w" onclick="openChip('t294')">
+                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">T294 / Magni</div><span class="cw">Planning</span></div>
                 <div class="chip-phase">Pre-silicon · Planning Phase</div>
                 <div class="chip-gate">Next gate: <span class="a">POR · TBD</span></div>
                 <div class="chip-bar"><div class="chip-bar-fill" style="width:5%;background:#3a78b0"></div></div>
@@ -1044,8 +1052,24 @@ body:not(.light) .hero-water-bar::after{background:linear-gradient(to bottom,rgb
                 <div class="chip-stat-row" style="margin-top:3px"><span style="color:#3a78b0;font-size:10px">Program kick-off in progress</span></div>
                 <div class="chip-cm">SW CM: <span class="chip-cm-name">Roopa</span></div>
               </div>
-              <div class="chip-card w" onclick="openChip('t294')">
-                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">T294 / Magni</div><span class="cw">Planning</span></div>
+            </div>
+          </div>
+
+          <!-- ── FUSION ── -->
+          <div class="cockpit-section">
+            <div class="cockpit-label"><span class="cockpit-icon">⚛️</span>Fusion</div>
+            <div class="chips-grid">
+              <div class="chip-card g" onclick="openChip('nr10x')">
+                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">NVLink Fusion / NR10x</div><span class="cg">On Track</span></div>
+                <div class="chip-phase">Pre-silicon · POR Phase</div>
+                <div class="chip-gate">Next gate: <span class="g">RTL · Q4 '26</span></div>
+                <div class="chip-bar"><div class="chip-bar-fill" style="width:12%;background:var(--green)"></div></div>
+                <div class="chip-stat-row"><span>POR: <span class="a">● Active</span></span><span>0 bugs</span></div>
+                <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--muted);font-size:10px">NVLink protocol spec in review</span></div>
+                <div class="chip-cm">SW CM: <span class="chip-cm-name">Ranjani</span></div>
+              </div>
+              <div class="chip-card w" onclick="openChip('t374')">
+                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">T374 / Beacon</div><span class="cw">Planning</span></div>
                 <div class="chip-phase">Pre-silicon · Planning Phase</div>
                 <div class="chip-gate">Next gate: <span class="a">POR · TBD</span></div>
                 <div class="chip-bar"><div class="chip-bar-fill" style="width:5%;background:#3a78b0"></div></div>
