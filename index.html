@@ -804,6 +804,7 @@ body:not(.light) .hero-water-bar::after{background:linear-gradient(to bottom,rgb
     <option value="">All chip programs</option>
     <option value="gr10x">GR10x / Rubin</option>
     <option value="fn10x">FN10x / Feynman</option>
+    <option value="gr15x">GR15x</option>
     <option value="t268">ThorZ</option>
     <option value="tb500">TB500 / Vera</option>
     <option value="t354">T354 / N2x</option>
@@ -852,6 +853,11 @@ body:not(.light) .hero-water-bar::after{background:linear-gradient(to bottom,rgb
           <div class="chip-nav-code">FN10x</div><div class="chip-nav-name">Feynman</div>
           <div class="chip-nav-status">RTL Active ⚠️</div>
           <div class="chip-nav-bar"><div class="chip-nav-bar-fill" style="width:38%;background:var(--amber)"></div></div>
+        </div>
+        <div class="chip-nav-item nav-w" data-chip="gr15x" onclick="openChip('gr15x')">
+          <div class="chip-nav-code">GR15x</div><div class="chip-nav-name">Next GPU</div>
+          <div class="chip-nav-status">Planning 🔵</div>
+          <div class="chip-nav-bar"><div class="chip-nav-bar-fill" style="width:5%;background:#3a78b0"></div></div>
         </div>
       </div>
     </div>
@@ -952,7 +958,8 @@ body:not(.light) .hero-water-bar::after{background:linear-gradient(to bottom,rgb
   <div class="main-panel">
     <!-- TAB BAR — multi-tab: dynamic chips injected here -->
     <div class="tab-bar">
-      <div class="tab-btn tab-active" id="tab-overview" onclick="showOverview()">Overview</div>
+      <div class="tab-btn tab-active" id="tab-overview" onclick="showOverview()">Chip Cockpit</div>
+      <div class="tab-btn" id="tab-radar" onclick="showRadar()">📡 Radar &amp; Heatmap</div>
       <div id="dyn-tabs" style="display:contents"></div>
     </div>
 
@@ -962,12 +969,6 @@ body:not(.light) .hero-water-bar::after{background:linear-gradient(to bottom,rgb
         <!-- OVERVIEW -->
         <div id="view-overview">
 
-
-          <!-- CHIP COCKPIT header -->
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px;padding:0 2px">
-            <span style="font-size:11px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--text-strong)">Chip Cockpit — SW Bringup</span>
-            <span style="font-size:10px;color:var(--muted)">Click a chip for details · Updated May 19, 2026</span>
-          </div>
 
           <!-- ── GPU ── -->
           <div class="cockpit-section">
@@ -989,6 +990,14 @@ body:not(.light) .hero-water-bar::after{background:linear-gradient(to bottom,rgb
                 <div class="chip-bar"><div class="chip-bar-fill" style="width:38%;background:var(--amber)"></div></div>
                 <div class="chip-stat-row"><span>1st NL RTL: <span class="g">✓ Done</span> · Phys Final: <span class="cb">Active</span></span><span class="r">4 bugs</span></div>
                 <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--amber);font-size:10px">PRI_HUB delays · Phase 21 SECHUB unblocks May 15</span></div>
+                <div class="chip-cm">SW CM: <span class="chip-cm-name">Madhura</span></div>
+              </div>
+              <div class="chip-card w" onclick="openChip('gr15x')">
+                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">GR15x</div><span class="cw">Planning</span></div>
+                <div class="chip-phase">Pre-silicon · POR Phase</div>
+                <div class="chip-gate">Next gate: <span class="a">POR · Q4 '26</span></div>
+                <div class="chip-bar"><div class="chip-bar-fill" style="width:5%;background:#3a78b0"></div></div>
+                <div class="chip-stat-row"><span>Status: <span class="cw">● Early Planning</span></span><span>0 bugs</span></div>
                 <div class="chip-cm">SW CM: <span class="chip-cm-name">TBD</span></div>
               </div>
             </div>
@@ -1089,6 +1098,10 @@ body:not(.light) .hero-water-bar::after{background:linear-gradient(to bottom,rgb
             </div>
           </div>
 
+        </div><!-- /view-overview -->
+
+        <!-- RADAR & HEATMAP VIEW -->
+        <div id="view-radar" style="display:none;flex-direction:column;gap:12px">
           <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:12px">
             <div class="card">
               <div class="card-hdr">
@@ -1128,8 +1141,7 @@ body:not(.light) .hero-water-bar::after{background:linear-gradient(to bottom,rgb
               </div>
             </div>
           </div>
-
-        </div><!-- /view-overview -->
+        </div><!-- /view-radar -->
 
         <!-- PER-CHIP VIEW -->
         <div id="view-chip"></div>
@@ -1233,6 +1245,7 @@ function toggleTheme(){
 /* Columns: GR10x · ThorZ · Vera · N2x · V·Ultra · Monet · NR10x · TCX10 · Beacon · Magni */
 const hmCols=[
   {code:'GR10x',  rI:1},  /* 0=green,1=amber,2=red,3=blue — SW risk category */
+  {code:'GR15x',  rI:3},
   {code:'FN10x',  rI:1},
   {code:'ThorZ',  rI:2},
   {code:'Vera',   rI:1},
@@ -1245,17 +1258,17 @@ const hmCols=[
 ];
 const hmData=[
   /* SW-domain heatmap — 1=Low 2=Med 3=High */
-  //                  GR  FN  TZ  Vra N2x VU  NR  Bea TX  Mag
-  ["SW Bringup",     [1,  2,  1,  2,  2,  2,  1,  1,  1,  1]],
-  ["Boot / Power-on",[1,  2,  1,  2,  2,  2,  1,  1,  1,  1]],
-  ["Driver / OS",    [1,  2,  3,  2,  3,  1,  1,  1,  1,  1]],
-  ["Firmware",       [2,  2,  3,  2,  2,  1,  1,  1,  1,  1]],
-  ["DV / Emulation", [1,  2,  1,  3,  3,  2,  1,  1,  1,  1]],
-  ["Test Coverage",  [2,  1,  2,  2,  3,  2,  1,  1,  1,  1]],
-  ["MODS / Qual",    [1,  1,  3,  2,  1,  1,  1,  1,  1,  1]],
-  ["SW Release",     [2,  1,  2,  3,  2,  1,  1,  1,  1,  1]],
-  ["WAR / WNF",      [3,  1,  1,  1,  1,  1,  1,  1,  1,  1]],
-  ["SW CM Owner",    [1,  2,  1,  1,  1,  1,  1,  1,  1,  1]],
+  //                  GR  G15 FN  TZ  Vra N2x VU  NR  Bea TX  Mag
+  ["SW Bringup",     [1,  1,  2,  1,  2,  2,  2,  1,  1,  1,  1]],
+  ["Boot / Power-on",[1,  1,  2,  1,  2,  2,  2,  1,  1,  1,  1]],
+  ["Driver / OS",    [1,  1,  2,  3,  2,  3,  1,  1,  1,  1,  1]],
+  ["Firmware",       [2,  1,  2,  3,  2,  2,  1,  1,  1,  1,  1]],
+  ["DV / Emulation", [1,  1,  2,  1,  3,  3,  2,  1,  1,  1,  1]],
+  ["Test Coverage",  [2,  1,  1,  2,  2,  3,  2,  1,  1,  1,  1]],
+  ["MODS / Qual",    [1,  1,  1,  3,  2,  1,  1,  1,  1,  1,  1]],
+  ["SW Release",     [2,  1,  1,  2,  3,  2,  1,  1,  1,  1,  1]],
+  ["WAR / WNF",      [3,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1]],
+  ["SW CM Owner",    [1,  2,  1,  1,  1,  1,  1,  1,  1,  1,  1]],
 ];
 const hmCellCls=["hm-l-cell","hm-m-cell","hm-h-cell"];
 /* Risk colours indexed by rI: green, amber, red, blue */
@@ -1385,7 +1398,7 @@ const CHIPS = {
     risks:[{level:'m',text:'Early planning — SW CM assigned, program kicking off'},{level:'l',text:'No blockers identified yet'}],
     actions:[{icon:'📋',text:'Kick off Magni POR planning'},{icon:'📅',text:'Define T294 milestone schedule'},{icon:'👥',text:'Identify SW module leads'}]
   },
-  fn10x:{id:'fn10x',code:'FN10x',name:'Feynman',sc:'sc-a',statusCls:'nav-a',statusBadge:'<span class="ca">RTL Active ⚠️</span>',cm:'TBD',phase:'Pre-silicon · Multi-dielet RTL · Phys Final NL In Progress',silicon:'Pre-Si · 1st NL RTL ✅',progress:38,nextGate:'Final NL RTL',nextGateDate:"Jul '26",nextGateCls:'a',bugs_count:4,
+  fn10x:{id:'fn10x',code:'FN10x',name:'Feynman',sc:'sc-a',statusCls:'nav-a',statusBadge:'<span class="ca">RTL Active ⚠️</span>',cm:'Madhura',phase:'Pre-silicon · Multi-dielet RTL · Phys Final NL In Progress',silicon:'Pre-Si · 1st NL RTL ✅',progress:38,nextGate:'Final NL RTL',nextGateDate:"Jul '26",nextGateCls:'a',bugs_count:4,
     milestones:[{n:'POR',s:'done',d:'✓'},{n:'Trial NL RTL',s:'done',d:'Aug \'25 ✓'},{n:'Stable FP NL',s:'done',d:'Oct \'25 ✓'},{n:'1st NL RTL',s:'done',d:'Jan \'26 ✓'},{n:'Phys Final NL',s:'now',d:'Apr \'26 🔵'},{n:'Final NL RTL',d:"Jul '26"},{n:'Tape-out',d:"Sep '26 (cHBM)"},{n:'Bringup',d:"Q1 '27"},{n:'ES',d:"Q2 '27"},{n:'PRel',d:"TBD"}],
     bugs:[
       {id:'6052109',pri:'P1',stat:'Active',title:'FN526 — IODS Self-boot failure',next:'SW team investigating IODS SECHUB path · May 15 unblock ETA',war:false},
@@ -1416,15 +1429,23 @@ const CHIPS = {
       {level:'m',text:'Phase 12 (Discovery flow HW enablement) — submission WIP, ETA Apr 30, Initial SW RTL Snap blocker'},
       {level:'m',text:'Phase 6.A Priv_sec / decode_trap support post PGRAPH relocation — solution still under discussion'},
       {level:'l',text:'Multi-dielet architecture first for NVIDIA GPU — execution complexity across IODS, UGD, CPD dielets'},
-      {level:'l',text:'SW CM not yet assigned — ownership gap for program management'},
+      {level:'l',text:'Multi-dielet first — cross-dielet SW integration complexity across IODS, UGD, CPD'},
     ],
     actions:[
-      {icon:'👤',text:'Assign SW CM for FN10x / Feynman program'},
+      {icon:'📋',text:'Review multi-dielet integration plan with Madhura'},
       {icon:'🔧',text:'Track Phase 12 Discovery Flow submission — ETA Apr 30'},
       {icon:'🐛',text:'Resolve IODS Self-boot failure — Bug 6052109'},
       {icon:'📋',text:'Coordinate Phase 21 IODS SECHUB unblock — May 15'},
       {icon:'📅',text:'Monitor Final Netlist RTL gate — Jul 7, 2026'},
     ]
+  },
+  gr15x:{id:'gr15x',code:'GR15x',name:'Next GPU',sc:'sc-w',statusCls:'nav-w',statusBadge:'<span class="cw">Planning 🔵</span>',cm:'TBD',phase:'Pre-silicon · POR Phase · Early Planning',silicon:'Pre-Si',progress:5,nextGate:'POR',nextGateDate:"Q4 '26",nextGateCls:'a',bugs_count:0,
+    milestones:[{n:'POR',s:'now',d:'Q4 \'26 🔵'},{n:'RTL',d:"TBD"},{n:'Tape-out',d:"TBD"},{n:'Bringup',d:"TBD"},{n:'ES',d:"TBD"},{n:'PRel',d:"TBD"}],
+    bugs:[],
+    reviews:[{doc:'GR15x POR Planning Doc',owner:'TBD',due:"Q4 '26",ds:'ok'}],
+    bringup:{type:'pre',items:[{n:'POR Kickoff',sub:'Early planning in progress',s:'prog',label:'In Progress'},{n:'Arch Spec',sub:'Not started',s:'wait',label:'Pending'},{n:'RTL Planning',sub:'Not started',s:'wait',label:'Pending'}]},
+    risks:[{level:'m',text:'SW CM not yet assigned — ownership needed for program kickoff'},{level:'l',text:'Early planning — no blockers identified yet'}],
+    actions:[{icon:'👤',text:'Assign SW CM for GR15x program'},{icon:'📋',text:'Kick off GR15x POR planning'},{icon:'📅',text:'Define GR15x milestone schedule'}]
   }
 };
 
@@ -1524,11 +1545,13 @@ function activateChipTab(chipId){
   if(navEl)navEl.classList.add('active');
   /* Tab active states */
   document.getElementById('tab-overview').classList.remove('tab-active');
+  document.getElementById('tab-radar').classList.remove('tab-active');
   _openTabs.forEach(t=>t.tabEl.classList.remove('tab-active'));
   const tab=_openTabs.find(t=>t.chipId===chipId);
   if(tab)tab.tabEl.classList.add('tab-active');
   /* Show chip view */
   document.getElementById('view-overview').style.display='none';
+  document.getElementById('view-radar').style.display='none';
   document.getElementById('view-chip').style.display='flex';
   renderChipView(chip);
   document.getElementById('prog-sel').value=chipId;
@@ -1547,10 +1570,23 @@ function closeChipTab(chipId,evt){
     }
   }
 }
+function showRadar(){
+  _activeChipId=null;
+  document.getElementById('view-overview').style.display='none';
+  document.getElementById('view-chip').style.display='none';
+  document.getElementById('view-radar').style.display='flex';
+  document.getElementById('tab-overview').classList.remove('tab-active');
+  document.getElementById('tab-radar').classList.add('tab-active');
+  _openTabs.forEach(t=>t.tabEl.classList.remove('tab-active'));
+  document.querySelectorAll('.chip-nav-item').forEach(e=>e.classList.remove('active'));
+  document.getElementById('prog-sel').value='';
+}
 function showOverview(){
   _activeChipId=null;
   document.getElementById('view-overview').style.display='flex';
   document.getElementById('view-chip').style.display='none';
+  document.getElementById('view-radar').style.display='none';
+  document.getElementById('tab-radar').classList.remove('tab-active');
   document.getElementById('tab-overview').classList.add('tab-active');
   _openTabs.forEach(t=>t.tabEl.classList.remove('tab-active'));
   document.querySelectorAll('.chip-nav-item').forEach(e=>e.classList.remove('active'));
