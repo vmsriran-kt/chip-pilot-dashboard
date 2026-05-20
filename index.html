@@ -837,31 +837,6 @@ body:not(.light) .hero-water-bar::after{background:linear-gradient(to bottom,rgb
   <div class="left-nav" id="left-nav">
     <div class="left-nav-hdr">Chips</div>
 
-    <!-- ── GPU BUCKET ── -->
-    <div class="chip-nav-group collapsed" id="grp-gpu">
-      <div class="chip-nav-group-hdr" onclick="toggleNavGroup('grp-gpu')">
-        <span class="nav-grp-label"><span class="nav-grp-icon">⚡</span>GPU</span>
-        <span class="nav-grp-arrow">▾</span>
-      </div>
-      <div class="chip-nav-group-chips">
-        <div class="chip-nav-item nav-g active" data-chip="gr10x">
-          <div class="chip-nav-code">GR10x</div><div class="chip-nav-name">Rubin</div>
-          <div class="chip-nav-status">PS/PRel Active 🔵</div>
-          <div class="chip-nav-bar"><div class="chip-nav-bar-fill" style="width:95%;background:var(--green)"></div></div>
-        </div>
-        <div class="chip-nav-item nav-a" data-chip="fn10x">
-          <div class="chip-nav-code">FN10x</div><div class="chip-nav-name">Feynman</div>
-          <div class="chip-nav-status">RTL Active ⚠️</div>
-          <div class="chip-nav-bar"><div class="chip-nav-bar-fill" style="width:38%;background:var(--amber)"></div></div>
-        </div>
-        <div class="chip-nav-item nav-w" data-chip="gr15x" onclick="openChip('gr15x')">
-          <div class="chip-nav-code">GR15x</div><div class="chip-nav-name">Next GPU</div>
-          <div class="chip-nav-status">Planning 🔵</div>
-          <div class="chip-nav-bar"><div class="chip-nav-bar-fill" style="width:5%;background:#3a78b0"></div></div>
-        </div>
-      </div>
-    </div>
-
     <!-- ── CPU BUCKET ── -->
     <div class="chip-nav-group collapsed" id="grp-cpu">
       <div class="chip-nav-group-hdr" onclick="toggleNavGroup('grp-cpu')">
@@ -897,6 +872,31 @@ body:not(.light) .hero-water-bar::after{background:linear-gradient(to bottom,rgb
         <div class="chip-nav-item nav-w" data-chip="t294">
           <div class="chip-nav-code">T294</div><div class="chip-nav-name">Magni</div>
           <div class="chip-nav-status">Planning</div>
+          <div class="chip-nav-bar"><div class="chip-nav-bar-fill" style="width:5%;background:#3a78b0"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── GPU BUCKET ── -->
+    <div class="chip-nav-group collapsed" id="grp-gpu">
+      <div class="chip-nav-group-hdr" onclick="toggleNavGroup('grp-gpu')">
+        <span class="nav-grp-label"><span class="nav-grp-icon">⚡</span>GPU</span>
+        <span class="nav-grp-arrow">▾</span>
+      </div>
+      <div class="chip-nav-group-chips">
+        <div class="chip-nav-item nav-g active" data-chip="gr10x">
+          <div class="chip-nav-code">GR10x</div><div class="chip-nav-name">Rubin</div>
+          <div class="chip-nav-status">PS/PRel Active 🔵</div>
+          <div class="chip-nav-bar"><div class="chip-nav-bar-fill" style="width:95%;background:var(--green)"></div></div>
+        </div>
+        <div class="chip-nav-item nav-a" data-chip="fn10x">
+          <div class="chip-nav-code">FN10x</div><div class="chip-nav-name">Feynman</div>
+          <div class="chip-nav-status">RTL Active ⚠️</div>
+          <div class="chip-nav-bar"><div class="chip-nav-bar-fill" style="width:38%;background:var(--amber)"></div></div>
+        </div>
+        <div class="chip-nav-item nav-w" data-chip="gr15x" onclick="openChip('gr15x')">
+          <div class="chip-nav-code">GR15x</div><div class="chip-nav-name">Next GPU</div>
+          <div class="chip-nav-status">Planning 🔵</div>
           <div class="chip-nav-bar"><div class="chip-nav-bar-fill" style="width:5%;background:#3a78b0"></div></div>
         </div>
       </div>
@@ -970,39 +970,6 @@ body:not(.light) .hero-water-bar::after{background:linear-gradient(to bottom,rgb
         <div id="view-overview">
 
 
-          <!-- ── GPU ── -->
-          <div class="cockpit-section">
-            <div class="cockpit-label"><span class="cockpit-icon">⚡</span>GPU</div>
-            <div class="chips-grid">
-              <div class="chip-card a" onclick="openChip('gr10x')">
-                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">GR10x / Rubin</div><span class="ca">PS/PRel Active 🔵</span></div>
-                <div class="chip-phase">Post-silicon · QS Done ✅ · PS/PRel In Progress</div>
-                <div class="chip-gate">Next gate: <span class="a">PRel · Q3 '26</span></div>
-                <div class="chip-bar"><div class="chip-bar-fill" style="width:95%;background:var(--amber)"></div></div>
-                <div class="chip-stat-row"><span>QS: <span class="g">✓ Done</span> · PS: <span class="ca">Active</span></span><span class="r">7 bugs</span></div>
-                <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--amber);font-size:10px">PS validation underway — PRel target Q3 '26</span></div>
-                <div class="chip-cm">SW CM: <span class="chip-cm-name">Ranjani V · Madhura</span></div>
-              </div>
-              <div class="chip-card a" onclick="openChip('fn10x')">
-                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">FN10x / Feynman</div><span class="ca">RTL Active ⚠️</span></div>
-                <div class="chip-phase">Pre-silicon · Multi-dielet RTL · Phys Final NL In Progress</div>
-                <div class="chip-gate">Next gate: <span class="a">Final NL RTL · Jul '26</span></div>
-                <div class="chip-bar"><div class="chip-bar-fill" style="width:38%;background:var(--amber)"></div></div>
-                <div class="chip-stat-row"><span>1st NL RTL: <span class="g">✓ Done</span> · Phys Final: <span class="cb">Active</span></span><span class="r">4 bugs</span></div>
-                <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--amber);font-size:10px">PRI_HUB delays · Phase 21 SECHUB unblocks May 15</span></div>
-                <div class="chip-cm">SW CM: <span class="chip-cm-name">Madhura</span></div>
-              </div>
-              <div class="chip-card w" onclick="openChip('gr15x')">
-                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">GR15x</div><span class="cw">Planning</span></div>
-                <div class="chip-phase">Pre-silicon · POR Phase</div>
-                <div class="chip-gate">Next gate: <span class="a">POR · Q4 '26</span></div>
-                <div class="chip-bar"><div class="chip-bar-fill" style="width:5%;background:#3a78b0"></div></div>
-                <div class="chip-stat-row"><span>Status: <span class="cw">● Early Planning</span></span><span>0 bugs</span></div>
-                <div class="chip-cm">SW CM: <span class="chip-cm-name">Vinay Sharma · Anshul Gupta</span></div>
-              </div>
-            </div>
-          </div>
-
           <!-- ── CPU ── -->
           <div class="cockpit-section">
             <div class="cockpit-label"><span class="cockpit-icon">🖥️</span>CPU</div>
@@ -1069,6 +1036,39 @@ body:not(.light) .hero-water-bar::after{background:linear-gradient(to bottom,rgb
                 <div class="chip-stat-row"><span>Status: <span class="cw">● Planning</span></span><span>0 bugs</span></div>
                 <div class="chip-stat-row" style="margin-top:3px"><span style="color:#3a78b0;font-size:10px">Program kick-off in progress</span></div>
                 <div class="chip-cm">SW CM: <span class="chip-cm-name">Roopa</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── GPU ── -->
+          <div class="cockpit-section">
+            <div class="cockpit-label"><span class="cockpit-icon">⚡</span>GPU</div>
+            <div class="chips-grid">
+              <div class="chip-card a" onclick="openChip('gr10x')">
+                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">GR10x / Rubin</div><span class="ca">PS/PRel Active 🔵</span></div>
+                <div class="chip-phase">Post-silicon · QS Done ✅ · PS/PRel In Progress</div>
+                <div class="chip-gate">Next gate: <span class="a">PRel · Q3 '26</span></div>
+                <div class="chip-bar"><div class="chip-bar-fill" style="width:95%;background:var(--amber)"></div></div>
+                <div class="chip-stat-row"><span>QS: <span class="g">✓ Done</span> · PS: <span class="ca">Active</span></span><span class="r">7 bugs</span></div>
+                <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--amber);font-size:10px">PS validation underway — PRel target Q3 '26</span></div>
+                <div class="chip-cm">SW CM: <span class="chip-cm-name">Ranjani V · Madhura</span></div>
+              </div>
+              <div class="chip-card a" onclick="openChip('fn10x')">
+                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">FN10x / Feynman</div><span class="ca">RTL Active ⚠️</span></div>
+                <div class="chip-phase">Pre-silicon · Multi-dielet RTL · Phys Final NL In Progress</div>
+                <div class="chip-gate">Next gate: <span class="a">Final NL RTL · Jul '26</span></div>
+                <div class="chip-bar"><div class="chip-bar-fill" style="width:38%;background:var(--amber)"></div></div>
+                <div class="chip-stat-row"><span>1st NL RTL: <span class="g">✓ Done</span> · Phys Final: <span class="cb">Active</span></span><span class="r">4 bugs</span></div>
+                <div class="chip-stat-row" style="margin-top:3px"><span style="color:var(--amber);font-size:10px">PRI_HUB delays · Phase 21 SECHUB unblocks May 15</span></div>
+                <div class="chip-cm">SW CM: <span class="chip-cm-name">Madhura</span></div>
+              </div>
+              <div class="chip-card w" onclick="openChip('gr15x')">
+                <div style="display:flex;align-items:center;justify-content:space-between"><div class="chip-name">GR15x</div><span class="cw">Planning</span></div>
+                <div class="chip-phase">Pre-silicon · POR Phase</div>
+                <div class="chip-gate">Next gate: <span class="a">POR · Q4 '26</span></div>
+                <div class="chip-bar"><div class="chip-bar-fill" style="width:5%;background:#3a78b0"></div></div>
+                <div class="chip-stat-row"><span>Status: <span class="cw">● Early Planning</span></span><span>0 bugs</span></div>
+                <div class="chip-cm">SW CM: <span class="chip-cm-name">Vinay Sharma · Anshul Gupta</span></div>
               </div>
             </div>
           </div>
