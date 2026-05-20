@@ -440,6 +440,41 @@ body.light .hero-water-bar{background:rgba(40,80,160,0.07);border:1px solid rgba
 .hero-water-fill{position:relative;height:100%;border-radius:7px;overflow:hidden}
 .hero-water-fill::before{content:'';position:absolute;top:-6px;left:0;width:200%;height:18px;border-radius:45%;background:rgba(255,255,255,0.22);animation:waveRoll 2.4s linear infinite}
 .hero-water-fill::after{content:'';position:absolute;top:-4px;left:-20%;width:200%;height:15px;border-radius:42%;background:rgba(255,255,255,0.12);animation:waveRoll 3.6s linear infinite reverse}
+
+/* ===== DARK MODE — LUMINOUS GLASS LIQUID ===== */
+/* Fill: brightness + saturation boost so colours glow like starship console LEDs */
+body:not(.light) .chip-bar-fill,
+body:not(.light) .chip-nav-bar-fill,
+body:not(.light) .conf-fill,
+body:not(.light) .hero-water-fill{
+  filter:brightness(1.85) saturate(1.55);
+  box-shadow:0 0 10px rgba(255,255,255,0.22) inset,0 0 4px rgba(255,255,255,0.10) inset
+}
+/* Wave shimmer — much brighter in dark mode */
+body:not(.light) .chip-bar-fill::before,
+body:not(.light) .conf-fill::before,
+body:not(.light) .hero-water-fill::before{background:rgba(255,255,255,0.44)}
+body:not(.light) .chip-bar-fill::after,
+body:not(.light) .conf-fill::after,
+body:not(.light) .hero-water-fill::after{background:rgba(255,255,255,0.28)}
+body:not(.light) .chip-nav-bar-fill::before{background:rgba(255,255,255,0.42)}
+/* Tube containers — internal radial illumination + brighter rim */
+body:not(.light) .chip-bar::before,
+body:not(.light) .conf-bar::before,
+body:not(.light) .hero-water-bar::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 18%,rgba(255,255,255,0.08) 0%,transparent 68%);
+  border-radius:inherit;pointer-events:none;z-index:0
+}
+body:not(.light) .chip-bar{border-color:rgba(255,255,255,0.22);box-shadow:inset 0 1px 5px rgba(0,0,0,0.42),0 0 7px rgba(120,180,255,0.09)}
+body:not(.light) .conf-bar{border-color:rgba(255,255,255,0.22);box-shadow:inset 0 1px 4px rgba(0,0,0,0.40),0 0 6px rgba(120,180,255,0.09)}
+body:not(.light) .hero-water-bar{border-color:rgba(255,255,255,0.25);box-shadow:inset 0 1px 6px rgba(0,0,0,0.44),0 0 10px rgba(120,180,255,0.11)}
+body:not(.light) .chip-nav-bar{border-color:rgba(255,255,255,0.19)}
+/* Top glass reflection — slightly stronger in dark */
+body:not(.light) .chip-bar::after,
+body:not(.light) .conf-bar::after,
+body:not(.light) .chip-nav-bar::after{background:linear-gradient(to bottom,rgba(255,255,255,0.22),transparent)}
+body:not(.light) .hero-water-bar::after{background:linear-gradient(to bottom,rgba(255,255,255,0.22),transparent)}
 </style>
 </head>
 <body>
