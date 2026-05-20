@@ -1507,16 +1507,17 @@ document.addEventListener('click', e=>{
   })();
 
   /* ---- light watercolor blobs — vivid morning wash ---- */
+  /* ---- LIGHT MODE — executive water palette: blue · grey · white only ---- */
   const WC_LIGHT=[
-    {px:.10,py:.14,pr:.54,r:80, g:170,b:255,a:.46,sp:.18},   /* vivid sky blue  */
-    {px:.86,py:.10,pr:.48,r:100,g:220,b:170,a:.40,sp:.14},   /* vivid sage      */
-    {px:.46,py:.82,pr:.56,r:140,g:130,b:255,a:.36,sp:.11},   /* vivid periwinkle*/
-    {px:.92,py:.76,pr:.44,r:255,g:195,b:100,a:.40,sp:.16},   /* warm gold       */
-    {px:.04,py:.80,pr:.42,r:80, g:215,b:185,a:.38,sp:.13},   /* vivid teal      */
-    {px:.55,py:.24,pr:.38,r:190,g:120,b:255,a:.28,sp:.10},   /* vivid violet    */
-    {px:.26,py:.48,pr:.34,r:255,g:140,b:150,a:.28,sp:.09},   /* soft coral      */
-    {px:.70,py:.40,pr:.32,r:110,g:190,b:255,a:.34,sp:.12},   /* bright azure    */
-    {px:.38,py:.05,pr:.40,r:130,g:235,b:195,a:.32,sp:.15},   /* bright mint     */
+    {px:.08,py:.12,pr:.74,r:172,g:196,b:232,a:.22,sp:.07},  /* pale steel wash  */
+    {px:.84,py:.08,pr:.66,r:188,g:210,b:238,a:.16,sp:.05},  /* silver mist      */
+    {px:.46,py:.84,pr:.72,r:158,g:184,b:222,a:.14,sp:.04},  /* deep slate pool  */
+    {px:.92,py:.66,pr:.58,r:196,g:213,b:235,a:.12,sp:.06},  /* cloud grey       */
+    {px:.04,py:.72,pr:.56,r:166,g:194,b:228,a:.16,sp:.05},  /* still water      */
+    {px:.58,py:.06,pr:.50,r:180,g:204,b:234,a:.13,sp:.07},  /* high sky         */
+    {px:.28,py:.46,pr:.44,r:162,g:188,b:220,a:.11,sp:.04},  /* shadow pool      */
+    {px:.72,py:.36,pr:.48,r:186,g:208,b:236,a:.13,sp:.06},  /* glass water      */
+    {px:.40,py:.02,pr:.54,r:176,g:200,b:230,a:.15,sp:.07},  /* dawn reflection  */
   ];
 
   function paintBlobs(blobs, base, vigStart, vigEnd){
@@ -1570,7 +1571,7 @@ document.addEventListener('click', e=>{
     ctx.fillStyle=sg;ctx.fillRect(0,H*.41,W,H*.04);
   }
   function drawLightWatercolor(){
-    paintBlobs(WC_LIGHT,'#f7f9fd','rgba(255,255,255,.16)','rgba(200,215,240,.18)');
+    paintBlobs(WC_LIGHT,'#f4f6fb','rgba(250,252,255,.08)','rgba(215,228,248,.14)');
   }
 
   function draw(){ isDark()?drawDarkWatercolor():drawLightWatercolor(); }
