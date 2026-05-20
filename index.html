@@ -28,25 +28,34 @@
   --shadow:none;
 }
 
-/* ===== LIGHT THEME ===== */
+/* ===== LIGHT THEME — Nube palette: warm parchment #EBEBE9 · stone #989490 ===== */
 body.light{
-  --green:#1a7822;--amber:#a86000;--red:#b81e1e;--blue:#0c4e9e;--cyan:#006070;
-  --card:#ffffff;--border:#b0c8e0;--muted:#2e4a62;
-  --bg:#f8fafd;--bg-hdr:#ffffff;--bg-nav:#f4f8fd;--bg-inner:#f4f8fd;
-  --bg-sel:#e8f0fa;--bg-strip:#ffffff;
-  --bg-bug:#fdf2f2;--bg-exec-r:#fdf0f4;--bg-exec-a:#fdf8ea;
-  --text:#0e1e2e;--text-strong:#040c18;--text-code:#0e1e2e;
-  --nav-hover:rgba(12,78,158,.03);--nav-active:rgba(12,78,158,.06);
-  --nav-sep:rgba(176,200,224,.6);
-  --chip-card-bg:#ffffff;
-  --exec-name-r:#b01818;--exec-name-a:#a06000;
-  --feed-r:#b81e1e;--feed-g:#1a7822;--feed-b:#0c4e9e;--feed-n:#2e4a62;
-  --ms-strip-bg:#ffffff;
-  --logo-span:#040c18;
-  --cp-badge-bg:rgba(0,96,112,.06);--cp-badge-border:rgba(0,96,112,.22);
-  --action-bg:#f4f8fd;
-  --toggle-bg:#e8f0fa;--toggle-color:#0e1e2e;
-  --shadow:0 4px 28px rgba(40,80,160,.10);
+  /* Accent colours — warm-toned for parchment base */
+  --green:#3a7200;--amber:#8a5e00;--red:#b82020;--blue:#1a54a0;--cyan:#007080;
+
+  /* Surfaces — warm linen family */
+  --card:#F8F8F6;--border:rgba(152,148,144,.28);--muted:#989490;
+  --bg:#EBEBE9;--bg-hdr:#E4E4E1;--bg-nav:#E7E7E4;--bg-inner:#F2F2F0;
+  --bg-sel:#DCDBD7;--bg-strip:#F8F8F6;
+  --bg-bug:#F5EEEE;--bg-exec-r:#F5EDF0;--bg-exec-a:#F5F0E4;
+
+  /* Text — warm near-blacks */
+  --text:#3A3733;--text-strong:#1C1A18;--text-code:#3A3733;
+
+  /* Nav states */
+  --nav-hover:rgba(152,148,144,.09);--nav-active:rgba(58,114,0,.09);
+  --nav-sep:rgba(152,148,144,.30);
+
+  /* Chip cards & misc */
+  --chip-card-bg:#F8F8F6;
+  --exec-name-r:#a82020;--exec-name-a:#8a5e00;
+  --feed-r:#b82020;--feed-g:#3a7200;--feed-b:#1a54a0;--feed-n:#989490;
+  --ms-strip-bg:#F8F8F6;
+  --logo-span:#1C1A18;
+  --cp-badge-bg:rgba(0,112,128,.07);--cp-badge-border:rgba(0,112,128,.24);
+  --action-bg:#E7E7E4;
+  --toggle-bg:#DCDBD7;--toggle-color:#3A3733;
+  --shadow:0 4px 24px rgba(60,54,48,.10);
 }
 
 body{background:transparent;color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;min-height:100vh;display:flex;flex-direction:column;transition:color .2s}
