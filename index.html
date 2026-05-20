@@ -845,7 +845,7 @@ const colSums=Array(6).fill(0);
 hmData.forEach(([name,vals])=>{
   const tr=document.createElement("tr");
   vals.forEach((v,i)=>colSums[i]+=v);
-  tr.innerHTML=`<td>${name}</td>`+vals.map(v=>`<td><div class="hm-cell ${hmCellCls[v-1]}">${hmLabels[v-1]}</div></td>`).join("");
+  tr.innerHTML=`<td>${name}</td>`+vals.map(v=>`<td><div class="hm-cell ${hmCellCls[v-1]}"></div></td>`).join("");
   hmbody.appendChild(tr);
 });
 /* Risk score summary row */
@@ -853,7 +853,7 @@ const maxScore=colSums.map(s=>Math.min(3,Math.round(s/hmData.length)));
 const scoreTr=document.createElement("tr");
 scoreTr.innerHTML=`<td>Risk score</td>`+maxScore.map((s,i)=>{
   const cl=hmCellCls[s-1]; const lbl=hmLabels[s-1];
-  return `<td><div class="hm-cell hm-score-cell ${cl}">${lbl}</div></td>`;
+  return `<td><div class="hm-cell hm-score-cell ${cl}"></div></td>`;
 }).join("");
 hmbody.appendChild(scoreTr);
 
