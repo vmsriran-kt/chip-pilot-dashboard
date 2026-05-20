@@ -349,13 +349,13 @@ body.light .bug-war-tag{color:#a06010}
 
 /* RISK HEATMAP */
 /* HEATMAP MATRIX */
-.hm-table{width:100%;border-collapse:separate;border-spacing:3px;font-size:10px;table-layout:fixed}
-.hm-table colgroup col:first-child{width:80px}
-.hm-table th{padding:4px 2px;font-size:8px;font-weight:700;text-align:center;letter-spacing:.4px;vertical-align:middle}
-.hm-table th:first-child{text-align:left;color:var(--muted);font-size:9px;padding-left:2px;font-weight:600;text-transform:uppercase;letter-spacing:.6px}
-.hm-chip-hdr{display:block;border-radius:6px;padding:3px 4px;font-size:8px;font-weight:800;letter-spacing:.5px;text-align:center}
+.hm-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.hm-table{width:100%;min-width:560px;border-collapse:separate;border-spacing:2px;font-size:10px;table-layout:auto}
+.hm-table th{padding:3px 1px;font-size:7.5px;font-weight:700;text-align:center;letter-spacing:.3px;vertical-align:middle}
+.hm-table th:first-child{text-align:left;color:var(--muted);font-size:9px;padding-left:2px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;min-width:76px}
+.hm-chip-hdr{display:block;border-radius:5px;padding:2px 3px;font-size:7.5px;font-weight:800;letter-spacing:.3px;text-align:center;white-space:nowrap}
 .hm-table td{padding:0;text-align:center;vertical-align:middle}
-.hm-table td:first-child{background:transparent!important;padding:0 4px 0 2px;font-size:10px;font-weight:600;color:var(--text-strong);text-align:left;vertical-align:middle;white-space:nowrap}
+.hm-table td:first-child{background:transparent!important;padding:0 4px 0 2px;font-size:9.5px;font-weight:600;color:var(--text-strong);text-align:left;vertical-align:middle;white-space:nowrap}
 .hm-cell{display:flex;align-items:center;justify-content:center;height:24px;border-radius:6px;font-size:9px;font-weight:800;letter-spacing:.4px;cursor:default;transition:filter .15s,transform .15s;position:relative}
 .hm-cell:hover{filter:brightness(1.25);transform:scale(1.06);z-index:2}
 /* dark mode cell fills */
@@ -939,19 +939,12 @@ body:not(.light) .hero-water-bar::after{background:linear-gradient(to bottom,rgb
                 <span class="card-title">Risk Heatmap</span>
                 <span style="font-size:10px;color:var(--muted)">impact × likelihood</span>
               </div>
+              <div class="hm-wrap">
               <table class="hm-table">
-                <colgroup><col/><col/><col/><col/><col/><col/><col/></colgroup>
-                <thead><tr>
-                  <th>Domain</th>
-                  <th><span class="hm-chip-hdr" style="background:rgba(208,152,0,.18);color:var(--amber)">GR10x</span></th>
-                  <th><span class="hm-chip-hdr" style="background:rgba(208,152,0,.18);color:var(--amber)">ThorZ</span></th>
-                  <th><span class="hm-chip-hdr" style="background:rgba(126,194,0,.16);color:var(--green)">Vera</span></th>
-                  <th><span class="hm-chip-hdr" style="background:rgba(204,68,68,.18);color:var(--red)">N2x</span></th>
-                  <th><span class="hm-chip-hdr" style="background:rgba(78,154,224,.16);color:var(--blue)">V·Ultra</span></th>
-                  <th><span class="hm-chip-hdr" style="background:rgba(78,154,224,.16);color:var(--blue)">Monet</span></th>
-                </tr></thead>
+                <thead id="hm-head"></thead>
                 <tbody id="hm-body"></tbody>
               </table>
+              </div>
               <div class="hm-legend">
                 <span style="color:var(--muted);font-size:9px;text-transform:uppercase;margin-right:2px">Risk:</span>
                 <span><div class="leg-dot hm-l-cell" style="border:none"></div>Low</span>
@@ -1086,37 +1079,62 @@ function toggleTheme(){
 }
 
 /* ===== HEATMAP ===== */
+/* Columns: GR10x · ThorZ · Vera · N2x · V·Ultra · Monet · NR10x · TCX10 · Beacon · Magni */
+const hmCols=[
+  {code:'GR10x',  rI:0},  /* 0=green,1=amber,2=red,3=blue */
+  {code:'ThorZ',  rI:1},
+  {code:'Vera',   rI:1},
+  {code:'N2x',    rI:2},
+  {code:'V·Ultra',rI:0},
+  {code:'Monet',  rI:3},
+  {code:'NR10x',  rI:0},
+  {code:'TCX10',  rI:3},
+  {code:'Beacon', rI:3},
+  {code:'Magni',  rI:3},
+];
 const hmData=[
-  ["Arch/RTL",    [1,1,2,2,1,1]],
-  ["DV/Emul",    [1,1,3,3,2,2]],
-  ["Phys design",[1,1,2,3,2,1]],
-  ["Package",    [3,1,2,2,1,1]],
-  ["PCIe/IO",    [3,1,3,3,2,2]],
-  ["HBM/DDR",    [3,2,2,3,1,1]],
-  ["Firmware",   [2,3,2,2,1,2]],
-  ["Drivers/SW", [1,3,3,3,2,2]],
-  ["Validation", [2,2,2,2,2,2]],
-  ["Mfg/Yield",  [3,1,1,1,1,1]],
+  //              GR  TZ  Vra N2x VU  Mon NR  TX  Bea Mag
+  ["Arch/RTL",   [1,  1,  2,  2,  1,  1,  1,  1,  1,  1]],
+  ["DV/Emul",    [1,  1,  3,  3,  2,  2,  1,  1,  1,  1]],
+  ["Phys Design",[1,  1,  2,  3,  2,  1,  1,  1,  1,  1]],
+  ["Package",    [3,  1,  2,  2,  1,  1,  1,  1,  1,  1]],
+  ["PCIe/IO",    [3,  1,  3,  3,  2,  2,  1,  1,  1,  1]],
+  ["HBM/DDR",    [3,  2,  2,  3,  1,  1,  1,  1,  1,  1]],
+  ["Firmware",   [2,  3,  2,  2,  1,  2,  1,  1,  1,  1]],
+  ["Drivers/SW", [1,  3,  3,  3,  2,  2,  1,  1,  1,  1]],
+  ["Validation", [2,  2,  2,  2,  2,  2,  1,  1,  1,  1]],
+  ["Mfg/Yield",  [3,  1,  1,  1,  1,  1,  1,  1,  1,  1]],
 ];
 const hmCellCls=["hm-l-cell","hm-m-cell","hm-h-cell"];
-const hmLabels=["L","M","H"];
-const hmScoreColor=["#70d888","#d4a830","#ee7070"];
+/* Risk colours indexed by rI: green, amber, red, blue */
+const hmRiskBg   =['rgba(60,180,80,.22)','rgba(210,150,0,.26)','rgba(220,55,55,.28)','rgba(78,154,224,.18)'];
+const hmRiskColor=['var(--green)',       'var(--amber)',        'var(--red)',          'var(--blue)'];
+
+/* Compute per-column average → overall risk level for each chip header */
+const N=hmData.length;
+const colSums=Array(hmCols.length).fill(0);
+hmData.forEach(([,vals])=>vals.forEach((v,i)=>colSums[i]+=v));
+const colRisk=colSums.map(s=>Math.min(3,Math.round(s/N))); /* 1=L 2=M 3=H */
+
+/* Build thead dynamically — headers coloured by computed overall risk */
+const hmHead=document.getElementById("hm-head");
+const hdrTr=document.createElement("tr");
+hdrTr.innerHTML=`<th>Domain</th>`+hmCols.map((c,i)=>{
+  /* Use computed risk (colRisk) to colour; fallback to chip's natural colour (rI) */
+  const riskIdx=colRisk[i]-1;                        /* 0/1/2 */
+  const bg   = hmRiskBg[riskIdx];
+  const color= hmRiskColor[riskIdx];
+  return `<th><span class="hm-chip-hdr" style="background:${bg};color:${color}">${c.code}</span></th>`;
+}).join("");
+hmHead.appendChild(hdrTr);
+
+/* Build body rows — no risk score footer row */
 const hmbody=document.getElementById("hm-body");
-const colSums=Array(6).fill(0);
 hmData.forEach(([name,vals])=>{
   const tr=document.createElement("tr");
-  vals.forEach((v,i)=>colSums[i]+=v);
   tr.innerHTML=`<td>${name}</td>`+vals.map(v=>`<td><div class="hm-cell ${hmCellCls[v-1]}"></div></td>`).join("");
   hmbody.appendChild(tr);
 });
-/* Risk score summary row */
-const maxScore=colSums.map(s=>Math.min(3,Math.round(s/hmData.length)));
-const scoreTr=document.createElement("tr");
-scoreTr.innerHTML=`<td>Risk score</td>`+maxScore.map((s,i)=>{
-  const cl=hmCellCls[s-1]; const lbl=hmLabels[s-1];
-  return `<td><div class="hm-cell hm-score-cell ${cl}"></div></td>`;
-}).join("");
-hmbody.appendChild(scoreTr);
 
 /* ===== CHIP DATA ===== */
 const CHIPS = {
