@@ -55,7 +55,7 @@ body{background:transparent;color:var(--text);font-family:'Segoe UI',system-ui,s
 
 /* HEADER */
 .hdr{background:rgba(255,255,255,0.08);backdrop-filter:blur(32px) saturate(160%);-webkit-backdrop-filter:blur(32px) saturate(160%);border-bottom:1px solid rgba(255,255,255,0.16);padding:10px 16px;display:flex;align-items:center;gap:12px;flex-shrink:0;box-shadow:0 1px 0 rgba(255,255,255,0.10) inset,0 4px 24px rgba(0,0,0,0.40)}
-body.light .hdr{background:rgba(255,255,255,0.88);backdrop-filter:blur(32px) saturate(200%);-webkit-backdrop-filter:blur(32px) saturate(200%);border-bottom:1px solid rgba(255,255,255,0.98);box-shadow:0 1px 0 rgba(255,255,255,1) inset,0 4px 20px rgba(40,80,160,0.08)}
+body.light .hdr{background:rgba(210,222,240,0.96);backdrop-filter:blur(32px) saturate(155%);-webkit-backdrop-filter:blur(32px) saturate(155%);border-bottom:1px solid rgba(255,255,255,0.86);box-shadow:inset 0 1px 0 rgba(255,255,255,0.94),0 4px 16px rgba(70,92,145,0.10)}
 .logo{color:var(--green);font-weight:800;font-size:15px;letter-spacing:.5px;white-space:nowrap}
 .logo span{color:var(--logo-span)}
 .prog-sel{background:var(--bg-sel);border:1px solid var(--border);color:var(--text);padding:6px 10px;border-radius:6px;font-size:12px;min-width:200px}
@@ -77,7 +77,7 @@ body.light .conf-bar{background:rgba(40,80,160,0.07);border:1px solid rgba(40,80
 /* LAYOUT */
 .body-wrap{display:flex;flex:1;overflow:hidden}
 .left-nav{width:168px;flex-shrink:0;background:rgba(255,255,255,0.07);backdrop-filter:blur(28px) saturate(155%);-webkit-backdrop-filter:blur(28px) saturate(155%);border-right:1px solid rgba(255,255,255,0.14);display:flex;flex-direction:column;overflow-y:auto;transition:left .25s,background .2s;box-shadow:1px 0 0 rgba(255,255,255,0.08) inset,6px 0 28px rgba(0,0,0,0.32)}
-body.light .left-nav{background:rgba(255,255,255,0.84);backdrop-filter:blur(28px) saturate(200%);-webkit-backdrop-filter:blur(28px) saturate(200%);border-right:1px solid rgba(255,255,255,0.98);box-shadow:6px 0 24px rgba(40,80,160,0.08)}
+body.light .left-nav{background:rgba(208,220,238,0.96);backdrop-filter:blur(28px) saturate(155%);-webkit-backdrop-filter:blur(28px) saturate(155%);border-right:1px solid rgba(255,255,255,0.84);box-shadow:inset -1px 0 0 rgba(255,255,255,0.60),6px 0 20px rgba(70,92,145,0.09)}
 .left-nav-hdr{padding:12px 12px 8px;font-size:9px;font-weight:700;letter-spacing:.9px;color:var(--muted);text-transform:uppercase;border-bottom:1px solid var(--border)}
 .chip-nav-item{padding:9px 12px;cursor:pointer;border-left:3px solid transparent;transition:background .15s;display:flex;flex-direction:column;gap:2px;border-bottom:1px solid var(--nav-sep)}
 .chip-nav-item:hover{background:var(--nav-hover)}
@@ -121,7 +121,7 @@ body.light .tab-bar{background:rgba(255,255,255,0.86);backdrop-filter:blur(28px)
 
 /* CARDS — GLASS */
 .card{background:rgba(255,255,255,0.10);backdrop-filter:blur(28px) saturate(160%);-webkit-backdrop-filter:blur(28px) saturate(160%);border:1px solid rgba(255,255,255,0.20);border-radius:16px;padding:14px;box-shadow:0 2px 0 rgba(255,255,255,0.12) inset,0 -1px 0 rgba(0,100,200,0.10) inset,0 12px 48px rgba(0,0,0,0.52),0 2px 8px rgba(0,0,0,0.28)}
-body.light .card{background:rgba(255,255,255,0.82);backdrop-filter:blur(28px) saturate(200%);-webkit-backdrop-filter:blur(28px) saturate(200%);border:1px solid rgba(255,255,255,0.98);border-radius:16px;box-shadow:0 1px 0 rgba(255,255,255,1) inset,0 -1px 0 rgba(140,180,240,0.18) inset,0 12px 48px rgba(40,80,160,0.13),0 2px 8px rgba(40,80,160,0.08)}
+body.light .card{background:rgba(220,230,244,0.94);backdrop-filter:blur(28px) saturate(155%);-webkit-backdrop-filter:blur(28px) saturate(155%);border:1px solid rgba(255,255,255,0.90);border-radius:16px;box-shadow:0 0 0 1px rgba(162,182,218,0.22),inset 0 1px 0 rgba(255,255,255,0.95),inset 0 -1px 0 rgba(145,165,208,0.28),0 12px 40px rgba(70,92,145,0.13),0 3px 8px rgba(70,92,145,0.08)}
 .card-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .card-title{font-size:11px;font-weight:700;letter-spacing:.8px;color:var(--text);text-transform:uppercase}
 
@@ -158,73 +158,68 @@ body.light .cw{color:#1a5ca0}
   transition:transform .22s ease,box-shadow .22s ease,filter .15s;
   box-shadow:0 2px 0 rgba(255,255,255,0.10) inset,0 8px 36px rgba(0,0,0,0.46),0 2px 6px rgba(0,0,0,0.24)
 }
-/* ── LIGHT MODE: Executive glass — cool blue-white acrylic ── */
+/* ── LIGHT MODE: Slate-grey + blue-tinge acrylic — top exec ── */
 body.light .chip-card{
-  background:rgba(246,249,255,0.94);
-  backdrop-filter:blur(30px) saturate(180%);-webkit-backdrop-filter:blur(30px) saturate(180%);
-  border:1px solid rgba(255,255,255,1);border-radius:14px;
+  background:rgba(216,226,242,0.96);
+  backdrop-filter:blur(32px) saturate(155%);-webkit-backdrop-filter:blur(32px) saturate(155%);
+  border:1px solid rgba(255,255,255,0.88);border-radius:14px;
   box-shadow:
-    0 0 0 1px rgba(160,190,240,0.20),
-    inset 0 2px 0 rgba(255,255,255,1),
-    inset 2px 0 0 rgba(255,255,255,0.95),
-    inset 0 -2px 0 rgba(120,150,210,0.28),
-    inset -2px 0 0 rgba(120,150,210,0.16),
-    0 28px 72px rgba(50,70,130,0.16),
-    0 10px 26px rgba(50,70,130,0.10),
-    0 2px 6px rgba(50,70,130,0.07)
+    0 0 0 1px rgba(165,185,220,0.24),
+    inset 0 1px 0 rgba(255,255,255,0.95),
+    inset 1px 0 0 rgba(255,255,255,0.78),
+    inset 0 -1px 0 rgba(148,168,210,0.32),
+    inset -1px 0 0 rgba(148,168,210,0.20),
+    0 18px 48px rgba(74,96,148,0.14),
+    0 6px 18px rgba(74,96,148,0.09),
+    0 2px 5px rgba(74,96,148,0.06)
 }
-
-/* Light neural — blue/grey/white water-wash only, no warm tones */
+/* Neural — barely-there depth texture, slate-toned */
 body.light .chip-card::before{
   content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:0;
   background:
-    radial-gradient(ellipse at 12% 20%,rgba(80,115,210,.22) 0%,transparent 50%),
-    radial-gradient(ellipse at 86% 80%,rgba(100,135,225,.16) 0%,transparent 46%),
-    radial-gradient(ellipse at 55% 5%, rgba(60,100,200,.18) 0%,transparent 42%),
-    radial-gradient(ellipse at 5%  90%,rgba(110,145,220,.14) 0%,transparent 40%),
-    radial-gradient(ellipse at 48% 54%,rgba(130,160,230,.10) 0%,transparent 36%),
-    radial-gradient(ellipse at 90% 16%,rgba(90,125,215,.16) 0%,transparent 38%);
-  animation:neuralBreath 6.5s ease-in-out infinite
+    radial-gradient(ellipse at 10% 18%,rgba(96,120,185,.07) 0%,transparent 56%),
+    radial-gradient(ellipse at 88% 82%,rgba(106,130,195,.05) 0%,transparent 52%),
+    radial-gradient(ellipse at 52% 4%, rgba(86,112,182,.06) 0%,transparent 48%),
+    radial-gradient(ellipse at 6%  88%,rgba(112,136,196,.05) 0%,transparent 46%);
+  animation:neuralBreath 9s ease-in-out infinite
 }
-body.light .chip-card:nth-child(2)::before{animation-delay:-2.1s}
-body.light .chip-card:nth-child(3)::before{animation-delay:-4.4s;animation-duration:7.8s}
-body.light .chip-card:nth-child(4)::before{animation-delay:-1.3s}
-body.light .chip-card:nth-child(5)::before{animation-delay:-5.2s;animation-duration:8.2s}
-body.light .chip-card:nth-child(6)::before{animation-delay:-3.0s}
-body.light .chip-card:nth-child(7)::before{animation-delay:-0.7s;animation-duration:7.2s}
-body.light .chip-card:nth-child(8)::before{animation-delay:-4.8s}
-
-/* Inner acrylic mat — glass insert */
+body.light .chip-card:nth-child(2)::before{animation-delay:-3.0s}
+body.light .chip-card:nth-child(3)::before{animation-delay:-6.1s;animation-duration:11s}
+body.light .chip-card:nth-child(4)::before{animation-delay:-1.8s}
+body.light .chip-card:nth-child(5)::before{animation-delay:-7.4s;animation-duration:12s}
+body.light .chip-card:nth-child(6)::before{animation-delay:-4.2s}
+body.light .chip-card:nth-child(7)::before{animation-delay:-1.0s;animation-duration:10s}
+body.light .chip-card:nth-child(8)::before{animation-delay:-5.8s}
+/* Inner acrylic mat — refined glass insert */
 body.light .chip-card::after{
   content:'';position:absolute;inset:5px;border-radius:10px;
-  border:1px solid rgba(130,160,225,0.20);
+  border:1px solid rgba(185,202,228,0.30);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.98),
-    inset 1px 0 0 rgba(255,255,255,0.85),
-    inset 0 -1px 0 rgba(110,140,210,0.14),
-    inset 0 0 20px rgba(60,90,180,0.04);
+    inset 0 1px 0 rgba(255,255,255,0.88),
+    inset 1px 0 0 rgba(255,255,255,0.68),
+    inset 0 -1px 0 rgba(148,168,212,0.16),
+    inset 0 0 18px rgba(88,112,172,0.04);
   pointer-events:none;z-index:20
 }
-
-/* Hover — lift, deepen glass shadow */
+/* Hover — lift cleanly off surface */
 body.light .chip-card:hover{
   transform:translateY(-3px) scale(1.007);
+  background:rgba(222,232,246,0.98);
   box-shadow:
-    0 0 0 1px rgba(140,175,240,0.28),
-    inset 0 2px 0 rgba(255,255,255,1),
-    inset 2px 0 0 rgba(255,255,255,0.98),
-    inset 0 -2px 0 rgba(100,135,210,0.36),
-    inset -2px 0 0 rgba(100,135,210,0.22),
-    0 40px 96px rgba(50,70,130,0.22),
-    0 16px 40px rgba(50,70,130,0.14),
-    0 4px 10px rgba(50,70,130,0.09)
+    0 0 0 1px rgba(148,175,225,0.32),
+    inset 0 1px 0 rgba(255,255,255,1),
+    inset 1px 0 0 rgba(255,255,255,0.88),
+    inset 0 -1px 0 rgba(130,155,205,0.40),
+    inset -1px 0 0 rgba(130,155,205,0.26),
+    0 28px 68px rgba(64,88,145,0.20),
+    0 10px 26px rgba(64,88,145,0.13),
+    0 3px 8px rgba(64,88,145,0.09)
 }
 body.light .chip-card:hover::before{animation-play-state:paused}
-
-/* Status left-edge glow — light mode */
-body.light .chip-card.g{box-shadow:0 0 0 1px rgba(160,190,240,0.20),inset 0 2px 0 rgba(255,255,255,1),inset 2px 0 0 rgba(255,255,255,0.95),inset 0 -2px 0 rgba(120,150,210,0.28),inset -2px 0 0 rgba(120,150,210,0.16),-5px 0 18px rgba(26,120,34,.16),0 28px 72px rgba(50,70,130,0.16),0 10px 26px rgba(50,70,130,0.10)}
-body.light .chip-card.a{box-shadow:0 0 0 1px rgba(160,190,240,0.20),inset 0 2px 0 rgba(255,255,255,1),inset 2px 0 0 rgba(255,255,255,0.95),inset 0 -2px 0 rgba(120,150,210,0.28),inset -2px 0 0 rgba(120,150,210,0.16),-5px 0 18px rgba(168,96,0,.16),0 28px 72px rgba(50,70,130,0.16),0 10px 26px rgba(50,70,130,0.10)}
-body.light .chip-card.r{box-shadow:0 0 0 1px rgba(160,190,240,0.20),inset 0 2px 0 rgba(255,255,255,1),inset 2px 0 0 rgba(255,255,255,0.95),inset 0 -2px 0 rgba(120,150,210,0.28),inset -2px 0 0 rgba(120,150,210,0.16),-5px 0 18px rgba(184,30,30,.16),0 28px 72px rgba(50,70,130,0.16),0 10px 26px rgba(50,70,130,0.10)}
+/* Status left-edge accent — slate base + status glow */
+body.light .chip-card.g{box-shadow:0 0 0 1px rgba(165,185,220,0.24),inset 0 1px 0 rgba(255,255,255,0.95),inset 1px 0 0 rgba(255,255,255,0.78),inset 0 -1px 0 rgba(148,168,210,0.32),inset -1px 0 0 rgba(148,168,210,0.20),-5px 0 16px rgba(26,120,34,.18),0 18px 48px rgba(74,96,148,0.14),0 6px 18px rgba(74,96,148,0.09)}
+body.light .chip-card.a{box-shadow:0 0 0 1px rgba(165,185,220,0.24),inset 0 1px 0 rgba(255,255,255,0.95),inset 1px 0 0 rgba(255,255,255,0.78),inset 0 -1px 0 rgba(148,168,210,0.32),inset -1px 0 0 rgba(148,168,210,0.20),-5px 0 16px rgba(168,96,0,.18),0 18px 48px rgba(74,96,148,0.14),0 6px 18px rgba(74,96,148,0.09)}
+body.light .chip-card.r{box-shadow:0 0 0 1px rgba(165,185,220,0.24),inset 0 1px 0 rgba(255,255,255,0.95),inset 1px 0 0 rgba(255,255,255,0.78),inset 0 -1px 0 rgba(148,168,210,0.32),inset -1px 0 0 rgba(148,168,210,0.20),-5px 0 16px rgba(184,30,30,.18),0 18px 48px rgba(74,96,148,0.14),0 6px 18px rgba(74,96,148,0.09)}
 
 /* ── DARK MODE: Acrylic painting frame — deep space ── */
 body:not(.light) .chip-card{
