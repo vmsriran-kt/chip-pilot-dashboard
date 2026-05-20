@@ -1062,7 +1062,7 @@ body:not(.light) .hero-water-bar::after{background:linear-gradient(to bottom,rgb
                   <tr><td class="a">MODS QS Qual release (Bug 6178454)</td><td><span style="color:var(--amber);font-weight:700">ThorZ</span></td><td class="slack-pos">6/5</td><td><span class="cb">In prog</span></td></tr>
                   <tr><td class="a">Windows boot — FPGA coverage gap</td><td><span style="color:var(--red);font-weight:700">N2x</span></td><td class="slack-pos">Pre-TO</td><td><span class="ca">Watch</span></td></tr>
                   <tr><td>DV L0:10% L1:5% — IAS/GFD reviews</td><td><span style="color:var(--red);font-weight:700">N2x</span></td><td class="slack-pos">Q4 '26</td><td><span class="ca">Watch</span></td></tr>
-                  <tr><td>SW CM not assigned</td><td><span style="color:var(--blue);font-weight:700">Monet · NR10x</span></td><td class="slack-pos">—</td><td><span class="cn">Gap</span></td></tr>
+                  <tr><td>SW CM not assigned</td><td><span style="color:var(--blue);font-weight:700">NR10x</span></td><td class="slack-pos">—</td><td><span class="cn">Gap</span></td></tr>
                 </tbody>
               </table>
               <div style="margin-top:8px;padding:5px 8px;background:rgba(0,200,200,.08);border:1px solid rgba(0,200,200,.2);border-radius:4px;font-size:10px;color:var(--cyan)">⚡ Next SW gate: ThorZ SCG BNB · target May 27 · 85% coverage</div>
@@ -1279,7 +1279,7 @@ const CHIPS = {
     risks:[{level:'h',text:'SCG BNB 85% — chip BNB gated on SCG completion by 5/27'},{level:'m',text:'MNB/CS slipped 6/7→6/13 — Speed checkouts 5/25, HSIO checkouts 5/27'},{level:'m',text:'CPU Soft Lock up active — Bug 6124878, root cause TBD'},{level:'l',text:'FMAX change may impact test schedule'},{level:'l',text:'QBAA noise issue under investigation'}],
     actions:[{icon:'📊',text:'Track SCG BNB coverage — target 5/27'},{icon:'🐛',text:'Resolve CPU Soft Lock up — Bug 6124878'},{icon:'📋',text:'MODS QS Qual release — Bug 6178454, target 6/5'},{icon:'⚡',text:'Speed checkouts 5/25 · HSIO checkouts 5/27'},{icon:'🔍',text:'Monitor QBAA noise issue'}]
   },
-  tb500:{id:'tb500',code:'TB500',name:'Vera',sc:'sc-a',statusCls:'nav-a',statusBadge:'<span class="ca">QS Active ⚠️</span>',cm:'TBD',phase:'Post-silicon · MG→QS Active',silicon:'ES1 (A01Y)',progress:92,nextGate:'QS (M-pkg)',nextGateDate:"Q2 '26 ⚠️",nextGateCls:'a',bugs_count:1,
+  tb500:{id:'tb500',code:'TB500',name:'Vera',sc:'sc-a',statusCls:'nav-a',statusBadge:'<span class="ca">QS Active ⚠️</span>',cm:'Sowjanya',phase:'Post-silicon · MG→QS Active',silicon:'ES1 (A01Y)',progress:92,nextGate:'QS (M-pkg)',nextGateDate:"Q2 '26 ⚠️",nextGateCls:'a',bugs_count:1,
     milestones:[{n:'POR',s:'done',d:'✓'},{n:'RTL',s:'done',d:'✓'},{n:'Tape-out',s:'done',d:'✓'},{n:'Bringup',s:'done',d:'✓'},{n:'ES',s:'done',d:'✓'},{n:'BNB',s:'done',d:'✓'},{n:'MG',s:'now',d:'73% 🔵'},{n:'QS',d:"M-pkg 69% ⚠️"},{n:'PS',d:"Q3 '26"},{n:'PRel',d:"Q3 '26"}],
     bugs:[{id:'6166265',pri:'P1',title:'SLT TB500-M UPHY C2C Timeout/Boot Hangs',owner:'TBD',age:5}],
     reviews:[{doc:'QS-M Qual Report',owner:'S. Bhimanapalli',due:'May 21',ds:'soon'},{doc:'P-Rel BWAT Execution Plan',owner:'TBD',due:'Jun 19',ds:'ok'},{doc:'A01Z DTS Release Plan',owner:'A. Dash',due:'Jun 1',ds:'ok'},{doc:'Arizona Qual SCG Assessment',owner:'TBD',due:'May 30',ds:'soon'}],
