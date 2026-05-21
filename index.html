@@ -149,20 +149,53 @@ html,body{height:100%;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px
 .cl-owner{font-size:10px;color:var(--muted)}
 .cl-progress{height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin-top:6px}
 .cl-fill{height:100%;background:var(--green);border-radius:3px;transition:width .3s}
-/* ── RESPONSIVE ── */
-@media(max-width:900px){.pm-grid{grid-template-columns:1fr}.cv-grid{grid-template-columns:1fr}#nav{display:none}}
-@media(max-width:600px){.chips-grid{grid-template-columns:1fr 1fr}}
+/* ── RESPONSIVE GRIDS (used in JS render fns) ── */
+.radar-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:12px;align-items:start}
+.pm-main-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+/* ── HAMBURGER & NAV DRAWER ── */
+#nav-toggle{display:none;background:none;border:none;font-size:20px;cursor:pointer;color:var(--text);padding:2px 8px;line-height:1;border-radius:5px;transition:background .15s}
+#nav-toggle:hover{background:var(--bg5)}
+#nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:19;backdrop-filter:blur(1px)}
+#nav-overlay.open{display:block}
+/* ── BREAKPOINTS ── */
+@media(max-width:900px){
+  #nav{display:none;position:fixed;top:var(--hdr-h);left:0;bottom:0;width:220px;z-index:20;
+       box-shadow:4px 0 20px rgba(0,0,0,.22);overflow-y:auto}
+  #nav.open{display:flex;flex-direction:column}
+  #nav-toggle{display:block}
+  .pm-grid{grid-template-columns:1fr}
+  .cv-grid{grid-template-columns:1fr}
+  .radar-grid{grid-template-columns:1fr}
+  .pm-main-grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .chips-grid{grid-template-columns:1fr 1fr}
+  #views{padding:10px}
+  .card-body{padding:10px}
+  #hdr{padding:0 10px}
+  .logo{font-size:13px}
+  .badge-b{display:none}
+  .draft-output{max-height:260px}
+}
+@media(max-width:420px){
+  .chips-grid{grid-template-columns:1fr}
+  .tab{padding:0 10px;font-size:10px}
+  #views{padding:8px}
+  .logo-v{display:none}
+}
 </style>
 </head>
 <body>
 <div id="app">
   <header id="hdr">
+    <button id="nav-toggle" onclick="toggleNav()" aria-label="Toggle navigation">☰</button>
     <div class="logo">⚙️ Chip Pilot <span class="logo-v">2.0</span></div>
     <div class="hdr-spacer"></div>
     <div class="badge badge-r" id="risk-badge" onclick="openRiskChips()"></div>
     <div class="badge badge-b" id="multi-badge"></div>
     <button class="theme-btn" onclick="toggleTheme()" id="theme-btn">☀️ Light</button>
   </header>
+  <div id="nav-overlay" onclick="toggleNav()"></div>
   <div id="body">
     <nav id="nav"></nav>
     <main id="main">
@@ -529,6 +562,8 @@ function showView(v, chipId=null){
   document.querySelectorAll('.nav-chip').forEach(el=>{
     el.classList.toggle('active', el.dataset.cid===chipId && v==='chip');
   });
+  // Auto-close nav drawer on mobile after navigation
+  closeNavDrawer();
 }
 
 function openChip(id){
@@ -603,7 +638,7 @@ function renderRadar(){
   }).join('');
 
   document.getElementById('v-radar').innerHTML = `
-    <div style="display:grid;grid-template-columns:1.6fr 1fr;gap:12px;align-items:start">
+    <div class="radar-grid">
       <div class="card">
         <div class="card-hdr">
           <span class="card-title">SW Critical Path Radar</span>
@@ -665,7 +700,7 @@ function renderPM(){
   const chipOpts = Object.values(CHIPS).map(c=>`<option value="${c.id}">${c.code} / ${c.name}</option>`).join('');
 
   document.getElementById('v-pm').innerHTML = `
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
+    <div class="pm-main-grid">
       <!-- Action Queue -->
       <div class="card" style="grid-column:1/-1">
         <div class="card-hdr"><span class="card-title">🎯 Today's Action Queue</span>
@@ -838,6 +873,20 @@ function renderChipDetail(id){
 function toggleCLandRefresh(key, idx, chipId){
   toggleCL(key, idx);
   if(S.view==='chip') renderChipDetail(chipId);
+}
+
+/* ═══════════════════════════════════════════════
+   NAV DRAWER (mobile)
+═══════════════════════════════════════════════ */
+function toggleNav(){
+  const nav = document.getElementById('nav');
+  const overlay = document.getElementById('nav-overlay');
+  const open = nav.classList.toggle('open');
+  overlay.classList.toggle('open', open);
+}
+function closeNavDrawer(){
+  document.getElementById('nav').classList.remove('open');
+  document.getElementById('nav-overlay').classList.remove('open');
 }
 
 /* ═══════════════════════════════════════════════
