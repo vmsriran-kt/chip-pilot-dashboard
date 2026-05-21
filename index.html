@@ -150,7 +150,7 @@ html,body{height:100%;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px
 .cl-progress{height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin-top:6px}
 .cl-fill{height:100%;background:var(--green);border-radius:3px;transition:width .3s}
 /* ── RESPONSIVE GRIDS (used in JS render fns) ── */
-.radar-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:12px;align-items:start}
+.radar-grid{display:flex;flex-direction:column;gap:12px;max-width:860px;margin:0 auto;width:100%}
 .pm-main-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
 /* ── NEEDS ATTENTION BAR ── */
 .attn-bar{display:flex;align-items:center;gap:12px;background:var(--bg4);border:1px solid var(--border);border-left:3px solid var(--red);border-radius:var(--card-r);padding:8px 12px;margin-bottom:14px;overflow-x:auto;flex-shrink:0}
@@ -187,7 +187,6 @@ html,body{height:100%;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px
   #nav-toggle{display:block}
   .pm-grid{grid-template-columns:1fr}
   .cv-grid{grid-template-columns:1fr}
-  .radar-grid{grid-template-columns:1fr}
   .pm-main-grid{grid-template-columns:1fr}
 }
 @media(max-width:600px){
@@ -716,11 +715,11 @@ function renderRadar(){
           <span class="card-title">SW Risk Heatmap</span>
           <span style="font-size:10px;color:var(--muted)">by domain · all chips</span>
         </div>
-        <div class="card-body">
-          <div class="hm-wrap">
+        <div class="card-body" style="display:flex;flex-direction:column;align-items:center">
+          <div class="hm-wrap" style="width:100%;display:flex;justify-content:center">
             <table class="hm-tbl"><thead>${hmHead}</thead><tbody>${hmBody}</tbody></table>
           </div>
-          <div class="hm-legend">
+          <div class="hm-legend" style="justify-content:center;margin-top:10px">
             <span>Risk:</span>
             <span><span class="hm-dot hm-l"></span>Low</span>
             <span><span class="hm-dot hm-m"></span>Med</span>
