@@ -152,19 +152,23 @@ html,body{height:100%;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px
 /* ── RESPONSIVE GRIDS (used in JS render fns) ── */
 .radar-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:12px;align-items:start}
 .pm-main-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
-/* ── COCKPIT STATS BAR ── */
-.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
-.stat-item{background:var(--bg4);border:1px solid var(--border);border-radius:var(--card-r);padding:10px 14px;display:flex;flex-direction:column;gap:3px}
-.stat-val{font-size:22px;font-weight:800;line-height:1}
-.stat-lbl{font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted)}
-.stat-sub{font-size:10px;color:var(--text2)}
+/* ── NEEDS ATTENTION BAR ── */
+.attn-bar{display:flex;align-items:center;gap:12px;background:var(--bg4);border:1px solid var(--border);border-left:3px solid var(--red);border-radius:var(--card-r);padding:8px 12px;margin-bottom:14px;overflow-x:auto;flex-shrink:0}
+.attn-label{font-size:9px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--red);white-space:nowrap;flex-shrink:0}
+.attn-items{display:flex;gap:7px;flex-wrap:wrap}
+.attn-item{display:flex;align-items:center;gap:7px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:5px 10px;cursor:pointer;transition:all .12s}
+.attn-item:hover{border-color:var(--amber);background:var(--amber-bg)}
+.attn-item.urgent{border-left:2px solid var(--red)}
+.attn-item.warn{border-left:2px solid var(--amber)}
+.attn-chip{font-size:11px;font-weight:700;color:var(--text)}
+.attn-status{font-size:10px;color:var(--muted)}
+.attn-bug{font-size:10px;color:var(--red);font-weight:700}
 /* ── COCKPIT 2-PANE LAYOUT ── */
 .ck-layout{display:flex;gap:14px;align-items:flex-start}
 .ck-chips{flex:1;min-width:0;display:flex;flex-direction:column;gap:14px}
 .ck-panel{width:260px;flex-shrink:0;display:flex;flex-direction:column;gap:10px}
 @media(max-width:1300px){.ck-panel{display:none}}
-@media(max-width:700px){.stats-bar{grid-template-columns:1fr 1fr}}
-@media(max-width:420px){.stats-bar{grid-template-columns:1fr 1fr}.stat-val{font-size:18px}}
+@media(max-width:700px){.attn-items{flex-wrap:nowrap;overflow-x:auto}}
 /* ── LARGE SCREEN: wider nav, cap card width ── */
 @media(min-width:1400px){
   :root{--nav-w:220px}
@@ -621,34 +625,22 @@ function chipCard(c){
 
 function renderCockpit(){
   const allChips = Object.values(CHIPS);
-  const atRisk = allChips.filter(c=>c.atRisk).length;
-  const totalBugs = allChips.reduce((a,c)=>a+c.bugs,0);
-  const avgPct = Math.round(allChips.reduce((a,c)=>a+c.progress,0)/allChips.length);
-  const postSilicon = allChips.filter(c=>c.progress>=60).length;
 
-  // ── Stats bar ──
-  const statsBar = `<div class="stats-bar">
-    <div class="stat-item">
-      <div class="stat-val" style="color:${atRisk>0?'var(--red)':'var(--green)'}">${atRisk}</div>
-      <div class="stat-lbl">At Risk</div>
-      <div class="stat-sub">${allChips.length} total programs</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-val" style="color:${totalBugs>0?'var(--amber)':'var(--green)'}">${totalBugs}</div>
-      <div class="stat-lbl">Active Bugs</div>
-      <div class="stat-sub">across all chips</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-val">${avgPct}%</div>
-      <div class="stat-lbl">Avg Progress</div>
-      <div class="stat-sub">${postSilicon} post-silicon</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-val" style="font-size:15px;padding-top:3px">ThorZ</div>
-      <div class="stat-lbl">Next Gate</div>
-      <div class="stat-sub">SCG BNB · May 27 ⚠️</div>
-    </div>
-  </div>`;
+  // ── Needs Attention bar (top) ──
+  const attention = allChips.filter(c=>c.atRisk||c.bugs>0);
+  let attnBar = '';
+  if(attention.length){
+    const items = attention.map(c=>`
+      <div class="attn-item ${c.atRisk?'urgent':'warn'}" onclick="openChip('${c.id}')">
+        <span class="attn-chip">${c.code}</span>
+        <span class="attn-status">${c.status}</span>
+        ${c.bugs>0?`<span class="attn-bug">${c.bugs} bug${c.bugs>1?'s':''}</span>`:''}
+      </div>`).join('');
+    attnBar = `<div class="attn-bar">
+      <span class="attn-label">⚠️ Needs Attention</span>
+      <div class="attn-items">${items}</div>
+    </div>`;
+  }
 
   // ── Chip sections ──
   let sections = '';
@@ -658,17 +650,7 @@ function renderCockpit(){
       <div class="chips-grid">${chips.map(chipCard).join('')}</div></div>`;
   });
 
-  // ── Right panel: Needs Attention ──
-  const attention = allChips.filter(c=>c.atRisk||c.bugs>0);
-  const attnItems = attention.length ? attention.map(c=>`
-    <div class="pm-item ${c.atRisk?'urgent':'week'}" onclick="openChip('${c.id}')">
-      <div class="pm-item-title">${c.code} / ${c.name}</div>
-      <div class="pm-item-sub">${c.status}</div>
-      ${c.bugs>0?`<span class="pm-item-chip bg-r">${c.bugs} bug${c.bugs>1?'s':''}</span>`:''}
-    </div>`).join('')
-    : `<div style="color:var(--green);font-size:11px;padding:6px 0">✓ No critical items</div>`;
-
-  // ── Right panel: Gate Schedule ──
+  // ── Right panel: Chip Schedule ──
   const gateItems = allChips.map(c=>`
     <div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--sep)">
       <div>
@@ -680,18 +662,12 @@ function renderCockpit(){
 
   const panel = `<div class="ck-panel">
     <div class="card">
-      <div class="card-hdr"><span class="card-title">⚠️ Needs Attention</span>
-        <span style="font-size:10px;color:var(--muted)">${attention.length} items</span>
-      </div>
-      <div class="card-body">${attnItems}</div>
-    </div>
-    <div class="card">
-      <div class="card-hdr"><span class="card-title">📅 Gate Schedule</span></div>
+      <div class="card-hdr"><span class="card-title">📅 Chip Schedule</span></div>
       <div class="card-body" style="padding-top:4px">${gateItems}</div>
     </div>
   </div>`;
 
-  document.getElementById('v-cockpit').innerHTML = statsBar +
+  document.getElementById('v-cockpit').innerHTML = attnBar +
     `<div class="ck-layout"><div class="ck-chips">${sections}</div>${panel}</div>`;
 }
 
