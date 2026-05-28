@@ -783,11 +783,11 @@ function renderPM(){
       </div>
       <!-- Weekly Status Draft -->
       <div class="card">
-        <div class="card-hdr"><span class="card-title">📝 Weekly Status Draft</span>
+        <div class="card-hdr"><span class="card-title">📝 Daily Status Update</span>
           <button class="btn btn-green" onclick="genStatusDraft()">⚡ Generate</button>
         </div>
         <div class="card-body">
-          <div class="draft-output" id="draft-out">Click "Generate" to auto-draft your weekly status update across all active chip programs.</div>
+          <div class="draft-output" id="draft-out">Click "Generate" to auto-draft your daily status update across all active chip programs.</div>
           <div style="display:flex;gap:8px;margin-top:8px">
             <button class="btn btn-green" onclick="copyDraft()">📋 Copy</button>
           </div>
@@ -834,7 +834,7 @@ function toggleCL(chipId, idx){
 
 function genStatusDraft(){
   const d = new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
-  let out = `=== CHIP PROGRAM WEEKLY STATUS — ${d} ===\n`;
+  let out = `=== CHIP PROGRAM DAILY STATUS — ${d} ===\n`;
   out += `\nSUMMARY: ${Object.values(CHIPS).filter(c=>c.atRisk).length} chips at risk · `;
   out += `${Object.values(CHIPS).reduce((a,c)=>a+c.bugs,0)} active bugs across all programs\n`;
   out += `─────────────────────────────────────────\n`;
