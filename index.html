@@ -242,17 +242,17 @@ const GROUPS = [
 
 const CHIPS = {
   thorz:{ id:'thorz', code:'ThorZ', name:'ThorZ', group:'cpu', cm:'Mayank Kapoor',
-    progress:65, color:'a', phase:'Post-silicon · SW BNB ✅ · SCG BNB In Progress',
-    status:'SCG 85% ⚠️', nextGate:'BNB (SCG)', nextGateDate:'5/27 ⚠️',
+    progress:72, color:'a', phase:'Post-silicon · BNB Declared 5/28 ✅ · MNB/QS Active',
+    status:'BNB Done 5/28 ✅', nextGate:'MNB/QS Qual', nextGateDate:"Jun '26",
     bugs:2, atRisk:true,
     milestones:[
       {n:'POR',s:'done',d:'✓'},{n:'RTL',s:'done',d:'✓'},{n:'Tape-out',s:'done',d:'✓'},
-      {n:'Bringup',s:'done',d:'✓'},{n:'ES',s:'done',d:'✓'},{n:'BNB',s:'now',d:'SCG 85% ⚠️'},
-      {n:'MG',s:'wait',d:"Q4 '26"},{n:'QS',s:'wait',d:"Q1 '27"},{n:'PRel',s:'wait',d:"Q3 '27"},
+      {n:'Bringup',s:'done',d:'✓'},{n:'ES',s:'done',d:'✓'},{n:'BNB',s:'done',d:'✓ 5/28'},
+      {n:'MG',s:'now',d:"MNB trending 6/2"},{n:'QS',s:'wait',d:"Q1 '27"},{n:'PRel',s:'wait',d:"Q3 '27"},
     ],
     risks:[
-      {l:'h',t:'SCG BNB 85% — chip BNB gated on SCG completion by 5/27'},
-      {l:'m',t:'MNB/CS slipped 6/7→6/13 — Speed checkouts 5/25, HSIO 5/27'},
+      {l:'h',t:'MaxP scope added by BU (Auto) — new PC cycle required, schedule impact TBD'},
+      {l:'m',t:'SCG HSIO debug ongoing (PCIe/USB/MGBE) — pending close-out'},
       {l:'m',t:'CPU Soft Lock up active — Bug 6124878, root cause TBD'},
     ],
     checklist:[
@@ -369,7 +369,7 @@ const CHIPS = {
       {l:'h',t:'PG558 SW QA at 80% — SW blocked by lack of L6 system (escalated 5/25)'},
       {l:'h',t:'GFW: TOT inforom issues — blocking MR submissions as of 5/28'},
       {l:'m',t:'FW v3.1 patch — NVLink lane drop · PRel blocked'},
-      {l:'l',t:'Ongoing monitoring for field issues'},
+      {l:'m',t:'C2C ENC error window violations (Bug 6203872) — root cause: SBIOS↔VBIOS encryption mismatch; fix validation in progress'},
     ],
     checklist:[
       {t:'FW v3.1 NVLink lane drop patch merged',owner:'FW team',done:false},
@@ -961,13 +961,4 @@ function closeNavDrawer(){
 /* ═══════════════════════════════════════════════
    INIT
 ═══════════════════════════════════════════════ */
-function init(){
-  applyTheme();
-  renderBadges();
-  renderNav();
-  showView('cockpit');
-}
-init();
-</script>
-</body>
-</html>
+function
