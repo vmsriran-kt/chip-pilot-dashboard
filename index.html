@@ -260,7 +260,7 @@ const CHIPS = {
       {t:'MNB/CS completion by 6/13',owner:'HW team',done:false},
       {t:'CPU Soft Lock up Bug 6124878 resolved',owner:'SW team',done:false},
       {t:'MODS QS Qual release Bug 6178454',owner:'MODS team',done:false},
-      {t:'QBAA noise issue investigation',owner:'PHY team',done:false},
+      {t:'QBAA noise — isolated to wafer lot U6F059.000; replacements ordered (5/29)',owner:'PHY team',done:false},
     ],
   },
   vera:{ id:'vera', code:'TB500', name:'Vera', group:'cpu', cm:'Sowjanya',
@@ -447,7 +447,7 @@ const HM_DATA=[
 
 const CP_ITEMS=[
   {t:'FW v3.1 patch — NVLink lane drop',chip:'GR10x',gate:'PRel',s:'r',sl:'Blocked'},
-  {t:'SCG BNB coverage 85% → 100%',chip:'ThorZ',gate:'5/27',s:'r',sl:'At risk'},
+  {t:'ThorZ MNB/QS Qual — qual testing begun',chip:'ThorZ',gate:"Jun '26",s:'a',sl:'In prog'},
   {t:'QS-M QBAA board setup pending',chip:'Vera',gate:"Q2 '26",s:'r',sl:'At risk'},
   {t:'FPGA H3 netlist — VIC VPR fail',chip:'N2x',gate:'6/5',s:'r',sl:'At risk'},
   {t:'MODS QS Qual release (Bug 6178454)',chip:'ThorZ',gate:'6/5',s:'a',sl:'In prog'},
@@ -456,7 +456,7 @@ const CP_ITEMS=[
 ];
 
 const ATTN_ITEMS=[
-  {t:'ThorZ SCG BNB gate at risk — 5/27',s:'r',chip:'ThorZ'},
+  {t:'ThorZ MNB/QS Qual active — MaxP PC cycle impact TBD',s:'a',chip:'ThorZ'},
   {t:'N2x FPGA H3 VIC/VPR fail — 6/5',s:'r',chip:'N2x'},
   {t:'GR10x FW v3.1 PRel blocker',s:'a',chip:'GR10x'},
 ];
@@ -541,7 +541,7 @@ function renderNav(){
   html += `</div></div>`;
   // Feed panel
   html += `<div class="nav-static">
-    <div class="nav-static-hdr">📋 Changed Today <span style="font-size:9px;color:var(--muted)">May 20</span></div>
+    <div class="nav-static-hdr">📋 Changed Today <span style="font-size:9px;color:var(--muted)">Jun 1</span></div>
     <div class="nav-feed">`;
   FEED_ITEMS.forEach(i=>{
     html += `<div class="nf-item nf-${i.s}"><div class="nf-t">${i.time} · ${i.t}</div><div class="nf-s">${i.sub}</div></div>`;
@@ -961,4 +961,7 @@ function closeNavDrawer(){
 
 /* ═══════════════════════════════════════════════
    INIT
-══════════════
+═══════════════════════════════════════════════ */
+function init(){
+  applyTheme();
+  renderBadges(
