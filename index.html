@@ -242,13 +242,13 @@ const GROUPS = [
 
 const CHIPS = {
   thorz:{ id:'thorz', code:'ThorZ', name:'ThorZ', group:'cpu', cm:'Mayank Kapoor',
-    progress:72, color:'a', phase:'Post-silicon · BNB Declared 5/28 ✅ · MNB/QS Active',
-    status:'BNB Done 5/28 ✅', nextGate:'MNB/QS Qual', nextGateDate:"Jun '26",
+    progress:75, color:'a', phase:'Post-silicon · BNB Declared 5/28 ✅ · MNB Active (73%/65%)',
+    status:'MNB 73%/65% Active', nextGate:'MNB/CS', nextGateDate:'6/13',
     bugs:2, atRisk:true,
     milestones:[
       {n:'POR',s:'done',d:'✓'},{n:'RTL',s:'done',d:'✓'},{n:'Tape-out',s:'done',d:'✓'},
       {n:'Bringup',s:'done',d:'✓'},{n:'ES',s:'done',d:'✓'},{n:'BNB',s:'done',d:'✓ 5/28'},
-      {n:'MG',s:'now',d:"MNB trending 6/2"},{n:'QS',s:'wait',d:"Q1 '27"},{n:'PRel',s:'wait',d:"Q3 '27"},
+      {n:'MG',s:'now',d:'MNB 6/7–6/13'},{n:'QS',s:'wait',d:"Q1 '27"},{n:'PRel',s:'wait',d:"Q3 '27"},
     ],
     risks:[
       {l:'h',t:'MaxP scope added by BU (Auto) — new PC cycle required, schedule impact TBD'},
@@ -256,39 +256,39 @@ const CHIPS = {
       {l:'m',t:'CPU Soft Lock up active — Bug 6124878, root cause TBD'},
     ],
     checklist:[
-      {t:'SCG BNB coverage reach 100%',owner:'Mayank Kapoor',done:false},
+      {t:'SCG miniWAT coverage 100%',owner:'Mayank Kapoor',done:true},
       {t:'MNB/CS completion by 6/13',owner:'HW team',done:false},
       {t:'CPU Soft Lock up Bug 6124878 resolved',owner:'SW team',done:false},
-      {t:'MODS QS Qual release Bug 6178454',owner:'MODS team',done:false},
+      {t:'MODS QS Qual release targeting 6/11',owner:'MODS team',done:false},
       {t:'QBAA noise — isolated to wafer lot U6F059.000; replacements ordered (5/29)',owner:'PHY team',done:false},
     ],
   },
   vera:{ id:'vera', code:'TB500', name:'Vera', group:'cpu', cm:'Sowjanya',
-    progress:92, color:'a', phase:'Post-silicon · VR NVL72 SW 0.6 Release Active',
-    status:'SW 0.6 Release ⚠️', nextGate:'SW 0.6 Dev Drop', nextGateDate:'6/22 ⚠️',
+    progress:93, color:'a', phase:'Post-silicon · PS SBIOS Released 6/2 ✅ · BWAT ~6/15',
+    status:'SBIOS Released ✅ · BWAT 6/15', nextGate:'M-pkg FinalCWAT', nextGateDate:'6/11',
     bugs:2, atRisk:true,
     milestones:[
       {n:'POR',s:'done',d:'✓'},{n:'RTL',s:'done',d:'✓'},{n:'Tape-out',s:'done',d:'✓'},
       {n:'Bringup',s:'done',d:'✓'},{n:'ES',s:'done',d:'✓'},{n:'MG',s:'done',d:'91% ✓'},
-      {n:'QS',s:'now',d:'SW 0.6 Active'},{n:'PS',s:'wait',d:"Q3 '26"},{n:'PRel',s:'wait',d:"Q4 '26"},
+      {n:'QS',s:'now',d:'SCG exec complete'},{n:'PS',s:'wait',d:"Q3 '26"},{n:'PRel',s:'wait',d:"Q4 '26"},
     ],
     risks:[
-      {l:'h',t:'SW 0.6 blocked: no releasable DFX Test Package, no ETA — feature cutoff imminent'},
-      {l:'h',t:'TB500 SLT P-package release June 2; SBIOS readiness May 29 — 2 days notice'},
-      {l:'m',t:'nvbugs/6197050 CPU IST fallout (SSG timeouts) — fix missed PG558 platform, addressed 5/28'},
-      {l:'m',t:'Branching plan ambiguity — dev-tb500-chip-mods branch adds last-minute scope'},
+      {l:'h',t:'QS blocker bugs increased from 68 to 90 — DCPOR Strata 4 features remain (closing by 6/5)'},
+      {l:'h',t:'USB transfers instability in OOBHUB (Bug 6103272 / 6091323) — HMC FW & OOBHUB FW WARs pending merge'},
+      {l:'m',t:'MSEQ L2 resets on NVL72 CPU yield issue — CBB MMIO intermittent failures; debug ongoing (Bug 6163858)'},
+      {l:'m',t:'9600MT/s 2R module shortage due to NVL72 allocation — recovery expected end of June'},
     ],
     checklist:[
-      {t:'DFX releasable Test Package for SW 0.6 FLM/PLDM bin',owner:'DFX',done:false},
-      {t:'TB500 SLT P-package release June 2',owner:'Sowjanya',done:false},
-      {t:'nvbugs/6210567 intermittent data mismatch fix merged to all platforms',owner:'SW team',done:false},
-      {t:'VR NVL72 SW 0.6 Dev Drop 6/22',owner:'Sowjanya',done:false},
-      {t:'SW 0.6 Release 7/6',owner:'Sowjanya',done:false},
+      {t:'PS SBIOS release ~6/2',owner:'Sowjanya',done:true},
+      {t:'MODS release ~6/5',owner:'Sowjanya',done:false},
+      {t:'M-pkg FinalCWAT parts arriving 6/11; SW cutoff 6/3',owner:'Sowjanya',done:false},
+      {t:'P-boards BWAT Final WAT trending 6/15',owner:'HW team',done:false},
+      {t:'DCPOR QS features (4 remaining) close by 6/5',owner:'SW team',done:false},
     ],
   },
   veraUltra:{ id:'veraUltra', code:'TB600', name:'Vera Ultra', group:'cpu', cm:'Hui Fu',
-    progress:40, color:'b', phase:'Bring-up · Tape-out ✅ · Bringup Active',
-    status:'Bringup 🔵', nextGate:'ES', nextGateDate:"Q4 '26",
+    progress:40, color:'b', phase:'Pre-silicon · Simulation Req Gathering · IAS/GFD Reviews Active',
+    status:'IAS/GFD Reviews 🔵', nextGate:'ES', nextGateDate:"Q4 '26",
     bugs:0, atRisk:false,
     milestones:[
       {n:'POR',s:'done',d:'✓'},{n:'RTL',s:'done',d:'✓'},{n:'Tape-out',s:'done',d:'✓'},
@@ -296,64 +296,65 @@ const CHIPS = {
       {n:'BNB',s:'wait',d:"Q2 '27"},{n:'PRel',s:'wait',d:"Q2 '28"},
     ],
     risks:[
-      {l:'m',t:'Power On active — early bringup issues expected'},
-      {l:'l',t:'All Power On tests passing — healthy start'},
+      {l:'m',t:'Gathering simulation requirements from SW teams — IAS and GFD reviews ongoing'},
+      {l:'l',t:'Early stage — no critical blockers identified'},
     ],
     checklist:[
       {t:'POST self-test pass',owner:'Hui Fu',done:true},
       {t:'DDR5 training validation',owner:'PHY team',done:true},
       {t:'PCIe enumeration complete',owner:'FW team',done:true},
-      {t:'NVLink init test',owner:'FW team',done:false},
-      {t:'Thermal monitor baseline',owner:'HW team',done:false},
+      {t:'IAS/GFD reviews complete',owner:'Hui Fu',done:false},
+      {t:'Simulation requirements finalized',owner:'Hui Fu',done:false},
     ],
   },
   n2x:{ id:'n2x', code:'N2x', name:'N2x', group:'cpu', cm:'Vivek Desikan',
-    progress:30, color:'r', phase:'Pre-silicon · FPGA Active · T354 S-Die Tape-out Nov 17',
-    status:'Tape-out Slipped ⚠️', nextGate:'Tape-out', nextGateDate:'Nov 17 ⚠️',
+    progress:32, color:'r', phase:'Pre-silicon · FPGA H2.07 Active · FDI 6/30 · H3 Netlist 6/5',
+    status:'FPGA Active ⚠️ · FDI 6/30', nextGate:'FDI', nextGateDate:'6/30 ⚠️',
     bugs:2, atRisk:true,
     milestones:[
       {n:'POR',s:'done',d:'✓'},{n:'RTL',s:'now',d:'FNL 6/29'},{n:'FPGA H2',s:'done',d:'Stable'},
-      {n:'FPGA H3',s:'now',d:'6/5 ⚠️'},{n:'Tape-out',s:'wait',d:'Nov 17 ⚠️'},
-      {n:'Bringup',s:'wait',d:"Q1 '27"},{n:'PRel',s:'wait',d:"TBD"},
+      {n:'FPGA H3',s:'now',d:'6/5 ⚠️'},{n:'FDI',s:'wait',d:'6/30 ⚠️'},
+      {n:'Tape-out',s:'wait',d:'Nov 17 ⚠️'},{n:'PRel',s:'wait',d:"TBD"},
     ],
     risks:[
-      {l:'h',t:'T354 S-Die tape-out slipped 1 month to Nov 17 — HSIO (USB4/USB3, DIA) long poles'},
-      {l:'h',t:'SW validation on FPGA started ~6 weeks late; cosim regressions at 57-60% (target 80%)'},
-      {l:'h',t:'FPGA H3 netlist — VIC VPR fail · delayed to 6/5'},
-      {l:'h',t:'DIA HW bugs active — root cause investigation ongoing'},
-      {l:'m',t:'Defeatured USB4.v2, DP2.1, iEP for schedule reasons'},
+      {l:'h',t:'Display bring-up on H2 blocked by Jade HW bug — fix expected this week'},
+      {l:'h',t:'Windows boot not up on N2x FPGA platform — Jade bringing up on p-core only netlist'},
+      {l:'h',t:'D3 discussions ongoing — may result in chip schedule pushout if approved'},
+      {l:'h',t:'VDK — Multiple performance bottlenecks across Display, GPU_RISCV, and front door boot'},
+      {l:'m',t:'NV Perf validation not started due to resource unavailability — expected next week'},
+      {l:'m',t:'Hybrid IPP Bringup delayed due to Jade netlist issues till July'},
     ],
     checklist:[
-      {t:'FPGA H3 VIC VPR fail resolved',owner:'DV team',done:false},
-      {t:'DIA HW bug root cause identified',owner:'HW team',done:false},
-      {t:'Cosim regression pass rate reach 80%',owner:'DV team',done:false},
+      {t:'FPGA H3 netlist available (6/5)',owner:'DV team',done:false},
+      {t:'Display H2 Jade HW bug fix resolved',owner:'HW team',done:false},
+      {t:'Testplan L0 to 22% (was 10%) — maintain progress',owner:'DV team',done:true},
       {t:'Windows boot FPGA coverage gap closed',owner:'SW team',done:false},
-      {t:'GPU D3 cold issue (HW fix vs SW WAR) decision',owner:'Vivek Desikan',done:false},
+      {t:'NV Perf validation kickoff (next week)',owner:'Vivek Desikan',done:false},
     ],
   },
   tcx10:{ id:'tcx10', code:'TCX10', name:'TCX10', group:'cpu', cm:'Roopa',
-    progress:5, color:'w', phase:'Pre-silicon · Planning Phase',
-    status:'Planning', nextGate:'POR', nextGateDate:'TBD',
+    progress:8, color:'w', phase:'Pre-silicon · POR Discussions Active · 8 New Features Added',
+    status:'POR Active', nextGate:'POR', nextGateDate:'TBD',
     bugs:0, atRisk:false,
-    milestones:[{n:'POR',s:'now',d:'Planning'},{n:'RTL',s:'wait',d:'TBD'},{n:'Tape-out',s:'wait',d:'TBD'}],
-    risks:[{l:'l',t:'Early planning — no blockers identified'}],
-    checklist:[{t:'POR Kickoff',owner:'Roopa',done:false},{t:'Arch Spec',owner:'TBD',done:false}],
+    milestones:[{n:'POR',s:'now',d:'8 features added'},{n:'RTL',s:'wait',d:'TBD'},{n:'Tape-out',s:'wait',d:'TBD'}],
+    risks:[{l:'m',t:'POR Discussions ongoing — 8 new features added to achieve performance targets; scope expanding'}],
+    checklist:[{t:'POR Kickoff',owner:'Roopa',done:false},{t:'Arch Spec with 8 new features',owner:'TBD',done:false}],
   },
   monet:{ id:'monet', code:'T257', name:'Monet', group:'cpu', cm:'Vivek Desikan',
-    progress:10, color:'w', phase:'Pre-silicon · POR Phase',
-    status:'POR Active', nextGate:'RTL', nextGateDate:"Q3 '26",
+    progress:10, color:'w', phase:'Pre-silicon · FPGA Validation Active · BMW Design Award Pending',
+    status:'FPGA Val Active', nextGate:'RTL', nextGateDate:"Q3 '26",
     bugs:0, atRisk:false,
     milestones:[{n:'POR',s:'now',d:'Active'},{n:'RTL',s:'wait',d:"Q3 '26"},{n:'Tape-out',s:'wait',d:"Q4 '26"}],
-    risks:[{l:'l',t:'Early planning — on schedule'}],
-    checklist:[{t:'POR Signoff',owner:'Vivek Desikan',done:false}],
+    risks:[{l:'m',t:'BMW design award decision pending — outcome may affect program scope/timeline'}],
+    checklist:[{t:'BMW design award decision',owner:'Vivek Desikan',done:false},{t:'FPGA validation ongoing',owner:'DV team',done:false}],
   },
   magni:{ id:'magni', code:'T294', name:'Magni', group:'cpu', cm:'Roopa',
-    progress:5, color:'w', phase:'Pre-silicon · Planning Phase',
-    status:'Planning', nextGate:'POR', nextGateDate:'TBD',
+    progress:8, color:'w', phase:'Pre-silicon · Arch Investigations Active · POR 90% target by 6/30',
+    status:'Arch Readouts Active', nextGate:'POR 90%', nextGateDate:'6/30',
     bugs:0, atRisk:false,
-    milestones:[{n:'POR',s:'now',d:'Planning'},{n:'RTL',s:'wait',d:'TBD'}],
-    risks:[{l:'l',t:'Early planning'}],
-    checklist:[{t:'POR Kickoff',owner:'Roopa',done:false}],
+    milestones:[{n:'POR',s:'now',d:'90% by 6/30'},{n:'RTL',s:'wait',d:'TBD'}],
+    risks:[{l:'l',t:'Arch investigations and readouts ongoing — targeting 90% POR complete by 6/30'}],
+    checklist:[{t:'Arch readouts complete',owner:'Roopa',done:false},{t:'90% POR by 6/30',owner:'Roopa',done:false}],
   },
   gr10x:{ id:'gr10x', code:'GR10x', name:'Rubin', group:'gpu', cm:'Ranjani V · Madhura',
     progress:95, color:'a', phase:'Post-silicon · QS Done ✅ · PS/PRel In Progress',
@@ -422,12 +423,12 @@ const CHIPS = {
     checklist:[{t:'NVLink protocol spec signoff',owner:'Ranjani',done:false},{t:'RTL planning kickoff',owner:'Ranjani',done:false}],
   },
   beacon:{ id:'beacon', code:'T374', name:'Beacon', group:'fusion', cm:'Roopa',
-    progress:5, color:'w', phase:'Pre-silicon · Planning Phase',
-    status:'Planning', nextGate:'POR', nextGateDate:'TBD',
+    progress:5, color:'w', phase:'Post-silicon · Schedule Alignment Ongoing · QS MODS/Fuse Release Req Under Review',
+    status:'Sched Alignment', nextGate:'QS MODS/Fuse', nextGateDate:'TBD',
     bugs:0, atRisk:false,
-    milestones:[{n:'POR',s:'now',d:'Planning'},{n:'RTL',s:'wait',d:'TBD'}],
-    risks:[{l:'l',t:'Early planning'}],
-    checklist:[{t:'POR Kickoff',owner:'Roopa',done:false}],
+    milestones:[{n:'POR',s:'done',d:'✓'},{n:'Post-Si',s:'now',d:'Sched align'}],
+    risks:[{l:'m',t:'Iris requesting QS MODS/Fuse release 7 weeks prior to original QS/PS milestone — reviewing schedule impact'}],
+    checklist:[{t:'Post-Si schedule alignment complete',owner:'Roopa',done:false},{t:'QS MODS/Fuse early release decision',owner:'Roopa',done:false}],
   },
 };
 
@@ -456,9 +457,10 @@ const CP_ITEMS=[
 ];
 
 const ATTN_ITEMS=[
-  {t:'ThorZ MNB/QS Qual active — MaxP PC cycle impact TBD',s:'a',chip:'ThorZ'},
-  {t:'N2x FPGA H3 VIC/VPR fail — 6/5',s:'r',chip:'N2x'},
-  {t:'GR10x FW v3.1 PRel blocker',s:'a',chip:'GR10x'},
+  {t:'ThorZ MNB active — 73% coverage, 65% pass; MNB/CS 6/7–6/13',s:'a',chip:'ThorZ'},
+  {t:'N2x FPGA H3 netlist 6/5; Display blocked Jade HW bug; D3 may push schedule',s:'r',chip:'N2x'},
+  {t:'Vera QS blocker bugs up 68→90; BWAT Final WAT ~6/15',s:'a',chip:'Vera'},
+  {t:'GR10x FW v3.1 PRel blocker ongoing',s:'a',chip:'GR10x'},
 ];
 
 const FEED_ITEMS=[
@@ -541,7 +543,7 @@ function renderNav(){
   html += `</div></div>`;
   // Feed panel
   html += `<div class="nav-static">
-    <div class="nav-static-hdr">📋 Changed Today <span style="font-size:9px;color:var(--muted)">Jun 1</span></div>
+    <div class="nav-static-hdr">📋 Changed Today <span style="font-size:9px;color:var(--muted)">Jun 3</span></div>
     <div class="nav-feed">`;
   FEED_ITEMS.forEach(i=>{
     html += `<div class="nf-item nf-${i.s}"><div class="nf-t">${i.time} · ${i.t}</div><div class="nf-s">${i.sub}</div></div>`;
@@ -937,31 +939,4 @@ function renderChipDetail(id){
           ${clItems}
         </div>
       </div>
-    </div>`;
-}
-
-function toggleCLandRefresh(key, idx, chipId){
-  toggleCL(key, idx);
-  if(S.view==='chip') renderChipDetail(chipId);
-}
-
-/* ═══════════════════════════════════════════════
-   NAV DRAWER (mobile)
-═══════════════════════════════════════════════ */
-function toggleNav(){
-  const nav = document.getElementById('nav');
-  const overlay = document.getElementById('nav-overlay');
-  const open = nav.classList.toggle('open');
-  overlay.classList.toggle('open', open);
-}
-function closeNavDrawer(){
-  document.getElementById('nav').classList.remove('open');
-  document.getElementById('nav-overlay').classList.remove('open');
-}
-
-/* ═══════════════════════════════════════════════
-   INIT
-═══════════════════════════════════════════════ */
-function init(){
-  applyTheme();
-  renderBadges(
+    
