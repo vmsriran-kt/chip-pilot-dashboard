@@ -124,6 +124,15 @@ html,body{height:100%;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px
 .pm-item-title{font-size:11px;font-weight:600;color:var(--text);margin-bottom:3px}
 .pm-item-sub{font-size:10px;color:var(--muted)}
 .pm-item-chip{font-size:9px;font-weight:700;padding:1px 6px;border-radius:8px;display:inline-block;margin-top:4px}
+/* ── PM CHIP SELECTOR ── */
+.pm-sel-bar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:10px 12px;background:var(--bg4);border:1px solid var(--border);border-radius:var(--card-r);margin-bottom:14px}
+.pm-sel-lbl{font-size:9px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);flex-shrink:0;margin-right:4px}
+.pm-pill{padding:4px 11px;border-radius:12px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--bg3);color:var(--text2);transition:all .12s;white-space:nowrap}
+.pm-pill:hover{border-color:var(--green);color:var(--green)}
+.pm-pill.on{background:var(--green-bg);border-color:var(--green);color:var(--green)}
+.pm-chip-header{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg4);border:1px solid var(--border);border-radius:var(--card-r);margin-bottom:14px}
+.pm-chip-name{font-size:16px;font-weight:800;color:var(--text)}
+.pm-chip-meta{font-size:11px;color:var(--muted)}
 /* ── STATUS DRAFT ── */
 .draft-output{background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:12px;font-size:11px;line-height:1.6;color:var(--text2);white-space:pre-wrap;font-family:'Courier New',monospace;max-height:360px;overflow-y:auto}
 .btn{padding:5px 14px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid;transition:all .15s}
@@ -477,6 +486,7 @@ const FEED_ITEMS=[
 const S = {
   view: 'cockpit',   // cockpit | radar | pm | chip
   chip: null,
+  pmChip: null,      // null = all chips, or chip id for focused PM view
   tabs: [],          // [{id, el}]
   clState: JSON.parse(localStorage.getItem('cl2') || '{}'),
 };
@@ -602,7 +612,12 @@ function showView(v, chipId=null){
 
 function openChip(id){
   if(!S.tabs.find(t=>t.id===id)) S.tabs.push({id});
+  S.pmChip = id;   // pre-select in PM Assistant
   showView('chip', id);
+}
+function openPMForChip(id){
+  S.pmChip = id;
+  showView('pm');
 }
 function closeTab(id, e){
   e && e.stopPropagation();
@@ -746,12 +761,43 @@ function renderRadar(){
 /* ═══════════════════════════════════════════════
    PM ASSISTANT VIEW
 ═══════════════════════════════════════════════ */
+function selectPMChip(id){
+  S.pmChip = id;
+  renderPM();
+}
+
 function renderPM(){
-  // Build action queue
+  const sel = S.pmChip;
+  const chipList = sel ? [CHIPS[sel]] : Object.values(CHIPS);
+
+  // ── Chip selector bar ──
+  const allPill = `<div class="pm-pill${!sel?' on':''}" onclick="selectPMChip(null)">All Chips</div>`;
+  const chipPills = Object.values(CHIPS).map(c=>`
+    <div class="pm-pill${sel===c.id?' on':''}" onclick="selectPMChip('${c.id}')">${c.code}</div>`).join('');
+  const selBar = `<div class="pm-sel-bar">
+    <span class="pm-sel-lbl">Focus:</span>
+    ${allPill}${chipPills}
+  </div>`;
+
+  // ── Focused chip header (when one chip selected) ──
+  let chipHeader = '';
+  if(sel){
+    const c = CHIPS[sel];
+    const barColor = c.color==='g'?'var(--green)':c.color==='a'?'var(--amber)':c.color==='r'?'var(--red)':'var(--blue)';
+    chipHeader = `<div class="pm-chip-header">
+      <span class="cc-badge bg-${c.color}" style="font-size:12px">${c.status}</span>
+      <div>
+        <div class="pm-chip-name">${c.code} / ${c.name}</div>
+        <div class="pm-chip-meta">${c.phase} · SW CM: <b style="color:var(--text)">${c.cm}</b> · Next gate: <b style="color:${barColor}">${c.nextGate} · ${c.nextGateDate}</b></div>
+      </div>
+    </div>`;
+  }
+
+  // ── Action queue (filtered) ──
   const urgent = [], thisWeek = [], fyi = [];
-  Object.values(CHIPS).forEach(c=>{
+  chipList.forEach(c=>{
     if(c.bugs>0) urgent.push({t:`${c.bugs} P1 bug${c.bugs>1?'s':''} need action`,chip:c.code,id:c.id,cat:'urgent'});
-    c.checklist.filter(i=>!i.done).slice(0,1).forEach(i=>{
+    c.checklist.filter(i=>!i.done).slice(0,2).forEach(i=>{
       if(c.atRisk) urgent.push({t:i.t,chip:c.code,owner:i.owner,id:c.id,cat:'urgent'});
       else if(c.progress>30) thisWeek.push({t:i.t,chip:c.code,owner:i.owner,id:c.id,cat:'week'});
       else fyi.push({t:i.t,chip:c.code,owner:i.owner,id:c.id,cat:'fyi'});
@@ -764,14 +810,20 @@ function renderPM(){
       <div class="pm-item ${cls}" onclick="openChip('${i.id}')">
         <div class="pm-item-title">${i.t}</div>
         ${i.owner?`<div class="pm-item-sub">Owner: ${i.owner}</div>`:''}
-        <span class="pm-item-chip bg-${cls==='urgent'?'r':cls==='week'?'a':'b'}">${i.chip}</span>
+        ${!sel?`<span class="pm-item-chip bg-${cls==='urgent'?'r':cls==='week'?'a':'b'}">${i.chip}</span>`:''}
       </div>`).join('');
   }
 
-  // Gate checklist selector
-  const chipOpts = Object.values(CHIPS).map(c=>`<option value="${c.id}">${c.code} / ${c.name}</option>`).join('');
+  // ── Gate checklist ──
+  const chipOpts = Object.values(CHIPS).map(c=>
+    `<option value="${c.id}"${sel===c.id?' selected':''}>${c.code} / ${c.name}</option>`).join('');
 
-  document.getElementById('v-pm').innerHTML = `
+  // ── Draft placeholder ──
+  const draftPlaceholder = sel
+    ? `Click "Generate" to draft today's status for ${CHIPS[sel].code} / ${CHIPS[sel].name}.`
+    : `Click "Generate" to auto-draft your daily status update across all active chip programs.`;
+
+  document.getElementById('v-pm').innerHTML = selBar + chipHeader + `
     <div class="pm-main-grid">
       <!-- Action Queue -->
       <div class="card" style="grid-column:1/-1">
@@ -794,13 +846,13 @@ function renderPM(){
         </div>
         <div class="card-body" id="cl-body"></div>
       </div>
-      <!-- Weekly Status Draft -->
+      <!-- Daily Status Draft -->
       <div class="card">
         <div class="card-hdr"><span class="card-title">📝 Daily Status Update</span>
           <button class="btn btn-green" onclick="genStatusDraft()">⚡ Generate</button>
         </div>
         <div class="card-body">
-          <div class="draft-output" id="draft-out">Click "Generate" to auto-draft your daily status update across all active chip programs.</div>
+          <div class="draft-output" id="draft-out">${draftPlaceholder}</div>
           <div style="display:flex;gap:8px;margin-top:8px">
             <button class="btn btn-green" onclick="copyDraft()">📋 Copy</button>
           </div>
@@ -847,25 +899,57 @@ function toggleCL(chipId, idx){
 
 function genStatusDraft(){
   const d = new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
-  let out = `=== CHIP PROGRAM DAILY STATUS — ${d} ===\n`;
-  out += `\nSUMMARY: ${Object.values(CHIPS).filter(c=>c.atRisk).length} chips at risk · `;
-  out += `${Object.values(CHIPS).reduce((a,c)=>a+c.bugs,0)} active bugs across all programs\n`;
-  out += `─────────────────────────────────────────\n`;
-  GROUPS.forEach(g=>{
-    out += `\n[${g.icon} ${g.label.toUpperCase()}]\n`;
-    Object.values(CHIPS).filter(c=>c.group===g.id).forEach(c=>{
-      out += `\n• ${c.code} / ${c.name} (${c.cm})\n`;
-      out += `  Status: ${c.status} | Progress: ${c.progress}%\n`;
-      out += `  Next Gate: ${c.nextGate} · ${c.nextGateDate}\n`;
-      if(c.risks.filter(r=>r.l!=='l').length){
-        out += `  Risks: ${c.risks.filter(r=>r.l!=='l').map(r=>r.t).join('; ')}\n`;
-      }
-      if(c.bugs>0) out += `  ⚠️ Active bugs: ${c.bugs}\n`;
+  const sel = S.pmChip;
+
+  if(sel){
+    // ── Single chip draft ──
+    const c = CHIPS[sel];
+    const done = S.clState[c.id] || {};
+    const clDone = c.checklist.filter((_,i)=>done[i]).length;
+    const clPct = c.checklist.length ? Math.round(clDone/c.checklist.length*100) : 0;
+    const openItems = c.checklist.filter((_,i)=>!done[i]).map(i=>i.t);
+    let out = `=== ${c.code} / ${c.name} — DAILY STATUS · ${d} ===\n\n`;
+    out += `SW CM: ${c.cm}\n`;
+    out += `Phase: ${c.phase}\n`;
+    out += `Progress: ${c.progress}% | Status: ${c.status}\n`;
+    out += `Next Gate: ${c.nextGate} · ${c.nextGateDate}\n`;
+    if(c.bugs>0) out += `Active Bugs: ${c.bugs} ⚠️\n`;
+    out += `\n── Gate Checklist (${clPct}% complete) ──\n`;
+    c.checklist.forEach((item,i)=>{
+      out += `  [${done[i]?'✓':' '}] ${item.t} (${item.owner})\n`;
     });
-  });
-  out += `\n─────────────────────────────────────────`;
-  out += `\nGenerated by Chip Pilot 2.0 · ${d}`;
-  document.getElementById('draft-out').textContent = out;
+    if(c.risks.length){
+      out += `\n── Risks ──\n`;
+      c.risks.forEach(r=>{ out += `  [${r.l.toUpperCase()}] ${r.t}\n`; });
+    }
+    if(openItems.length){
+      out += `\n── Open Action Items ──\n`;
+      openItems.slice(0,5).forEach(t=>{ out += `  • ${t}\n`; });
+    }
+    out += `\n─────────────────────────────────────────`;
+    out += `\nGenerated by Chip Pilot 2.0 · ${d}`;
+    document.getElementById('draft-out').textContent = out;
+  } else {
+    // ── All chips draft ──
+    let out = `=== CHIP PROGRAM DAILY STATUS — ${d} ===\n`;
+    out += `\nSUMMARY: ${Object.values(CHIPS).filter(c=>c.atRisk).length} chips at risk · `;
+    out += `${Object.values(CHIPS).reduce((a,c)=>a+c.bugs,0)} active bugs across all programs\n`;
+    out += `─────────────────────────────────────────\n`;
+    GROUPS.forEach(g=>{
+      out += `\n[${g.icon} ${g.label.toUpperCase()}]\n`;
+      Object.values(CHIPS).filter(c=>c.group===g.id).forEach(c=>{
+        out += `\n• ${c.code} / ${c.name} (${c.cm})\n`;
+        out += `  Status: ${c.status} | Progress: ${c.progress}%\n`;
+        out += `  Next Gate: ${c.nextGate} · ${c.nextGateDate}\n`;
+        if(c.risks.filter(r=>r.l!=='l').length)
+          out += `  Risks: ${c.risks.filter(r=>r.l!=='l').map(r=>r.t).join('; ')}\n`;
+        if(c.bugs>0) out += `  ⚠️ Active bugs: ${c.bugs}\n`;
+      });
+    });
+    out += `\n─────────────────────────────────────────`;
+    out += `\nGenerated by Chip Pilot 2.0 · ${d}`;
+    document.getElementById('draft-out').textContent = out;
+  }
 }
 
 function copyDraft(){
@@ -912,6 +996,8 @@ function renderChipDetail(id){
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
       <div style="font-size:18px;font-weight:800;color:var(--text)">${c.code} / ${c.name}</div>
       <span class="cc-badge bg-${c.color}" style="font-size:11px">${c.status}</span>
+      <div style="flex:1"></div>
+      <button class="btn btn-green" onclick="openPMForChip('${c.id}')" style="font-size:10px">🤖 PM Assistant</button>
     </div>
     <div style="font-size:11px;color:var(--muted);margin-bottom:12px">${c.phase} · SW CM: <b style="color:var(--text2)">${c.cm}</b></div>
     <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">
