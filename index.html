@@ -273,8 +273,8 @@ const CHIPS = {
     ],
   },
   vera:{ id:'vera', code:'TB500', name:'Vera', group:'cpu', cm:'Sowjanya',
-    progress:93, color:'a', phase:'Post-silicon · PS SBIOS Released 6/2 ✅ · BWAT ~6/15',
-    status:'SBIOS Released ✅ · BWAT 6/15', nextGate:'M-pkg FinalCWAT', nextGateDate:'6/11',
+    progress:93, color:'a', phase:'Post-silicon · PS SBIOS Released 6/2 ✅ · MODS V8.0 RC 6/4 · BWAT ~6/15',
+    status:'SBIOS Released ✅ · MODS V8.0 RC 6/4 · BWAT 6/15', nextGate:'M-pkg FinalCWAT', nextGateDate:'6/11',
     bugs:2, atRisk:true,
     milestones:[
       {n:'POR',s:'done',d:'✓'},{n:'RTL',s:'done',d:'✓'},{n:'Tape-out',s:'done',d:'✓'},
@@ -289,7 +289,7 @@ const CHIPS = {
     ],
     checklist:[
       {t:'PS SBIOS release ~6/2',owner:'Sowjanya',done:true},
-      {t:'MODS release ~6/5',owner:'Sowjanya',done:false},
+      {t:'MODS V8.0 RC cut 6/4; target release 6/11',owner:'Sowjanya',done:false},
       {t:'M-pkg FinalCWAT parts arriving 6/11; SW cutoff 6/3',owner:'Sowjanya',done:false},
       {t:'P-boards BWAT Final WAT trending 6/15',owner:'HW team',done:false},
       {t:'DCPOR QS features (4 remaining) close by 6/5',owner:'SW team',done:false},
@@ -366,8 +366,8 @@ const CHIPS = {
     checklist:[{t:'Arch readouts complete',owner:'Roopa',done:false},{t:'90% POR by 6/30',owner:'Roopa',done:false}],
   },
   gr10x:{ id:'gr10x', code:'GR10x', name:'Rubin', group:'gpu', cm:'Ranjani V · Madhura',
-    progress:95, color:'a', phase:'Post-silicon · QS Done ✅ · PS/PRel In Progress',
-    status:'PS/PRel Active ⚠️', nextGate:'PRel', nextGateDate:"Q3 '26",
+    progress:95, color:'a', phase:'Post-silicon · QS Done ✅ · PS/PRel In Progress · PRel 6/22',
+    status:'PS/PRel Active · PRel 6/22 ⚠️', nextGate:'PRel', nextGateDate:'6/22 ⚠️',
     bugs:8, atRisk:true,
     milestones:[
       {n:'POR',s:'done',d:'✓'},{n:'RTL',s:'done',d:'✓'},{n:'Tape-out',s:'done',d:'✓'},
@@ -376,8 +376,9 @@ const CHIPS = {
       {n:'PRel',s:'wait',d:"Q3 '26"},
     ],
     risks:[
-      {l:'h',t:'PG558 SW QA at 80% — SW blocked by lack of L6 system (escalated 5/25)'},
+      {l:'m',t:'PG558 SW QA — L6 system access obtained 6/1; debugging remaining failure; BWAT 14/18 systems, ETA 6/23'},
       {l:'h',t:'GFW: TOT inforom issues — blocking MR submissions as of 5/28'},
+      {l:'l',t:'GR10x DVS regressions resolved (Bug 6173668) — VBIOS 99.00.18.00.00 + chips_a CL 38085350; RM sanities clean 6/2'},
       {l:'m',t:'FW v3.1 patch — NVLink lane drop · PRel blocked'},
       {l:'m',t:'C2C ENC error window violations (Bug 6203872) — root cause: SBIOS↔VBIOS encryption mismatch; fix validation in progress'},
       {l:'h',t:'Bug 5116766: No appropriate VBIOS/image for GR102 INT/QS qual — SHTOL WW30 blocked (5/29)'},
@@ -1049,14 +1050,4 @@ function closeNavDrawer(){
 
 /* ═══════════════════════════════════════════════
    INIT
-═══════════════════════════════════════════════ */
-function init(){
-  applyTheme();
-  renderBadges();
-  renderNav();
-  showView('cockpit');
-}
-init();
-</script>
-</body>
-</html>
+══�
