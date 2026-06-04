@@ -25,7 +25,7 @@ body.dark{
   --red-bg:rgba(204,68,68,.14);--blue-bg:rgba(78,154,224,.12);
 }
 html,body{height:100%;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;background:var(--bg);color:var(--text)}
-/* ── LAYOUT ── */
+/* -- LAYOUT -- */
 #app{display:flex;flex-direction:column;height:100vh;overflow:hidden}
 #hdr{height:var(--hdr-h);background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 14px;gap:10px;flex-shrink:0;z-index:10}
 #body{display:flex;flex:1;overflow:hidden}
@@ -33,7 +33,7 @@ html,body{height:100%;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px
 #main{flex:1;display:flex;flex-direction:column;overflow:hidden;background:var(--bg)}
 #tabs{height:var(--tab-h);background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 12px;gap:0;flex-shrink:0;overflow-x:auto}
 #views{flex:1;overflow-y:auto;padding:14px}
-/* ── HEADER ── */
+/* -- HEADER -- */
 .logo{font-size:14px;font-weight:800;letter-spacing:.5px;color:var(--text);display:flex;align-items:center;gap:7px}
 .logo-v{font-size:10px;font-weight:700;color:var(--green);background:var(--green-bg);padding:1px 6px;border-radius:10px;letter-spacing:.5px}
 .hdr-spacer{flex:1}
@@ -43,7 +43,7 @@ html,body{height:100%;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px
 .badge-b{background:var(--blue-bg);color:var(--blue);border-color:rgba(26,84,160,.20)}
 .theme-btn{background:none;border:1px solid var(--border);color:var(--muted);padding:3px 9px;border-radius:6px;cursor:pointer;font-size:11px;transition:all .15s}
 .theme-btn:hover{color:var(--text);border-color:var(--muted)}
-/* ── NAV ── */
+/* -- NAV -- */
 .nav-hdr{font-size:9px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);padding:10px 12px 6px}
 .nav-grp{border-top:1px solid var(--sep)}
 .nav-grp-hdr{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;cursor:pointer;font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--text2);background:rgba(0,0,0,.02);border-left:3px solid transparent;transition:all .15s;user-select:none}
@@ -68,18 +68,18 @@ html,body{height:100%;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px
 .nf-s{font-size:9px;color:var(--muted)}
 .nf-r .nf-t{color:var(--red)}
 .nf-g .nf-t{color:var(--green)}
-/* ── TABS ── */
+/* -- TABS -- */
 .tab{padding:0 14px;height:var(--tab-h);display:flex;align-items:center;font-size:11px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;gap:5px;transition:all .12s;user-select:none}
 .tab:hover{color:var(--text2)}
 .tab.on{color:var(--text);border-bottom-color:var(--green)}
 .tab-close{font-size:13px;color:var(--muted);margin-left:4px;line-height:1;border-radius:3px;padding:0 2px;transition:all .12s}
 .tab-close:hover{color:var(--red);background:var(--red-bg)}
-/* ── VIEWS ── */
+/* -- VIEWS -- */
 .view{display:flex;flex-direction:column;gap:14px}
 .view[hidden]{display:none!important}
-/* ── SECTION LABEL ── */
+/* -- SECTION LABEL -- */
 .sec-label{display:flex;align-items:center;gap:7px;font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);padding:4px 0 8px;border-bottom:1px solid var(--border);margin-bottom:10px}
-/* ── CHIP GRID ── */
+/* -- CHIP GRID -- */
 .chips-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
 .cc{background:var(--bg4);border:1px solid var(--border);border-radius:var(--card-r);padding:11px 12px;cursor:pointer;transition:all .15s;border-left:3px solid var(--border)}
 .cc:hover{transform:translateY(-1px);box-shadow:var(--shadow);border-color:var(--muted)}
@@ -94,18 +94,18 @@ html,body{height:100%;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px
 .cc-row{display:flex;justify-content:space-between;font-size:10px;color:var(--text2)}
 .cc-cm{font-size:10px;color:var(--muted);margin-top:4px}
 .cc-cm span{color:var(--text2);font-weight:600}
-/* ── CARDS ── */
+/* -- CARDS -- */
 .card{background:var(--bg4);border:1px solid var(--border);border-radius:var(--card-r);overflow:hidden}
 .card-hdr{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-bottom:1px solid var(--border);background:rgba(0,0,0,.02)}
 .card-title{font-size:11px;font-weight:700;letter-spacing:.3px;color:var(--text)}
 .card-body{padding:12px}
-/* ── TABLE ── */
+/* -- TABLE -- */
 .tbl{width:100%;border-collapse:collapse;font-size:11px}
 .tbl th{padding:5px 8px;text-align:left;font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border)}
 .tbl td{padding:6px 8px;border-bottom:1px solid var(--sep);color:var(--text2)}
 .tbl tr:last-child td{border-bottom:none}
 .tbl tr:hover td{background:rgba(0,0,0,.02)}
-/* ── HEATMAP ── */
+/* -- HEATMAP -- */
 .hm-wrap{overflow-x:auto}
 .hm-tbl{border-collapse:separate;border-spacing:2px;font-size:10px;white-space:nowrap}
 .hm-tbl th{font-size:8px;font-weight:700;text-align:center;color:var(--muted);padding:2px 3px}
@@ -114,7 +114,7 @@ html,body{height:100%;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px
 .hm-l{background:rgba(58,114,0,.18);color:var(--green)}.hm-m{background:rgba(138,94,0,.22);color:var(--amber)}.hm-h{background:rgba(184,32,32,.22);color:var(--red)}
 .hm-legend{display:flex;gap:12px;margin-top:8px;font-size:10px;color:var(--muted);align-items:center}
 .hm-dot{width:10px;height:10px;border-radius:2px;display:inline-block;margin-right:4px;vertical-align:middle}
-/* ── PM ASSISTANT ── */
+/* -- PM ASSISTANT -- */
 .pm-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
 .pm-col-hdr{display:flex;align-items:center;gap:6px;font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--text2);padding:0 0 8px;border-bottom:1px solid var(--border);margin-bottom:10px}
 .pm-item{background:var(--bg4);border:1px solid var(--border);border-radius:6px;padding:9px 10px;margin-bottom:8px;border-left:3px solid var(--border);transition:all .12s}
@@ -124,7 +124,7 @@ html,body{height:100%;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px
 .pm-item-title{font-size:11px;font-weight:600;color:var(--text);margin-bottom:3px}
 .pm-item-sub{font-size:10px;color:var(--muted)}
 .pm-item-chip{font-size:9px;font-weight:700;padding:1px 6px;border-radius:8px;display:inline-block;margin-top:4px}
-/* ── PM CHIP SELECTOR ── */
+/* -- PM CHIP SELECTOR -- */
 .pm-sel-bar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:10px 12px;background:var(--bg4);border:1px solid var(--border);border-radius:var(--card-r);margin-bottom:14px}
 .pm-sel-lbl{font-size:9px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);flex-shrink:0;margin-right:4px}
 .pm-pill{padding:4px 11px;border-radius:12px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--bg3);color:var(--text2);transition:all .12s;white-space:nowrap}
@@ -133,12 +133,12 @@ html,body{height:100%;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px
 .pm-chip-header{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg4);border:1px solid var(--border);border-radius:var(--card-r);margin-bottom:14px}
 .pm-chip-name{font-size:16px;font-weight:800;color:var(--text)}
 .pm-chip-meta{font-size:11px;color:var(--muted)}
-/* ── STATUS DRAFT ── */
+/* -- STATUS DRAFT -- */
 .draft-output{background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:12px;font-size:11px;line-height:1.6;color:var(--text2);white-space:pre-wrap;font-family:'Courier New',monospace;max-height:360px;overflow-y:auto}
 .btn{padding:5px 14px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid;transition:all .15s}
 .btn-green{background:var(--green-bg);color:var(--green);border-color:var(--green)}
 .btn-green:hover{background:var(--green);color:#fff}
-/* ── CHIP DETAIL ── */
+/* -- CHIP DETAIL -- */
 .cv-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .ms-list{display:flex;flex-direction:column;gap:6px}
 .ms-item{display:flex;align-items:center;gap:8px;font-size:11px}
@@ -150,7 +150,7 @@ html,body{height:100%;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px
 .risk-item:last-child{border-bottom:none}
 .ri-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:3px}
 .ri-h{background:var(--red)}.ri-m{background:var(--amber)}.ri-l{background:var(--green)}
-/* ── GATE CHECKLIST ── */
+/* -- GATE CHECKLIST -- */
 .cl-item{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--sep);font-size:11px;cursor:pointer}
 .cl-item:last-child{border-bottom:none}
 .cl-item input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--green)}
@@ -158,10 +158,10 @@ html,body{height:100%;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px
 .cl-owner{font-size:10px;color:var(--muted)}
 .cl-progress{height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin-top:6px}
 .cl-fill{height:100%;background:var(--green);border-radius:3px;transition:width .3s}
-/* ── RESPONSIVE GRIDS (used in JS render fns) ── */
+/* -- RESPONSIVE GRIDS (used in JS render fns) -- */
 .radar-grid{display:flex;flex-direction:column;gap:12px;max-width:860px;margin:0 auto;width:100%}
 .pm-main-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
-/* ── NEEDS ATTENTION BAR ── */
+/* -- NEEDS ATTENTION BAR -- */
 .attn-bar{display:flex;align-items:center;gap:12px;background:var(--bg4);border:1px solid var(--border);border-left:3px solid var(--red);border-radius:var(--card-r);padding:8px 12px;margin-bottom:14px;overflow-x:auto;flex-shrink:0}
 .attn-label{font-size:9px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--red);white-space:nowrap;flex-shrink:0}
 .attn-items{display:flex;gap:7px;flex-wrap:wrap}
@@ -172,23 +172,23 @@ html,body{height:100%;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px
 .attn-chip{font-size:11px;font-weight:700;color:var(--text)}
 .attn-status{font-size:10px;color:var(--muted)}
 .attn-bug{font-size:10px;color:var(--red);font-weight:700}
-/* ── COCKPIT 2-PANE LAYOUT ── */
+/* -- COCKPIT 2-PANE LAYOUT -- */
 .ck-layout{display:flex;gap:14px;align-items:flex-start}
 .ck-chips{flex:1;min-width:0;display:flex;flex-direction:column;gap:14px}
 .ck-panel{width:260px;flex-shrink:0;display:flex;flex-direction:column;gap:10px}
 @media(max-width:1300px){.ck-panel{display:none}}
 @media(max-width:700px){.attn-items{flex-wrap:nowrap;overflow-x:auto}}
-/* ── LARGE SCREEN: wider nav, cap card width ── */
+/* -- LARGE SCREEN: wider nav, cap card width -- */
 @media(min-width:1400px){
   :root{--nav-w:220px}
   .chips-grid{grid-template-columns:repeat(auto-fill,minmax(220px,280px))}
 }
-/* ── HAMBURGER & NAV DRAWER ── */
+/* -- HAMBURGER & NAV DRAWER -- */
 #nav-toggle{display:none;background:none;border:none;font-size:20px;cursor:pointer;color:var(--text);padding:2px 8px;line-height:1;border-radius:5px;transition:background .15s}
 #nav-toggle:hover{background:var(--bg5)}
 #nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:19;backdrop-filter:blur(1px)}
 #nav-overlay.open{display:block}
-/* ── BREAKPOINTS ── */
+/* -- BREAKPOINTS -- */
 @media(max-width:900px){
   #nav{display:none;position:fixed;top:var(--hdr-h);left:0;bottom:0;width:220px;z-index:20;
        box-shadow:4px 0 20px rgba(0,0,0,.22);overflow-y:auto}
@@ -240,9 +240,9 @@ html,body{height:100%;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px
   </div>
 </div>
 <script>
-/* ═══════════════════════════════════════════════
+/* ===============================================
    CHIP DATA
-═══════════════════════════════════════════════ */
+=============================================== */
 const GROUPS = [
   { id:'cpu', icon:'🖥️', label:'CPU' },
   { id:'gpu', icon:'⚡', label:'GPU' },
@@ -481,9 +481,9 @@ const FEED_ITEMS=[
   {t:'DDR5 training fail ×3',sub:'GR10x · PHY team',s:'r',time:'15:55'},
 ];
 
-/* ═══════════════════════════════════════════════
+/* ===============================================
    STATE
-═══════════════════════════════════════════════ */
+=============================================== */
 const S = {
   view: 'cockpit',   // cockpit | radar | pm | chip
   chip: null,
@@ -494,9 +494,9 @@ const S = {
 
 function saveCL(){ localStorage.setItem('cl2', JSON.stringify(S.clState)); }
 
-/* ═══════════════════════════════════════════════
+/* ===============================================
    THEME
-═══════════════════════════════════════════════ */
+=============================================== */
 let dark = localStorage.getItem('theme2') === 'dark';
 function applyTheme(){
   document.body.classList.toggle('dark', dark);
@@ -508,9 +508,9 @@ function toggleTheme(){
   applyTheme();
 }
 
-/* ═══════════════════════════════════════════════
+/* ===============================================
    HEADER BADGES
-═══════════════════════════════════════════════ */
+=============================================== */
 function renderBadges(){
   const at = Object.values(CHIPS).filter(c=>c.atRisk).length;
   const total = Object.keys(CHIPS).length;
@@ -521,9 +521,9 @@ function openRiskChips(){
   Object.values(CHIPS).filter(c=>c.atRisk).forEach(c=>openChip(c.id));
 }
 
-/* ═══════════════════════════════════════════════
+/* ===============================================
    LEFT NAV
-═══════════════════════════════════════════════ */
+=============================================== */
 function renderNav(){
   const nav = document.getElementById('nav');
   let html = `<div class="nav-hdr">Programs</div>`;
@@ -566,9 +566,9 @@ function toggleGrp(id){
   document.getElementById('ng-'+id).classList.toggle('closed');
 }
 
-/* ═══════════════════════════════════════════════
+/* ===============================================
    TAB BAR
-═══════════════════════════════════════════════ */
+=============================================== */
 function renderTabBar(){
   const bar = document.getElementById('tabs');
   bar.innerHTML = `
@@ -587,9 +587,9 @@ function renderTabBar(){
   });
 }
 
-/* ═══════════════════════════════════════════════
+/* ===============================================
    VIEW ROUTING
-═══════════════════════════════════════════════ */
+=============================================== */
 function showView(v, chipId=null){
   S.view = v;
   S.chip = chipId;
@@ -629,9 +629,9 @@ function closeTab(id, e){
   } else renderTabBar();
 }
 
-/* ═══════════════════════════════════════════════
+/* ===============================================
    CHIP COCKPIT VIEW
-═══════════════════════════════════════════════ */
+=============================================== */
 function chipCard(c){
   const clr = c.color;
   const barColor = clr==='g'?'var(--green)':clr==='a'?'var(--amber)':clr==='r'?'var(--red)':clr==='b'?'var(--blue)':'#888';
@@ -654,7 +654,7 @@ function chipCard(c){
 function renderCockpit(){
   const allChips = Object.values(CHIPS);
 
-  // ── Needs Attention bar (top) ──
+  // -- Needs Attention bar (top) --
   const attention = allChips.filter(c=>c.atRisk||c.bugs>0);
   let attnBar = '';
   if(attention.length){
@@ -670,7 +670,7 @@ function renderCockpit(){
     </div>`;
   }
 
-  // ── Chip sections ──
+  // -- Chip sections --
   let sections = '';
   GROUPS.forEach(g=>{
     const chips = allChips.filter(c=>c.group===g.id);
@@ -678,7 +678,7 @@ function renderCockpit(){
       <div class="chips-grid">${chips.map(chipCard).join('')}</div></div>`;
   });
 
-  // ── Right panel: Chip Schedule ──
+  // -- Right panel: Chip Schedule --
   const gateItems = allChips.map(c=>`
     <div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--sep)">
       <div>
@@ -699,9 +699,9 @@ function renderCockpit(){
     `<div class="ck-layout"><div class="ck-chips">${sections}</div>${panel}</div>`;
 }
 
-/* ═══════════════════════════════════════════════
+/* ===============================================
    RADAR & HEATMAP VIEW
-═══════════════════════════════════════════════ */
+=============================================== */
 function renderRadar(){
   const cpRows = CP_ITEMS.map(i=>{
     const sc = i.s==='r'?'var(--red)':i.s==='a'?'var(--amber)':'var(--muted)';
@@ -759,9 +759,9 @@ function renderRadar(){
     </div>`;
 }
 
-/* ═══════════════════════════════════════════════
+/* ===============================================
    PM ASSISTANT VIEW
-═══════════════════════════════════════════════ */
+=============================================== */
 function selectPMChip(id){
   S.pmChip = id;
   renderPM();
@@ -771,7 +771,7 @@ function renderPM(){
   const sel = S.pmChip;
   const chipList = sel ? [CHIPS[sel]] : Object.values(CHIPS);
 
-  // ── Chip selector bar ──
+  // -- Chip selector bar --
   const allPill = `<div class="pm-pill${!sel?' on':''}" onclick="selectPMChip(null)">All Chips</div>`;
   const chipPills = Object.values(CHIPS).map(c=>`
     <div class="pm-pill${sel===c.id?' on':''}" onclick="selectPMChip('${c.id}')">${c.code}</div>`).join('');
@@ -780,7 +780,7 @@ function renderPM(){
     ${allPill}${chipPills}
   </div>`;
 
-  // ── Focused chip header (when one chip selected) ──
+  // -- Focused chip header (when one chip selected) --
   let chipHeader = '';
   if(sel){
     const c = CHIPS[sel];
@@ -794,7 +794,7 @@ function renderPM(){
     </div>`;
   }
 
-  // ── Action queue (filtered) ──
+  // -- Action queue (filtered) --
   const urgent = [], thisWeek = [], fyi = [];
   chipList.forEach(c=>{
     if(c.bugs>0) urgent.push({t:`${c.bugs} P1 bug${c.bugs>1?'s':''} need action`,chip:c.code,id:c.id,cat:'urgent'});
@@ -815,11 +815,11 @@ function renderPM(){
       </div>`).join('');
   }
 
-  // ── Gate checklist ──
+  // -- Gate checklist --
   const chipOpts = Object.values(CHIPS).map(c=>
     `<option value="${c.id}"${sel===c.id?' selected':''}>${c.code} / ${c.name}</option>`).join('');
 
-  // ── Draft placeholder ──
+  // -- Draft placeholder --
   const draftPlaceholder = sel
     ? `Click "Generate" to draft today's status for ${CHIPS[sel].code} / ${CHIPS[sel].name}.`
     : `Click "Generate" to auto-draft your daily status update across all active chip programs.`;
@@ -903,7 +903,7 @@ function genStatusDraft(){
   const sel = S.pmChip;
 
   if(sel){
-    // ── Single chip draft ──
+    // -- Single chip draft --
     const c = CHIPS[sel];
     const done = S.clState[c.id] || {};
     const clDone = c.checklist.filter((_,i)=>done[i]).length;
@@ -915,27 +915,27 @@ function genStatusDraft(){
     out += `Progress: ${c.progress}% | Status: ${c.status}\n`;
     out += `Next Gate: ${c.nextGate} · ${c.nextGateDate}\n`;
     if(c.bugs>0) out += `Active Bugs: ${c.bugs} ⚠️\n`;
-    out += `\n── Gate Checklist (${clPct}% complete) ──\n`;
+    out += `\n-- Gate Checklist (${clPct}% complete) --\n`;
     c.checklist.forEach((item,i)=>{
       out += `  [${done[i]?'✓':' '}] ${item.t} (${item.owner})\n`;
     });
     if(c.risks.length){
-      out += `\n── Risks ──\n`;
+      out += `\n-- Risks --\n`;
       c.risks.forEach(r=>{ out += `  [${r.l.toUpperCase()}] ${r.t}\n`; });
     }
     if(openItems.length){
-      out += `\n── Open Action Items ──\n`;
+      out += `\n-- Open Action Items --\n`;
       openItems.slice(0,5).forEach(t=>{ out += `  • ${t}\n`; });
     }
-    out += `\n─────────────────────────────────────────`;
+    out += `\n-----------------------------------------`;
     out += `\nGenerated by Chip Pilot 2.0 · ${d}`;
     document.getElementById('draft-out').textContent = out;
   } else {
-    // ── All chips draft ──
+    // -- All chips draft --
     let out = `=== CHIP PROGRAM DAILY STATUS — ${d} ===\n`;
     out += `\nSUMMARY: ${Object.values(CHIPS).filter(c=>c.atRisk).length} chips at risk · `;
     out += `${Object.values(CHIPS).reduce((a,c)=>a+c.bugs,0)} active bugs across all programs\n`;
-    out += `─────────────────────────────────────────\n`;
+    out += `-----------------------------------------\n`;
     GROUPS.forEach(g=>{
       out += `\n[${g.icon} ${g.label.toUpperCase()}]\n`;
       Object.values(CHIPS).filter(c=>c.group===g.id).forEach(c=>{
@@ -947,7 +947,7 @@ function genStatusDraft(){
         if(c.bugs>0) out += `  ⚠️ Active bugs: ${c.bugs}\n`;
       });
     });
-    out += `\n─────────────────────────────────────────`;
+    out += `\n-----------------------------------------`;
     out += `\nGenerated by Chip Pilot 2.0 · ${d}`;
     document.getElementById('draft-out').textContent = out;
   }
@@ -962,9 +962,9 @@ function copyDraft(){
   });
 }
 
-/* ═══════════════════════════════════════════════
+/* ===============================================
    CHIP DETAIL VIEW
-═══════════════════════════════════════════════ */
+=============================================== */
 function renderChipDetail(id){
   const c = CHIPS[id];
   if(!c) return;
@@ -1034,9 +1034,9 @@ function toggleCLandRefresh(key, idx, chipId){
   if(S.view==='chip') renderChipDetail(chipId);
 }
 
-/* ═══════════════════════════════════════════════
+/* ===============================================
    NAV DRAWER (mobile)
-═══════════════════════════════════════════════ */
+=============================================== */
 function toggleNav(){
   const nav = document.getElementById('nav');
   const overlay = document.getElementById('nav-overlay');
@@ -1048,6 +1048,16 @@ function closeNavDrawer(){
   document.getElementById('nav-overlay').classList.remove('open');
 }
 
-/* ═══════════════════════════════════════════════
+/* ===============================================
    INIT
-══�
+=============================================== */
+function init(){
+  applyTheme();
+  renderBadges();
+  renderNav();
+  showView('cockpit');
+}
+init();
+</script>
+</body>
+</html>
