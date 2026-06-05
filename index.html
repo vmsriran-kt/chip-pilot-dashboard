@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Chip Pilot 2.0</title>
+<meta name="version" content="2026-06-05-r2"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -158,6 +159,35 @@ html,body{height:100%;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px
 .cl-owner{font-size:10px;color:var(--muted)}
 .cl-progress{height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin-top:6px}
 .cl-fill{height:100%;background:var(--green);border-radius:3px;transition:width .3s}
+/* -- COMMAND CENTER -- */
+.cc-cats{display:flex;gap:2px;margin-bottom:12px;background:var(--bg4);border:1px solid var(--border);border-radius:var(--card-r);padding:3px;overflow-x:auto;flex-shrink:0}
+.cc-cat{padding:6px 16px;border-radius:6px;font-size:11px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .12s;white-space:nowrap;user-select:none}
+.cc-cat:hover{color:var(--text)}
+.cc-cat.on{background:var(--bg);color:var(--text);box-shadow:var(--shadow)}
+.cc-layout{display:flex;gap:14px;align-items:flex-start}
+.cc-main{flex:1;min-width:0}
+.cc-panel{width:240px;flex-shrink:0;display:flex;flex-direction:column;gap:10px}
+@media(max-width:1100px){.cc-panel{display:none}}
+.cc-chip-block{margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--sep)}
+.cc-chip-block:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.cc-chip-hdr{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.cc-chip-code{font-size:12px;font-weight:700;color:var(--text)}
+.cc-chip-gate{font-size:10px;color:var(--muted);flex:1}
+.cc-pct{font-size:11px;font-weight:700}
+.cc-item{display:flex;align-items:flex-start;gap:9px;padding:8px 0;border-bottom:1px solid var(--sep);cursor:pointer;transition:background .1s}
+.cc-item:hover{background:rgba(0,0,0,.02)}
+.cc-item:last-child{border-bottom:none}
+.cc-item input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--green);flex-shrink:0;margin-top:1px}
+.cc-item-body{flex:1;min-width:0}
+.cc-item-text{font-size:11px;color:var(--text2);line-height:1.4}
+.cc-item-text.done{text-decoration:line-through;color:var(--muted)}
+.cc-item-meta{display:flex;align-items:center;gap:6px;margin-top:3px}
+.cc-item-owner{font-size:10px;color:var(--muted)}
+.cc-pri{font-size:9px;font-weight:700;padding:1px 5px;border-radius:4px;color:#fff;letter-spacing:.4px}
+.cc-pri-h{background:var(--red)}.cc-pri-m{background:var(--amber)}.cc-pri-l{background:var(--muted)}
+.cc-empty{font-size:11px;color:var(--muted);padding:14px 0;text-align:center}
+.cc-score-row{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--sep);font-size:11px}
+.cc-score-row:last-child{border-bottom:none}
 /* -- RESPONSIVE GRIDS (used in JS render fns) -- */
 .radar-grid{display:flex;flex-direction:column;gap:12px;max-width:860px;margin:0 auto;width:100%}
 .pm-main-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
@@ -172,6 +202,27 @@ html,body{height:100%;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px
 .attn-chip{font-size:11px;font-weight:700;color:var(--text)}
 .attn-status{font-size:10px;color:var(--muted)}
 .attn-bug{font-size:10px;color:var(--red);font-weight:700}
+/* -- NEW CHIP SETUP FORM -- */
+.nc-form{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.nc-field{display:flex;flex-direction:column;gap:4px}
+.nc-field.full{grid-column:1/-1}
+.nc-label{font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--muted)}
+.nc-input{padding:7px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:12px;width:100%;transition:border-color .15s}
+.nc-input:focus{outline:none;border-color:var(--green)}
+.nc-select{padding:7px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:12px;width:100%}
+/* Page tree preview */
+.pg-tree{display:flex;flex-direction:column;gap:1px;background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:12px;margin-bottom:14px}
+.pg-node{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text2);padding:4px 2px;border-radius:4px;transition:background .1s}
+.pg-node:hover{background:rgba(0,0,0,.03)}
+.pg-node.root{font-weight:800;color:var(--text);font-size:13px;padding-bottom:8px;border-bottom:1px solid var(--border);margin-bottom:4px}
+.pg-l1{padding-left:20px}.pg-l2{padding-left:40px}
+.pg-icon{font-size:11px;flex-shrink:0}
+.pg-status{font-size:9px;font-weight:700;padding:1px 7px;border-radius:10px;margin-left:auto;white-space:nowrap}
+.pg-pending{background:var(--amber-bg);color:var(--amber)}
+.pg-done{background:var(--green-bg);color:var(--green)}
+.pg-err{background:var(--red-bg);color:var(--red)}
+.nc-result{background:var(--green-bg);border:1px solid var(--green);border-radius:7px;padding:12px 14px;font-size:11px;color:var(--green);line-height:1.7}
+.nc-result a{color:var(--green);font-weight:600}
 /* -- COCKPIT 2-PANE LAYOUT -- */
 .ck-layout{display:flex;gap:14px;align-items:flex-start}
 .ck-chips{flex:1;min-width:0;display:flex;flex-direction:column;gap:14px}
@@ -234,6 +285,7 @@ html,body{height:100%;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px
         <div class="view" id="v-cockpit"></div>
         <div class="view" id="v-radar" hidden></div>
         <div class="view" id="v-pm" hidden></div>
+        <div class="view" id="v-cc" hidden></div>
         <div class="view" id="v-chip" hidden></div>
       </div>
     </main>
@@ -251,6 +303,25 @@ const GROUPS = [
 
 const CHIPS = {
   thorz:{ id:'thorz', code:'ThorZ', name:'ThorZ', group:'cpu', cm:'Mayank Kapoor',
+    wikiUrl:'https://nvidia.atlassian.net/wiki/spaces/TCS/pages/2872182184/T268+SW',
+    pageStructure:[
+      {title:'{CHIP} SW',                                   level:0},
+      {title:'{CHIP} Chip SW Development (PLC-L1) Process', level:1},
+      {title:'{CHIP} Display SW',                           level:1},
+      {title:'{CHIP} Display Bringup Prep',                 level:2},
+      {title:'{CHIP} Display FPGA Execution',               level:2},
+      {title:'{CHIP} Display Silicon Execution',            level:2},
+      {title:'{CHIP} Frontdoor Boot Status',                level:1},
+      {title:'FD Boot SYNC Up Meetings Notes',              level:2},
+      {title:'{CHIP} IST SW',                               level:1},
+      {title:'{CHIP} Key IST, Predictive IST SW',           level:2},
+      {title:'{CHIP} Memory SW',                            level:1},
+      {title:'{CHIP} Simulation Sanity Plan',               level:1},
+      {title:'{CHIP} Board Control',                        level:1},
+      {title:'{CHIP} SW Bringup',                           level:1},
+      {title:'{CHIP} Tegra SW Platforms',                   level:2},
+      {title:'{CHIP} Bringup - Sanity Enablement Plan',     level:2},
+    ],
     progress:75, color:'a', phase:'Post-silicon · BNB Declared 5/28 ✅ · MNB Active (73%/65%)',
     status:'MNB 73%/65% Active', nextGate:'MNB/CS', nextGateDate:'6/13',
     bugs:2, atRisk:true,
@@ -273,6 +344,18 @@ const CHIPS = {
     ],
   },
   vera:{ id:'vera', code:'TB500', name:'Vera', group:'cpu', cm:'Sowjanya',
+    wikiUrl:'https://nvidia.atlassian.net/wiki/spaces/TCS/pages/2872182006/TB500+Chip+SW+Development+PLC-L1+Process',
+    pageStructure:[
+      {title:'{CHIP} SW',                                   level:0},
+      {title:'{CHIP} Chip SW Development (PLC-L1) Process', level:1},
+      {title:'{CHIP} PLC Requirements and Process',         level:2},
+      {title:'{CHIP} SW JIRA Projects',                     level:2},
+      {title:'{CHIP} NVPOR Guidance to teams',              level:2},
+      {title:'{CHIP} Jira-XRAY Guidance to teams',          level:2},
+      {title:'{CHIP} Improvements from TH500 AAR',          level:2},
+      {title:'{CHIP} SW Sync Meetings',                     level:1},
+      {title:'{CHIP} Simulation Sanity Test Plan',          level:1},
+    ],
     progress:93, color:'a', phase:'Post-silicon · PS SBIOS Released 6/2 ✅ · MODS V8.0 RC 6/4 · BWAT ~6/15',
     status:'SBIOS Released ✅ · MODS V8.0 RC 6/4 · BWAT 6/15', nextGate:'M-pkg FinalCWAT', nextGateDate:'6/11',
     bugs:2, atRisk:true,
@@ -296,6 +379,7 @@ const CHIPS = {
     ],
   },
   veraUltra:{ id:'veraUltra', code:'TB600', name:'Vera Ultra', group:'cpu', cm:'Hui Fu',
+    wikiUrl:'https://nvidia.atlassian.net/wiki/spaces/TCS',
     progress:40, color:'b', phase:'Pre-silicon · Simulation Req Gathering · IAS/GFD Reviews Active',
     status:'IAS/GFD Reviews 🔵', nextGate:'ES', nextGateDate:"Q4 '26",
     bugs:0, atRisk:false,
@@ -317,6 +401,7 @@ const CHIPS = {
     ],
   },
   n2x:{ id:'n2x', code:'N2x', name:'N2x', group:'cpu', cm:'Vivek Desikan',
+    wikiUrl:'https://nvidia.atlassian.net/wiki/spaces/TCS/pages/3228994147/T354+SW+AAR',
     progress:32, color:'r', phase:'Pre-silicon · FPGA H2.07 Active · FDI 6/30 · H3 Netlist 6/5',
     status:'FPGA Active ⚠️ · FDI 6/30', nextGate:'FDI', nextGateDate:'6/30 ⚠️',
     bugs:2, atRisk:true,
@@ -342,6 +427,7 @@ const CHIPS = {
     ],
   },
   tcx10:{ id:'tcx10', code:'TCX10', name:'TCX10', group:'cpu', cm:'Roopa',
+    wikiUrl:'https://nvidia.atlassian.net/wiki/spaces/TCS',
     progress:8, color:'w', phase:'Pre-silicon · POR Discussions Active · 8 New Features Added',
     status:'POR Active', nextGate:'POR', nextGateDate:'TBD',
     bugs:0, atRisk:false,
@@ -350,6 +436,7 @@ const CHIPS = {
     checklist:[{t:'POR Kickoff',owner:'Roopa',done:false},{t:'Arch Spec with 8 new features',owner:'TBD',done:false}],
   },
   monet:{ id:'monet', code:'T257', name:'Monet', group:'cpu', cm:'Vivek Desikan',
+    wikiUrl:'https://nvidia.atlassian.net/wiki/spaces/TCS',
     progress:10, color:'w', phase:'Pre-silicon · FPGA Validation Active · BMW Design Award Pending',
     status:'FPGA Val Active', nextGate:'RTL', nextGateDate:"Q3 '26",
     bugs:0, atRisk:false,
@@ -358,6 +445,7 @@ const CHIPS = {
     checklist:[{t:'BMW design award decision',owner:'Vivek Desikan',done:false},{t:'FPGA validation ongoing',owner:'DV team',done:false}],
   },
   magni:{ id:'magni', code:'T294', name:'Magni', group:'cpu', cm:'Roopa',
+    wikiUrl:'https://nvidia.atlassian.net/wiki/spaces/TCS',
     progress:8, color:'w', phase:'Pre-silicon · Arch Investigations Active · POR 90% target by 6/30',
     status:'Arch Readouts Active', nextGate:'POR 90%', nextGateDate:'6/30',
     bugs:0, atRisk:false,
@@ -366,8 +454,9 @@ const CHIPS = {
     checklist:[{t:'Arch readouts complete',owner:'Roopa',done:false},{t:'90% POR by 6/30',owner:'Roopa',done:false}],
   },
   gr10x:{ id:'gr10x', code:'GR10x', name:'Rubin', group:'gpu', cm:'Ranjani V · Madhura',
-    progress:95, color:'a', phase:'Post-silicon · QS Done ✅ · PS/PRel In Progress · PRel 6/22',
-    status:'PS/PRel Active · PRel 6/22 ⚠️', nextGate:'PRel', nextGateDate:'6/22 ⚠️',
+    wikiUrl:'https://nvidia.atlassian.net/wiki/spaces/RubinSW',
+    progress:95, color:'a', phase:'Post-silicon · QS Done ✅ · PS/PRel Active · DRAM BW ~17.8 TB/s ✅ · PRel 6/22',
+    status:'PS/PRel Active · DRAM BW Restored ✅ · PRel 6/22 ⚠️', nextGate:'PRel', nextGateDate:'6/22 ⚠️',
     bugs:8, atRisk:true,
     milestones:[
       {n:'POR',s:'done',d:'✓'},{n:'RTL',s:'done',d:'✓'},{n:'Tape-out',s:'done',d:'✓'},
@@ -382,6 +471,8 @@ const CHIPS = {
       {l:'m',t:'FW v3.1 patch — NVLink lane drop · PRel blocked'},
       {l:'m',t:'C2C ENC error window violations (Bug 6203872) — root cause: SBIOS↔VBIOS encryption mismatch; fix validation in progress'},
       {l:'h',t:'Bug 5116766: No appropriate VBIOS/image for GR102 INT/QS qual — SHTOL WW30 blocked (5/29)'},
+      {l:'h',t:'NCCL hang on GR100/PDX (NVBug 6241628/6227189) — NCCL_NVLS_ENABLE=0 WAR; suspected driver/fabric manager init issue'},
+      {l:'m',t:'MNNVL CUDA fabric allocation failure (NVBug 6223505) — fix needed in node MNNVL config or supports_mnnvl() detection'},
     ],
     checklist:[
       {t:'FW v3.1 NVLink lane drop patch merged',owner:'FW team',done:false},
@@ -391,6 +482,7 @@ const CHIPS = {
     ],
   },
   feynman:{ id:'feynman', code:'FN10x', name:'Feynman', group:'gpu', cm:'Madhura',
+    wikiUrl:'https://nvidia.atlassian.net/wiki/spaces/FEYNMANGPUHOST',
     progress:38, color:'a', phase:'Pre-silicon · Multi-dielet RTL · Phys Final NL In Progress',
     status:'RTL Active ⚠️', nextGate:'Final NL RTL', nextGateDate:"Jul '26",
     bugs:4, atRisk:false,
@@ -413,11 +505,22 @@ const CHIPS = {
     ],
   },
   gr15x:{ id:'gr15x', code:'GR15x', name:'Next GPU', group:'gpu', cm:'Vinay Sharma · Anshul Gupta',
-    progress:5, color:'w', phase:'Pre-silicon · POR Phase · Early Planning',
-    status:'Planning 🔵', nextGate:'POR', nextGateDate:"Q4 '26",
+    wikiUrl:'https://nvidia.atlassian.net/wiki/spaces/RubinSW/pages/3529740918/GR15x+SW+Bringup',
+    pageStructure:[
+      {title:'{CHIP} SW Bringup',                                  level:0},
+      {title:'{CHIP} Bringup SW Dashboard',                        level:1},
+      {title:'SW-SCG Milestone Definitions',                        level:1},
+      {title:'{CHIP} Bring up Planning Meeting Notes',             level:1},
+      {title:'{CHIP} SW - SSG Sync',                               level:2},
+      {title:'{CHIP} Branching Proposal',                          level:2},
+      {title:'{CHIP} A01TV and A01P Feature Enablement sheet',     level:1},
+      {title:'{CHIP} Bringup NVBugs Keywords and Templates',       level:1},
+    ],
+    progress:5, color:'b', phase:'Pre-silicon · Presilicon Execution Active · VBIOS TOT Health In Progress',
+    status:'Presilicon Exec 🔵', nextGate:'POR', nextGateDate:"Q4 '26",
     bugs:0, atRisk:false,
     milestones:[{n:'POR',s:'now',d:"Q4 '26"},{n:'RTL',s:'wait',d:'TBD'},{n:'Tape-out',s:'wait',d:'TBD'}],
-    risks:[{l:'l',t:'Early planning — SW CMs assigned, program kicking off'}],
+    risks:[{l:'m',t:'Bug 5730588 — VBIOS TOT health in progress; presilicon execution tracking active (6/5)'},{l:'l',t:'Early planning — SW CMs assigned, program kicking off'}],
     checklist:[
       {t:'POR Kickoff meeting',owner:'Vinay Sharma',done:false},
       {t:'Arch Spec draft',owner:'Anshul Gupta',done:false},
@@ -425,14 +528,32 @@ const CHIPS = {
     ],
   },
   nr10x:{ id:'nr10x', code:'NR10x', name:'NVLink Fusion', group:'fusion', cm:'Ranjani',
-    progress:12, color:'g', phase:'Pre-silicon · POR Phase',
-    status:'On Track', nextGate:'RTL', nextGateDate:"Q4 '26",
+    wikiUrl:'https://nvidia.atlassian.net/wiki/spaces/~ssriranjani/pages/3389539178/NR10+Sirius+SW',
+    pageStructure:[
+      {title:'{CHIP} SW',                                   level:0},
+      {title:'{CHIP} Chip SW Development (PLC-L1) Process', level:1},
+      {title:'{CHIP} PLC Requirements and Process',         level:2},
+      {title:'{CHIP} SW JIRA Projects',                     level:2},
+      {title:'{CHIP} NVPOR Guidance to teams',              level:2},
+      {title:'{CHIP} Jira-XRAY Guidance to teams',          level:2},
+      {title:'{CHIP} Improvements from TH500 AAR',          level:2},
+      {title:'{CHIP} Simulation Sanity Test Plan',          level:1},
+      {title:'{CHIP} SW Sync Meetings',                     level:1},
+      {title:'{CHIP} IAS (Implementation Architecture Spec)',level:1},
+      {title:'{CHIP} - Program Landing Page',               level:1},
+    ],
+    progress:12, color:'g', phase:'Pre-silicon · SystemSim Active · NVLink Fusion XNQ Bringup',
+    status:'SystemSim Active', nextGate:'RTL', nextGateDate:"Q4 '26",
     bugs:0, atRisk:false,
     milestones:[{n:'POR',s:'now',d:'Active'},{n:'RTL',s:'wait',d:"Q4 '26"},{n:'Tape-out',s:'wait',d:'TBD'}],
-    risks:[{l:'l',t:'NVLink protocol spec in review — on track'}],
+    risks:[
+      {l:'l',t:'NVLV-8733 / Bug 6137117 — links reaching logical up after SM fix; LFM MAD-drop secondary fix also provided (6/4)'},
+      {l:'l',t:'NVLink Fusion XNQ 23-step sim recipe active — caguid=0x0 expected behavior in FModel (documented)'},
+    ],
     checklist:[{t:'NVLink protocol spec signoff',owner:'Ranjani',done:false},{t:'RTL planning kickoff',owner:'Ranjani',done:false}],
   },
   beacon:{ id:'beacon', code:'T374', name:'Beacon', group:'fusion', cm:'Roopa',
+    wikiUrl:'https://nvidia.atlassian.net/wiki/spaces/TCS',
     progress:5, color:'w', phase:'Post-silicon · Schedule Alignment Ongoing · QS MODS/Fuse Release Req Under Review',
     status:'Sched Alignment', nextGate:'QS MODS/Fuse', nextGateDate:'TBD',
     bugs:0, atRisk:false,
@@ -485,12 +606,78 @@ const FEED_ITEMS=[
    STATE
 =============================================== */
 const S = {
-  view: 'cockpit',   // cockpit | radar | pm | chip
+  view: 'cockpit',   // cockpit | radar | pm | cc | chip
   chip: null,
-  pmChip: null,      // null = all chips, or chip id for focused PM view
-  tabs: [],          // [{id, el}]
+  pmChip: null,
+  ccChip: null,
+  ccCat: 'daily',    // daily | weekly | gate | setup | newchip
+  newChip: {name:'', codename:'', group:'cpu', cm:'', refId:'nr10x'},
+  ncStatus: null,    // null | 'preview' | 'creating' | 'done' | 'error'
+  ncPages: [],       // [{title, level, url, status}]
+  tabs: [],
   clState: JSON.parse(localStorage.getItem('cl2') || '{}'),
+  ccState: JSON.parse(localStorage.getItem('cc1') || '{}'),
 };
+function saveCC(){ localStorage.setItem('cc1', JSON.stringify(S.ccState)); }
+
+/* ===============================================
+   COMMAND CENTER DATA
+=============================================== */
+const CC_TASKS = {
+  daily: [
+    {t:'Check Slack for overnight blockers or escalations across active chips', pri:'h'},
+    {t:'Triage new P0/P1 bugs — assign owner and set resolution target', pri:'h'},
+    {t:'Verify gate tracker — flag any milestone slippages or date changes', pri:'h'},
+    {t:'Review "Needs Attention" dashboard items and take action', pri:'h'},
+    {t:'Confirm daily standup agenda is ready for at-risk chips', pri:'m'},
+    {t:'Update daily status notes for chips in active bringup/gate phase', pri:'m'},
+    {t:'Check FW/SW build health — verify no new regressions', pri:'m'},
+    {t:'Review any pending WAR approvals or escalation requests', pri:'l'},
+  ],
+  weekly: [
+    {t:'Draft and send weekly status email to leadership and stakeholders', pri:'h'},
+    {t:'Review all at-risk chips with team — agree on mitigation plan', pri:'h'},
+    {t:'Confirm all action items from last week are closed or re-assigned', pri:'h'},
+    {t:'Update risk register for each active chip program', pri:'h'},
+    {t:'Review upcoming gate timelines for the next 4 weeks', pri:'h'},
+    {t:'Check milestone % completion — escalate chips below target', pri:'m'},
+    {t:'Schedule and set agenda for weekly CM sync meeting', pri:'m'},
+    {t:'Review open P2 bugs — determine WAR vs escalation path', pri:'m'},
+    {t:'Sync with HW leads on any cross-team dependencies', pri:'m'},
+    {t:'Update Confluence program status pages', pri:'l'},
+    {t:'Review and close stale action items older than 2 weeks', pri:'l'},
+  ],
+  setup: [
+    {t:'Confirm SW CM assignment — notify team and stakeholders', pri:'h'},
+    {t:'Review and sign off on POR document', pri:'h'},
+    {t:'Create Confluence space for chip program', pri:'h'},
+    {t:'Set up NVBugs project for chip program', pri:'h'},
+    {t:'Create Slack channels: #chip-bringup, #chip-sw-status, #chip-issues', pri:'h'},
+    {t:'Schedule HW-SW alignment kickoff meeting', pri:'h'},
+    {t:'Align on milestone dates with HW PM — lock in gate schedule', pri:'h'},
+    {t:'Add chip to SW Program Dashboard and gate tracker', pri:'m'},
+    {t:'Set up recurring chip status meeting series (weekly or biweekly)', pri:'m'},
+    {t:'Identify and onboard key team leads (FW, SW, PHY, MODS)', pri:'m'},
+    {t:'Set up automated build/test notifications for the chip', pri:'m'},
+    {t:'Review risk template and customize for this chip program', pri:'l'},
+    {t:'Confirm escalation path and on-call rotations', pri:'l'},
+  ],
+};
+
+/* Fallback template (used when reference chip has no pageStructure) */
+const CHIP_PAGE_TMPL = [
+  {title:'{CHIP} SW',                                      level:0},
+  {title:'{CHIP} Chip SW Development (PLC-L1) Process',    level:1},
+  {title:'{CHIP} PLC Requirements and Process',            level:2},
+  {title:'{CHIP} SW JIRA Projects',                        level:2},
+  {title:'{CHIP} NVPOR Guidance to teams',                 level:2},
+  {title:'{CHIP} Jira-XRAY Guidance to teams',             level:2},
+  {title:'{CHIP} Improvements from TH500 AAR',             level:2},
+  {title:'{CHIP} Simulation Sanity Test Plan',             level:1},
+  {title:'{CHIP} SW Sync Meetings',                        level:1},
+  {title:'{CHIP} IAS (Implementation Architecture Spec)',  level:1},
+  {title:'{CHIP} - Program Landing Page',                  level:1},
+];
 
 function saveCL(){ localStorage.setItem('cl2', JSON.stringify(S.clState)); }
 
@@ -575,6 +762,7 @@ function renderTabBar(){
     <div class="tab ${S.view==='cockpit'?'on':''}" id="t-cockpit" onclick="showView('cockpit')">🏠 Chip Cockpit</div>
     <div class="tab ${S.view==='radar'?'on':''}" id="t-radar" onclick="showView('radar')">📡 Radar &amp; Heatmap</div>
     <div class="tab ${S.view==='pm'?'on':''}" id="t-pm" onclick="showView('pm')">🤖 PM Assistant</div>
+    <div class="tab ${S.view==='cc'?'on':''}" id="t-cc" onclick="showView('cc')">✅ CM-Checklist</div>
     <div id="dyn-tabs" style="display:contents"></div>`;
   S.tabs.forEach(t=>{
     const chip = CHIPS[t.id];
@@ -594,13 +782,14 @@ function showView(v, chipId=null){
   S.view = v;
   S.chip = chipId;
   // Hide all
-  ['cockpit','radar','pm','chip'].forEach(id=>{
+  ['cockpit','radar','pm','cc','chip'].forEach(id=>{
     document.getElementById('v-'+id).hidden = (id!==v);
   });
   // Render target
   if(v==='cockpit') renderCockpit();
   else if(v==='radar') renderRadar();
   else if(v==='pm') renderPM();
+  else if(v==='cc') renderCC();
   else if(v==='chip' && chipId) renderChipDetail(chipId);
   renderTabBar();
   // Update nav active state
@@ -648,6 +837,7 @@ function chipCard(c){
       <span style="color:${c.bugs>0?'var(--red)':'var(--muted)'}">${c.bugs} bug${c.bugs!==1?'s':''}</span>
     </div>
     <div class="cc-cm">SW CM: <span>${c.cm}</span></div>
+    ${c.wikiUrl?`<div style="margin-top:5px"><a href="${c.wikiUrl}" target="_blank" onclick="event.stopPropagation()" style="font-size:9px;color:var(--blue);text-decoration:none;font-weight:600">📄 SW Page ↗</a></div>`:''}
   </div>`;
 }
 
@@ -1000,7 +1190,9 @@ function renderChipDetail(id){
       <div style="flex:1"></div>
       <button class="btn btn-green" onclick="openPMForChip('${c.id}')" style="font-size:10px">🤖 PM Assistant</button>
     </div>
-    <div style="font-size:11px;color:var(--muted);margin-bottom:12px">${c.phase} · SW CM: <b style="color:var(--text2)">${c.cm}</b></div>
+    <div style="font-size:11px;color:var(--muted);margin-bottom:12px">${c.phase} · SW CM: <b style="color:var(--text2)">${c.cm}</b>
+      ${c.wikiUrl?` · <a href="${c.wikiUrl}" target="_blank" style="color:var(--blue);font-weight:600;text-decoration:none">📄 SW Confluence Page ↗</a>`:''}
+    </div>
     <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">
       <div style="flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden">
         <div style="height:100%;width:${c.progress}%;background:${barColor};border-radius:3px"></div>
@@ -1035,29 +1227,361 @@ function toggleCLandRefresh(key, idx, chipId){
 }
 
 /* ===============================================
-   NAV DRAWER (mobile)
+   COMMAND CENTER VIEW
 =============================================== */
-function toggleNav(){
-  const nav = document.getElementById('nav');
-  const overlay = document.getElementById('nav-overlay');
-  const open = nav.classList.toggle('open');
-  overlay.classList.toggle('open', open);
+function selectCCChip(id){ S.ccChip=id; renderCC(); }
+function selectCCCat(cat){ S.ccCat=cat; renderCC(); }
+function toggleCC(key, idx){
+  if(!S.ccState[key]) S.ccState[key]={};
+  S.ccState[key][idx] = !S.ccState[key][idx];
+  saveCC();
+  renderCC();
 }
-function closeNavDrawer(){
-  document.getElementById('nav').classList.remove('open');
-  document.getElementById('nav-overlay').classList.remove('open');
+
+function renderCC(){
+  const sel = S.ccChip;
+  const cat = S.ccCat || 'daily';
+
+  // -- Chip selector --
+  const allPill = `<div class="pm-pill${!sel?' on':''}" onclick="selectCCChip(null)">All Chips</div>`;
+  const chipPills = Object.values(CHIPS).map(c=>
+    `<div class="pm-pill${sel===c.id?' on':''}" onclick="selectCCChip('${c.id}')">${c.code}</div>`).join('');
+  const selBar = `<div class="pm-sel-bar">
+    <span class="pm-sel-lbl">Chip:</span>${allPill}${chipPills}
+  </div>`;
+
+  // -- Category tabs --
+  const cats = [
+    {id:'daily',    label:'🌅 Daily'},
+    {id:'weekly',   label:'📅 Weekly'},
+    {id:'gate',     label:'🚦 Gate Prep'},
+    {id:'setup',    label:'🔧 Program Setup'},
+    {id:'newchip',  label:'🆕 New Chip Setup'},
+  ];
+  const catBar = `<div class="cc-cats">${cats.map(c=>
+    `<div class="cc-cat${cat===c.id?' on':''}" onclick="selectCCCat('${c.id}')">${c.label}</div>`).join('')}</div>`;
+
+  // -- Build checklist content --
+  let mainHTML = '';
+
+  if(cat === 'newchip'){
+    const nc = S.newChip;
+    const chip = nc.name.trim().toUpperCase() || 'CHIP';
+    const code = nc.codename.trim() || 'Codename';
+
+    // Use real page structure from reference chip, or fallback template
+    const refChipObj = nc.refId && CHIPS[nc.refId];
+    const activeTmpl = refChipObj?.pageStructure || CHIP_PAGE_TMPL;
+    const refBanner = S.ncStatus && refChipObj
+      ? `<div style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--blue-bg);border:1px solid rgba(26,84,160,.20);border-radius:6px;margin-bottom:8px;font-size:10px;color:var(--blue)">
+          <span>📐 Structure based on:</span>
+          <a href="${refChipObj.wikiUrl}" target="_blank" style="font-weight:700;color:var(--blue);text-decoration:none">${refChipObj.code} / ${refChipObj.name} ↗</a>
+          <span style="margin-left:auto;color:var(--blue);opacity:.7">${activeTmpl.length} pages</span>
+        </div>` : '';
+    const treeHTML = S.ncStatus
+      ? refBanner + `<div class="pg-tree">${activeTmpl.map((p,i)=>{
+          const title = p.title.replace(/{CHIP}/g,chip).replace(/{CODENAME}/g,code);
+          const st = S.ncPages[i]?.status || 'pending';
+          const stLabel = st==='done'?'Created':st==='error'?'Error':st==='queued'?'Queued':'Pending';
+          const stCls = st==='done'?'pg-done':st==='error'?'pg-err':'pg-pending';
+          const link = S.ncPages[i]?.url ? `<a href="${S.ncPages[i].url}" target="_blank" style="color:var(--green);font-size:9px;margin-left:6px">↗</a>` : '';
+          return `<div class="pg-node${p.level===0?' root':''} pg-l${p.level}">
+            <span class="pg-icon">${p.level===0?'📂':'📄'}</span>
+            <span>${title}</span>${link}
+            <span class="pg-status ${stCls}">${stLabel}</span>
+          </div>`;
+        }).join('')}</div>`
+      : '';
+
+    const structureLines = activeTmpl.map((p,i)=>
+      `${i+1}. ${'  '.repeat(p.level)}${p.title.replace(/{CHIP}/g,chip).replace(/{CODENAME}/g,code)}`).join('\n');
+    const refChip = CHIPS[nc.refId];
+    const refDesc = refChip ? `${refChip.code} / ${refChip.name} (${refChip.wikiUrl})` : 'NR10 (Sirius)';
+    const coworkPrompt = `Create Confluence page structure for new chip ${chip} (${code}) in space ~ssriranjani under parent page 1613201410 on nvidia.atlassian.net. SW CM: ${nc.cm||'TBD'}. Use ${refDesc} as the content and structure reference.\n\nPages to create (indentation = parent relationship):\n${structureLines}\n\nSubstitute the reference chip name/codename with ${chip}/${code} throughout. Set SW CM to "${nc.cm||'TBD'}". Leave all [TBD] fields for the team to fill in.`;
+
+    const resultHTML = S.ncStatus==='copied'
+      ? `<div class="nc-result" style="margin-bottom:12px">
+          📋 <strong>Request copied to clipboard!</strong><br>
+          Paste it in your <strong>Cowork chat</strong> and Claude will create all pages in Confluence instantly.<br><br>
+          <details style="margin-top:4px"><summary style="cursor:pointer;font-size:10px;color:var(--green)">View prompt</summary>
+          <pre style="margin-top:8px;font-size:9px;white-space:pre-wrap;color:var(--text2);background:var(--bg3);padding:8px;border-radius:5px">${coworkPrompt}</pre></details>
+        </div>` : '';
+
+    const btnLabel = S.ncStatus==='creating' ? '⏳ Creating…'
+      : S.ncStatus==='preview' ? '🚀 Create in Confluence'
+      : S.ncStatus==='copied' ? '📋 Copied!'
+      : '👁️ Preview';
+    const btnDisabled = S.ncStatus==='creating'||S.ncStatus==='copied' ? 'disabled' : '';
+
+    mainHTML = `
+      <div style="margin-bottom:6px">
+        <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:12px">New Chip Confluence Setup</div>
+        <div class="nc-form">
+          <div class="nc-field">
+            <label class="nc-label">Chip Name / ID</label>
+            <input class="nc-input" id="nc-name" placeholder="e.g. NR20" value="${nc.name}"
+              oninput="S.newChip.name=this.value;S.ncStatus=null;S.ncPages=[]">
+          </div>
+          <div class="nc-field">
+            <label class="nc-label">Codename</label>
+            <input class="nc-input" id="nc-code" placeholder="e.g. Orion" value="${nc.codename}"
+              oninput="S.newChip.codename=this.value;S.ncStatus=null;S.ncPages=[]">
+          </div>
+          <div class="nc-field">
+            <label class="nc-label">Group</label>
+            <select class="nc-select" onchange="S.newChip.group=this.value">
+              <option value="cpu"${nc.group==='cpu'?' selected':''}>CPU</option>
+              <option value="gpu"${nc.group==='gpu'?' selected':''}>GPU</option>
+              <option value="fusion"${nc.group==='fusion'?' selected':''}>Fusion</option>
+            </select>
+          </div>
+          <div class="nc-field">
+            <label class="nc-label">SW CM</label>
+            <input class="nc-input" id="nc-cm" placeholder="e.g. Ranjani V" value="${nc.cm}"
+              oninput="S.newChip.cm=this.value;S.ncStatus=null;S.ncPages=[]">
+          </div>
+          <div class="nc-field full">
+            <label class="nc-label">Reference Chip (copies page structure from this chip's SW space)</label>
+            <select class="nc-select" onchange="S.newChip.refId=this.value;S.ncStatus=null;S.ncPages=[];renderCC()">
+              <option value="">-- Select reference chip --</option>
+              ${Object.values(CHIPS).filter(c=>c.wikiUrl).map(c=>
+                `<option value="${c.id}"${nc.refId===c.id?' selected':''}>${c.code} / ${c.name}</option>`
+              ).join('')}
+            </select>
+            ${(()=>{
+              const ref = nc.refId && CHIPS[nc.refId];
+              return ref && ref.wikiUrl
+                ? `<div style="margin-top:6px;padding:8px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:space-between">
+                    <span style="font-size:10px;color:var(--muted)">Reference SW page:</span>
+                    <a href="${ref.wikiUrl}" target="_blank" style="font-size:10px;font-weight:600;color:var(--blue);text-decoration:none">${ref.code} / ${ref.name} ↗</a>
+                  </div>`
+                : `<div style="margin-top:6px;font-size:10px;color:var(--muted);padding:4px 2px">Select a chip to see its SW Confluence page</div>`;
+            })()}
+          </div>
+        </div>
+        ${treeHTML}
+        ${resultHTML}
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-green" ${btnDisabled}
+            onclick="${S.ncStatus==='preview'?'createChipPages()':'previewChipSetup()'}"
+            style="min-width:180px">${btnLabel}</button>
+          ${S.ncStatus==='preview'?`<button class="btn" style="border-color:var(--border);color:var(--muted)" onclick="S.ncStatus=null;S.ncPages=[];renderCC()">Reset</button>`:''}
+        </div>
+      </div>`;
+
+  } else if(cat === 'gate'){
+    // Per-chip gate checklists
+    const chips = sel ? [CHIPS[sel]] : Object.values(CHIPS);
+    mainHTML = chips.map(c=>{
+      const key = 'gate_'+c.id;
+      const done = S.ccState[key] || {};
+      const total = c.checklist.length;
+      const completed = c.checklist.filter((_,i)=>!!done[i]).length;
+      const pct = total ? Math.round(completed/total*100) : 0;
+      const pctColor = pct===100?'var(--green)':pct>=50?'var(--amber)':'var(--red)';
+      const items = c.checklist.map((item,i)=>`
+        <div class="cc-item" onclick="toggleCC('${key}',${i})">
+          <input type="checkbox" ${done[i]?'checked':''} onclick="event.stopPropagation()" onchange="toggleCC('${key}',${i})">
+          <div class="cc-item-body">
+            <div class="cc-item-text${done[i]?' done':''}">${item.t}</div>
+            <div class="cc-item-meta"><span class="cc-item-owner">${item.owner}</span></div>
+          </div>
+        </div>`).join('');
+      return `<div class="cc-chip-block">
+        <div class="cc-chip-hdr">
+          <span class="cc-chip-code">${c.code} / ${c.name}</span>
+          <span class="cc-chip-gate">Gate: ${c.nextGate} · ${c.nextGateDate}</span>
+          <span class="cc-pct" style="color:${pctColor}">${pct}%</span>
+        </div>
+        <div class="cl-progress" style="margin-bottom:8px"><div class="cl-fill" style="width:${pct}%"></div></div>
+        ${items||'<div class="cc-empty">No checklist items defined</div>'}
+      </div>`;
+    }).join('');
+
+  } else {
+    // Global task lists (daily / weekly / setup)
+    const tasks = CC_TASKS[cat] || [];
+    const key = cat;
+    const done = S.ccState[key] || {};
+    const completed = tasks.filter((_,i)=>!!done[i]).length;
+    const pct = tasks.length ? Math.round(completed/tasks.length*100) : 0;
+    const pctColor = pct===100?'var(--green)':pct>=50?'var(--amber)':'var(--text)';
+    const items = tasks.map((task,i)=>`
+      <div class="cc-item" onclick="toggleCC('${key}',${i})">
+        <input type="checkbox" ${done[i]?'checked':''} onclick="event.stopPropagation()" onchange="toggleCC('${key}',${i})">
+        <div class="cc-item-body">
+          <div class="cc-item-text${done[i]?' done':''}">${task.t}</div>
+        </div>
+        <span class="cc-pri cc-pri-${task.pri}">${task.pri.toUpperCase()}</span>
+      </div>`).join('');
+    mainHTML = `<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+        <span style="font-size:11px;color:var(--muted)">${completed} of ${tasks.length} complete</span>
+        <span style="font-size:13px;font-weight:800;color:${pctColor}">${pct}%</span>
+      </div>
+      <div class="cl-progress" style="margin-bottom:14px"><div class="cl-fill" style="width:${pct}%"></div></div>
+      ${items}`;
+  }
+
+  // -- Right panel: scoreboard --
+  const gateRows = Object.values(CHIPS).map(c=>{
+    const key = 'gate_'+c.id;
+    const done = S.ccState[key] || {};
+    const pct = c.checklist.length ? Math.round(c.checklist.filter((_,i)=>!!done[i]).length/c.checklist.length*100) : 0;
+    const col = pct===100?'var(--green)':pct>=50?'var(--amber)':'var(--muted)';
+    return `<div class="cc-score-row">
+      <span style="font-weight:600;font-size:11px;color:var(--text)">${c.code}</span>
+      <div style="flex:1;height:4px;background:var(--border);border-radius:2px;margin:0 10px;overflow:hidden">
+        <div style="height:100%;width:${pct}%;background:${col};border-radius:2px"></div>
+      </div>
+      <span style="font-size:11px;font-weight:700;color:${col};min-width:28px;text-align:right">${pct}%</span>
+    </div>`;
+  }).join('');
+
+  const cadenceRows = ['daily','weekly','setup'].map(k=>{
+    const tasks = CC_TASKS[k]||[];
+    const done = S.ccState[k]||{};
+    const pct = tasks.length ? Math.round(tasks.filter((_,i)=>!!done[i]).length/tasks.length*100) : 0;
+    const labels = {daily:'Daily',weekly:'Weekly',setup:'Program Setup'};
+    const col = pct===100?'var(--green)':pct>=50?'var(--amber)':'var(--muted)';
+    return `<div class="cc-score-row" style="cursor:pointer" onclick="selectCCCat('${k}')">
+      <span style="font-size:11px;color:var(--text2)">${labels[k]}</span>
+      <span style="font-size:11px;font-weight:700;color:${col}">${pct}%</span>
+    </div>`;
+  }).join('');
+
+  const panel = `<div class="cc-panel">
+    <div class="card">
+      <div class="card-hdr"><span class="card-title">📊 Completion</span></div>
+      <div class="card-body" style="padding-top:6px">
+        <div style="font-size:9px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin-bottom:6px">CM Cadence</div>
+        ${cadenceRows}
+        <div style="font-size:9px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin:12px 0 6px">Gate Prep</div>
+        ${gateRows}
+      </div>
+    </div>
+  </div>`;
+
+  document.getElementById('v-cc').innerHTML = selBar + `
+    <div class="cc-layout">
+      <div class="cc-main">${catBar}<div class="card"><div class="card-body">${mainHTML}</div></div></div>
+      ${panel}
+    </div>`;
 }
 
 /* ===============================================
-   INIT
+   NEW CHIP SETUP
 =============================================== */
-function init(){
-  applyTheme();
-  renderBadges();
-  renderNav();
-  showView('cockpit');
+function previewChipSetup(){
+  const nc = S.newChip;
+  if(!nc.name.trim()){ alert('Please enter a chip name.'); return; }
+  if(!nc.codename.trim()){ alert('Please enter a codename.'); return; }
+  if(!nc.refId || !CHIPS[nc.refId]){ alert('Please select a reference chip.'); return; }
+  const tmpl = CHIPS[nc.refId]?.pageStructure || CHIP_PAGE_TMPL;
+  S.ncStatus = 'preview';
+  S.ncPages = tmpl.map(p=>({title:p.title, level:p.level, status:'pending', url:null}));
+  renderCC();
 }
-init();
-</script>
-</body>
-</html>
+
+async function createChipPages(){
+  const nc = S.newChip;
+  const chip = nc.name.trim().toUpperCase();
+  const code = nc.codename.trim();
+  S.ncStatus = 'creating';
+  renderCC();
+
+  // Confluence config
+  const SPACE_ID   = '~ssriranjani';
+  const PARENT_ID  = '1613201410'; // Ranjani V's Home
+  const BASE_URL   = 'https://nvidia.atlassian.net/wiki';
+
+  // Build page list with parent tracking
+  const pages = CHIP_PAGE_TMPL.map(p=>({
+    ...p,
+    title: p.title.replace(/{CHIP}/g,chip).replace(/{CODENAME}/g,code),
+    status:'pending', url:null, id:null
+  }));
+
+  // Root page body (based on NR10 template)
+  function rootBody(chip, code, cm){
+    return `<h2>Chip Soul</h2>
+<p>${chip} (${code}) is a next-generation chip program. SW CM: <strong>${cm||'TBD'}</strong>. Currently in Pre-Silicon phase.</p>
+<h2>Terminology</h2>
+<table><thead><tr><th>Name</th><th>Description</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td>${chip}</td><td>Chip program identifier</td><td>Chip ID</td></tr>
+<tr><td>${code}</td><td>Codename for ${chip}</td><td>Codename</td></tr>
+</tbody></table>
+<h2>${chip} POR</h2>
+<ul>
+<li><strong>HW POR:</strong> [TBD]</li>
+<li><strong>ChipPOR:</strong> [TBD]</li>
+<li><strong>SW POR Tracker:</strong> [TBD]</li>
+</ul>
+<h2>Key Links</h2>
+<table><thead><tr><th>Resource</th><th>Link</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td>HW POR</td><td>[TBD]</td><td></td></tr>
+<tr><td>Slack</td><td>#chips-${code.toLowerCase()}</td><td>Main SW channel</td></tr>
+</tbody></table>
+<h2>${chip} SW Leads</h2>
+<table><thead><tr><th>Role</th><th>Name</th></tr></thead>
+<tbody>
+<tr><td>SW Chip Management</td><td>${cm||'[TBD]'}</td></tr>
+<tr><td>Driver SW</td><td>[TBD]</td></tr>
+<tr><td>FW</td><td>[TBD]</td></tr>
+<tr><td>MODS</td><td>[TBD]</td></tr>
+</tbody></table>`;
+  }
+
+  function subBody(title){ return `<p>${title}</p><p>[Content to be filled by SW leads — see NR10 for reference structure]</p>`; }
+
+  // IDs for parent tracking by level
+  let l0id=null, l1id=null;
+
+  for(let i=0; i<pages.length; i++){
+    const p = pages[i];
+    const parentId = p.level===0 ? PARENT_ID : p.level===1 ? l0id : l1id;
+    const body = p.level===0 ? rootBody(chip,code,nc.cm) : subBody(p.title);
+
+    try {
+      const payload = {
+        spaceId: SPACE_ID,
+        parentId,
+        title: p.title,
+        body,
+        contentFormat: 'html',
+        status: 'current'
+      };
+      // Call Claude via postMessage to execute the Confluence API
+      // Since we're in a static page, we queue this for Cowork execution
+      // For now, simulate and store the spec
+      pages[i].status = 'queued';
+      if(p.level===0) l0id = 'queued_'+i;
+      else if(p.level===1) l1id = 'queued_'+i;
+    } catch(e){
+      pages[i].status = 'error';
+    }
+  }
+
+  // Build the Cowork prompt and copy to clipboard
+  const chip_uc = chip;
+  const structureLines = pages.map((p,i)=>`${i+1}. ${'  '.repeat(p.level)}${p.title}`).join('\n');
+  const prompt = `Create Confluence page structure for new chip ${chip_uc} (${code}) in space ~ssriranjani under parent page 1613201410 ("Ranjani V's Home") on nvidia.atlassian.net. SW CM: ${nc.cm||'TBD'}. Use NR10 (Sirius) page ID 3389539178 as content reference.
+
+Pages to create in this order (indentation = parent relationship):
+${structureLines}
+
+Create each page with content based on the NR10 template. Substitute all occurrences of "NR10"/"Sirius" with "${chip_uc}"/"${code}". Set SW CM to "${nc.cm||'TBD'}". Leave all [TBD] links as-is for the team to fill in.`;
+
+  navigator.clipboard.writeText(prompt).catch(()=>{
+    const ta=document.createElement('textarea');
+    ta.value=prompt; document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+  });
+
+  S.ncPages = pages.map(p=>({...p, status:'queued'}));
+  S.ncStatus = 'copied';
+  renderCC();
+}
+
+/* =====================
