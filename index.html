@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Chip Pilot 2.0</title>
-<meta name="version" content="2026-06-06"/>
+<meta name="version" content="2026-06-07"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -483,9 +483,9 @@ const CHIPS = {
   },
   feynman:{ id:'feynman', code:'FN10x', name:'Feynman', group:'gpu', cm:'Madhura',
     wikiUrl:'https://nvidia.atlassian.net/wiki/spaces/FEYNMANGPUHOST',
-    progress:38, color:'a', phase:'Pre-silicon · Multi-dielet RTL · Phys Final NL In Progress',
-    status:'RTL Active ⚠️', nextGate:'Final NL RTL', nextGateDate:"Jul '26",
-    bugs:4, atRisk:false,
+    progress:38, color:'a', phase:'Pre-silicon · Multi-dielet RTL · Kernel Ready 38% (target 96%) · Test Ready 17% · 43 open issues',
+    status:'RTL Active ⚠️ · Kernel 38%', nextGate:'Final NL RTL', nextGateDate:"Jul '26",
+    bugs:4, atRisk:true,
     milestones:[
       {n:'Trial NL RTL',s:'done',d:"Aug '25 ✓"},{n:'1st NL RTL',s:'done',d:"Jan '26 ✓"},
       {n:'Phys Final NL',s:'now',d:"Apr '26 🔵"},{n:'Final NL RTL',s:'wait',d:"Jul '26"},
@@ -493,7 +493,9 @@ const CHIPS = {
     ],
     risks:[
       {l:'h',t:'PRI_HUB delays (>1 month) blocking Phase 23/24'},
-      {l:'h',t:'Phase 21 IODS SECHUB blocked until May 15'},
+      {l:'h',t:'43 open issues (37 >7 days) — Kernel Ready 38% vs 96% target; Test Ready 17% vs 96% target'},
+      {l:'h',t:'Memory system ordering issues — FB→L2 out-of-order extended DPCTMA barrier (Bugs 6197993, 6193509, 5995557)'},
+      {l:'h',t:'XBAR response-path out-of-order (Bug 6058384); DPC SP skew after MMU (Bug 6084959)'},
       {l:'m',t:'Multi-dielet first — cross-dielet SW integration complexity'},
     ],
     checklist:[
@@ -516,15 +518,21 @@ const CHIPS = {
       {title:'{CHIP} A01TV and A01P Feature Enablement sheet',     level:1},
       {title:'{CHIP} Bringup NVBugs Keywords and Templates',       level:1},
     ],
-    progress:5, color:'b', phase:'Pre-silicon · Presilicon Execution Active · VBIOS TOT Health In Progress',
-    status:'Presilicon Exec 🔵', nextGate:'POR', nextGateDate:"Q4 '26",
+    progress:20, color:'g', phase:'Post-silicon · Tapeout Complete ✅ 6/2 · Power On Prep Active · Target 9/6',
+    status:'Tapeout ✅ · Power On Prep 9/6', nextGate:'Power On', nextGateDate:'9/6',
     bugs:0, atRisk:false,
-    milestones:[{n:'POR',s:'now',d:"Q4 '26"},{n:'RTL',s:'wait',d:'TBD'},{n:'Tape-out',s:'wait',d:'TBD'}],
-    risks:[{l:'m',t:'Bug 5730588 — VBIOS TOT health in progress; presilicon execution tracking active (6/5)'},{l:'l',t:'Early planning — SW CMs assigned, program kicking off'}],
+    milestones:[
+      {n:'POR',s:'done',d:'✓'},{n:'RTL',s:'done',d:'✓'},{n:'Tape-out',s:'done',d:'✓ 6/2'},
+      {n:'Power On',s:'now',d:'Target 9/6'},{n:'ES',s:'wait',d:'TBD'},{n:'PRel',s:'wait',d:'TBD'},
+    ],
+    risks:[
+      {l:'m',t:'Transitioning to Power On — early post-silicon phase, power-on risks emerging (target 9/6/2026)'},
+      {l:'l',t:'Bug 5730588 — VBIOS TOT health in progress; presilicon execution complete'},
+    ],
     checklist:[
-      {t:'POR Kickoff meeting',owner:'Vinay Sharma',done:false},
-      {t:'Arch Spec draft',owner:'Anshul Gupta',done:false},
-      {t:'Milestone schedule defined',owner:'Vinay Sharma',done:false},
+      {t:'Silicon tapeout complete (6/2/2026)',owner:'Vinay Sharma',done:true},
+      {t:'Power On preparation kickoff',owner:'Vinay Sharma',done:false},
+      {t:'Milestone schedule defined for post-silicon',owner:'Anshul Gupta',done:false},
     ],
   },
   nr10x:{ id:'nr10x', code:'NR10x', name:'NVLink Fusion', group:'fusion', cm:'Ranjani',
@@ -1569,19 +1577,4 @@ async function createChipPages(){
   const prompt = `Create Confluence page structure for new chip ${chip_uc} (${code}) in space ~ssriranjani under parent page 1613201410 ("Ranjani V's Home") on nvidia.atlassian.net. SW CM: ${nc.cm||'TBD'}. Use NR10 (Sirius) page ID 3389539178 as content reference.
 
 Pages to create in this order (indentation = parent relationship):
-${structureLines}
-
-Create each page with content based on the NR10 template. Substitute all occurrences of "NR10"/"Sirius" with "${chip_uc}"/"${code}". Set SW CM to "${nc.cm||'TBD'}". Leave all [TBD] links as-is for the team to fill in.`;
-
-  navigator.clipboard.writeText(prompt).catch(()=>{
-    const ta=document.createElement('textarea');
-    ta.value=prompt; document.body.appendChild(ta); ta.select();
-    document.execCommand('copy'); document.body.removeChild(ta);
-  });
-
-  S.ncPages = pages.map(p=>({...p, status:'queued'}));
-  S.ncStatus = 'copied';
-  renderCC();
-}
-
-/
+${structureL
