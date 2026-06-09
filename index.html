@@ -1588,4 +1588,9 @@ Create each page with content based on the NR10 template. Substitute all occurre
   navigator.clipboard.writeText(prompt).catch(()=>{
     const ta=document.createElement('textarea');
     ta.value=prompt; document.body.appendChild(ta); ta.select();
-    document.execCommand('copy'); document.body.removeChi
+    document.execCommand('copy'); document.body.removeChild(ta);
+  });
+  S.ncStatus = 'copied';
+  renderCC();
+}
+</script></body></html>
