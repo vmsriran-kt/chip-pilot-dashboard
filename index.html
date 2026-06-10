@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Chip Pilot 2.0</title>
-<meta name="version" content="2026-06-09"/>
+<meta name="version" content="2026-06-10"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -357,8 +357,8 @@ const CHIPS = {
       {title:'{CHIP} SW Sync Meetings',                     level:1},
       {title:'{CHIP} Simulation Sanity Test Plan',          level:1},
     ],
-    progress:93, color:'a', phase:'Post-silicon · PS SBIOS Released 6/2 ✅ · MODS V8.0 RC 6/4 · BWAT ~6/15',
-    status:'SBIOS Released ✅ · MODS V8.0 RC 6/4 · BWAT 6/15', nextGate:'M-pkg FinalCWAT', nextGateDate:'6/11',
+    progress:93, color:'a', phase:'Post-silicon · M-pkg QS Qual Done ✅ · P-pkg PS WAT Ph1 75% · A01Z PRel → 7/31 ⚠️',
+    status:'M-pkg QS Done ✅ · P-pkg WAT 75% · A01Z PRel 7/31', nextGate:'M-pkg FinalCWAT', nextGateDate:'6/11',
     bugs:2, atRisk:true,
     milestones:[
       {n:'POR',s:'done',d:'✓'},{n:'RTL',s:'done',d:'✓'},{n:'Tape-out',s:'done',d:'✓'},
@@ -371,6 +371,7 @@ const CHIPS = {
       {l:'m',t:'MSEQ L2 resets on NVL72 CPU yield issue — CBB MMIO intermittent failures; debug ongoing (Bug 6163858)'},
       {l:'m',t:'9600MT/s 2R module shortage due to NVL72 allocation — recovery expected end of June'},
       {l:'h',t:'M-pkg SK memory decision: do not build with SK memory — Hynix 2R/96GB SOCAMM failing at 4800 MHz (Bug 6217453, Venky Top N 6/7)'},
+      {l:'m',t:'A01Z M-pkg: Prod lots wider bin (-2.5σ to +2σ); PS FGI/PREL moved to 7/31 to intercept prod lots (Venky Top N 6/7)'},
     ],
     checklist:[
       {t:'PS SBIOS release ~6/2',owner:'Sowjanya',done:true},
@@ -457,8 +458,8 @@ const CHIPS = {
   },
   gr10x:{ id:'gr10x', code:'GR10x', name:'Rubin', group:'gpu', cm:'Ranjani V · Madhura',
     wikiUrl:'https://nvidia.atlassian.net/wiki/spaces/RubinSW/overview?homepageId=2598141954',
-    progress:95, color:'a', phase:'Post-silicon · QS Done ✅ · PS/PRel Active · DD Chips Delivered 6/5-6/6 ✅ · DRAM BW ~17.8 TB/s ✅ · PRel 6/22',
-    status:'PS/PRel Active · DD Chips ✅ 6/5-6/6 · PRel 6/22 ⚠️', nextGate:'PRel', nextGateDate:'6/22 ⚠️',
+    progress:95, color:'a', phase:'Post-silicon · QS Done ✅ · PS/PRel Active · VBIOS 99.00.1A.00.00 Released 6/8 ✅ · PRel 6/22',
+    status:'PS/PRel Active · VBIOS Released 6/8 ✅ · PRel 6/22 ⚠️', nextGate:'PRel', nextGateDate:'6/22 ⚠️',
     bugs:8, atRisk:true,
     milestones:[
       {n:'POR',s:'done',d:'✓'},{n:'RTL',s:'done',d:'✓'},{n:'Tape-out',s:'done',d:'✓'},
@@ -477,6 +478,8 @@ const CHIPS = {
       {l:'h',t:'NCCL hang on GR100/PDX (NVBug 6241628/6227189) — NCCL_NVLS_ENABLE=0 WAR; suspected driver/fabric manager init issue'},
       {l:'m',t:'MNNVL CUDA fabric allocation failure (NVBug 6223505) — fix needed in node MNNVL config or supports_mnnvl() detection'},
       {l:'h',t:'Bug 6243309 SWDL_gr10x_BLOCKING — vr200nvl_hecate HPC-X libcudnn.so.9 not found; Sev 2; ARB → Piotr Bialecki & Eddie Yan (6/8)'},
+      {l:'h',t:'NVBug 6242795 SWDL_gr10x_BLOCKING — Triton PTX targeting sm_103f fails ptxas on GR100; fix committed (e1a8777 on update_for_26.06_rubin), needs CI verification (6/10)'},
+      {l:'m',t:'NVBug 6262856 SWDL_gr10x_BLOCKING — cuDNN 9.30.0.8 downgrade breaks sm_107 attention; gated by cuDNN MR !3477; monitor cuDNN team (6/10)'},
     ],
     checklist:[
       {t:'FW v3.1 NVLink lane drop patch merged',owner:'FW team',done:false},
@@ -554,15 +557,23 @@ const CHIPS = {
       {title:'{CHIP} IAS (Implementation Architecture Spec)',level:1},
       {title:'{CHIP} - Program Landing Page',               level:1},
     ],
-    progress:12, color:'g', phase:'Pre-silicon · SystemSim Active · NVLink Fusion XNQ Bringup',
-    status:'SystemSim Active', nextGate:'RTL', nextGateDate:"Q4 '26",
-    bugs:0, atRisk:false,
-    milestones:[{n:'POR',s:'now',d:'Active'},{n:'RTL',s:'wait',d:"Q4 '26"},{n:'Tape-out',s:'wait',d:'TBD'}],
+    progress:15, color:'a', phase:'Pre-silicon · XNQ SystemSim 2.0.0 Available ✅ · FNL SW Feature-Complete At Risk 6/29 · QM4 TREX Long Pole',
+    status:'FNL SW At Risk ⚠️ · XNQ 2.0.0 Available', nextGate:'FNL RTL Snap', nextGateDate:'6/29 ⚠️',
+    bugs:0, atRisk:true,
+    milestones:[{n:'POR',s:'now',d:'Active'},{n:'FNL RTL',s:'wait',d:'6/29 ⚠️'},{n:'RTL',s:'wait',d:"Q4 '26"},{n:'Tape-out',s:'wait',d:'TBD'}],
     risks:[
-      {l:'l',t:'NVLV-8733 / Bug 6137117 — links reaching logical up after SM fix; LFM MAD-drop secondary fix also provided (6/4)'},
-      {l:'l',t:'NVLink Fusion XNQ 23-step sim recipe active — caguid=0x0 expected behavior in FModel (documented)'},
+      {l:'h',t:'QM4 TREX may slip to early August — past FNL RTL snap (Jun 29); QM4↔NR10 emulation link bring-up blocking FM testing'},
+      {l:'h',t:'NR10 + QM4 emulation link bring-up in progress — MSE/NetIR up in loopback only; P2P mode not working, escalated for support'},
+      {l:'m',t:'NetIR release (Jun 24) on critical path for emulator readiness; FM PRD/POR dates slipped to 6/30 and 7/30'},
+      {l:'m',t:'Simulation feature gaps — FW features for boot, resets, UCIe link, interrupts not in sim; co-emulation scope undefined'},
+      {l:'l',t:'SystemSim NR10 CAGUID incorrect — init-vector fix in progress, needed ahead of QM4-ready release for NVOS testing'},
     ],
-    checklist:[{t:'NVLink protocol spec signoff',owner:'Ranjani',done:false},{t:'RTL planning kickoff',owner:'Ranjani',done:false}],
+    checklist:[
+      {t:'NVLink protocol spec signoff',owner:'Ranjani',done:false},
+      {t:'QM4 TREX link bring-up unblock',owner:'Ranjani',done:false},
+      {t:'NetIR release (Jun 24)',owner:'NR10 team',done:false},
+      {t:'FNL RTL snap (Jun 29)',owner:'Ranjani',done:false},
+    ],
   },
   beacon:{ id:'beacon', code:'T374', name:'Beacon', group:'fusion', cm:'Roopa',
     wikiUrl:'https://nvidia.atlassian.net/wiki/spaces/TCS',
@@ -1567,30 +1578,4 @@ async function createChipPages(){
       // Call Claude via postMessage to execute the Confluence API
       // Since we're in a static page, we queue this for Cowork execution
       // For now, simulate and store the spec
-      pages[i].status = 'queued';
-      if(p.level===0) l0id = 'queued_'+i;
-      else if(p.level===1) l1id = 'queued_'+i;
-    } catch(e){
-      pages[i].status = 'error';
-    }
-  }
-
-  // Build the Cowork prompt and copy to clipboard
-  const chip_uc = chip;
-  const structureLines = pages.map((p,i)=>`${i+1}. ${'  '.repeat(p.level)}${p.title}`).join('\n');
-  const prompt = `Create Confluence page structure for new chip ${chip_uc} (${code}) in space ~ssriranjani under parent page 1613201410 ("Ranjani V's Home") on nvidia.atlassian.net. SW CM: ${nc.cm||'TBD'}. Use NR10 (Sirius) page ID 3389539178 as content reference.
-
-Pages to create in this order (indentation = parent relationship):
-${structureLines}
-
-Create each page with content based on the NR10 template. Substitute all occurrences of "NR10"/"Sirius" with "${chip_uc}"/"${code}". Set SW CM to "${nc.cm||'TBD'}". Leave all [TBD] links as-is for the team to fill in.`;
-
-  navigator.clipboard.writeText(prompt).catch(()=>{
-    const ta=document.createElement('textarea');
-    ta.value=prompt; document.body.appendChild(ta); ta.select();
-    document.execCommand('copy'); document.body.removeChild(ta);
-  });
-  S.ncStatus = 'copied';
-  renderCC();
-}
-</script></body></html>
+      pages[i].status = 'queued
