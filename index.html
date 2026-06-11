@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Chip Pilot 2.0</title>
-<meta name="version" content="2026-06-09"/>
+<meta name="version" content="2026-06-11"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -459,7 +459,7 @@ const CHIPS = {
     wikiUrl:'https://nvidia.atlassian.net/wiki/spaces/RubinSW/overview?homepageId=2598141954',
     progress:95, color:'a', phase:'Post-silicon · QS Done ✅ · PS/PRel Active · DD Chips Delivered 6/5-6/6 ✅ · DRAM BW ~17.8 TB/s ✅ · PRel 6/22',
     status:'PS/PRel Active · DD Chips ✅ 6/5-6/6 · PRel 6/22 ⚠️', nextGate:'PRel', nextGateDate:'6/22 ⚠️',
-    bugs:8, atRisk:true,
+    bugs:10, atRisk:true,
     milestones:[
       {n:'POR',s:'done',d:'✓'},{n:'RTL',s:'done',d:'✓'},{n:'Tape-out',s:'done',d:'✓'},
       {n:'Bringup',s:'done',d:'✓'},{n:'ES',s:'done',d:'✓'},{n:'BNB',s:'done',d:'✓'},
@@ -477,6 +477,8 @@ const CHIPS = {
       {l:'h',t:'NCCL hang on GR100/PDX (NVBug 6241628/6227189) — NCCL_NVLS_ENABLE=0 WAR; suspected driver/fabric manager init issue'},
       {l:'m',t:'MNNVL CUDA fabric allocation failure (NVBug 6223505) — fix needed in node MNNVL config or supports_mnnvl() detection'},
       {l:'h',t:'Bug 6243309 SWDL_gr10x_BLOCKING — vr200nvl_hecate HPC-X libcudnn.so.9 not found; Sev 2; ARB → Piotr Bialecki & Eddie Yan (6/8)'},
+      {l:'m',t:'NVBug 6242795 SWDL_gr10x_BLOCKING — Triton PTX targeting sm_103f fails ptxas on GR100; fix committed (e1a8777 on update_for_26.06_rubin), needs GR100 CI verification (6/10)'},
+      {l:'h',t:'NVBug 6262856 SWDL_gr10x_BLOCKING — cuDNN 9.30.0.8 downgrade breaks sm_107 attention; Sev-2; gated by cuDNN MR !3477 (6/10)'},
     ],
     checklist:[
       {t:'FW v3.1 NVLink lane drop patch merged',owner:'FW team',done:false},
@@ -554,15 +556,20 @@ const CHIPS = {
       {title:'{CHIP} IAS (Implementation Architecture Spec)',level:1},
       {title:'{CHIP} - Program Landing Page',               level:1},
     ],
-    progress:12, color:'g', phase:'Pre-silicon · SystemSim Active · NVLink Fusion XNQ Bringup',
-    status:'SystemSim Active', nextGate:'RTL', nextGateDate:"Q4 '26",
-    bugs:0, atRisk:false,
-    milestones:[{n:'POR',s:'now',d:'Active'},{n:'RTL',s:'wait',d:"Q4 '26"},{n:'Tape-out',s:'wait',d:'TBD'}],
+    progress:18, color:'a', phase:'Pre-silicon · Emulation Bringup · QM4↔NR10 Link Bring-up In Progress · FNL RTL Snap 6/29 ⚠️',
+    status:'Emulation Bringup · FNL At Risk ⚠️', nextGate:'FNL RTL Snap', nextGateDate:'6/29 ⚠️',
+    bugs:0, atRisk:true,
+    milestones:[{n:'POR',s:'done',d:'✓'},{n:'Emulation',s:'now',d:'QM4↔NR10 In Progress'},{n:'RTL',s:'wait',d:"Q4 '26"},{n:'Tape-out',s:'wait',d:'TBD'}],
     risks:[
+      {l:'h',t:'FNL SW feature-complete at risk by 06/29 — QM4 TREX is long pole, gated by NR10+QM4 emulation link bring-up'},
+      {l:'h',t:'QM4 ↔ NR10 emulation link bring-up blocked — MSE/NetIR up in loopback but not talking to QM4; P2P mode not working, escalated (6/9)'},
+      {l:'h',t:'QM4 TREX may slip to early August — past FNL RTL snap (6/29); highest-leverage unblock needed'},
+      {l:'m',t:'NetIR release (6/24) on critical path for emulator readiness; simulation carries same dependency'},
+      {l:'m',t:'FM PRD/POR dates slipped to 6/30 and 7/30'},
+      {l:'l',t:'SystemSim NR10 CAGUID incorrect — init-vector fix in progress, needed ahead of QM4-ready release'},
       {l:'l',t:'NVLV-8733 / Bug 6137117 — links reaching logical up after SM fix; LFM MAD-drop secondary fix also provided (6/4)'},
-      {l:'l',t:'NVLink Fusion XNQ 23-step sim recipe active — caguid=0x0 expected behavior in FModel (documented)'},
     ],
-    checklist:[{t:'NVLink protocol spec signoff',owner:'Ranjani',done:false},{t:'RTL planning kickoff',owner:'Ranjani',done:false}],
+    checklist:[{t:'NVLink protocol spec signoff',owner:'Ranjani',done:false},{t:'QM4↔NR10 emulation link bring-up',owner:'Ranjani',done:false},{t:'FNL RTL snap by 6/29',owner:'Ranjani',done:false}],
   },
   beacon:{ id:'beacon', code:'T374', name:'Beacon', group:'fusion', cm:'Roopa',
     wikiUrl:'https://nvidia.atlassian.net/wiki/spaces/TCS',
