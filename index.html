@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Chip Pilot 2.0</title>
-<meta name="version" content="2026-06-12"/>
+<meta name="version" content="2026-06-14"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -322,7 +322,7 @@ const CHIPS = {
       {title:'{CHIP} Tegra SW Platforms',                   level:2},
       {title:'{CHIP} Bringup - Sanity Enablement Plan',     level:2},
     ],
-    progress:78, color:'a', phase:'Post-silicon · BNB Declared 5/28 ✅ · POR 420 TOPS 84.3W · MNB/CS 6/13 · QS Qual ~6/16 · MNB Pass 85.23%',
+    progress:78, color:'a', phase:'Post-silicon · BNB Declared 5/28 ✅ · POR 420 TOPS 84.3W · MNB/CS → 6/15 · QS Qual ~6/16 · MNB Pass 85.23%',
     status:'MNB Pass 85% · QS Qual ~6/16 ⚠️', nextGate:'QS Qual', nextGateDate:'6/16 ⚠️',
     bugs:2, atRisk:true,
     milestones:[
@@ -334,6 +334,7 @@ const CHIPS = {
       {l:'h',t:'POR updated 360→420 TOPS (+11W): 1.4→1.6 GHz / 73.3→84.3W — dual RAM assist modes required; MNB schedule under review'},
       {l:'m',t:'MaxP scope added by BU (Auto) — new PC cycle required, schedule impact TBD'},
       {l:'m',t:'CPU Soft Lock up active — Bug 6124878, root cause TBD'},
+      {l:'m',t:'T268 SE clock 21% slower than T264 — leaves just enough capacity to authenticate 13 cameras; high-level CPU targets solidified, microbenchmark projections in progress (6/12)'},
     ],
     checklist:[
       {t:'SCG miniWAT coverage 100%',owner:'Mayank Kapoor',done:true},
@@ -450,18 +451,18 @@ const CHIPS = {
   },
   magni:{ id:'magni', code:'T294', name:'Magni', group:'cpu', cm:'Roopa',
     wikiUrl:'https://nvidia.atlassian.net/wiki/spaces/TCS',
-    progress:8, color:'w', phase:'Pre-silicon · Arch Investigations Active · POR Complete Target 6/30',
-    status:'Arch Readouts Active', nextGate:'POR Complete', nextGateDate:'6/30',
+    progress:8, color:'w', phase:'Pre-silicon · Arch Investigations Active · POR Complete Target 6/30 · Maarva B00 Power: Idle 22.4W · Motion Det 28.1W (6/12)',
+    status:'Arch Readouts Active · Maarva B00 Power Data', nextGate:'POR Complete', nextGateDate:'6/30',
     bugs:0, atRisk:false,
     milestones:[{n:'POR',s:'now',d:'90% by 6/30'},{n:'RTL',s:'wait',d:'TBD'}],
-    risks:[{l:'l',t:'Arch investigations and readouts ongoing — targeting 90% POR complete by 6/30'}],
+    risks:[{l:'l',t:'Arch investigations and readouts ongoing — targeting 90% POR complete by 6/30'},{l:'m',t:'Maarva B00 Event Handling: GPU remains on contributing excess power; PVA for video encoding (saves 6-8W) under exploration (6/12)'}],
     checklist:[{t:'Arch readouts complete',owner:'Roopa',done:false},{t:'90% POR by 6/30',owner:'Roopa',done:false}],
   },
   gr10x:{ id:'gr10x', code:'GR10x', name:'Rubin', group:'gpu', cm:'Ranjani V · Madhura',
     wikiUrl:'https://nvidia.atlassian.net/wiki/spaces/RubinSW/overview?homepageId=2598141954',
     progress:95, color:'a', phase:'Post-silicon · QS Done ✅ · PS/PRel Active · DD Chips Delivered 6/5-6/6 ✅ · DRAM BW ~17.8 TB/s ✅ · PRel 6/22 · DVS P-boards 21% ⚠️',
-    status:'PS/PRel Active · DD Chips ✅ · PRel 6/22 ⚠️ · DVS Bug 6283549', nextGate:'PRel', nextGateDate:'6/22 ⚠️',
-    bugs:11, atRisk:true,
+    status:'PS/PRel Active · FAI Timeout Bug 6294710 ⚠️ · PRel 6/22 ⚠️ · DVS Bug 6283549', nextGate:'PRel', nextGateDate:'6/22 ⚠️',
+    bugs:12, atRisk:true,
     milestones:[
       {n:'POR',s:'done',d:'✓'},{n:'RTL',s:'done',d:'✓'},{n:'Tape-out',s:'done',d:'✓'},
       {n:'Bringup',s:'done',d:'✓'},{n:'ES',s:'done',d:'✓'},{n:'BNB',s:'done',d:'✓'},
@@ -481,6 +482,7 @@ const CHIPS = {
       {l:'h',t:'Bug 6243309 SWDL_gr10x_BLOCKING — vr200nvl_hecate HPC-X libcudnn.so.9 not found; Sev 2; ARB → Piotr Bialecki & Eddie Yan (6/8)'},
       {l:'m',t:'NVBug 6242795 SWDL_gr10x_BLOCKING — Triton PTX targeting sm_103f fails ptxas on GR100; fix committed (e1a8777 on update_for_26.06_rubin), needs GR100 CI verification (6/10)'},
       {l:'h',t:'NVBug 6262856 SWDL_gr10x_BLOCKING — cuDNN 9.30.0.8 downgrade breaks sm_107 attention; Sev-2; gated by cuDNN MR !3477 (6/10)'},
+      {l:'h',t:'Fractal TS2 FAI — no single passing RIN run on FAI#14/#15/#16 (6/13); timeout root-caused to NVBug 6288193 (PRI Level violation); VBIOS security sign-off pending (blocking debug VBIOS release); CX9 overtemp on multiple units'},
     ],
     checklist:[
       {t:'FW v3.1 NVLink lane drop patch merged',owner:'FW team',done:false},
