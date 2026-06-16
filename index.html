@@ -322,7 +322,7 @@ const CHIPS = {
       {title:'{CHIP} Tegra SW Platforms',                   level:2},
       {title:'{CHIP} Bringup - Sanity Enablement Plan',     level:2},
     ],
-    progress:78, color:'a', phase:'Post-silicon · BNB Declared 5/28 ✅ · POR 420 TOPS 84.3W · MNB/CS 6/13 · QS Qual ~6/16 · CP rev0.7 → 6/29 · NVCAL DTS 6/16',
+    progress:78, color:'a', phase:'Post-silicon · BNB Declared 5/28 ✅ · POR 420 TOPS 84.3W · MNB/CS 6/13 · QS Qual ~6/16 · CP rev0.7 → 6/29 · NVCAL DTS 6/16 · VNM ISINK DTS 7/10',
     status:'QS Qual ~6/16 ⚠️ · CP rev0.7 → 6/29 · Embedded SKU Risk', nextGate:'QS Qual', nextGateDate:'6/16 ⚠️',
     bugs:2, atRisk:true,
     milestones:[
@@ -336,6 +336,7 @@ const CHIPS = {
       {l:'m',t:'MaxP scope added by BU (Auto) — new PC cycle required, schedule impact TBD'},
       {l:'m',t:'CPU Soft Lock up active — Bug 6124878, root cause TBD'},
       {l:'m',t:'T268 SE clock 21% slower than T264 — leaves just enough capacity to authenticate 13 cameras; high-level CPU targets solidified, microbenchmark projections in progress (6/12)'},
+      {l:'m',t:'HSIO MNB electrical coverage blocked on CPrev0.4 chips — USB and MGBE failures during temperature shmoo; unfused OPT_PHY_PLL_SPEEDO_TRIM_NVHS; fuses to be blown in CPrev0.7 (Confluence 6/14)'},
     ],
     checklist:[
       {t:'SCG miniWAT coverage 100%',owner:'Mayank Kapoor',done:true},
@@ -374,6 +375,7 @@ const CHIPS = {
       {l:'h',t:'M pkg: Decision to not build with SK memory — Bug 6217453: Hynix 2R/96GB SOCAMM failure at 4800 MHz; SK and SCG+MSS debugging (6/7)'},
       {l:'m',t:'TB500-M P-rel/PS-FGI moved to 7/31 to align with A01Z silicon availability and qual completion'},
       {l:'m',t:'LP5 POR change (768GB 2R) — SW changes to emulate 7500 4R behavior in progress; golden register mismatches ~4k under review'},
+      {l:'m',t:'TB500 C7 exit latency increases linearly with simultaneous core exits — possible UCF bottleneck under multi-core exit; HW DVFS tuning still needed for mysqlslap/wrk regressions (PAT email 6/12)'},
     ],
     checklist:[
       {t:'PS SBIOS release ~6/2',owner:'Sowjanya',done:true},
@@ -396,6 +398,7 @@ const CHIPS = {
     ],
     risks:[
       {l:'m',t:'Gathering simulation requirements from SW teams — IAS and GFD reviews ongoing'},
+      {l:'m',t:'TB600/Rosa C7 exit RFEs active — ATF from DRAM, per-socket SYSRAM ATF access, Rigel core caching/prefetching before MMU setup (PAT email 6/12)'},
       {l:'l',t:'Early stage — no critical blockers identified'},
     ],
     checklist:[
@@ -423,6 +426,7 @@ const CHIPS = {
       {l:'m',t:'VIC (Bug 6281029) — CPU not receiving IRQ; HW issue suspected; WAR available'},
       {l:'m',t:'D3 Cold on iGPU — POR unconfirmed; chip schedule push-out possible'},
       {l:'m',t:'NV Perf validation not started; resource constrained'},
+      {l:'m',t:'N2X SOC ASIC perf validation blocked — runs waiting on Jade NMR implementation; SoC+GPU netlist not expected until end of June; Display validation at 0% (PAT email 6/12)'},
     ],
     checklist:[
       {t:'FPGA H3 netlist received by SW (6/13)',owner:'DV team',done:true},
