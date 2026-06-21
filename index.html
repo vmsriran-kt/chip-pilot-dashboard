@@ -2204,7 +2204,7 @@ const CHIP_DB = {
   },
   tb500: {
     title: 'TB500 · Vera CPU',
-    sub: 'Post-Silicon · SW CM: Sowjanya · Prel 98% · WAT Ph1 Done 6/15 · M-pkg ~6/24',
+    sub: 'Post-Silicon · SW CM: Hui Fu · Prel 98% · WAT Ph1 Done 6/15 · M-pkg ~6/24',
     wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/TCS/pages/2872182006/TB500+Chip+SW+Development+PLC-L1+Process',
     pills: [['pill-g','98% COMPLETE'],['pill-a','M-PKG ~6/24']],
     anno: 'PS SBIOS Released 6/2. P-pkg PS SLT done; M-pkg release trending 6/24. P-pkg NVL72 Prel at 98%; SCG Final WAT Phase-1 completed 6/15; Phase-2 (thermal swaps) trending 6/30. CR SLT Diag released 6/12 on schedule. NVL72 SW 0.6 Build 4 in QA; Release target 7/9 (Dev Drop 1: 6/29). TB500-M P-rel/PS-FGI moved to 7/31. A01Z TSMC Fix: No measurable Fmax improvement at Vmax vs A01Y on system (more data pending). Do not build with SK memory (Hynix 2R/96GB failing at 4800 MHz). LP5 POR change (768GB 2R) BCT released; good across all vendors. New memory strategy: TS4 Samsung 7500 4R (unblocked); QS pivots to Micron 9600 2R. M-pkg Final CWAT QA trending 6/17. CM Update 6/12: Hui Fu taking over from Sowjanya Komatineni (Sowjanya moving to Rack Scale Software per Roopa announcement). Sim Status (PSET 6/15): OCX trial release with TB500 shows 2-3x faster perf for CPU workloads; nightly kernel sanity test enabled. Multi-socket bringup blocked on ARM Fast Model cross-chip exclusive bug (repro package sent to ARM). VDK-X bringup ongoing -- QSPI model fix causing frontdoor boot hang, debug in progress. Simtools TOT supports TB500+GR152 SystemSim; C2C not working in Frontdoor path.',
@@ -2219,9 +2219,9 @@ const CHIP_DB = {
       {p:'m',t:'9600MT/s 2R module shortage due to NVL72 allocation -- recovery expected end of June'},
     ],
     checklist: [
-      {t:'PS SBIOS release ~6/2',owner:'Sowjanya',done:true},
-      {t:'MODS V8.0 RC cut 6/4; target release 6/11',owner:'Sowjanya',done:false},
-      {t:'M-pkg FinalCWAT parts arriving 6/11; SW cutoff 6/3',owner:'Sowjanya',done:false},
+      {t:'PS SBIOS release ~6/2',owner:'Hui Fu',done:true},
+      {t:'MODS V8.0 RC cut 6/4; target release 6/11',owner:'Hui Fu',done:false},
+      {t:'M-pkg FinalCWAT parts arriving 6/11; SW cutoff 6/3',owner:'Hui Fu',done:false},
       {t:'P-boards BWAT Final WAT trending 6/15',owner:'HW team',done:false},
       {t:'DCPOR QS features (4 remaining) close by 6/5',owner:'SW team',done:false},
     ],
