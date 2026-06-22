@@ -2207,7 +2207,7 @@ const CHIP_DB = {
     sub: 'Post-Silicon · SW CM: Hui Fu · Prel 98% · WAT Ph1 Done 6/15 · M-pkg ~6/24',
     wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/TCS/pages/2872182006/TB500+Chip+SW+Development+PLC-L1+Process',
     pills: [['pill-g','98% COMPLETE'],['pill-a','M-PKG ~6/24']],
-    anno: 'PS SBIOS Released 6/2. P-pkg PS SLT done; M-pkg release trending 6/24. P-pkg NVL72 Prel at 98%; SCG Final WAT Phase-1 completed 6/15; Phase-2 (thermal swaps) trending 6/30. CR SLT Diag released 6/12 on schedule. NVL72 SW 0.6 Build 4 in QA; Release target 7/9 (Dev Drop 1: 6/29). TB500-M P-rel/PS-FGI moved to 7/31. A01Z TSMC Fix: No measurable Fmax improvement at Vmax vs A01Y on system (more data pending). Do not build with SK memory (Hynix 2R/96GB failing at 4800 MHz). LP5 POR change (768GB 2R) BCT released; good across all vendors. New memory strategy: TS4 Samsung 7500 4R (unblocked); QS pivots to Micron 9600 2R. M-pkg Final CWAT QA trending 6/17. CM Update 6/12: Hui Fu taking over from Sowjanya Komatineni (Sowjanya moving to Rack Scale Software per Roopa announcement). Sim Status (PSET 6/15): OCX trial release with TB500 shows 2-3x faster perf for CPU workloads; nightly kernel sanity test enabled. Multi-socket bringup blocked on ARM Fast Model cross-chip exclusive bug (repro package sent to ARM). VDK-X bringup ongoing -- QSPI model fix causing frontdoor boot hang, debug in progress. Simtools TOT supports TB500+GR152 SystemSim; C2C not working in Frontdoor path.',
+    anno: 'PS SBIOS Released 6/2. P-pkg PS SLT done; M-pkg release trending 6/24. P-pkg NVL72 Prel at 98%; SCG Final WAT Phase-1 completed 6/15; Phase-2 (thermal swaps) trending 6/30. CR SLT Diag released 6/12 on schedule. NVL72 SW 0.6 Build 4 in QA; Release target 7/9 (Dev Drop 1: 6/29). TB500-M P-rel/PS-FGI moved to 7/31. A01Z TSMC Fix: No measurable Fmax improvement at Vmax vs A01Y on system (more data pending). Do not build with SK memory (Hynix 2R/96GB failing at 4800 MHz). LP5 POR change (768GB 2R) BCT released; good across all vendors. New memory strategy: TS4 Samsung 7500 4R (unblocked); QS pivots to Micron 9600 2R. M-pkg Final CWAT QA trending 6/17. CM Update 6/12: Hui Fu taking over from Sowjanya Komatineni (Sowjanya moving to Rack Scale Software per Roopa announcement). Sim Status (PSET 6/15): OCX trial release with TB500 shows 2-3x faster perf for CPU workloads; nightly kernel sanity test enabled. Multi-socket bringup blocked on ARM Fast Model cross-chip exclusive bug (repro package sent to ARM). VDK-X bringup ongoing -- QSPI model fix causing frontdoor boot hang, debug in progress. Simtools TOT supports TB500+GR152 SystemSim; C2C not working in Frontdoor path. Bug Tracking (Confluence TGM 6/22): TB500 Open Bug RCA Tracking: 166 open MODS bugs with RCCAs (severity breakdown: 1-System Crash: 6, 2-App Crash: 4, 3-Functionality: 55, 4-Corruption: 1, 5-Performance: 8; auto-updated daily).',
     meetings: [
       {time:'4:00 PM', title:'TB500 Bringup Meeting', pill:'pill-g'},
     ],
@@ -2250,14 +2250,15 @@ const CHIP_DB = {
   },
   tb600: {
     title: 'TB600 · Vera Ultra',
-    sub: 'Pre-Silicon · SW CM: Hui Fu · IAS/GFD Reviews Active · SCSIM vs System SIM Eval',
+    sub: 'Pre-Silicon · SW CM: Hui Fu · Package A CRR Blocked · ATE Verif Schedule Risk',
     wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/TCS',
-    pills: [['pill-b','PRE-SILICON'],['pill-a','SCSIM/SYS-SIM EVAL']],
-    anno: 'Simulation environment under evaluation: SCSIM vs System SIM for presi. IAS and GFD reviews active. ES target Q4 2026. SCSIM R1 milestone: TB600/T414 + FN10x SCSIM R1 simulator Buildroot now boots to console in Backdoor boot -- RM team enabled for GPU bring-up (PSET 6/15). T414 chip ID support added to Bootwrapper. Frontdoor boot bringup starting (Bug 6286429).',
+    pills: [['pill-r','PKG-A BLOCKED'],['pill-a','VERIF RISK']],
+    anno: 'Simulation environment under evaluation: SCSIM vs System SIM for presi. IAS and GFD reviews active. ES target Q4 2026. SCSIM R1 milestone: TB600/T414 + FN10x SCSIM R1 simulator Buildroot now boots to console in Backdoor boot -- RM team enabled for GPU bring-up (PSET 6/15). T414 chip ID support added to Bootwrapper. Frontdoor boot bringup starting (Bug 6286429). Package Tree Status (Confluence TB60x 6/22): Pkg A [TB600M+TB600C+TB500S] BLOCKED -- CRR from Tripti Jain pending, was ETA 6/15, new ETA 6/22; Pkg B [TB600M+TB500C+TB500S] Released (JTAG Sanity passing); Pkg C [TB500M+TB600C+TB500S] BLOCKED (CRR pending). ATE Verif Weekly (6/22): Package-A CRR delayed 1 week -- RISK to verif schedule. VSIM snapshot for Pkg B targeted 6/23.',
     meetings: [],
     risks: [
+      {p:'h',t:'Package A [TB600M+TB600C+TB500S] CRR blocked -- was ETA 6/15, delayed to 6/22 (Tripti Jain CRR pending); ATE verif schedule at risk (Confluence TB60x 6/22)'},
+      {p:'h',t:'Package C [TB500M+TB600C+TB500S] also blocked -- CRR pending, ETA TBD'},
       {p:'m',t:'Gathering simulation requirements from SW teams -- IAS and GFD reviews ongoing'},
-      {p:'l',t:'Early stage -- no critical blockers identified'},
     ],
     checklist: [
       {t:'POST self-test pass',owner:'Hui Fu',done:true},
@@ -2420,22 +2421,25 @@ const CHIP_DB = {
   },
   t294: {
     title: 'T294 · Magni CPU',
-    sub: 'Pre-Silicon · SW CM: Roopa · Arch Investigations Active · POR 90% by 6/30',
+    sub: 'Pre-Silicon · SW CM: Roopa · Arch Investigations Active · POR 90% by 6/30 · C2C Pushback',
     wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/TCS',
-    pills: [['pill-m','SETUP']],
-    anno: 'Arch investigations and readouts active. Targeting 90% POR complete by 6/30.',
+    pills: [['pill-m','SETUP'],['pill-a','C2C RISK']],
+    anno: 'Arch investigations and readouts active. Targeting 90% POR complete by 6/30. C2C Update (PSET 6/15): C2C was pushed out of TB600; C2C Arch is pushing back on including C2C in Magni due to bandwidth constraints -- taking help from Rich to prioritize. Modeling team focusing on a few Modeling requirements including C2C.',
     meetings: [],
     risks: [
       {p:'h',t:'Safety design verification HIGH risk -- HSR dependency Feb 2028; concept assessment ~1 month before tapeout'},
+      {p:'h',t:'C2C Arch pushing back on C2C for Magni due to bandwidth constraints -- was pushed out of TB600; prioritization escalated (PSET 6/15)'},
       {p:'m',t:'FI FMEDA timeline -- base design done Dec-Jan, 3 months to complete; tight schedule'},
       {p:'l',t:'Arch investigations and readouts ongoing -- targeting 90% POR complete by 6/30'},
     ],
     checklist: [
       {t:'Arch readouts complete',owner:'Roopa',done:false},
       {t:'90% POR by 6/30',owner:'Roopa',done:false},
+      {t:'C2C arch scope decision for Magni',owner:'Roopa',done:false},
     ],
     emails: [
       {sub:'Top N Things - Tegra SW CM (6/9/26)',from:'rranganathan@nvidia.com',time:'Jun 9',body:'T294 Magni: Arch investigations and readouts ongoing. Targeting POR complete by 6/30.'},
+      {sub:'Top N - PSET - June 15, 2026',from:'sgarg@nvidia.com',time:'Jun 15',body:'T294 Magni: Arch targeting chip POR 90% complete by June-end. Focusing on Modeling requirements like C2C which got pushed out of TB600. C2C Arch pushing back on this even for Magni due to bandwidth constraints -- taking help from Rich to prioritize.'},
     ],
     slack: [{ch:'#t294_magni_fsm',from:'zvi_goldshtein',time:'Today 1:58pm',msg:'Safety plan risks: Safety design verification (HIGH), FI FMEDA timing (MEDIUM), Concept assessment ~1 month before T/O (HIGH).'}],
     prog: 8, phase:'Pre-Silicon'
