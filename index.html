@@ -810,7 +810,7 @@ mark{background:rgba(118,185,0,.25);color:var(--text);border-radius:2px;padding:
           <div class="chip-card-sub">CPU · Post-silicon · CM: Mayank Kapoor</div>
           <div class="chip-prog"><div style="height:100%;width:78%;border-radius:2px" class="cp-a"></div></div>
           <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted)">
-            <span>BNB 5/28 &#x2705; · DTS Released · MCU regression active</span><span>78%</span>
+            <span>QS+WA WAT Active · HWQA 99.24% Cov · MODS IFT-RA Gated</span><span>89%</span>
           </div>
         </div>
         <div class="chip-card cc-green" onclick="showView('chip','tb500')" style="cursor:pointer">
@@ -820,7 +820,7 @@ mark{background:rgba(118,185,0,.25);color:var(--text);border-radius:2px;padding:
           <div class="chip-card-sub">Vera · CPU · Post-silicon · CM: Sowjanya</div>
           <div class="chip-prog"><div style="height:100%;width:93%;border-radius:2px" class="cp-g"></div></div>
           <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted)">
-            <span>NVL72 SW 0.6 release active · BWAT ~6/15</span><span>93%</span>
+            <span>P-Rel Complete · FinalCWAT Ph1 Active · MODS SLT 7/13</span><span>98%</span>
           </div>
         </div>
         <div class="chip-card cc-blue" onclick="showView('chip','tb600')" style="cursor:pointer">
@@ -840,7 +840,7 @@ mark{background:rgba(118,185,0,.25);color:var(--text);border-radius:2px;padding:
           <div class="chip-card-sub">CPU · Pre-silicon · CM: Vivek Desikan</div>
           <div class="chip-prog"><div style="height:100%;width:32%;border-radius:2px" class="cp-r"></div></div>
           <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted)">
-            <span>FPGA H2.07 · FDI 6/30</span><span style="color:var(--red)">AT RISK</span>
+            <span>SOC FDI Done · T354G FNL 7/23 · SW Signoff 7/30</span><span style="color:var(--amber)">AT RISK</span>
           </div>
         </div>
         <div class="chip-card" style="border-left:3px solid var(--muted);cursor:pointer" onclick="showView('chip','tcx10')">
@@ -2494,7 +2494,7 @@ const CHIP_DB = {
   },
   t294: {
     title: 'T294 · Magni CPU',
-    sub: 'Pre-Silicon · SW CM: Roopa · Arch Investigations Active · POR Target 6/30',
+    sub: 'Pre-Silicon · SW CM: Roopa · Arch Readouts Ongoing · POR Target Past (6/30)',
     wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/TCS',
     pills: [['pill-m','SETUP']],
     anno: 'T294 Magni (7/7): Arch investigations and readouts ongoing; POR completion targeted 6/30 (per 7/7 status, work continues). — Magni ROM page active today (Jun 22, Rakshithkumar GC): Milestones tracked across Feynman and Spectrum7 -- non-secure boot (flash), secure boot, recovery flow, attestation/physical security, code freeze. Arch investigations and readouts active. Targeting 90% POR complete by 6/30. C2C feature pushed out of TB600 scope -- T294 team working to prioritize C2C inclusion for Magni with Rich. Safety design verification HIGH risk (HSR dependency Feb 2028); FI FMEDA timeline tight (3 months, base design Dec-Jan).',
