@@ -652,7 +652,7 @@ mark{background:rgba(118,185,0,.25);color:var(--text);border-radius:2px;padding:
     <div class="nav-prog"><div class="nav-prog-fill" style="width:78%"></div></div>
   </div>
   <div class="nav-item" onclick="showView('chip','tb500')">
-    <div class="nav-chip-code"><span>TB500 <span class="status-dot dot-g"></span></span><span style="font-size:9px;color:var(--nv-green);font-weight:700">NEAR DONE</span></div>
+    <div class="nav-chip-code"><span>TB500 <span class="status-dot dot-a"></span></span><span style="font-size:9px;color:var(--amber);font-weight:700">P-REL BEHIND</span></div>
     <div class="nav-chip-sub">Vera · Sowjanya</div>
     <div class="nav-prog"><div class="nav-prog-fill" style="width:93%"></div></div>
   </div>
@@ -742,12 +742,12 @@ mark{background:rgba(118,185,0,.25);color:var(--text);border-radius:2px;padding:
       <!-- Attention strip -->
       <div class="attn">
         <span class="attn-lbl">⬟ Needs Attention</span>
-        <div class="attn-pill"><span style="color:var(--red)">●</span> NR10x · FNL Jun 29 at risk</div>
-        <div class="attn-pill"><span style="color:var(--red)">●</span> N2x · FDI Jun 30 at risk</div>
+        <div class="attn-pill"><span style="color:var(--amber)">●</span> ThorZ · Full WAT on hold — V/F curve ETA TBD</div>
+        <div class="attn-pill"><span style="color:var(--amber)">●</span> TB500 · PS FGI ~7/31 · P-Rel ~1wk behind</div>
+        <div class="attn-pill"><span style="color:var(--red)">●</span> T257/Monet · BMW → Qualcomm · SW wind-down</div>
+        <div class="attn-pill"><span style="color:var(--amber)">●</span> N2x · SW Signoff 7/30 · USB/DP blocked on Hybrid IPP</div>
+        <div class="attn-pill"><span style="color:var(--amber)">●</span> T374/Beacon · 10-12wk pre-si FPGA risk</div>
         <div class="attn-pill"><span style="color:var(--amber)">●</span> T294 · Safety plan HIGH risk</div>
-        <div class="attn-pill"><span style="color:var(--amber)">●</span> TB600 · CM OOO Jun 11-16</div>
-        <div class="attn-pill"><span style="color:var(--amber)">●</span> NR10x · NetIR Jun 24 critical path</div>
-        <div class="attn-pill"><span style="color:var(--amber)">●</span> ThorZ · MCU regressions active</div>
       </div>
 
 
@@ -770,7 +770,7 @@ mark{background:rgba(118,185,0,.25);color:var(--text);border-radius:2px;padding:
           <div class="chip-card-sub">Beacon · Fusion · CM: Roopa</div>
           <div class="chip-prog"><div style="height:100%;width:5%;border-radius:2px" class="cp-a"></div></div>
           <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted)">
-            <span>Schedule Alignment</span><span>5%</span>
+            <span>10-12wk FPGA Risk · Weekly Plan w/ Iris Team</span><span>5%</span>
           </div>
         </div>
         <div class="chip-card cc-green" onclick="showView('chip','gr10x')" style="cursor:pointer">
@@ -805,42 +805,42 @@ mark{background:rgba(118,185,0,.25);color:var(--text);border-radius:2px;padding:
         </div>
         <div class="chip-card cc-amber" onclick="showView('chip','thorz')" style="cursor:pointer">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px">
-            <span class="chip-card-name">ThorZ</span><span class="pill pill-a">QS FOCUS</span>
+            <span class="chip-card-name">ThorZ</span><span class="pill pill-a">WAT FOCUS</span>
           </div>
           <div class="chip-card-sub">CPU · Post-silicon · CM: Mayank Kapoor</div>
-          <div class="chip-prog"><div style="height:100%;width:78%;border-radius:2px" class="cp-a"></div></div>
+          <div class="chip-prog"><div style="height:100%;width:80%;border-radius:2px" class="cp-a"></div></div>
           <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted)">
-            <span>QS+WA WAT Active · HWQA 99.24% Cov · MODS IFT-RA Gated</span><span>89%</span>
+            <span>RA WAT 7/24 · Full WAT On Hold (V/F) · Cov 80% / Pass 55%</span><span>80%</span>
           </div>
         </div>
-        <div class="chip-card cc-green" onclick="showView('chip','tb500')" style="cursor:pointer">
+        <div class="chip-card cc-amber" onclick="showView('chip','tb500')" style="cursor:pointer">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px">
-            <span class="chip-card-name">TB500</span><span class="pill pill-g">NEAR COMPLETE</span>
+            <span class="chip-card-name">TB500</span><span class="pill pill-a">P-REL BEHIND</span>
           </div>
           <div class="chip-card-sub">Vera · CPU · Post-silicon · CM: Sowjanya</div>
-          <div class="chip-prog"><div style="height:100%;width:93%;border-radius:2px" class="cp-g"></div></div>
+          <div class="chip-prog"><div style="height:100%;width:88%;border-radius:2px" class="cp-a"></div></div>
           <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted)">
-            <span>P-Rel Complete · FinalCWAT Ph1 Active · MODS SLT 7/13</span><span>98%</span>
+            <span>PS FGI ~7/31 · P-Rel ~1wk Behind · M-pkg SLT Done</span><span>88%</span>
           </div>
         </div>
         <div class="chip-card cc-blue" onclick="showView('chip','tb600')" style="cursor:pointer">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px">
             <span class="chip-card-name">TB600</span><span class="pill pill-b">PRE-SILICON</span>
           </div>
-          <div class="chip-card-sub">Vera Ultra · CPU · CM: Hui Fu (OOO 6/11-6/16)</div>
-          <div class="chip-prog"><div style="height:100%;width:40%;border-radius:2px" class="cp-b"></div></div>
+          <div class="chip-card-sub">Vera Ultra · CPU · CM: Hui Fu</div>
+          <div class="chip-prog"><div style="height:100%;width:42%;border-radius:2px" class="cp-b"></div></div>
           <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted)">
-            <span>IAS/GFD Reviews Active</span><span>40%</span>
+            <span>SCSIM Front Door Boot · NVPOR Alignment</span><span>42%</span>
           </div>
         </div>
-        <div class="chip-card cc-red" onclick="showView('chip','n2x')" style="cursor:pointer">
+        <div class="chip-card cc-amber" onclick="showView('chip','n2x')" style="cursor:pointer">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px">
-            <span class="chip-card-name">N2x</span><span class="pill pill-r">AT RISK</span>
+            <span class="chip-card-name">N2x</span><span class="pill pill-a">FPGA BU 7/30</span>
           </div>
           <div class="chip-card-sub">CPU · Pre-silicon · CM: Vivek Desikan</div>
-          <div class="chip-prog"><div style="height:100%;width:32%;border-radius:2px" class="cp-r"></div></div>
+          <div class="chip-prog"><div style="height:100%;width:35%;border-radius:2px" class="cp-a"></div></div>
           <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted)">
-            <span>SOC FDI Done · T354G FNL 7/23 · SW Signoff 7/30</span><span style="color:var(--amber)">AT RISK</span>
+            <span>SOC FDI Done · T354G FNL 7/23 · SW Signoff 7/30 · USB/DP blocked</span><span style="color:var(--amber)">⚠</span>
           </div>
         </div>
         <div class="chip-card" style="border-left:3px solid var(--muted);cursor:pointer" onclick="showView('chip','tcx10')">
@@ -853,14 +853,14 @@ mark{background:rgba(118,185,0,.25);color:var(--text);border-radius:2px;padding:
             <span>POR Discussions Active</span><span>8%</span>
           </div>
         </div>
-        <div class="chip-card" style="border-left:3px solid var(--muted);cursor:pointer" onclick="showView('chip','t257')">
+        <div class="chip-card cc-amber" onclick="showView('chip','t257')" style="cursor:pointer">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px">
-            <span class="chip-card-name">T257</span><span class="pill" style="background:rgba(128,128,128,.1);color:var(--muted);border:1px solid rgba(128,128,128,.2)">SETUP</span>
+            <span class="chip-card-name">T257</span><span class="pill pill-r">BMW→QUALCOMM</span>
           </div>
           <div class="chip-card-sub">Monet · CPU · Pre-silicon · CM: Vivek Desikan</div>
-          <div class="chip-prog"><div style="height:100%;width:10%;border-radius:2px;background:var(--muted)"></div></div>
+          <div class="chip-prog"><div style="height:100%;width:10%;border-radius:2px" class="cp-a"></div></div>
           <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted)">
-            <span>FPGA Validation Active</span><span>10%</span>
+            <span>BMW→QC · SW wind-down to TO Validation · Then Shelf</span><span>10%</span>
           </div>
         </div>
         <div class="chip-card" style="border-left:3px solid var(--muted);cursor:pointer" onclick="showView('chip','t294')">
@@ -889,14 +889,14 @@ mark{background:rgba(118,185,0,.25);color:var(--text);border-radius:2px;padding:
               <table class="s-tbl">
                 <thead><tr><th>Date</th><th>Chip</th><th>Milestone</th><th>Status</th></tr></thead>
                 <tbody>
-                  <tr><td>Jun 24</td><td>NR10x</td><td>NetIR Release (critical path)</td><td><span class="pill pill-r" style="font-size:9px">AT RISK</span></td></tr>
-                  <tr><td>Jun 29</td><td>NR10x</td><td>FNL RTL Snap</td><td><span class="pill pill-r" style="font-size:9px">AT RISK</span></td></tr>
-                  <tr><td>Jun 30</td><td>N2x</td><td>Feature Delivery Inspection</td><td><span class="pill pill-r" style="font-size:9px">AT RISK</span></td></tr>
-                  <tr><td>Jun 30</td><td>NR10x</td><td>FM PRD (slipped)</td><td><span class="pill pill-a" style="font-size:9px">SLIPPED</span></td></tr>
-                  <tr><td>~Jun 15</td><td>TB500</td><td>BWAT Release</td><td><span class="pill pill-g" style="font-size:9px">ON TRACK</span></td></tr>
-                  <tr><td>Jun 22</td><td>GR10x</td><td>Production Release</td><td><span class="pill pill-g" style="font-size:9px">ON TRACK</span></td></tr>
-                  <tr><td>Jul 30</td><td>NR10x</td><td>FM POR (slipped)</td><td><span class="pill pill-a" style="font-size:9px">SLIPPED</span></td></tr>
-                  <tr><td>Sep 6</td><td>GR15x</td><td>Power-On Target</td><td><span class="pill pill-g" style="font-size:9px">ON TRACK</span></td></tr>
+                  <tr><td>Jul 23</td><td>N2x</td><td>T354G FNL RTL Snap</td><td><span class="pill pill-a" style="font-size:9px">TRENDING</span></td></tr>
+                  <tr><td>Jul 24</td><td>NR10x</td><td>ECO Window Close</td><td><span class="pill pill-a" style="font-size:9px">TRACKING</span></td></tr>
+                  <tr><td>Jul 24</td><td>ThorZ</td><td>RA WAT Release Trending</td><td><span class="pill pill-a" style="font-size:9px">⚠ ON HOLD</span></td></tr>
+                  <tr><td>Jul 30</td><td>N2x</td><td>SOC FDI SW Signoff + FPGA Checkout</td><td><span class="pill pill-a" style="font-size:9px">AT RISK</span></td></tr>
+                  <tr><td>Jul 31</td><td>TB500</td><td>TB500-M PS FGI (Chip PS)</td><td><span class="pill pill-a" style="font-size:9px">~1WK LATE</span></td></tr>
+                  <tr><td>Aug 5</td><td>ThorZ</td><td>MNB Milestone</td><td><span class="pill pill-a" style="font-size:9px">TRACKING</span></td></tr>
+                  <tr><td>Aug 31</td><td>NR10x</td><td>Tapeout (planning)</td><td><span class="pill pill-a" style="font-size:9px">TRACKING</span></td></tr>
+                  <tr><td>Sep 21</td><td>N2x</td><td>SM IP FNL (pushed from orig)</td><td><span class="pill pill-a" style="font-size:9px">SLIPPED</span></td></tr>
                 </tbody>
               </table>
             </div>
@@ -908,25 +908,25 @@ mark{background:rgba(118,185,0,.25);color:var(--text);border-radius:2px;padding:
           <div class="g-card" style="margin-bottom:14px">
             <div class="c-hdr"><span class="c-hdr-title">Top Risks Across Programs</span></div>
             <div class="c-body" style="padding:10px">
-              <div class="risk-row"><div class="rd rd-h"></div><span><strong>NR10x:</strong> QM4↔NR10 emulation link not working — FNL Jun 29 at risk</span></div>
-              <div class="risk-row"><div class="rd rd-h"></div><span><strong>NR10x:</strong> QM4 T-Rex slipping to August — past FNL RTL snap</span></div>
+              <div class="risk-row"><div class="rd rd-h"></div><span><strong>ThorZ:</strong> Full WAT on hold — V/F curve changes pending, ETA TBD (Bug 6404289)</span></div>
+              <div class="risk-row"><div class="rd rd-h"></div><span><strong>T257/Monet:</strong> BMW IVI program awarded to Qualcomm — SW wind-down to TO validation underway</span></div>
               <div class="risk-row"><div class="rd rd-h"></div><span><strong>T294:</strong> Safety design verification HIGH risk — HSR dependency Feb 2028</span></div>
-              <div class="risk-row"><div class="rd rd-m"></div><span><strong>N2x:</strong> FPGA H2.07 validation; FDI Jun 30 at risk</span></div>
-              <div class="risk-row"><div class="rd rd-m"></div><span><strong>NR10x:</strong> NetIR release Jun 24 on critical path for emulator readiness</span></div>
-              <div class="risk-row"><div class="rd rd-m"></div><span><strong>TB600:</strong> CM Hui Fu OOO Jun 11-16 — active IAS/GFD reviews need coverage</span></div>
+              <div class="risk-row"><div class="rd rd-m"></div><span><strong>TB500:</strong> PS FGI ~7/31 but P-Rel ~1 week behind; 23 blocker bugs for SBIOS 0.8 (Bug 6447327 active)</span></div>
+              <div class="risk-row"><div class="rd rd-m"></div><span><strong>N2x:</strong> USB/DP Tunneling blocked on Hybrid IPP bringup; SOC FDI SW signoff gated on validation coverage</span></div>
+              <div class="risk-row"><div class="rd rd-m"></div><span><strong>T374/Beacon:</strong> Pre-silicon top risk — 10-12wk FPGA validation window; weekly plan alignment with Iris</span></div>
             </div>
           </div>
 
           <div class="g-card" style="margin-bottom:14px">
             <div class="c-hdr"><span class="c-hdr-title">📡 Live Signals Today</span></div>
             <div class="c-body" style="padding:10px;display:flex;flex-direction:column;gap:10px">
-              <div style="border-left:2px solid var(--amber);padding-left:10px">
-                <div style="font-size:10px;color:var(--muted)">📧 NR10 Branching Plan · Ranjani V · 12:39pm</div>
-                <div style="font-size:12px;color:var(--text2)">Starting branching conversations — Hema, Gus, Kunle. Input needed from SW PICs on build/package names for DVS.</div>
+              <div style="border-left:2px solid var(--red);padding-left:10px">
+                <div style="font-size:10px;color:var(--muted)">📧 Top N Things Tegra SW CM (07/20/26) · Roopa Ranganathan · Jul 21</div>
+                <div style="font-size:12px;color:var(--text2)">T257/Monet: BMW IVI program awarded to Qualcomm. Guidance to close all SW towards TO validation before shelving.</div>
               </div>
               <div style="border-left:2px solid var(--amber);padding-left:10px">
-                <div style="font-size:10px;color:var(--muted)">💬 #swgpu-chips-nvlink-fusion · Edward Sears · 12:54pm</div>
-                <div style="font-size:12px;color:var(--text2)">Is the question about HW coverage risk if NR10 SW verif is not done by FNL?</div>
+                <div style="font-size:10px;color:var(--muted)">📧 TB500 · Roopa · Jul 21</div>
+                <div style="font-size:12px;color:var(--text2)">M-pkg PS SLT MODS released. PS FGI ~7/31, P-Rel ~1wk behind. SBIOS 0.8 cutoff 7/20 with ~23 blockers.</div>
               </div>
               <div style="border-left:2px solid var(--nv-green);padding-left:10px">
                 <div style="font-size:10px;color:var(--muted)">📧 TB500 KIST Status · sruskamp · 10:35am</div>
@@ -2350,10 +2350,10 @@ const CHIP_DB = {
   },
   thorz: {
     title: 'ThorZ · CPU',
-    sub: 'Post-Silicon · SW CM: Mayank Kapoor · CS Done · MNB 8/5 · QS+WA WAT Active · MODS IFT-RA Gated',
+    sub: 'Post-Silicon · SW CM: Mayank Kapoor · CS Done · MNB 8/5 · RA WAT 7/24 · Full WAT On Hold (V/F Pending)',
     wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/TCS/pages/2872182184/T268+SW',
     pills: [['pill-g','CS ACHIEVED'],['pill-a','MNB SLIPPED 8/5']],
-    anno: 'T268 (7/13 PSET): QS Qual incremental image 1.4 created, validated, and released to SCG teams. Working with Arch team to re-classify privacy settings for HW registers -- proposed new header release flow. -- [Prior 7/7]: QS+WA WAT testing in progress — failures across WarmBoot, ColdBoot, SC7, Concurrency, GPU MODS under debug. MODS IFT+RA gated on (1) Bug 5648656 Test525 (waiting SCG review) and (2) Bug 6404289 PeakTops (V/F curve issue; SCG sign-off needed). HWQA MNB: Coverage 99.24%, Pass 89.43%. SOC-EQOS vs FSI-EQOS gap under discussion. AAR mid-July planned. — T268 (6/23): CS milestone achieved. MNB/MG dates revised: MNB 6/13→8/5, MG 7/11→9/2 to accommodate Thor-Z RA/liquid-cool (420 TOPS / 84.3W POR). MODS IFT-RA ETA 6/30. MODS QS Qual package released to SIT; Cold/Warm boot runs initiated. HWQA MNB coverage 99.08%, pass 88.75%. Thor-Z Max-P SW implementation in progress. AAR consolidation in progress. T268 BL Weekly Sync (Jun 17 Confluence): Jira tasks created for NVBugs tracking; Inline PLC flashing/boot support in progress (Shankar). T268 MB1 Binary Releases page updated Jun 17. CP rev0.7 trending 6/29 (new VNM patterns). NVCAL DTS released 6/16 (Fmax w/o VNM ISINK); DTS with VNM ISINK for RA trending 7/10. POR: 360->420 TOPS (+11W). BNB Declared 5/28. ATS Nightly Jun 17 (Build #1090): linux_dev_nsr 488/510 passed; qnx_debug_sr 470/486 passed. Escalations ongoing: PwrCtrl, TMON, VMON, ASILNA, NFW flash, OTA. HSIO MNB electrical coverage blocked on CPrev0.4 (unfused OPT_PHY_PLL_SPEEDO_TRIM_NVHS); ~30 locally fused CPrev0.5/FTrev0.6 units as MNB mitigation. QS Qual L4T image released; dev-t268 branch repurposed from bringup to MODS stable branch for SCG/SLT releases.',
+    anno: 'T268 (7/20 Email Roopa): RA+QS WAT trending 7/24. Full WAT on hold waiting for updated V/F curve (ETA TBD). WAT testing coverage improved 70→80%, pass rate 30→55%. No HW issues sighted. AAR consolidation in progress — plan to host end of July. MNB milestone: 8/5. -- T268 (7/13 PSET): QS Qual incremental image 1.4 created, validated, and released to SCG teams. Working with Arch team to re-classify privacy settings for HW registers -- proposed new header release flow. -- [Prior 7/7]: QS+WA WAT testing in progress — failures across WarmBoot, ColdBoot, SC7, Concurrency, GPU MODS under debug. MODS IFT+RA gated on (1) Bug 5648656 Test525 (waiting SCG review) and (2) Bug 6404289 PeakTops (V/F curve issue; SCG sign-off needed). HWQA MNB: Coverage 99.24%, Pass 89.43%. SOC-EQOS vs FSI-EQOS gap under discussion. AAR mid-July planned. — T268 (6/23): CS milestone achieved. MNB/MG dates revised: MNB 6/13→8/5, MG 7/11→9/2 to accommodate Thor-Z RA/liquid-cool (420 TOPS / 84.3W POR). MODS IFT-RA ETA 6/30. MODS QS Qual package released to SIT; Cold/Warm boot runs initiated. HWQA MNB coverage 99.08%, pass 88.75%. Thor-Z Max-P SW implementation in progress. AAR consolidation in progress. T268 BL Weekly Sync (Jun 17 Confluence): Jira tasks created for NVBugs tracking; Inline PLC flashing/boot support in progress (Shankar). T268 MB1 Binary Releases page updated Jun 17. CP rev0.7 trending 6/29 (new VNM patterns). NVCAL DTS released 6/16 (Fmax w/o VNM ISINK); DTS with VNM ISINK for RA trending 7/10. POR: 360->420 TOPS (+11W). BNB Declared 5/28. ATS Nightly Jun 17 (Build #1090): linux_dev_nsr 488/510 passed; qnx_debug_sr 470/486 passed. Escalations ongoing: PwrCtrl, TMON, VMON, ASILNA, NFW flash, OTA. HSIO MNB electrical coverage blocked on CPrev0.4 (unfused OPT_PHY_PLL_SPEEDO_TRIM_NVHS); ~30 locally fused CPrev0.5/FTrev0.6 units as MNB mitigation. QS Qual L4T image released; dev-t268 branch repurposed from bringup to MODS stable branch for SCG/SLT releases.',
     meetings: [],
     risks: [
       {p:'h',t:'POR updated 360→420 TOPS (+11W: 73.3W→84.3W) -- dual RAM assist modes required; MNB schedule under review pending Liquid-Cool/Read-Assist mode timelines'},
@@ -2430,10 +2430,10 @@ const CHIP_DB = {
   },
   n2x: {
     title: 'N2x · CPU',
-    sub: 'Pre-Silicon · SW CM: Vivek Desikan · SOC FDI DONE · GPU TO Oct 17 · SOC TO Dec \'26',
+    sub: 'Pre-Silicon · SW CM: Vivek Desikan · SOC FDI DONE · T354G FNL 7/23 · SW Signoff 7/30 · GPU TO Oct 17',
     wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/TCS/pages/3228994147/T354+SW+AAR',
     pills: [['pill-a','SW SIGNOFF 7/30'],['pill-g','SOC FDI DONE']],
-    anno: 'N2x SoCV Infra (7/15 Confluence): Cosim DVALL milestone 7/24 -- X-Prop bring-up WIP trending 7/20 (Bug 6209326, initial tests passing but tars regression issues). C2C R4.2 release to Jade 7/24 (unblocks D3 Power Scenario verification; D3 verif expected close October). SysPV performance gap: N2X cosim BW lower than ESL in Store/Mix tests -- bugs 6107216, 6408971 in active debug with Jade. FPGA board now free for Nitro test runs (Bug 5868670). -- N2x Video SW (7/15 Confluence): L0 95% (538P/607T), L1 55% (1190P/2158T). FNL signed off with medium-risk items: NVDEC1/NVENC1 not yet tested on system FPGA (H3+NET06 booting -- pending workload tests); VPR support blocked Bug 5779834; GPU timer issue Bug 6182956 still present on H3. GPU Tapeout 10/17/2026, GPU Power-On 3/11/2027. -- Emulation (7/16): H4 Release tentative from Jade 07/20; H3 all configs (SoC_Trim/Full, SoC+GPU 111/Full) released to SW and HW teams. -- [7/14-15 EMU]: miniSOC G-die 97.94% pass rate (2775 pass, 77 fail). S-die+G-die: 93.88% pass rate. TOT tegrashell broken for emulation (Bug 6426896; fix WIP). Onslaught coherency 67.69%; multi-core support (Bug 6225515) ETA mid-July. H3+NET06-PFNL functional on QT and HAPS. -- [7/13 PSET]: Sim V7 released -- HFRP ticker perf issue; Jade SW fix provided. GPU fmodel integrated. Boot from NVMe switching to Marlin model. TinyLinux 6.14→6.18 LTS migration in progress. BaseOS sanity enabled dev-main and mod*. -- [7/7]: SOC FDI SNAPPED. SW signoff trending 7/30. D3 Cold approved; SOC tapeout targeting end of December. GB21B FNL 7/6. Windows multicore fixed; hypervisor gated on Bug 6339277. NVPOR: 474 total (226 committed). GFX FPGA testplan L0 86%, L1 99.8%.'
+    anno: 'N2x (7/20 Email Roopa): All teams unblocked on FPGA, making progress toward checkout by 7/30. T354G FNL 7/23. GB21B FNL snapped; SM IP FNL pushed to 9/21 (2b Trellis POR update). S-Die L0: 63% (was 58), L1: 45% (was 37) / G-Die L0: 67% (was 56), L1: 39% (was 29). Risk: USB/DP Tunneling blocked on Hybrid IPP bringup — daily debug ongoing. GFW L0:50%, L1:0% — PTimer regressions debug in progress. Windows: WinVOS w/ hypervisor up, GPU enumerated; DLA next. NVPOR: 474 total (3 Done; 225 committed; 19 in planning; 45 to-do). IAS/GFD pending 0.7 and 1.0 reviews — 24 open. -- N2x SoCV Infra (7/15 Confluence): Cosim DVALL milestone 7/24 -- X-Prop bring-up WIP trending 7/20 (Bug 6209326, initial tests passing but tars regression issues). C2C R4.2 release to Jade 7/24 (unblocks D3 Power Scenario verification; D3 verif expected close October). SysPV performance gap: N2X cosim BW lower than ESL in Store/Mix tests -- bugs 6107216, 6408971 in active debug with Jade. FPGA board now free for Nitro test runs (Bug 5868670). -- N2x Video SW (7/15 Confluence): L0 95% (538P/607T), L1 55% (1190P/2158T). FNL signed off with medium-risk items: NVDEC1/NVENC1 not yet tested on system FPGA (H3+NET06 booting -- pending workload tests); VPR support blocked Bug 5779834; GPU timer issue Bug 6182956 still present on H3. GPU Tapeout 10/17/2026, GPU Power-On 3/11/2027. -- Emulation (7/16): H4 Release tentative from Jade 07/20; H3 all configs (SoC_Trim/Full, SoC+GPU 111/Full) released to SW and HW teams. -- [7/14-15 EMU]: miniSOC G-die 97.94% pass rate (2775 pass, 77 fail). S-die+G-die: 93.88% pass rate. TOT tegrashell broken for emulation (Bug 6426896; fix WIP). Onslaught coherency 67.69%; multi-core support (Bug 6225515) ETA mid-July. H3+NET06-PFNL functional on QT and HAPS. -- [7/13 PSET]: Sim V7 released -- HFRP ticker perf issue; Jade SW fix provided. GPU fmodel integrated. Boot from NVMe switching to Marlin model. TinyLinux 6.14→6.18 LTS migration in progress. BaseOS sanity enabled dev-main and mod*. -- [7/7]: SOC FDI SNAPPED. SW signoff trending 7/30. D3 Cold approved; SOC tapeout targeting end of December. GB21B FNL 7/6. Windows multicore fixed; hypervisor gated on Bug 6339277. NVPOR: 474 total (226 committed). GFX FPGA testplan L0 86%, L1 99.8%.'
     meetings: [],
     risks: [
       {p:'h',t:'Display bring-up on H2 blocked by Jade HW bug -- fix expected this week'},
@@ -2489,16 +2489,16 @@ const CHIP_DB = {
   },
   t257: {
     title: 'T257 · Monet CPU',
-    sub: 'Pre-Silicon · SW CM: Vivek Desikan · BMW Award Pending · Tapeout Decision Deferred Jul 10',
+    sub: 'Program Wind-Down · SW CM: Vivek Desikan · BMW→Qualcomm · Closing SW Toward TO Validation',
     wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/TCS',
-    pills: [['pill-m','SETUP']],
-    anno: 'T257 (Monet): BMW design award pending; tapeout decision deferred to July 10 (7/7 status email). FPGA validation framework active.',
+    pills: [['pill-r','BMW→QUALCOMM'],['pill-a','SW WIND-DOWN']],
+    anno: 'T257/Monet (7/20 Email Roopa): BMW IVI program awarded to Qualcomm. Guidance: close all SW activities toward TO validation on T257 before putting on shelf. -- T257 (Monet): BMW design award pending; tapeout decision deferred to July 10 (7/7 status email). FPGA validation framework active.',
     meetings: [],
     risks: [
-      {p:'m',t:'BMW design award decision pending -- outcome may affect program scope/timeline'},
+      {p:'h',t:'BMW IVI program awarded to Qualcomm (7/20) -- SW wind-down in progress; close all activities toward TO validation before shelving'},
     ],
     checklist: [
-      {t:'BMW design award decision',owner:'Vivek Desikan',done:false},
+      {t:'BMW program wind-down: close all SW toward TO validation',owner:'Vivek Desikan',done:false},
       {t:'FPGA validation ongoing',owner:'DV team',done:false},
     ],
     emails: [
@@ -2533,10 +2533,10 @@ const CHIP_DB = {
   },
   t374: {
     title: 'T374 · Beacon',
-    sub: 'Post-Silicon · SW CM: Roopa · Pre-Si Window Compressed ~10-12wk · Lx Testplan Triage Active',
+    sub: 'Pre-Silicon · SW CM: Roopa · 10-12wk FPGA Validation Risk · Weekly Plan w/ Iris',
     wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/TCS',
     pills: [['pill-a','POST-SI']],
-    anno: 'T374/Beacon (7/13 PSET): Bringup in progress on Intel (N-1) CRB and PTL+GB207 platforms (Bug 6269597). RTX PRO 4000 SFF Blackwell successfully validated with Intel CRB/PTL platforms. Beacon RVP requirements drafting started, targeting delivery to Iris by end of July. FPGA Automation API requirements presented to Iris and NV FPGA teams -- workflow under scoping. Buildroot vs LiteLinux for SLT screening flow under assessment. -- [Prior 7/7]: SW pre-si window compressed to ~10-12 weeks due to late FPGA availability. Teams triaging Lx test plans.'
+    anno: 'T374/Beacon (7/20 Email Roopa): Pre-silicon remains the top risk — 10-12 weeks of FPGA validation. Key risks shared with Iris team; working on weekly execution plan to improve coordination across dependencies. -- T374/Beacon (7/13 PSET): Bringup in progress on Intel (N-1) CRB and PTL+GB207 platforms (Bug 6269597). RTX PRO 4000 SFF Blackwell successfully validated with Intel CRB/PTL platforms. Beacon RVP requirements drafting started, targeting delivery to Iris by end of July. FPGA Automation API requirements presented to Iris and NV FPGA teams -- workflow under scoping. Buildroot vs LiteLinux for SLT screening flow under assessment. -- [Prior 7/7]: SW pre-si window compressed to ~10-12 weeks due to late FPGA availability. Teams triaging Lx test plans.'
     meetings: [],
     risks: [
       {p:'h',t:'SW pre-silicon validation window compressed to ~10-12 weeks due to late FPGA availability (7/7) -- teams triaging Lx test plans to prioritize critical coverage before tapeout signoff'},
