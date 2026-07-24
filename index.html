@@ -566,6 +566,132 @@ mark{background:rgba(118,185,0,.25);color:var(--text);border-radius:2px;padding:
 /* -- Action Button -- */
 .act-btn{padding:8px 16px;border-radius:6px;border:none;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;font-family:inherit}
 .act-btn:hover{opacity:.85;transform:translateY(-1px)}
+
+/* ══ CM CHECKLIST PANEL ══════════════════════════════════════════════════════ */
+#v-cc { padding:0; }
+.cl-top{padding:12px 20px 0;background:var(--bg2);border-bottom:1px solid var(--border);}
+.cl-chip-bar-title{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:10px;}
+.cl-chip-cards{display:flex;gap:10px;overflow-x:auto;padding-bottom:14px;scrollbar-width:none;}
+.cl-chip-cards::-webkit-scrollbar{display:none}
+.cl-chip-card{flex-shrink:0;width:160px;border:1.5px solid var(--border);border-radius:10px;padding:10px 12px;cursor:pointer;background:var(--bg2);transition:all .15s;position:relative;}
+.cl-chip-card:hover{border-color:var(--border-h);box-shadow:0 2px 8px rgba(0,0,0,.18);}
+.cl-chip-card.cl-active{border-color:var(--ccc);background:rgba(var(--ccc-rgb),.07);box-shadow:0 2px 10px rgba(0,0,0,.2);}
+.cl-cc-name{font-size:13px;font-weight:700;}
+.cl-cc-full{font-size:10px;color:var(--muted);margin-top:1px;}
+.cl-cc-phase{font-size:9px;font-weight:600;padding:2px 6px;border-radius:10px;margin-top:6px;display:inline-block;}
+.cl-cc-progress{margin-top:8px;}
+.cl-cc-bar-wrap{height:4px;background:var(--border);border-radius:2px;overflow:hidden;}
+.cl-cc-bar{height:100%;border-radius:2px;}
+.cl-cc-pct{font-size:9px;color:var(--muted);margin-top:3px;}
+.cl-cc-next{font-size:9px;color:var(--text2);margin-top:4px;border-top:1px solid var(--border);padding-top:4px;}
+/* hero */
+.cl-hero{background:var(--bg3);border-bottom:1px solid var(--border);padding:10px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.cl-h-stat{text-align:center;min-width:64px;}
+.cl-h-val{font-size:20px;font-weight:700;line-height:1;}
+.cl-h-lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-top:3px;}
+.cl-h-div{width:1px;height:32px;background:var(--border);}
+.cl-h-alert{flex:1;min-width:200px;border-radius:8px;padding:8px 12px;font-size:11px;line-height:1.5;border:1px solid var(--border);}
+/* phase nav */
+.cl-phase-nav{background:var(--bg2);border-bottom:2px solid var(--border);padding:0 20px;display:flex;overflow-x:auto;scrollbar-width:none;}
+.cl-phase-nav::-webkit-scrollbar{display:none}
+.cl-ptab{padding:9px 13px;font-size:11px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;white-space:nowrap;display:flex;align-items:center;gap:5px;transition:color .15s;}
+.cl-ptab.cl-pon{color:var(--nv-green);border-bottom-color:var(--nv-green);}
+.cl-ptab .cl-pdot{width:6px;height:6px;border-radius:50%;}
+/* layout */
+.cl-main{display:grid;grid-template-columns:1fr 260px;min-height:400px;}
+.cl-gate-col{padding:12px 16px;border-right:1px solid var(--border);overflow-y:auto;max-height:calc(100vh - 380px);}
+.cl-side-col{padding:10px 12px;background:var(--bg3);overflow-y:auto;max-height:calc(100vh - 380px);}
+/* phase header */
+.cl-phase-hdr{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;margin-bottom:10px;}
+.cl-phase-hdr.done{background:rgba(118,185,0,.1);color:var(--nv-green);}
+.cl-phase-hdr.active{background:rgba(245,166,35,.1);color:var(--amber);}
+.cl-phase-hdr.upcoming{background:rgba(77,159,255,.1);color:var(--blue);}
+.cl-phase-hdr.future{background:var(--bg4);color:var(--muted);}
+.cl-phase-hdr.qual{background:rgba(77,159,255,.06);color:var(--blue);}
+.cl-ph-icon{font-size:16px;}
+.cl-ph-title{font-size:12px;font-weight:700;}
+.cl-ph-sub{font-size:10px;opacity:.75;margin-top:1px;}
+/* gates */
+.cl-gate{background:var(--bg2);border:1px solid var(--border);border-radius:8px;margin-bottom:8px;box-shadow:var(--shadow-sm);}
+.cl-gate.cl-done-g{border-left:3px solid var(--nv-green);}
+.cl-gate.cl-active-g{border-left:3px solid var(--amber);background:var(--amber-g);}
+.cl-gate.cl-next-g{border-left:3px solid var(--blue);}
+.cl-gate.cl-future-g{border-left:3px solid var(--border);}
+.cl-gate-hdr{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;cursor:pointer;user-select:none;border-radius:7px;}
+.cl-gate-hdr:hover{background:rgba(255,255,255,.03);}
+.cl-g-left{display:flex;align-items:center;gap:7px;}
+.cl-g-ico{width:26px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;}
+.cl-g-ico.cl-di{background:rgba(118,185,0,.12);}
+.cl-g-ico.cl-ai{background:rgba(245,166,35,.12);}
+.cl-g-ico.cl-ni{background:rgba(77,159,255,.12);}
+.cl-g-ico.cl-fi{background:var(--bg4);}
+.cl-g-title{font-size:11px;font-weight:600;color:var(--text);}
+.cl-g-date{font-size:9px;color:var(--muted);margin-top:1px;}
+.cl-g-right{display:flex;align-items:center;gap:6px;}
+.cl-g-badge{font-size:9px;font-weight:700;padding:2px 6px;border-radius:9px;}
+.cl-g-badge.cl-db{background:rgba(118,185,0,.15);color:var(--nv-green);}
+.cl-g-badge.cl-ab{background:rgba(245,166,35,.15);color:var(--amber);}
+.cl-g-badge.cl-nb{background:rgba(77,159,255,.15);color:var(--blue);}
+.cl-g-badge.cl-fb{background:var(--bg4);color:var(--muted);}
+.cl-g-count{font-size:10px;color:var(--muted);}
+.cl-g-chev{color:var(--muted);font-size:10px;transition:transform .2s;}
+.cl-gate.cl-open .cl-g-chev{transform:rotate(180deg);}
+.cl-gate-body{display:none;padding:0 10px 10px;}
+.cl-gate.cl-open .cl-gate-body{display:block;}
+.cl-g-divider{height:1px;background:var(--border);margin-bottom:8px;}
+/* checklist items */
+.cl-list{list-style:none;}
+.cl-item{display:flex;align-items:flex-start;gap:7px;padding:4px 0;border-bottom:1px solid var(--border);position:relative;}
+.cl-item:last-of-type{border-bottom:none;}
+.cl-item:hover .cl-del{opacity:1;}
+.cl-box{width:14px;height:14px;border-radius:3px;border:1.5px solid var(--border);background:var(--bg);flex-shrink:0;margin-top:1px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .12s;user-select:none;}
+.cl-box:hover{border-color:var(--nv-green);}
+.cl-box.cl-done{background:var(--nv-green);border-color:var(--nv-green);}
+.cl-box.cl-done::after{content:'✓';color:#000;font-size:9px;font-weight:800;}
+.cl-box.cl-blocked{background:var(--red-g);border-color:var(--red);}
+.cl-box.cl-blocked::after{content:'!';color:var(--red);font-size:9px;font-weight:800;}
+.cl-body{flex:1;min-width:0;}
+.cl-text{font-size:11px;color:var(--text2);line-height:1.4;outline:none;cursor:text;border-radius:3px;padding:1px 3px;margin:-1px -3px;}
+.cl-text:focus{background:rgba(77,159,255,.06);outline:1px solid var(--blue);}
+.cl-tags{display:flex;gap:3px;margin-top:2px;flex-wrap:wrap;}
+.cl-tag{font-size:9px;padding:1px 4px;border-radius:3px;font-weight:500;}
+.cl-tag.arch{background:rgba(77,159,255,.12);color:var(--blue);}
+.cl-tag.hw{background:rgba(245,166,35,.12);color:var(--amber);}
+.cl-tag.sw{background:rgba(118,185,0,.12);color:var(--nv-green);}
+.cl-tag.cross{background:rgba(255,77,77,.1);color:var(--red);}
+.cl-tag.fab{background:rgba(77,159,255,.08);color:var(--blue);}
+.cl-del{position:absolute;right:0;top:50%;transform:translateY(-50%);width:16px;height:16px;border-radius:3px;background:var(--red-g);color:var(--red);border:none;cursor:pointer;font-size:10px;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .15s;}
+.cl-add-btn{display:flex;align-items:center;gap:4px;margin-top:7px;padding:4px 7px;background:var(--bg4);border:1px dashed var(--border);border-radius:5px;cursor:pointer;font-size:11px;color:var(--muted);width:100%;transition:all .15s;}
+.cl-add-btn:hover{border-color:var(--nv-green);color:var(--nv-green);}
+/* phase panes */
+.cl-pane{display:none;}
+.cl-pane.cl-pon{display:block;}
+/* side panel */
+.cl-s-title{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:7px;}
+.cl-s-sec{margin-bottom:14px;}
+.cl-tl-list{display:flex;flex-direction:column;gap:3px;}
+.cl-tl-row{display:flex;align-items:center;justify-content:space-between;padding:3px 7px;border-radius:4px;border:1px solid var(--border);background:var(--bg2);}
+.cl-tl-name{font-size:10px;font-weight:600;color:var(--text2);}
+.cl-tl-date{font-size:9px;color:var(--muted);}
+.cl-tl-delta{font-size:9px;font-weight:700;}
+.cl-tl-row.cl-dr .cl-tl-name{color:var(--nv-green);}
+.cl-tl-row.cl-ar{background:var(--amber-g);border-color:rgba(245,166,35,.25);}
+.cl-tl-row.cl-nr .cl-tl-name{color:var(--blue);}
+.cl-tl-row.cl-pr{background:var(--blue-g);border-color:rgba(77,159,255,.2);}
+.cl-notes{width:100%;min-height:70px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:7px;font-size:11px;font-family:inherit;color:var(--text);resize:vertical;outline:none;}
+.cl-notes:focus{border-color:var(--nv-green);}
+.cl-notes-lbl{font-size:9px;color:var(--muted);margin-top:3px;}
+/* legend */
+.cl-legend{background:var(--bg3);border-top:1px solid var(--border);padding:8px 20px;display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start;}
+.cl-leg-g{display:flex;flex-direction:column;gap:3px;}
+.cl-leg-t{font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;}
+.cl-leg-items{display:flex;gap:8px;flex-wrap:wrap;}
+.cl-leg-i{display:flex;align-items:center;gap:3px;font-size:10px;color:var(--text2);}
+.cl-leg-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.cl-leg-divv{width:1px;height:32px;background:var(--border);}
+.cl-hint{text-align:center;padding:4px;font-size:10px;color:var(--muted);background:var(--bg2);border-top:1px solid var(--border);}
+.cl-toast{position:fixed;bottom:14px;right:14px;background:var(--bg2);border:1px solid var(--nv-green);color:var(--nv-green);padding:6px 12px;border-radius:6px;font-size:11px;z-index:9999;opacity:0;transition:opacity .2s;pointer-events:none;box-shadow:var(--shadow-sm);}
+
 </style>
 </head>
 <body>
@@ -956,33 +1082,92 @@ mark{background:rgba(118,185,0,.25);color:var(--text);border-radius:2px;padding:
     <!-- ================ CM CHECKLIST ================ -->
     <div id="v-cc" style="display:none">
 
-      <div class="sel-bar">
-        <div class="sel-pill on" onclick="setChipFilter(null,this)">All Programs</div>
-        <div class="sel-pill" onclick="setChipFilter('nr10x',this)">NR10x</div>
-        <div class="sel-pill" onclick="setChipFilter('gr10x',this)">GR10x</div>
-        <div class="sel-pill" onclick="setChipFilter('gr15x',this)">GR15x</div>
-        <div class="sel-pill" onclick="setChipFilter('fn10x',this)">FN10x</div>
-        <div class="sel-pill" onclick="setChipFilter('thorz',this)">ThorZ</div>
-        <div class="sel-pill" onclick="setChipFilter('tb500',this)">TB500</div>
-        <div class="sel-pill" onclick="setChipFilter('tb600',this)">TB600</div>
-        <div class="sel-pill" onclick="setChipFilter('n2x',this)">N2x</div>
-        <div class="sel-pill" onclick="setChipFilter('tcx10',this)">TCX10</div>
-        <div class="sel-pill" onclick="setChipFilter('t374',this)">T374</div>
-        <div class="sel-pill" onclick="setChipFilter('t257',this)">T257</div>
-        <div class="sel-pill" onclick="setChipFilter('t294',this)">T294</div>
+      <!-- chip selector -->
+      <div class="cl-top">
+        <div class="cl-chip-bar-title">Select Chip Program</div>
+        <div class="cl-chip-cards" id="cl-chip-cards"></div>
       </div>
 
-      <!-- Category sub-tabs -->
-      <div style="display:flex;gap:2px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:var(--r-sm);padding:3px;margin-bottom:18px;overflow-x:auto;scrollbar-width:none;width:fit-content;max-width:100%">
-        <div class="cc-ptab on" onclick="setCCCat('phase',this)">🔄 Pre/Post Silicon</div>
-        <div class="cc-ptab" onclick="setCCCat('daily',this)">🌅 Daily</div>
-        <div class="cc-ptab" onclick="setCCCat('weekly',this)">📅 Weekly</div>
-        <div class="cc-ptab" onclick="setCCCat('gate',this)">🚦 Gate Prep</div>
-        <div class="cc-ptab" onclick="setCCCat('setup',this)">🔧 Program Setup</div>
-        <div class="cc-ptab" onclick="setCCCat('newchip',this)">🆕 New Chip Setup</div>
+      <!-- hero strip -->
+      <div class="cl-hero" id="cl-hero">
+        <div class="cl-h-stat"><div class="cl-h-val" id="cl-h-phase" style="font-size:13px">—</div><div class="cl-h-lbl">Phase</div></div>
+        <div class="cl-h-div"></div>
+        <div class="cl-h-stat"><div class="cl-h-val" id="cl-h-next" style="color:var(--amber)">—</div><div class="cl-h-lbl">Days to Next Gate</div></div>
+        <div class="cl-h-div"></div>
+        <div class="cl-h-stat"><div class="cl-h-val" id="cl-h-done" style="color:var(--nv-green)">0</div><div class="cl-h-lbl">Done</div></div>
+        <div class="cl-h-div"></div>
+        <div class="cl-h-stat"><div class="cl-h-val" id="cl-h-pct" style="color:var(--nv-green)">0%</div><div class="cl-h-lbl">Complete</div></div>
+        <div class="cl-h-div"></div>
+        <div class="cl-h-alert" id="cl-h-alert">Select a chip above to begin.</div>
       </div>
 
-      <div id="cc-body"></div>
+      <!-- phase tabs -->
+      <div class="cl-phase-nav" id="cl-phase-nav"></div>
+
+      <!-- main content -->
+      <div class="cl-main">
+        <div class="cl-gate-col" id="cl-gate-col">
+          <div style="padding:30px;text-align:center;color:var(--muted);">Select a chip to load its checklist.</div>
+        </div>
+        <div class="cl-side-col">
+          <div class="cl-s-sec">
+            <div class="cl-s-title">Program Timeline</div>
+            <div class="cl-tl-list" id="cl-tl-list"><div style="color:var(--muted);font-size:11px;">Select a chip</div></div>
+          </div>
+          <div class="cl-s-sec">
+            <div class="cl-s-title">CM Notes <span id="cl-notes-lbl" style="color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0;font-size:9px;"></span></div>
+            <textarea class="cl-notes" id="cl-notes" placeholder="Notes saved per chip…" oninput="clSaveNotes()"></textarea>
+            <div class="cl-notes-lbl">Auto-saved · Per chip</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- legend -->
+      <div class="cl-legend">
+        <div class="cl-leg-g">
+          <div class="cl-leg-t">Gate Status</div>
+          <div class="cl-leg-items">
+            <div class="cl-leg-i"><div class="cl-leg-dot" style="background:var(--nv-green)"></div>Done</div>
+            <div class="cl-leg-i"><div class="cl-leg-dot" style="background:var(--amber)"></div>Active</div>
+            <div class="cl-leg-i"><div class="cl-leg-dot" style="background:var(--blue)"></div>Upcoming</div>
+            <div class="cl-leg-i"><div class="cl-leg-dot" style="border:1.5px solid var(--border);background:var(--bg)"></div>Future</div>
+          </div>
+        </div>
+        <div class="cl-leg-divv"></div>
+        <div class="cl-leg-g">
+          <div class="cl-leg-t">Task Tags</div>
+          <div class="cl-leg-items">
+            <div class="cl-leg-i"><span class="cl-tag arch">Arch</span>Architecture</div>
+            <div class="cl-leg-i"><span class="cl-tag hw">HW</span>Hardware</div>
+            <div class="cl-leg-i"><span class="cl-tag sw">SW</span>Software</div>
+            <div class="cl-leg-i"><span class="cl-tag cross">Cross</span>Cross-team</div>
+          </div>
+        </div>
+        <div class="cl-leg-divv"></div>
+        <div class="cl-leg-g">
+          <div class="cl-leg-t">Checkbox (click)</div>
+          <div class="cl-leg-items">
+            <div class="cl-leg-i"><div style="width:12px;height:12px;border-radius:3px;border:1.5px solid var(--border);background:var(--bg);"></div>Not started</div>
+            <div class="cl-leg-i"><div style="width:12px;height:12px;border-radius:3px;background:var(--nv-green);display:inline-flex;align-items:center;justify-content:center;font-size:8px;color:#000;font-weight:800;">✓</div>Done</div>
+            <div class="cl-leg-i"><div style="width:12px;height:12px;border-radius:3px;background:var(--red-g);border:1.5px solid var(--red);display:inline-flex;align-items:center;justify-content:center;font-size:8px;color:var(--red);font-weight:800;">!</div>Blocked</div>
+          </div>
+        </div>
+        <div class="cl-leg-divv"></div>
+        <div class="cl-leg-g">
+          <div class="cl-leg-t">Editing</div>
+          <div class="cl-leg-items">
+            <div class="cl-leg-i">Double-click text → edit inline · Hover → ✕ delete · ＋ Add item</div>
+          </div>
+        </div>
+        <div class="cl-leg-divv"></div>
+        <div class="cl-leg-g">
+          <div class="cl-leg-t">Key Terms</div>
+          <div class="cl-leg-items">
+            <div class="cl-leg-i">BU=Bring-Up · BGE=Base Good Enough · BNB=Base Not Bad · MNB=Metal Not Bad · FGI=First Good ICs · P-Rel=Production Release</div>
+          </div>
+        </div>
+      </div>
+      <div class="cl-hint">💡 Select chip · Click checkboxes (3 states) · Double-click text to edit · ＋ Add custom items · Notes auto-saved per chip</div>
     </div><!-- /cc -->
 
 
@@ -1248,6 +1433,7 @@ function priTag(p){return p==='h'?'<span class="pri-h">High</span>':p==='m'?'<sp
 
 function renderCC(){
   const body=document.getElementById('cc-body');
+  if(!body) return; // CC tab now uses embedded checklist — no legacy cc-body
   const chipKey=S.selChip?':'+S.selChip:'';
   const chip=S.selChip&&typeof CHIP_DB!=='undefined'?CHIP_DB[S.selChip]:null;
   const chipBanner=chip?`<div style="border-left:3px solid var(--amber);padding:8px 14px;border-radius:var(--r-sm);background:rgba(255,160,50,.08);margin-bottom:14px;font-size:12px;color:var(--text2)"><strong style="color:var(--text)">${chip.title}</strong> &nbsp;·&nbsp; ${chip.phase} &nbsp;·&nbsp; ${chip.sub.split('·').slice(1).join('·').trim()}</div>`:'';
@@ -2057,6 +2243,19 @@ function renderChipView(chipId) {
       </div></div>`;
   }
 
+  // Build trend card
+  let trendHtml = '';
+  if(d.trend && d.trend.length) {
+    const trendPill = s => s==='slipped'?'pill-r':s==='at risk'?'pill-a':s==='today'?'pill-a':'pill-g';
+    trendHtml = `<div class="g-card" style="margin-bottom:14px">
+      <div class="c-hdr"><span class="c-hdr-title">📈 Schedule Trend</span></div>
+      <div class="c-body" style="padding:0">
+        <table class="s-tbl"><thead><tr><th>Date</th><th>Milestone</th><th>Status</th></tr></thead><tbody>
+        ${d.trend.map(m=>`<tr><td style="white-space:nowrap;font-size:11px">${m.d}</td><td style="font-size:11px">${m.e}</td><td><span class="pill ${trendPill(m.s)}" style="font-size:9px">${m.s.toUpperCase()}</span></td></tr>`).join('')}
+        </tbody></table>
+      </div></div>`;
+  }
+
   document.getElementById('chip-body').innerHTML = `
     <div style="margin-bottom:16px">
       <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:6px">
@@ -2066,9 +2265,10 @@ function renderChipView(chipId) {
         <div style="height:100%;width:${pct}%;background:${pctColor};border-radius:4px;transition:width .6s ease"></div>
       </div>
     </div>
+    ${risksHtml}
     <div class="two-col">
-      <div>${stackHtml||'<div class="g-card" style="margin-bottom:14px"><div class="c-hdr"><span class="c-hdr-title">SW Stack</span></div><div class="c-body" style="padding:14px;color:var(--muted);font-size:12px">Stack details in live dashboard →</div></div>'}</div>
-      <div>${risksHtml}${signalsHtml}</div>
+      <div>${trendHtml||stackHtml||'<div class="g-card" style="margin-bottom:14px"><div class="c-hdr"><span class="c-hdr-title">SW Stack</span></div><div class="c-body" style="padding:14px;color:var(--muted);font-size:12px">Stack details in live dashboard →</div></div>'}</div>
+      <div>${signalsHtml}${trendHtml && stackHtml ? stackHtml : (!trendHtml && !stackHtml ? '' : '')}</div>
     </div>`;
 }
 
@@ -2132,7 +2332,14 @@ const CHIP_DB = {
     sub: 'Pre-Silicon · SW CM: Ranjani · FNL Jun 29, 2026 · PON Apr 2027',
     wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/NBS/overview?homepageId=2520514562',
     pills: [['pill-a','FNL AT RISK'],['pill-a','CO-EMU UNBLOCKING']],
-    anno: '<div style="width:100%;font-size:11px;line-height:1.75"><div style="display:grid;grid-template-columns:1fr 1fr;gap:20px"><div><div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;opacity:.75;margin-bottom:6px">📋 Highlights</div><ul style="margin:0;padding-left:14px"><li><b style="color:#d69e2e">[7/17 Slack]</b> Co-emu model progress: Pini&apos;s team signed off local NR10&harr;QM4 co-emu model, ran PRBS, physical links brought up. MSE standalone deliverables MET. Next: Prashanth/Yogev/Pini approving new forces &amp; reversals (Rosalind board mapping) -- link training not yet starting in co-emu (portState DOWN). Tracking nvbug 6075676.</li><li>NR10 ISM: ECO window close <b>7/24/2026</b>. Most baseline work DONE (synthesis, RTL checks, timing, fullchip timing all completed).</li><li>IAS 1.0 review (Bug 5662018): v0.7 done; <b>waiting sign-off from Suhas and Xiaoyang</b> for v1.0.</li><li>Physical location review WIP (Bug 6214925) &mdash; PFNL signoff done; ROSC/NMEAS tracking open.</li><li>Post-silicon debug readiness open (Bug 6441413). MODS not supported in NR10 &mdash; SCG will use SCANDEBUG.</li><li>GR152N DCAP fix integration DONE. CVB (Continuous Voltage Binning) enabling in progress (Bug 5766944).</li><li>NR10 Branching: dev migrated to dev-main by 7/6. FNL SW feature-complete 6/29 target passed.</li><li>Tapeout: Aug 31 planning &middot; Nov 30 real &middot; PON Apr 2027</li></ul></div><div><div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:#e53e3e;margin-bottom:6px">⚠ Risks</div><ul style="margin:0;padding-left:14px;color:#e53e3e"><li>IAS 1.0 sign-off blocked pending reviewers &mdash; Bug 5662018 still open; Shirley Liu tracking</li><li>NR10&harr;QM4 co-emu link-up slipped from end-of-June target (QTM4 lane mapping/INI + Rosalind mux diffs surfaced late) &mdash; physical links up locally; awaiting approved forces+reversals model (nvbug 6075676)</li><li>Post-silicon debug readiness (Bug 6441413) &mdash; open item for SCG bringup</li><li>nv-bug-report tool not yet established for Fusion</li><li>[7/16 Slack] DME clock issue identified in co-emu model &mdash; requires another model spin; further delaying NR10&harr;QM4 link training (nvbug 6075676)</li></ul></div></div></div>',
+    anno: '[Jul 24] ECO window close today. IAS 1.0 sign-off blocked — waiting on Suhas & Xiaoyang (Bug 5662018). NR10↔QM4 co-emu model spin needed (DME clock issue, nvbug 6075676). Post-silicon debug readiness open (Bug 6441413). GR152N DCAP fix DONE · CVB enabling in progress.',
+    trend: [
+      {d:'Jul 24',  e:'ECO Window Close',    s:'today'},
+      {d:'Nov 10',  e:'TO Freeze',           s:'tracking'},
+      {d:'Nov 20',  e:'Code Lock',           s:'tracking'},
+      {d:'Nov 30',  e:'Tape-Out',            s:'target'},
+      {d:'Apr 2027',e:'Power-On (PON)',      s:'target'},
+    ],
     meetings: [
       {time:'4:00 PM', title:'NR10 -- QM4 link-bring up', pill:'pill-r'},
       {time:'10:30 PM', title:'NR10 Branching Plan', pill:'pill-a'}
@@ -2189,6 +2396,15 @@ const CHIP_DB = {
     sub: 'Post-Silicon · SW CM: Ranjani · 99.6% Coverage · CWAT+BWAT DONE · No P0 Blockers · PRel Gated Control Run',
     wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/RubinSW/pages/2598145065',
     pills: [['pill-g','CWAT+BWAT DONE'],['pill-a','PRel GATED CTRL RUN']],
+    trend: [
+      {d:'Jul 28',  e:'v0.6 QS SW Full Drop',  s:'slipped'},
+      {d:'Aug 17',  e:'v0.8 Dev Drop',          s:'slipped'},
+      {d:'Sep 8',   e:'v0.8 Full Drop',         s:'slipped'},
+      {d:'Sep 24',  e:'v1.0 Dev Drop',          s:'tracking'},
+      {d:'Sep 30',  e:'P-Rel Target',           s:'tracking'},
+      {d:'Oct 3',   e:'GR100-A01P Power-On',    s:'target'},
+      {d:'Jan 2027',e:'GR150 (A01P) Power-On',  s:'target'},
+    ],
     anno: '[7/22 DL Exec Slack]: 48 SW blockers open as of 7/21 (Core Models 15, TRT-LLM 10, PyTorch 7, vLLM 5, SGLang 2, others). VR NVL72 schedule updated: v0.6 QS SW Full Drop slipped 7/24→7/28; v0.8 SW Dev Drop moved 8/10→8/17; v0.8 SW Full Drop moved 9/4→9/8; v1.0 Dev Drop remains 9/24; v1.0 Full Drop trends 11/6. GR150 POR changes approved for gr152G, integrated into A01P -- power-on planned January 2027. DLFW-Rubin switched to gpgpu-ext for CUDA 13.5 scope; PyTorch VR self-test pass rate comparable to GB200; distributed tests ~5% lower. vLLM L0 100%, L1 90%; SGLang behind vLLM; some workloads below 1x GB300. FlashInfer official Rubin release still side branch -- requested in v0.6.16 on 7/27. cuBLAS heuristics round 1 complete; 26.07/CUDA 13.4 U1 build planned as v0.8 Dev Drop source. cuDNN v9.25 for VR posted 7/20. -- [7/21 FW CI]: GR100 image-size overflow resolved on ps15 (FW_SUBMODULES_CI/48612) -- no code-shrink needed; build continuing normally. -- [7/19 Factory]: VR-NVL72 CR yield below &gt;90% target: L6 83% (assembly/NVLink failures), L10 78%, L11 100% (2/2). L10 assembly resumed after Lupine replacements addressed BF4 L6 HW issue. TS6 100% Vera-IST fallout traced to firmware/SBIOS/IST-vector revision locks; revised recipe avoids lock (keep SBIOS at CR version, Hynix-enabled 0.5 GPU firmware). -- GR10x (7/17 Slack): MSE boot fails after setting PORT disable mask for nvlink -- blocking 0.6 QA activities (kssoni). QS 0.6 branch: FSP component MRs 5229/5228 queued for integration (Conrad Turlik). -- (7/16-17 Confluence): R615/CUDA 13.4 Last CL Readiness -- 8 open bugs, active triaging but closure rate behind pace needed for 7/16 promotion deadline; 8 bugs pending QA details or triage. A01P Power-On: GR102G-A01P FabOut 2026-09-03; GR100-A01P PON 2026-10-03; GR100-A01Q PON 2026-09-23; GR100-A01R TBA. -- NSM task hang (7/16 Slack): Reset failures due to NSM task acquiring GP_BUFF_Lock then hanging -- blocking all tasks requiring the lock (VDM/Secureboot/PLDM/SPDM affected); under debug. -- [7/15 DL Exec Sync]: 35 SW blockers open (Core Models 13, PyTorch 7, vLLM 5, SGLang 2, others). VR NVL72 v0.6 QS SW Full Drop AT RISK: 7/24 trending to week of 7/27. DLFW-Rubin AT RISK: Fractal runners unstable/scarce (TS1 fractal-ts1-062/068 blocked by NFS/scratch-write Bug 6441264); TS2 boards no ETA (factory throughput slow). cuBLAS Rubin functional support complete (CUDA 13.4 GA). VR v0.8 Dev Drop 8/10, Full Drop 9/4 on schedule. vLLM/SGLang: R100 89%/100%/85% (kernel/L0/L1), VR200 91%/100%/92%. -- [Prior 7/13 SCG PROD VR]: Overall coverage 99.6%. Final CWAT and BWAT completed. No P0 Critical blockers. Chip PREL gated by Control Run -- 1xTBTI+HCI done; SHTOL Run2 trending 8/14; 13x part data 8/2. All P0/P0.5 features enabled; L11 validation in progress. SOC completion 7/10 (WIP). OVERT/LDIV Thermal Gap WAR: 3ms OVERT filter un-gates production. Fractal scoping WIP. Strata/NVL72: cracked vias in VGT PCBs; flash-plate process switch underway. -- [Prior 6/22] PS FGI + PRel trending 6/30. CWAT 98%, BWAT 80%. NVDEC Bug 5881444 WAR approved FREL_1; r615 fix pending. r615 Dev Drop 1 6/29, release 7/9.',
     meetings: [],
     stack: [],
@@ -2576,6 +2792,425 @@ const CHIP_DB = {
   }
 })();
 
+
+
+
+// ══════════════════════════════════════════════════════════════════════════════
+//  CM CHECKLIST — embedded panel
+// ══════════════════════════════════════════════════════════════════════════════
+(function(){
+const CL_TODAY = new Date('2026-07-24');
+
+function clDays(d){ if(!d) return null; return Math.round((new Date(d)-CL_TODAY)/86400000); }
+function clFmt(d){ if(!d) return 'TBD'; return new Date(d).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); }
+function clDelta(n){ if(n===null) return ''; if(n<0) return Math.abs(n)+'d ago'; if(n===0) return 'TODAY'; return n+'d'; }
+function clEsc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+const CL_CHIPS = {
+  NR10:{label:'NR10',fullName:'NVLink Fusion',color:'#5a9100',phase:'post-fnl',
+    alert:'<strong>Post-FNL · In PnR/Layout.</strong> FNL Jun 29 ✅, ECO window closed Jul 24. SW baseline freeze needed by Sep 29 (BU-6M). A01 TapeOut Nov 30.',
+    alertBg:'rgba(90,145,0,.07)',alertBorder:'rgba(90,145,0,.25)',
+    dates:{fnl:'2026-06-29',ecoClose:'2026-07-24',toFreeze:'2026-11-10',codeLock:'2026-11-20',tapeOut:'2026-11-30',maskAppr:'2026-12-07',fabOut:'2027-02-26',powerOn:'2027-03-29',bge:'2027-04-26',esFgi:'2027-05-10',bnb:'2027-07-19',qsFgi:'2027-08-13',mnb:'2027-08-19',metalGood:'2027-09-26',prel:'2027-09-30'}},
+  GR10x:{label:'GR10x',fullName:'Rubin (GR100)',color:'#f5a623',phase:'qual',
+    alert:'⚠️ <strong>QS Phase · P-Rel in progress.</strong> VR 0.6 QS SW Full Drop slipped 7/24→7/28. 48 SW blockers as of 7/21 (Core Models 15, TRT-LLM 10, PyTorch 7…). R615+CUDA 13.4 last-CL: 4 bugs still in triage. P-Rel huddle today (7/24) with Rahul. GR15x (Rubin Ultra) is a SEPARATE chip — TapeOut Jun 2, PO Jan 2027.',
+    alertBg:'rgba(245,166,35,.07)',alertBorder:'rgba(245,166,35,.25)',
+    dates:{fnl:'2025-03-01',ecoClose:'2025-03-10',toFreeze:'2025-03-20',codeLock:'2025-03-25',tapeOut:'2025-04-01',maskAppr:'2025-04-08',fabOut:'2025-10-01',powerOn:'2026-01-15',bge:'2026-02-15',esFgi:'2026-03-01',bnb:'2026-05-15',qsFgi:'2026-07-28',mnb:null,metalGood:null,prel:'2026-09-30'}},
+  N2x:{label:'N2x',fullName:'Tegra N2x',color:'#4d9fff',phase:'post-fnl',
+    alert:'<strong>Pre-FNL → FNL Aug 25.</strong> 1NL due Aug 15. TapeOut Sep 15. Focus on SW PIC assignments and interposer strategy now.',
+    alertBg:'rgba(77,159,255,.06)',alertBorder:'rgba(77,159,255,.2)',
+    dates:{fnl:'2026-08-25',ecoClose:'2026-09-01',toFreeze:'2026-09-08',codeLock:'2026-09-12',tapeOut:'2026-09-15',maskAppr:'2026-09-22',fabOut:'2026-12-10',powerOn:'2027-01-20',bge:'2027-02-15',esFgi:'2027-03-01',bnb:'2027-05-15',qsFgi:'2027-06-01',mnb:'2027-06-15',metalGood:'2027-07-30',prel:'2027-08-15'}},
+  GR15x:{label:'GR15x',fullName:'Rubin Ultra (GR150)',color:'#9b59b6',phase:'fab',
+    alert:'<strong>Fab Phase · TapeOut Jun 2, 2026 ✅</strong> Preparing for Power-On target Jan 2027. Board builds being planned.',
+    alertBg:'rgba(155,89,182,.07)',alertBorder:'rgba(155,89,182,.25)',
+    dates:{fnl:'2025-06-01',ecoClose:'2025-06-10',toFreeze:'2025-11-15',codeLock:'2025-11-25',tapeOut:'2026-06-02',maskAppr:'2026-06-09',fabOut:'2026-10-01',powerOn:'2027-01-01',bge:null,esFgi:null,bnb:null,qsFgi:null,mnb:null,metalGood:null,prel:null}},
+  TB600:{label:'TB600',fullName:'Tegra TB600',color:'#1abc9c',phase:'planning',
+    alert:'<strong>Early Planning Phase.</strong> Platform POR and PIC identification in early stages. TapeOut ~18 months away.',
+    alertBg:'rgba(26,188,156,.06)',alertBorder:'rgba(26,188,156,.2)',
+    dates:{fnl:'2027-09-01',ecoClose:'2027-09-15',toFreeze:'2028-02-01',codeLock:'2028-02-10',tapeOut:'2028-02-20',maskAppr:'2028-02-27',fabOut:'2028-06-01',powerOn:'2028-07-15',bge:null,esFgi:null,bnb:null,qsFgi:null,mnb:null,metalGood:null,prel:null}}
+};
+
+const CL_PHASE_META=[
+  {id:'planning',label:'Pre-FNL Setup',icon:'🗂️',style:'upcoming'},
+  {id:'post-fnl',label:'Post-FNL → TapeOut',icon:'📐',style:'active'},
+  {id:'fab',label:'Fab Phase',icon:'🏭',style:'upcoming'},
+  {id:'bringup',label:'Bring-Up',icon:'⚡',style:'active'},
+  {id:'validation',label:'ES Validation',icon:'🔬',style:'qual'},
+  {id:'qual',label:'Qual → P-Rel',icon:'🏁',style:'future'}
+];
+const CL_PHASE_ORDER=['planning','post-fnl','fab','bringup','validation','qual','prel'];
+
+const CL_TEMPLATE={
+  planning:[
+    {gateId:'clg-pl-1',title:'Platform POR & Architecture',icon:'🏗️',dateKey:'fnl',datelabel:'Due by FNL',items:[
+      {id:'clp1',text:'Platform POR review — define all platform types (SLT, Module SLT, L4T Power, Auto, Product)',tags:['arch']},
+      {id:'clp2',text:'Identify board team PICs — Arch PICs and LDEs for all platforms',tags:['arch']},
+      {id:'clp3',text:'Identify SW PICs — Chip SW and Platform SW owners',tags:['sw']},
+      {id:'clp4',text:'Platform RFE Sheet created — SW-visible feature requests compiled',tags:['sw','arch']},
+      {id:'clp5',text:'Review Platform POR with SW team',tags:['sw']},
+    ]},
+    {gateId:'clg-pl-2',title:'Interposer & PIC Alignment',icon:'🔧',dateKey:'fnl',datelabel:'Due BU-4M',items:[
+      {id:'clp6',text:'Interposer system strategy — define bring-up plan (SW + Board + System)',tags:['cross','hw']},
+      {id:'clp7',text:'Platform priority rank for bring-up — which boards get first SW attention',tags:['arch','sw']},
+      {id:'clp8',text:'NPI mailing list sign-up — CM and key SW owners enrolled',tags:['sw']},
+    ]}
+  ],
+  'post-fnl':[
+    {gateId:'clg-pf-1',title:'SW Bring-Up Baseline Freeze',icon:'💾',dateKey:'toFreeze',datelabel:'Due by TO Freeze',items:[
+      {id:'clpf1',text:'Pinmux spreadsheet + IO MUX config tables — per-platform configs locked against FNL netlist',tags:['hw','sw']},
+      {id:'clpf2',text:'Power rails ramp delay spec — power sequencing finalized; thermal shutdown thresholds locked',tags:['hw','sw']},
+      {id:'clpf3',text:'Memory / RAM_CODE table — SKU-to-memory mapping documented',tags:['sw']},
+      {id:'clpf4',text:'Design delta doc complete — all design changes vs predecessor chip documented',tags:['arch']},
+      {id:'clpf5',text:'Ethernet MAC alignment — MAC address assignment strategy finalized',tags:['sw']},
+    ]},
+    {gateId:'clg-pf-2',title:'HW Build Planning',icon:'🏗️',dateKey:'tapeOut',datelabel:'Due before TO',items:[
+      {id:'clpf6',text:'Primary & alternate component lists finalized — BOM with fallbacks',tags:['hw']},
+      {id:'clpf7',text:'NVPN creation — NVIDIA part numbers assigned for all components',tags:['hw']},
+      {id:'clpf8',text:'Demand collection — build quantities from HWQA, SWQA, labs, partners',tags:['hw']},
+      {id:'clpf9',text:'Component securing — long-lead item orders placed',tags:['hw']},
+      {id:'clpf10',text:'Boards planning XL published — quantities, owners, timeline per board type',tags:['hw']},
+      {id:'clpf11',text:'Platform combos vs SSG aligned — combination matrix aligned with customer commitments',tags:['cross']},
+    ]},
+    {gateId:'clg-pf-3',title:'TapeOut / Code Lock Readiness',icon:'🔐',dateKey:'tapeOut',datelabel:'CM sign-off',items:[
+      {id:'clpf12',text:'SW bring-up package baseline locked — kernel config, DTB, CBL frozen',tags:['sw']},
+      {id:'clpf13',text:'SW feature list for customer engagement drafted',tags:['sw']},
+      {id:'clpf14',text:'CM TapeOut sign-off — CM review and sign-off before TO submission',tags:['cross']},
+    ]}
+  ],
+  fab:[
+    {gateId:'clg-fab-1',title:'Board Build Kickoff',icon:'🔬',dateKey:'maskAppr',datelabel:'Post Mask Approval',items:[
+      {id:'clf1',text:'Board build order triggered — A01 build initiated with BOM confirmed',tags:['hw']},
+      {id:'clf2',text:'Android/Auto platform validation plan complete',tags:['sw']},
+      {id:'clf3',text:'Debug infrastructure ordered — JTAG probes, DAQ equipment, licenses',tags:['hw']},
+      {id:'clf4',text:'HDC/BDC/PDC bring-up planning complete',tags:['hw']},
+    ]},
+    {gateId:'clg-fab-2',title:'Power-On Readiness',icon:'📬',dateKey:'fabOut',datelabel:'At Fab Out',items:[
+      {id:'clf5',text:'MODS coverage vs screening release timeline aligned',tags:['sw']},
+      {id:'clf6',text:'Chip & Board Screening plan finalized (BU-3W)',tags:['cross']},
+      {id:'clf7',text:'Bring-up team briefed — all Power-On owners onboarded with roles and lab access',tags:['sw','hw']},
+      {id:'clf8',text:'Power-On readiness review passed — CM sign-off',tags:['cross']},
+    ]}
+  ],
+  bringup:[
+    {gateId:'clg-bu-1',title:'Power-On Execution',icon:'⚡',dateKey:'powerOn',datelabel:'From Power-On day',items:[
+      {id:'clbu1',text:'Board prioritization plan active — allocation priorities confirmed',tags:['hw','sw']},
+      {id:'clbu2',text:'Reworks/design changes communication — reworks communicated with mix-and-match matrix',tags:['cross']},
+      {id:'clbu3',text:'Mobile sanity coverage confirmed — HWQA/SWQA platforms available',tags:['sw']},
+      {id:'clbu4',text:'Prod Mode fused parts alignment — timeline aligned before ES boards built wide',tags:['cross']},
+    ]},
+    {gateId:'clg-bu-2',title:'Bug Triage & BGE',icon:'🐛',dateKey:'bge',datelabel:'Target: BGE gate',items:[
+      {id:'clbu5',text:'Bug triage workflow live — NVBug cadence; P1/P2 owners assigned; war-room cadence set',tags:['sw']},
+      {id:'clbu6',text:'RAM repaired parts — HWQA/SWQA boards tracked and distributed',tags:['hw']},
+      {id:'clbu7',text:'Base Good Enough (BGE) criteria met and signed off',tags:['cross']},
+    ]}
+  ],
+  validation:[
+    {gateId:'clg-val-1',title:'ES Validation — ES FGI to BNB',icon:'📋',dateKey:'esFgi',datelabel:'From ES FGI',items:[
+      {id:'clv1',text:'Platform validation plan executing — all platform validation tests running',tags:['sw']},
+      {id:'clv2',text:'MODS coverage executing — MODS tests running on ES parts; weekly reports',tags:['sw']},
+      {id:'clv3',text:'Risk Wafer Start confirmed',tags:['fab']},
+    ]},
+    {gateId:'clg-val-2',title:'Base Not Bad (BNB)',icon:'🏅',dateKey:'bnb',datelabel:'BNB target',items:[
+      {id:'clv4',text:'All P1 functional bugs resolved or SW WAR documented',tags:['sw']},
+      {id:'clv5',text:'SW WARs documented in errata — all workarounds published to SSG/customers',tags:['sw']},
+      {id:'clv6',text:'BNB criteria review passed — go/no-go for QS build',tags:['cross']},
+    ]}
+  ],
+  qual:[
+    {gateId:'clg-q-1',title:'Qualification — QS FGI / MNB',icon:'📦',dateKey:'qsFgi',datelabel:'From QS FGI',items:[
+      {id:'clq1',text:'QS parts available — system qualification tests running',tags:['sw']},
+      {id:'clq2',text:'Metal Not Bad (MNB) criteria met',tags:['fab']},
+      {id:'clq3',text:'Customer deliverables draft ready — engineering BSP draft published for QS evaluation',tags:['sw']},
+    ]},
+    {gateId:'clg-q-2',title:'P-Rel Sign-Off',icon:'🏆',dateKey:'prel',datelabel:'P-Rel target',items:[
+      {id:'clq4',text:'All P1 bugs closed or WNF/WAR signed off by management',tags:['sw']},
+      {id:'clq5',text:'Production test signoffs complete — SLT, SCP, CP executed and signed',tags:['cross']},
+      {id:'clq6',text:'Final SW feature list published to SSG',tags:['sw']},
+      {id:'clq7',text:'Customer BSP/SDK shipped to all partner recipients',tags:['sw']},
+      {id:'clq8',text:'SOL P-Rel management sign-off — chip enters production',tags:['cross']},
+    ]}
+  ]
+};
+
+let clCurrentChip=null;
+function clKey(ch){ return 'cm_cl_'+ch+'_v2'; }
+function clLoad(ch){ try{return JSON.parse(localStorage.getItem(clKey(ch))||'{}')}catch(e){return{}} }
+function clSave(ch,s){ localStorage.setItem(clKey(ch),JSON.stringify(s)); }
+function clSet(ch,k,v){ const s=clLoad(ch); s[k]=v; clSave(ch,s); }
+function clDel(ch,k){ const s=clLoad(ch); delete s[k]; clSave(ch,s); }
+
+function clPhaseLabel(p){
+  const m={planning:'📋 Planning','post-fnl':'📐 Post-FNL',fab:'🏭 Fab',bringup:'⚡ Bring-Up',validation:'🔬 ES Val',qual:'🏁 Qual/P-Rel',prel:'🎉 P-Rel Done'};
+  return m[p]||p;
+}
+function clGetNextDays(chip){
+  const d=chip.dates;
+  for(const date of [d.fnl,d.ecoClose,d.toFreeze,d.tapeOut,d.fabOut,d.powerOn,d.bge,d.esFgi,d.bnb,d.qsFgi,d.mnb,d.prel]){
+    if(!date) continue; const n=clDays(date); if(n>=0) return n;
+  }
+  return null;
+}
+function clCountProgress(chipId){
+  const s=clLoad(chipId); let done=0,total=0;
+  Object.values(CL_TEMPLATE).forEach(gates=>gates.forEach(gate=>{
+    gate.items.forEach(it=>{total++; if(s['clck_'+it.id]==='done') done++;});
+    (s['clcust_'+gate.gateId]||[]).forEach(ci=>{total++; if(s['clck_cust_'+ci.id]==='done') done++;});
+  }));
+  return{done,total};
+}
+function clGetNextGateTxt(chip){
+  const d=chip.dates;
+  const pairs=[['FNL',d.fnl],['ECO',d.ecoClose],['TO Freeze',d.toFreeze],['TapeOut',d.tapeOut],['Fab Out',d.fabOut],['Power-On',d.powerOn],['BGE',d.bge],['ES FGI',d.esFgi],['BNB',d.bnb],['QS FGI',d.qsFgi],['MNB',d.mnb],['P-Rel',d.prel]];
+  for(const[lbl,date] of pairs){ if(!date) continue; const n=clDays(date); if(n>=0) return 'Next: '+lbl+' in '+n+'d'; }
+  return '🎉 All milestones passed';
+}
+
+function clRenderCards(){
+  const el=document.getElementById('cl-chip-cards');
+  if(!el) return;
+  el.innerHTML=Object.entries(CL_CHIPS).map(([id,c])=>{
+    const{done,total}=clCountProgress(id);
+    const pct=total?Math.round(done/total*100):0;
+    return `<div class="cl-chip-card${id===clCurrentChip?' cl-active':''}" style="--ccc:${c.color};" onclick="clSelectChip('${id}')">
+      <div class="cl-cc-name" style="color:${c.color}">${c.label}</div>
+      <div class="cl-cc-full">${c.fullName}</div>
+      <div class="cl-cc-phase" style="background:rgba(var(--ccc-rgb,128,128,128),.1);color:${c.color};">${clPhaseLabel(c.phase)}</div>
+      <div class="cl-cc-progress">
+        <div class="cl-cc-bar-wrap"><div class="cl-cc-bar" style="width:${pct}%;background:${c.color};"></div></div>
+        <div class="cl-cc-pct">${done}/${total} · ${pct}%</div>
+      </div>
+      <div class="cl-cc-next">${clGetNextGateTxt(c)}</div>
+    </div>`;
+  }).join('');
+}
+
+function clSelectChip(chipId){
+  clCurrentChip=chipId;
+  clRenderCards();
+  const chip=CL_CHIPS[chipId];
+  clUpdateHero(chipId,chip);
+  clRenderPhaseTabs(chipId,chip);
+  clRenderGates(chipId,chip);
+  clUpdateSide(chipId,chip);
+  const s=clLoad(chipId);
+  const na=document.getElementById('cl-notes'); if(na) na.value=s._notes||'';
+  const nl=document.getElementById('cl-notes-lbl'); if(nl) nl.textContent='for '+chip.label;
+}
+
+function clUpdateHero(chipId,chip){
+  const{done,total}=clCountProgress(chipId);
+  const pct=total?Math.round(done/total*100):0;
+  const nd=clGetNextDays(chip);
+  const el=(id)=>document.getElementById(id);
+  if(el('cl-h-phase')){ el('cl-h-phase').textContent=clPhaseLabel(chip.phase); el('cl-h-phase').style.color=chip.color; }
+  if(el('cl-h-next')){ el('cl-h-next').textContent=nd!==null?nd+'d':'—'; el('cl-h-next').style.color=nd!==null&&nd<30?'var(--red)':nd!==null&&nd<90?'var(--amber)':'var(--blue)'; }
+  if(el('cl-h-done')) el('cl-h-done').textContent=done;
+  if(el('cl-h-pct')){ el('cl-h-pct').textContent=pct+'%'; }
+  const ha=el('cl-h-alert');
+  if(ha){ ha.innerHTML=chip.alert; ha.style.background=chip.alertBg; ha.style.border='1px solid '+chip.alertBorder; }
+}
+
+function clRenderPhaseTabs(chipId,chip){
+  const nav=document.getElementById('cl-phase-nav'); if(!nav) return;
+  const curIdx=CL_PHASE_ORDER.indexOf(chip.phase);
+  nav.innerHTML=CL_PHASE_META.map((pm,i)=>{
+    const isDone=i<curIdx, isAct=pm.id===chip.phase;
+    const dotColor=isDone?'var(--nv-green)':isAct?chip.color:'var(--border)';
+    return `<div class="cl-ptab${i===0?' cl-pon':''}" id="cl-ptab-${i}" onclick="clSwitchTab(${i})">
+      <span class="cl-pdot" style="background:${dotColor};"></span>${pm.icon} ${pm.label}${isDone?' ✓':''}
+    </div>`;
+  }).join('');
+  clSwitchTab(0);
+}
+
+function clSwitchTab(idx){
+  document.querySelectorAll('.cl-ptab').forEach((t,i)=>t.classList.toggle('cl-pon',i===idx));
+  document.querySelectorAll('.cl-pane').forEach((p,i)=>p.classList.toggle('cl-pon',i===idx));
+}
+
+function clRenderGates(chipId,chip){
+  const col=document.getElementById('cl-gate-col'); if(!col) return;
+  const s=clLoad(chipId);
+  const curIdx=CL_PHASE_ORDER.indexOf(chip.phase);
+  let html='';
+  CL_PHASE_META.forEach((pm,pi)=>{
+    const isDone=pi<curIdx, isAct=pm.id===chip.phase;
+    const phStyle=isDone?'done':isAct?'active':pm.style;
+    const gates=CL_TEMPLATE[pm.id]||[];
+    let gHtml='';
+    gates.forEach((gate,gi)=>{
+      const gd=gate.dateKey?chip.dates[gate.dateKey]:null;
+      const gStyle=isDone?'cl-done-g':isAct?'cl-active-g':'cl-next-g cl-future-g';
+      const bCls=isDone?'cl-db':isAct?'cl-ab':'cl-nb cl-fb';
+      const iCls=isDone?'cl-di':isAct?'cl-ai':'cl-ni cl-fi';
+      const bLbl=isDone?'✓ DONE':isAct?'ACTIVE':gd&&clDays(gd)!==null?clDays(gd)+'d':'FUTURE';
+      const allItems=[...gate.items,...(s['clcust_'+gate.gateId]||[])];
+      const doneC=allItems.filter(it=>{
+        const k=it.id.startsWith('clcust')?'clck_cust_'+it.id:'clck_'+it.id;
+        return s[k]==='done';
+      }).length;
+      let iHtml=allItems.map(item=>{
+        const ckK=item.id.startsWith('clcust')?'clck_cust_'+item.id:'clck_'+item.id;
+        const ckV=s[ckK]||'';
+        const bCl=ckV==='done'?'cl-done':ckV==='blocked'?'cl-blocked':'';
+        const tHtml=(item.tags||[]).map(t=>`<span class="cl-tag ${t}">${t}</span>`).join('');
+        return `<li class="cl-item" id="clci-${item.id}">
+          <div class="cl-box ${bCl}" onclick="clToggle('${chipId}','${item.id}',this)"></div>
+          <div class="cl-body">
+            <div class="cl-text" contenteditable="true" spellcheck="false"
+              onblur="clSaveTxt('${chipId}','${item.id}',this)">${clEsc(s['cltxt_'+item.id]||item.text)}</div>
+            <div class="cl-tags">${tHtml}</div>
+          </div>
+          <button class="cl-del" onclick="clDelItem('${chipId}','${gate.gateId}','${item.id}')" title="Delete">✕</button>
+        </li>`;
+      }).join('');
+      const isOpen=(isDone||isAct)&&gi===0;
+      gHtml+=`<div class="cl-gate ${gStyle}${isOpen?' cl-open':''}" id="${gate.gateId}">
+        <div class="cl-gate-hdr" onclick="clToggleGate(this.parentElement)">
+          <div class="cl-g-left">
+            <div class="cl-g-ico ${iCls}">${gate.icon}</div>
+            <div>
+              <div class="cl-g-title">${gate.title}</div>
+              <div class="cl-g-date">${gate.datelabel}${gd?' · '+clFmt(gd)+(clDays(gd)!==null?' · '+clDelta(clDays(gd)):''):''}  </div>
+            </div>
+          </div>
+          <div class="cl-g-right">
+            <div class="cl-g-count" id="clgcnt-${gate.gateId}">${doneC}/${allItems.length} done</div>
+            <div class="cl-g-badge ${bCls}">${bLbl}</div>
+            <div class="cl-g-chev">▼</div>
+          </div>
+        </div>
+        <div class="cl-gate-body">
+          <div class="cl-g-divider"></div>
+          <ul class="cl-list" id="clcl-${gate.gateId}">${iHtml}</ul>
+          <button class="cl-add-btn" onclick="clAddItem('${chipId}','${gate.gateId}')">＋ Add item</button>
+        </div>
+      </div>`;
+    });
+    const sub=clPhaseSub(pm.id,chip);
+    html+=`<div class="cl-pane" id="cl-pane-${pi}">
+      <div class="cl-phase-hdr ${phStyle}">
+        <div class="cl-ph-icon">${pm.icon}</div>
+        <div><div class="cl-ph-title">${pm.label}${isDone?' — Complete ✓':isAct?' — Active Now':''}</div>
+        <div class="cl-ph-sub">${sub}</div></div>
+      </div>
+      ${gHtml||'<div style="color:var(--muted);padding:20px;text-align:center;">No gates for this phase.</div>'}
+    </div>`;
+  });
+  col.innerHTML=html;
+  document.querySelectorAll('.cl-pane')[0]?.classList.add('cl-pon');
+}
+
+function clPhaseSub(phaseId,chip){
+  const d=chip.dates;
+  const m={planning:'FNL: '+clFmt(d.fnl),'post-fnl':'FNL: '+clFmt(d.fnl)+' → TO: '+clFmt(d.tapeOut)+' ('+clDelta(clDays(d.tapeOut))+')',fab:'TapeOut: '+clFmt(d.tapeOut)+' → Fab Out: '+clFmt(d.fabOut),bringup:'Power-On: '+clFmt(d.powerOn)+' ('+clDelta(clDays(d.powerOn))+')',validation:'ES FGI: '+clFmt(d.esFgi)+' → BNB: '+clFmt(d.bnb),qual:'QS FGI: '+clFmt(d.qsFgi)+' → P-Rel: '+clFmt(d.prel)};
+  return m[phaseId]||'';
+}
+
+function clUpdateSide(chipId,chip){
+  const d=chip.dates;
+  const ms=[['FNL',d.fnl],['ECO Close',d.ecoClose],['TO Freeze',d.toFreeze],['Code Lock',d.codeLock],['A01 TapeOut',d.tapeOut],['Mask Appr.',d.maskAppr],['Fab Out',d.fabOut],['⚡ Power-On',d.powerOn],['BGE',d.bge],['ES FGI',d.esFgi],['BNB',d.bnb],['QS FGI',d.qsFgi],['MNB',d.mnb],['Metal Good',d.metalGood],['🏁 P-Rel',d.prel]];
+  const el=document.getElementById('cl-tl-list'); if(!el) return;
+  el.innerHTML=ms.filter(m=>m[1]).map(([lbl,date])=>{
+    const n=clDays(date);
+    const cls=n<0?'cl-dr':n===0?'cl-ar':n<180?'cl-nr':'cl-pr';
+    const col=n<0?'var(--nv-green)':n<30?'var(--red)':n<90?'var(--amber)':'var(--blue)';
+    return `<div class="cl-tl-row ${cls}">
+      <div class="cl-tl-name">${lbl}</div>
+      <div class="cl-tl-date">${clFmt(date)}</div>
+      <div class="cl-tl-delta" style="color:${col}">${clDelta(n)}</div>
+    </div>`;
+  }).join('');
+}
+
+function clToggleGate(gate){ gate.classList.toggle('cl-open'); }
+
+function clToggle(chipId,itemId,box){
+  const ckK=itemId.startsWith('clcust')?'clck_cust_'+itemId:'clck_'+itemId;
+  const cur=box.classList.contains('cl-done')?'done':box.classList.contains('cl-blocked')?'blocked':'';
+  box.classList.remove('cl-done','cl-blocked');
+  let next='';
+  if(cur===''){next='done';box.classList.add('cl-done');}
+  else if(cur==='done'){next='blocked';box.classList.add('cl-blocked');}
+  if(next) clSet(chipId,ckK,next); else clDel(chipId,ckK);
+  clUpdateGateCnt(itemId); clUpdateHero(chipId,CL_CHIPS[chipId]); clRenderCards();
+  clToast(next==='done'?'✓ Done':next==='blocked'?'⚠ Blocked':'Cleared');
+}
+
+function clUpdateGateCnt(itemId){
+  const ci=document.getElementById('clci-'+itemId); if(!ci) return;
+  const cl=ci.closest('.cl-list'); if(!cl) return;
+  const gid=cl.id.replace('clcl-','');
+  const items=cl.querySelectorAll('.cl-box');
+  const done=[...items].filter(b=>b.classList.contains('cl-done')).length;
+  const c=document.getElementById('clgcnt-'+gid); if(c) c.textContent=done+'/'+items.length+' done';
+}
+
+function clSaveTxt(chipId,itemId,el){ clSet(chipId,'cltxt_'+itemId,el.textContent.trim()); }
+
+function clAddItem(chipId,gateId){
+  const id='clcust_'+gateId+'_'+Date.now();
+  const s=clLoad(chipId);
+  const cust=s['clcust_'+gateId]||[];
+  cust.push({id,text:'New item — double-click to edit',isCustom:true,tags:['sw']});
+  clSet(chipId,'clcust_'+gateId,cust);
+  const cl=document.getElementById('clcl-'+gateId); if(!cl) return;
+  const li=document.createElement('li'); li.className='cl-item'; li.id='clci-'+id;
+  li.innerHTML=`<div class="cl-box" onclick="clToggle('${chipId}','${id}',this)"></div>
+    <div class="cl-body"><div class="cl-text" contenteditable="true" spellcheck="false"
+      onblur="clSaveTxt('${chipId}','${id}',this)">New item — double-click to edit</div>
+      <div class="cl-tags"><span class="cl-tag sw">sw</span></div></div>
+    <button class="cl-del" onclick="clDelItem('${chipId}','${gateId}','${id}')" title="Delete">✕</button>`;
+  cl.appendChild(li);
+  setTimeout(()=>{ const t=li.querySelector('.cl-text'); t.focus(); const r=document.createRange(); r.selectNodeContents(t); const sel=window.getSelection(); sel.removeAllRanges(); sel.addRange(r); },50);
+  clToast('Item added');
+}
+
+function clDelItem(chipId,gateId,itemId){
+  if(!confirm('Delete this item?')) return;
+  const s=clLoad(chipId);
+  if(itemId.startsWith('clcust')){
+    const cust=(s['clcust_'+gateId]||[]).filter(c=>c.id!==itemId);
+    clSet(chipId,'clcust_'+gateId,cust);
+    clDel(chipId,'clck_cust_'+itemId);
+    clDel(chipId,'cltxt_'+itemId);
+  }
+  document.getElementById('clci-'+itemId)?.remove();
+  clToast('Item deleted');
+}
+
+function clSaveNotes(){ if(!clCurrentChip) return; clSet(clCurrentChip,'_notes',document.getElementById('cl-notes')?.value||''); }
+
+let clToastT;
+function clToast(msg){
+  let el=document.getElementById('cl-toast-el');
+  if(!el){ el=document.createElement('div'); el.id='cl-toast-el'; el.className='cl-toast'; document.body.appendChild(el); }
+  el.textContent=msg; el.style.opacity='1';
+  clearTimeout(clToastT); clToastT=setTimeout(()=>el.style.opacity='0',1800);
+}
+
+// init on CC tab open
+const _origShowView=window.showView;
+window.showView=function(view,chip,tab){
+  if(_origShowView) _origShowView.call(this,view,chip,tab);
+  if(view==='cc' && !clCurrentChip){
+    setTimeout(()=>{ clRenderCards(); clSelectChip('NR10'); },50);
+  }
+};
+// expose onclick-accessible functions to global scope (required for inline HTML handlers)
+window.clSelectChip = clSelectChip;
+window.clSwitchTab  = clSwitchTab;
+window.clToggleGate = clToggleGate;
+window.clToggle     = clToggle;
+window.clSaveTxt    = clSaveTxt;
+window.clAddItem    = clAddItem;
+window.clDelItem    = clDelItem;
+window.clSaveNotes  = clSaveNotes;
+
+// also init if already on cc
+if(document.getElementById('v-cc') && document.getElementById('v-cc').style.display!=='none'){
+  clRenderCards(); clSelectChip('NR10');
+}
+})();
 
 </script>
 </body>
