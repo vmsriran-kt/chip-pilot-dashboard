@@ -383,6 +383,46 @@ mark{background:rgba(118,185,0,.25);color:var(--text);border-radius:2px;padding:
 .tab{padding:0 14px;height:var(--tab-h);display:flex;align-items:center;gap:6px;font-size:11px;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s;border-radius:var(--r-xs) var(--r-xs) 0 0}
 .tab:hover{color:var(--text2);background:rgba(255,255,255,.04)}
 .tab.on{color:var(--nv-green);border-bottom-color:var(--nv-green);background:rgba(118,185,0,.07);font-weight:600}
+#tab-cc{color:var(--nv-green);opacity:.7;font-weight:600}
+#tab-cc:hover{opacity:1;background:rgba(118,185,0,.08)}
+#tab-cc.on{opacity:1}
+body.light #tab-cc{color:#5a9100;opacity:.75}
+body.light #tab-cc.on{opacity:1;color:#5a9100}
+
+/* -- CM CONFIG PANEL -- */
+#cm-config-panel{margin-bottom:16px;}
+.cmcp-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;}
+.cmcp-hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);background:rgba(118,185,0,.04);}
+.cmcp-hdr-left{display:flex;align-items:center;gap:8px;}
+.cmcp-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--nv-green);}
+.cmcp-sub{font-size:10px;color:var(--muted);}
+.cmcp-rows{display:flex;flex-direction:column;gap:0;}
+.cmcp-row{display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid var(--border);flex-wrap:wrap;}
+.cmcp-row:last-child{border-bottom:none;}
+.cmcp-chip-tag{font-size:12px;font-weight:800;min-width:64px;color:var(--text);}
+.cmcp-chip-phase{font-size:9px;font-weight:600;padding:2px 8px;border-radius:10px;text-transform:uppercase;background:rgba(118,185,0,.1);color:var(--nv-green);}
+.cmcp-chip-phase.ps{background:rgba(245,166,35,.1);color:var(--amber);}
+.cmcp-sources{display:flex;align-items:center;gap:6px;flex:1;flex-wrap:wrap;}
+.cmcp-src{display:inline-flex;align-items:center;gap:4px;padding:4px 9px;border-radius:6px;border:1px solid var(--border);background:var(--bg);font-size:10px;font-weight:600;color:var(--muted);cursor:pointer;user-select:none;transition:all .15s;}
+.cmcp-src.on{border-color:var(--nv-green);background:rgba(118,185,0,.08);color:var(--nv-green);}
+.cmcp-src input{display:none;}
+.cmcp-update-btn{margin-left:auto;padding:6px 16px;border-radius:6px;border:none;background:var(--nv-green);color:#000;font-size:11px;font-weight:800;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;white-space:nowrap;transition:opacity .15s;}
+.cmcp-update-btn:hover{opacity:.85;}
+.cmcp-update-btn.copied{background:rgba(118,185,0,.2);color:var(--nv-green);border:1px solid var(--nv-green);}
+.cmcp-prompt-preview{width:100%;margin-top:6px;padding:6px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:5px;font-size:10px;font-family:monospace;color:var(--text2);display:none;}
+.cmcp-row.expanded .cmcp-prompt-preview{display:block;}
+/* Configure panel */
+.cmcp-row.expanded{background:rgba(118,185,0,.02);}
+.cmcp-cfg-label{font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;}
+.cmcp-cfg-input{width:100%;padding:5px 8px;border-radius:5px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:11px;font-family:inherit;box-sizing:border-box;}
+.cmcp-cfg-input:focus{outline:none;border-color:var(--nv-green);}
+.cmcp-prompt-box{padding:8px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:5px;font-size:10px;font-family:monospace;color:var(--text2);white-space:pre-wrap;line-height:1.5;min-height:60px;}
+.cmcp-cfg-hint{font-size:9px;color:var(--muted);margin-top:4px;}
+.cmcp-update-btn[style*="background:var(--bg2)"]{background:var(--bg2)!important;border:1px solid var(--border)!important;color:var(--text2)!important;}
+body.light .cmcp-card{background:#fff;border-color:#e0e0e0;}
+body.light .cmcp-hdr{background:rgba(118,185,0,.03);}
+body.light .cmcp-src{background:#f8f8f8;border-color:#e0e0e0;color:#888;}
+body.light .cmcp-src.on{border-color:#76b900;background:rgba(118,185,0,.07);color:#5a9100;}
 
 /* -- GLASS CARDS -- */
 .g-card{background:var(--glass);backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:border-color .2s}
@@ -569,74 +609,81 @@ mark{background:rgba(118,185,0,.25);color:var(--text);border-radius:2px;padding:
 
 /* ══ CM CHECKLIST PANEL ══════════════════════════════════════════════════════ */
 #v-cc { padding:0; }
+/* chip selector bar — matches cockpit .sec-lbl + chip-card style */
 .cl-top{padding:12px 20px 0;background:var(--bg2);border-bottom:1px solid var(--border);}
-.cl-chip-bar-title{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:10px;}
-.cl-chip-cards{display:flex;gap:10px;overflow-x:auto;padding-bottom:14px;scrollbar-width:none;}
+.cl-chip-bar-title{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);margin-bottom:10px;}
+.cl-chip-cards{display:flex;gap:8px;overflow-x:auto;padding-bottom:14px;scrollbar-width:none;}
 .cl-chip-cards::-webkit-scrollbar{display:none}
-.cl-chip-card{flex-shrink:0;width:160px;border:1.5px solid var(--border);border-radius:10px;padding:10px 12px;cursor:pointer;background:var(--bg2);transition:all .15s;position:relative;}
-.cl-chip-card:hover{border-color:var(--border-h);box-shadow:0 2px 8px rgba(0,0,0,.18);}
-.cl-chip-card.cl-active{border-color:var(--ccc);background:rgba(var(--ccc-rgb),.07);box-shadow:0 2px 10px rgba(0,0,0,.2);}
-.cl-cc-name{font-size:13px;font-weight:700;}
-.cl-cc-full{font-size:10px;color:var(--muted);margin-top:1px;}
-.cl-cc-phase{font-size:9px;font-weight:600;padding:2px 6px;border-radius:10px;margin-top:6px;display:inline-block;}
+.cl-chip-card{flex-shrink:0;width:158px;border:1px solid var(--border);border-left:3px solid var(--border);border-radius:var(--r);padding:9px 11px;cursor:pointer;background:var(--bg2);transition:all .15s;position:relative;}
+.cl-chip-card:hover{border-left-color:var(--ccc,var(--border-h));box-shadow:var(--shadow);}
+.cl-chip-card.cl-active{border-left-color:var(--ccc,var(--nv-green));background:rgba(var(--ccc-rgb,118,185,0),.05);box-shadow:var(--shadow);}
+.cl-cc-name{font-size:13px;font-weight:800;letter-spacing:-.2px;}
+.cl-cc-full{font-size:10px;color:var(--muted);margin-top:2px;}
+.cl-cc-phase{font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;margin-top:6px;display:inline-block;text-transform:uppercase;letter-spacing:.3px;}
 .cl-cc-progress{margin-top:8px;}
-.cl-cc-bar-wrap{height:4px;background:var(--border);border-radius:2px;overflow:hidden;}
+.cl-cc-bar-wrap{height:3px;background:var(--border);border-radius:2px;overflow:hidden;}
 .cl-cc-bar{height:100%;border-radius:2px;}
 .cl-cc-pct{font-size:9px;color:var(--muted);margin-top:3px;}
-.cl-cc-next{font-size:9px;color:var(--text2);margin-top:4px;border-top:1px solid var(--border);padding-top:4px;}
-/* hero */
-.cl-hero{background:var(--bg3);border-bottom:1px solid var(--border);padding:10px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
-.cl-h-stat{text-align:center;min-width:64px;}
-.cl-h-val{font-size:20px;font-weight:700;line-height:1;}
-.cl-h-lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-top:3px;}
-.cl-h-div{width:1px;height:32px;background:var(--border);}
-.cl-h-alert{flex:1;min-width:200px;border-radius:8px;padding:8px 12px;font-size:11px;line-height:1.5;border:1px solid var(--border);}
-/* phase nav */
-.cl-phase-nav{background:var(--bg2);border-bottom:2px solid var(--border);padding:0 20px;display:flex;overflow-x:auto;scrollbar-width:none;}
+.cl-cc-next{font-size:9px;color:var(--text2);margin-top:5px;border-top:1px solid var(--border);padding-top:4px;}
+/* hero strip — matches cockpit stat bar */
+.cl-hero{background:var(--bg2);border-bottom:1px solid var(--border);padding:10px 20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+.cl-h-stat{text-align:center;min-width:60px;}
+.cl-h-val{font-size:22px;font-weight:900;line-height:1;letter-spacing:-.5px;}
+.cl-h-lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-top:3px;font-weight:600;}
+.cl-h-div{width:1px;height:34px;background:var(--border);}
+.cl-h-alert{flex:1;min-width:200px;border-radius:var(--r-sm);padding:8px 12px;font-size:11px;line-height:1.6;}
+/* phase nav — identical to top .tab bar */
+.cl-phase-nav{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 20px;display:flex;overflow-x:auto;scrollbar-width:none;gap:0;}
 .cl-phase-nav::-webkit-scrollbar{display:none}
-.cl-ptab{padding:9px 13px;font-size:11px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;white-space:nowrap;display:flex;align-items:center;gap:5px;transition:color .15s;}
-.cl-ptab.cl-pon{color:var(--nv-green);border-bottom-color:var(--nv-green);}
+.cl-ptab{padding:0 13px;height:38px;font-size:11px;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;display:flex;align-items:center;gap:5px;transition:all .15s;}
+.cl-ptab:hover{color:var(--text2);background:rgba(255,255,255,.04);}
+.cl-ptab.cl-pon{color:var(--nv-green);border-bottom-color:var(--nv-green);font-weight:600;}
+body.light .cl-ptab{color:#767676;}
+body.light .cl-ptab:hover{color:#1a1a1a;background:#f5f5f5;}
+body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:rgba(118,185,0,.05);}
 .cl-ptab .cl-pdot{width:6px;height:6px;border-radius:50%;}
 /* layout */
 .cl-main{display:grid;grid-template-columns:1fr 260px;min-height:400px;}
-.cl-gate-col{padding:12px 16px;border-right:1px solid var(--border);overflow-y:auto;max-height:calc(100vh - 380px);}
-.cl-side-col{padding:10px 12px;background:var(--bg3);overflow-y:auto;max-height:calc(100vh - 380px);}
-/* phase header */
-.cl-phase-hdr{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;margin-bottom:10px;}
-.cl-phase-hdr.done{background:rgba(118,185,0,.1);color:var(--nv-green);}
-.cl-phase-hdr.active{background:rgba(245,166,35,.1);color:var(--amber);}
-.cl-phase-hdr.upcoming{background:rgba(77,159,255,.1);color:var(--blue);}
+.cl-gate-col{padding:14px 18px;border-right:1px solid var(--border);overflow-y:auto;max-height:calc(100vh - 360px);}
+.cl-side-col{padding:12px 14px;background:var(--bg3);overflow-y:auto;max-height:calc(100vh - 360px);}
+/* phase header — matches g-card c-hdr style */
+.cl-phase-hdr{display:flex;align-items:center;gap:10px;padding:7px 12px;border-radius:var(--r-sm);margin-bottom:10px;border:1px solid var(--border);}
+.cl-phase-hdr.done{background:rgba(118,185,0,.07);color:var(--nv-green);border-color:rgba(118,185,0,.2);}
+.cl-phase-hdr.active{background:rgba(245,166,35,.07);color:var(--amber);border-color:rgba(245,166,35,.2);}
+.cl-phase-hdr.upcoming{background:rgba(77,159,255,.07);color:var(--blue);border-color:rgba(77,159,255,.2);}
 .cl-phase-hdr.future{background:var(--bg4);color:var(--muted);}
-.cl-phase-hdr.qual{background:rgba(77,159,255,.06);color:var(--blue);}
-.cl-ph-icon{font-size:16px;}
-.cl-ph-title{font-size:12px;font-weight:700;}
-.cl-ph-sub{font-size:10px;opacity:.75;margin-top:1px;}
-/* gates */
-.cl-gate{background:var(--bg2);border:1px solid var(--border);border-radius:8px;margin-bottom:8px;box-shadow:var(--shadow-sm);}
+.cl-phase-hdr.qual{background:rgba(77,159,255,.05);color:var(--blue);border-color:rgba(77,159,255,.15);}
+.cl-ph-icon{font-size:14px;}
+.cl-ph-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;}
+.cl-ph-sub{font-size:10px;opacity:.7;margin-top:1px;}
+/* gates — identical to .g-card */
+.cl-gate{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);margin-bottom:8px;box-shadow:var(--shadow-sm);overflow:hidden;}
 .cl-gate.cl-done-g{border-left:3px solid var(--nv-green);}
-.cl-gate.cl-active-g{border-left:3px solid var(--amber);background:var(--amber-g);}
+.cl-gate.cl-active-g{border-left:3px solid var(--amber);}
 .cl-gate.cl-next-g{border-left:3px solid var(--blue);}
 .cl-gate.cl-future-g{border-left:3px solid var(--border);}
-.cl-gate-hdr{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;cursor:pointer;user-select:none;border-radius:7px;}
-.cl-gate-hdr:hover{background:rgba(255,255,255,.03);}
+/* gate header — identical to .c-hdr */
+.cl-gate-hdr{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;cursor:pointer;user-select:none;background:var(--bg2);border-bottom:1px solid transparent;}
+.cl-gate.cl-open .cl-gate-hdr{border-bottom-color:var(--border);}
+.cl-gate-hdr:hover{background:rgba(118,185,0,.03);}
 .cl-g-left{display:flex;align-items:center;gap:7px;}
-.cl-g-ico{width:26px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;}
+.cl-g-ico{width:24px;height:24px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;}
 .cl-g-ico.cl-di{background:rgba(118,185,0,.12);}
 .cl-g-ico.cl-ai{background:rgba(245,166,35,.12);}
 .cl-g-ico.cl-ni{background:rgba(77,159,255,.12);}
 .cl-g-ico.cl-fi{background:var(--bg4);}
-.cl-g-title{font-size:11px;font-weight:600;color:var(--text);}
+.cl-g-title{font-size:11px;font-weight:700;color:var(--text);letter-spacing:-.1px;}
 .cl-g-date{font-size:9px;color:var(--muted);margin-top:1px;}
 .cl-g-right{display:flex;align-items:center;gap:6px;}
-.cl-g-badge{font-size:9px;font-weight:700;padding:2px 6px;border-radius:9px;}
-.cl-g-badge.cl-db{background:rgba(118,185,0,.15);color:var(--nv-green);}
-.cl-g-badge.cl-ab{background:rgba(245,166,35,.15);color:var(--amber);}
-.cl-g-badge.cl-nb{background:rgba(77,159,255,.15);color:var(--blue);}
+.cl-g-badge{font-size:9px;font-weight:700;padding:2px 7px;border-radius:9px;text-transform:uppercase;letter-spacing:.2px;}
+.cl-g-badge.cl-db{background:rgba(118,185,0,.12);color:var(--nv-green);}
+.cl-g-badge.cl-ab{background:rgba(245,166,35,.12);color:var(--amber);}
+.cl-g-badge.cl-nb{background:rgba(77,159,255,.12);color:var(--blue);}
 .cl-g-badge.cl-fb{background:var(--bg4);color:var(--muted);}
 .cl-g-count{font-size:10px;color:var(--muted);}
 .cl-g-chev{color:var(--muted);font-size:10px;transition:transform .2s;}
 .cl-gate.cl-open .cl-g-chev{transform:rotate(180deg);}
-.cl-gate-body{display:none;padding:0 10px 10px;}
+.cl-gate-body{display:none;padding:0 12px 12px;}
 .cl-gate.cl-open .cl-gate-body{display:block;}
 .cl-g-divider{height:1px;background:var(--border);margin-bottom:8px;}
 /* checklist items */
@@ -723,6 +770,7 @@ mark{background:rgba(118,185,0,.25);color:var(--text);border-radius:2px;padding:
   <div class="hdr-spacer"></div>
   <div class="hdr-badge bd-danger" onclick="showView('cockpit')">⬟ 3 Critical</div>
   <div class="hdr-badge bd-info">⬡ 12 Programs</div>
+  <button id="cp-tour-help" onclick="cptStart()" title="Start guided tour">?</button>
   <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn" title="Toggle theme" aria-label="Toggle theme">
     <span id="theme-icon">🌙</span>
   </button>
@@ -784,7 +832,7 @@ mark{background:rgba(118,185,0,.25);color:var(--text);border-radius:2px;padding:
   </div>
   <div class="nav-item" onclick="showView('chip','tb500')">
     <div class="nav-chip-code"><span>TB500 <span class="status-dot dot-a"></span></span><span style="font-size:9px;color:var(--amber);font-weight:700">P-REL BEHIND</span></div>
-    <div class="nav-chip-sub">Vera · Sowjanya</div>
+    <div class="nav-chip-sub">Vera · Roopa Ranganathan</div>
     <div class="nav-prog"><div class="nav-prog-fill" style="width:93%"></div></div>
   </div>
   <div class="nav-item" onclick="showView('chip','tb600')">
@@ -862,6 +910,7 @@ mark{background:rgba(118,185,0,.25);color:var(--text);border-radius:2px;padding:
     <div class="tab" id="tab-radar" onclick="showView('radar',null,this)">📡 Risk Radar</div>
     <div class="tab" id="tab-pm" onclick="showView('pm',null,this)">🤖 PM Assistant</div>
     <div class="tab" id="tab-chip" onclick="showView('chip',null,this)">🔬 Chip Detail</div>
+    <div class="tab" id="tab-settings" onclick="showView('settings',null,this)" style="margin-left:auto">⚙ Settings</div>
   </div>
 
   <div id="content">
@@ -949,7 +998,7 @@ mark{background:rgba(118,185,0,.25);color:var(--text);border-radius:2px;padding:
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px">
             <span class="chip-card-name">TB500</span><span class="pill pill-a">P-REL BEHIND</span>
           </div>
-          <div class="chip-card-sub">Vera · CPU · Post-silicon · CM: Sowjanya</div>
+          <div class="chip-card-sub">Vera · CPU · Post-silicon · CM: Roopa Ranganathan</div>
           <div class="chip-prog"><div style="height:100%;width:88%;border-radius:2px" class="cp-a"></div></div>
           <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted)">
             <span>PS FGI ~7/31 · P-Rel ~1wk Behind · M-pkg SLT Done</span><span>88%</span>
@@ -1261,6 +1310,14 @@ mark{background:rgba(118,185,0,.25);color:var(--text);border-radius:2px;padding:
       <div id="chip-body"></div>
     </div><!-- /chip -->
 
+    <!-- ================ SETTINGS ================ -->
+    <div id="v-settings" style="display:none;padding:20px 0">
+      <div class="sec-lbl" style="margin-bottom:14px">⚙ Settings &amp; Dashboard Configuration</div>
+      <div id="cm-config-panel">
+        <div style="color:var(--muted);font-size:12px;padding:20px 0">Sign in to configure your chip dashboard updates.</div>
+      </div>
+    </div>
+
   </div><!-- /.content-inner -->
   </div><!-- /#content -->
 </main>
@@ -1279,12 +1336,146 @@ const CM_REGISTRY = [
   {name:'Madhura',       email:'',                        initials:'M',  tag:'Madhura'},
   {name:'Vinay Sharma',  email:'',                        initials:'VS', tag:'Vinay Sharma'},
   {name:'Anshul Gupta',  email:'',                        initials:'AG', tag:'Anshul Gupta'},
-  {name:'Sowjanya',      email:'',                        initials:'S',  tag:'Sowjanya'},
   {name:'Hui Fu',        email:'',                        initials:'HF', tag:'Hui Fu'},
   {name:'Mayank Kapoor', email:'',                        initials:'MK', tag:'Mayank Kapoor'},
   {name:'Vivek Desikan', email:'',                        initials:'VD', tag:'Vivek Desikan'},
-  {name:'Roopa',         email:'',                        initials:'R',  tag:'Roopa'},
+  {name:'Roopa Ranganathan', email:'',                     initials:'RR', tag:'Roopa'},
 ];
+
+function buildCMConfigPanel() {
+  const panel = document.getElementById('cm-config-panel');
+  if (!panel) return;
+
+  const allChips = Object.keys(CHIP_DB);
+  if (!window._cmcpState) window._cmcpState = {};
+  const DEFAULT_SOURCES = ['slack','confluence','email','nvbugs'];
+  allChips.forEach(id => {
+    if (!window._cmcpState[id]) window._cmcpState[id] = new Set(DEFAULT_SOURCES);
+  });
+
+  const SOURCES = [
+    { id:'slack',      label:'💬 Slack'      },
+    { id:'confluence', label:'📄 Confluence' },
+    { id:'email',      label:'📧 Email'      },
+    { id:'nvbugs',     label:'🐛 NVBugs'     },
+    { id:'calendar',   label:'📅 Calendar'   },
+  ];
+
+  function buildRichPrompt(chipId) {
+    const cfg  = loadChipCfg(chipId);
+    const src  = window._cmcpState[chipId] ? [...window._cmcpState[chipId]] : DEFAULT_SOURCES;
+    const chip = CHIP_DB[chipId];
+    const lines = [`Update the ChipPilot dashboard for ${chipId.toUpperCase()} (${chip ? chip.phase : ''}):`];
+    if (src.includes('slack') && cfg.slack)
+      lines.push(`• Slack: read latest messages from channels: ${cfg.slack}`);
+    if (src.includes('confluence') && cfg.confluence)
+      lines.push(`• Confluence: search space "${cfg.confluence}" for "${chipId.toUpperCase()} status", milestone, last CL readiness`);
+    if (src.includes('email') && cfg.email)
+      lines.push(`• Email: find threads from ${cfg.email} mentioning ${chipId.toUpperCase()}`);
+    if (src.includes('nvbugs') && cfg.nvbugs)
+      lines.push(`• NVBugs: pull open P1/P2 bugs for component "${cfg.nvbugs}"`);
+    if (src.includes('calendar'))
+      lines.push(`• Calendar: check upcoming sync meetings for ${chipId.toUpperCase()}`);
+    lines.push(`\nSummarise: top risks, schedule status, open blockers, and update the ${chipId.toUpperCase()} dashboard card.`);
+    return lines.join('\n');
+  }
+
+  function renderRow(chipId) {
+    const chip   = CHIP_DB[chipId];
+    const isMine = MY_CHIPS && MY_CHIPS.includes(chipId);
+    const isPS   = chip && (chip.phase||'').toLowerCase().includes('post');
+    const cfg    = loadChipCfg(chipId);
+    const chipTitle = chip ? (chip.title||'').split('·')[1]?.trim() || '' : '';
+
+    const srcBtns = SOURCES.map(s => {
+      const on = DEFAULT_SOURCES.includes(s.id);
+      return `<label class="cmcp-src${on?' on':''}" id="cmcp-src-${chipId}-${s.id}" onclick="(function(el,e){
+        e.preventDefault();
+        var wasOn=el.classList.contains('on');el.classList.toggle('on');
+        var state=window._cmcpState['${chipId}'];if(!state)return;
+        if(!wasOn){state.add('${s.id}');}else{state.delete('${s.id}');}
+        var prev=document.getElementById('cmcp-preview-${chipId}');
+        if(prev&&prev.parentNode.classList.contains('expanded'))
+          prev.textContent=buildRichPrompt('${chipId}');
+      })(this,event)">${s.label}</label>`;
+    }).join('');
+
+    const myBadge = isMine
+      ? `<span style="font-size:8px;font-weight:800;padding:1px 5px;border-radius:3px;background:var(--nv-green);color:#000;margin-left:4px">MY CHIP</span>` : '';
+
+    return `<div class="cmcp-row" id="cmcp-row-${chipId}">
+      <div style="min-width:80px">
+        <div style="font-size:12px;font-weight:800;color:var(--text)">${chipId.toUpperCase()}${myBadge}</div>
+        <div style="font-size:9px;color:var(--muted);margin-top:1px">${chipTitle}</div>
+      </div>
+      <span class="cmcp-chip-phase${isPS?' ps':''}">${chip?chip.phase:''}</span>
+      <div class="cmcp-sources">${srcBtns}</div>
+      <div style="display:flex;gap:6px;margin-left:auto;align-items:center">
+        <button class="cmcp-update-btn" style="background:var(--bg2);border:1px solid var(--border);color:var(--text2);font-weight:600"
+          onclick="(function(){
+            var row=document.getElementById('cmcp-row-${chipId}');
+            var cfg=document.getElementById('cmcp-cfg-${chipId}');
+            if(!cfg)return;
+            var open=cfg.style.display!=='none';
+            cfg.style.display=open?'none':'block';
+            row.classList.toggle('expanded',!open);
+          })()">✏ Configure</button>
+        <button class="cmcp-update-btn" id="cmcp-upd-${chipId}"
+          onclick="(function(btn){
+            var prompt=buildRichPrompt('${chipId}');
+            var copy=function(){
+              btn.innerHTML='✓ Copied — paste in chat';btn.classList.add('copied');
+              var cfg=document.getElementById('cmcp-cfg-${chipId}');
+              var prev=document.getElementById('cmcp-preview-${chipId}');
+              if(prev){prev.textContent=prompt;if(cfg)cfg.style.display='block';}
+              var row=document.getElementById('cmcp-row-${chipId}');if(row)row.classList.add('expanded');
+              setTimeout(function(){btn.innerHTML='⚙ Update Dashboard';btn.classList.remove('copied');},2500);
+            };
+            navigator.clipboard.writeText(prompt).then(copy).catch(function(){
+              var ta=document.createElement('textarea');ta.value=prompt;ta.style.cssText='position:fixed;opacity:0';
+              document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);copy();
+            });
+          })(this)">⚙ Update Dashboard</button>
+      </div>
+      <!-- Configure panel -->
+      <div id="cmcp-cfg-${chipId}" style="display:none;width:100%;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          ${['slack','confluence','email','nvbugs'].map(k => `
+          <div>
+            <div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">${k==='slack'?'💬 Slack Channels':k==='confluence'?'📄 Confluence Space':k==='email'?'📧 Email Senders':'🐛 NVBugs Component'}</div>
+            <input id="cmcp-input-${chipId}-${k}" type="text" value="${cfg[k]||''}"
+              style="width:100%;padding:5px 8px;border-radius:5px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:11px;font-family:inherit;box-sizing:border-box"
+              placeholder="${k==='slack'?'#channel-name':k==='confluence'?'SpaceKey':k==='email'?'sender@nvidia.com':'ComponentName'}"
+              onchange="(function(v){
+                var cfg=loadChipCfg('${chipId}');
+                cfg['${k}']=v;saveChipCfg('${chipId}',cfg);
+              })(this.value)">
+          </div>`).join('')}
+        </div>
+        <div style="margin-top:8px">
+          <div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">📋 Generated Prompt Preview</div>
+          <div id="cmcp-preview-${chipId}" style="padding:8px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:5px;font-size:10px;font-family:monospace;color:var(--text2);white-space:pre-wrap;line-height:1.5"></div>
+          <div style="font-size:9px;color:var(--muted);margin-top:4px">Works with Claude (ChipPilot skill), Codex (Slack + Atlassian plugins), or any AI agent with these connectors.</div>
+        </div>
+      </div>
+      <div class="cmcp-prompt-preview" id="cmcp-preview-old-${chipId}" style="display:none"></div>
+    </div>`;
+  }
+
+  const userLabel = (MY_CHIPS && MY_CHIPS.length > 0)
+    ? `Logged in as ${CURRENT_USER.name} · Your chips highlighted`
+    : 'Portfolio / Management view — all 12 programs';
+
+  panel.innerHTML = `<div class="cmcp-card">
+    <div class="cmcp-hdr">
+      <div class="cmcp-hdr-left">
+        <span class="cmcp-title">⚙ Dashboard Update — All Programs</span>
+      </div>
+      <span class="cmcp-sub">${userLabel} · Configure sources per chip · copy prompt · paste in any AI chat</span>
+    </div>
+    <div class="cmcp-rows">${allChips.map(renderRow).join('')}</div>
+  </div>`;
+}
 
 function applyIdentity(cm) {
   CURRENT_USER.name     = cm.name;
@@ -1298,6 +1489,7 @@ function applyIdentity(cm) {
   }) : [];
   CURRENT_USER.role = MY_CHIPS.length > 0 ? 'cm' : 'mgmt';
   window.ACTIVE_CHIP = MY_CHIPS[0] || Object.keys(CHIP_DB)[0];
+  buildCMConfigPanel();
   const av = document.getElementById('hdr-avatar');
   if(av){ av.textContent = CURRENT_USER.initials; av.title = CURRENT_USER.name + ' (click to switch)'; }
   const navAv = document.getElementById('nav-user-avatar');
@@ -2272,10 +2464,36 @@ function renderChipView(chipId) {
     </div>`;
 }
 
+// Per-chip connector config defaults (editable in Settings)
+const CHIP_CFG_DEFAULTS = {
+  nr10x:  { slack:'#nvlink-fusion-sw, #nr10-bringup', confluence:'NBS', email:'sonawen, dachiang, glu, aaingaran', nvbugs:'NR10' },
+  gr10x:  { slack:'#swgpu-chips-gfw-rubin, #swdl-execution', confluence:'RubinSW', email:'mshastri, ssriranjani, hagrawal', nvbugs:'GR10x' },
+  gr15x:  { slack:'#swgpu-chips-gfw-gr15x', confluence:'RubinSW', email:'vinay', nvbugs:'GR15x' },
+  fn10x:  { slack:'#swgpu-chips-gfw-fn10x', confluence:'FeynmanSW', email:'madhura', nvbugs:'FN10x' },
+  thorz:  { slack:'#thorz-bringup, #cpu-ps-bringup', confluence:'ThorSW', email:'mayank', nvbugs:'ThorZ' },
+  tb500:  { slack:'#tb500-sw-bringup', confluence:'VeraSW', email:'sowjanya, sruskamp', nvbugs:'TB500' },
+  tb600:  { slack:'#tb600-sw-bringup', confluence:'VeraSW', email:'huifu', nvbugs:'TB600' },
+  n2x:    { slack:'#n2x-sw-bringup, #n2x-fpga', confluence:'N2xSW', email:'vivek, desikan', nvbugs:'N2x' },
+  tcx10:  { slack:'#tcx10-sw', confluence:'TCX10SW', email:'roopa', nvbugs:'TCX10' },
+  t374:   { slack:'#t374-bringup', confluence:'BeaconSW', email:'roopa', nvbugs:'T374' },
+  t257:   { slack:'#t257-monet-sw', confluence:'MonetSW', email:'vivek', nvbugs:'T257' },
+  t294:   { slack:'#t294-magni-sw', confluence:'MagniSW', email:'roopa', nvbugs:'T294' },
+};
+// Load saved overrides from localStorage
+function loadChipCfg(chipId) {
+  try {
+    const saved = JSON.parse(localStorage.getItem('cp2_cfg_' + chipId) || 'null');
+    return Object.assign({}, CHIP_CFG_DEFAULTS[chipId] || {}, saved || {});
+  } catch(e) { return CHIP_CFG_DEFAULTS[chipId] || {}; }
+}
+function saveChipCfg(chipId, cfg) {
+  localStorage.setItem('cp2_cfg_' + chipId, JSON.stringify(cfg));
+}
+
 window.ACTIVE_CHIP = null;
 function showView(id,chipId,tabEl){
   if(chipId) window.ACTIVE_CHIP=chipId;
-  ['cockpit','cc','radar','pm','chip'].forEach(v=>{
+  ['cockpit','cc','radar','pm','chip','settings'].forEach(v=>{
     document.getElementById('v-'+v).style.display=v===id?'block':'none';
   });
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
@@ -2332,7 +2550,7 @@ const CHIP_DB = {
     sub: 'Pre-Silicon · SW CM: Ranjani · FNL Jun 29, 2026 · PON Apr 2027',
     wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/NBS/overview?homepageId=2520514562',
     pills: [['pill-a','FNL AT RISK'],['pill-a','CO-EMU UNBLOCKING']],
-    anno: '[Jul 24] ECO window close today. IAS 1.0 sign-off blocked — waiting on Suhas & Xiaoyang (Bug 5662018). NR10↔QM4 co-emu model spin needed (DME clock issue, nvbug 6075676). Post-silicon debug readiness open (Bug 6441413). GR152N DCAP fix DONE · CVB enabling in progress.',
+    anno: '[Jul 24] ECO window closes today. IAS 1.0 sign-off blocked. 3 open P1 bugs. Post-silicon debug readiness in progress.',
     trend: [
       {d:'Jul 24',  e:'ECO Window Close',    s:'today'},
       {d:'Nov 10',  e:'TO Freeze',           s:'tracking'},
@@ -2405,7 +2623,7 @@ const CHIP_DB = {
       {d:'Oct 3',   e:'GR100-A01P Power-On',    s:'target'},
       {d:'Jan 2027',e:'GR150 (A01P) Power-On',  s:'target'},
     ],
-    anno: '[7/22 DL Exec Slack]: 48 SW blockers open as of 7/21 (Core Models 15, TRT-LLM 10, PyTorch 7, vLLM 5, SGLang 2, others). VR NVL72 schedule updated: v0.6 QS SW Full Drop slipped 7/24→7/28; v0.8 SW Dev Drop moved 8/10→8/17; v0.8 SW Full Drop moved 9/4→9/8; v1.0 Dev Drop remains 9/24; v1.0 Full Drop trends 11/6. GR150 POR changes approved for gr152G, integrated into A01P -- power-on planned January 2027. DLFW-Rubin switched to gpgpu-ext for CUDA 13.5 scope; PyTorch VR self-test pass rate comparable to GB200; distributed tests ~5% lower. vLLM L0 100%, L1 90%; SGLang behind vLLM; some workloads below 1x GB300. FlashInfer official Rubin release still side branch -- requested in v0.6.16 on 7/27. cuBLAS heuristics round 1 complete; 26.07/CUDA 13.4 U1 build planned as v0.8 Dev Drop source. cuDNN v9.25 for VR posted 7/20. -- [7/21 FW CI]: GR100 image-size overflow resolved on ps15 (FW_SUBMODULES_CI/48612) -- no code-shrink needed; build continuing normally. -- [7/19 Factory]: VR-NVL72 CR yield below &gt;90% target: L6 83% (assembly/NVLink failures), L10 78%, L11 100% (2/2). L10 assembly resumed after Lupine replacements addressed BF4 L6 HW issue. TS6 100% Vera-IST fallout traced to firmware/SBIOS/IST-vector revision locks; revised recipe avoids lock (keep SBIOS at CR version, Hynix-enabled 0.5 GPU firmware). -- GR10x (7/17 Slack): MSE boot fails after setting PORT disable mask for nvlink -- blocking 0.6 QA activities (kssoni). QS 0.6 branch: FSP component MRs 5229/5228 queued for integration (Conrad Turlik). -- (7/16-17 Confluence): R615/CUDA 13.4 Last CL Readiness -- 8 open bugs, active triaging but closure rate behind pace needed for 7/16 promotion deadline; 8 bugs pending QA details or triage. A01P Power-On: GR102G-A01P FabOut 2026-09-03; GR100-A01P PON 2026-10-03; GR100-A01Q PON 2026-09-23; GR100-A01R TBA. -- NSM task hang (7/16 Slack): Reset failures due to NSM task acquiring GP_BUFF_Lock then hanging -- blocking all tasks requiring the lock (VDM/Secureboot/PLDM/SPDM affected); under debug. -- [7/15 DL Exec Sync]: 35 SW blockers open (Core Models 13, PyTorch 7, vLLM 5, SGLang 2, others). VR NVL72 v0.6 QS SW Full Drop AT RISK: 7/24 trending to week of 7/27. DLFW-Rubin AT RISK: Fractal runners unstable/scarce (TS1 fractal-ts1-062/068 blocked by NFS/scratch-write Bug 6441264); TS2 boards no ETA (factory throughput slow). cuBLAS Rubin functional support complete (CUDA 13.4 GA). VR v0.8 Dev Drop 8/10, Full Drop 9/4 on schedule. vLLM/SGLang: R100 89%/100%/85% (kernel/L0/L1), VR200 91%/100%/92%. -- [Prior 7/13 SCG PROD VR]: Overall coverage 99.6%. Final CWAT and BWAT completed. No P0 Critical blockers. Chip PREL gated by Control Run -- 1xTBTI+HCI done; SHTOL Run2 trending 8/14; 13x part data 8/2. All P0/P0.5 features enabled; L11 validation in progress. SOC completion 7/10 (WIP). OVERT/LDIV Thermal Gap WAR: 3ms OVERT filter un-gates production. Fractal scoping WIP. Strata/NVL72: cracked vias in VGT PCBs; flash-plate process switch underway. -- [Prior 6/22] PS FGI + PRel trending 6/30. CWAT 98%, BWAT 80%. NVDEC Bug 5881444 WAR approved FREL_1; r615 fix pending. r615 Dev Drop 1 6/29, release 7/9.',
+    anno: '[Jul 22] 48 SW blockers open. v0.6 QS drop slipped to Jul 28. v1.0 Dev Drop Sep 24. P-Rel target Sep 30. Power-On Oct 3.',
     meetings: [],
     stack: [],
     risks: [
@@ -2457,7 +2675,7 @@ const CHIP_DB = {
     sub: 'Post-Silicon · SW CMs: Vinay Sharma · Anshul Gupta · A01 Power-On Early Aug 2026',
     wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/RubinSW/pages/3529740918/GR15x+SW+Bringup',
     pills: [['pill-g','POWER-ON'],['pill-g','TAPEOUT DONE']],
-    anno: 'A01 power-on early Aug 2026 (TV bringup only); A01P Jan 2027 (QM5+self-hosted). Tapeout completed Jun 2; physical data review Jun 11 complete. GR150 Bringup SW Dashboard (Jun 16, Vinay Sharma): SW releases table still empty -- no TOT SW versions published for Linux driver, MODS, VBIOS, CUDA toolkit. chips_a PMU: GR15x Enable VOLT HALs and features under review (Swarm CL 38285500, Jun 17). MODS GR15x Status burndown concerning -- predictable delivery at risk. NICs MODS requirements from SCG (NVBugs 5985577, 5984800, 5984797) still unresolved -- SW cannot plan PowerOn work until clarified. MODS GR15x Resets Pre-Silicon Coverage Plan (Jun 21, Akanksha Periwal): emulation-only; reset entry/exit sequencing, cold/warm/functional reset paths -- netlist not yet available.',
+    anno: '[Jul] A01P power-on Jan 2027. Tapeout Jun 2 complete. SW bringup in progress; early bring-up TV only in Aug 2026.',
     meetings: [
       {time:'7:00 PM', title:'GR15x Physical Data review', pill:'pill-g'},
     ],
@@ -2490,10 +2708,10 @@ const CHIP_DB = {
   },
   tb500: {
     title: 'TB500 · Vera CPU',
-    sub: 'Post-Silicon · SW CM: Hui Fu · 97% Coverage · TB500P PREL 83.5% · BWAT Done · M-pkg Chip PREL Trending 8/28',
+    sub: 'Post-Silicon · SW CM: Roopa Ranganathan · 97% Coverage · TB500P PREL 83.5% · BWAT Done · M-pkg Chip PREL Trending 8/28',
     wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/TCS/pages/2872182006/TB500+Chip+SW+Development+PLC-L1+Process',
     pills: [['pill-g','VERA C2 ES DONE'],['pill-g','P-REL 83.5%'],['pill-a','M-PKG CHIP PREL 8/28']],
-    anno: '[7/20 Email Roopa]: M-pkg PS SLT MODS release done. TB500-M PS-FGI ~7/31, P-rel ~1 week behind. SBIOS FW: 0.6 release all complete, working on scrubbing pending ~12 blockers. PS 0.8 features in progress (cut off 7/20) -- ~23 blocker bugs tagged for 0.8 release. Risk: Bug 6447327 [C2G4 Strata] sockets going out of sync during shutdown -- one boots from L1, other from L2 reset causing hang; under debug by BPMP team. -- [7/20 Slack #swteg-bringup-tb500]: Bug 6377798 [VR L10] uncontainable SCF/SLC tracker-timeout 0x13 -- active debug in bringup channel. Bug 6478806 [TB500][PSC] CPU0/CPU1 SPDM attestation parity -- sent to Sukanto Ghosh for approval. PROD-fused boards now being identified in Colossus (production ramp testing active). -- [7/19 DCCS Tools]: Vera C2 ES gate passed. NVSSVT partner results: AMI 77.94%, Insyde 85.72% OPP -- review/waiver decision needed by July 24. -- TB500 WAT L11 (7/17 Confluence): Bug 6462044 [TB500][MODS][L11] Tegra PCIE test causes kernel panic -- under debug by WAT team. -- [7/13 SCG PROD VR]: Overall Coverage 97%. TB500P: PS 100%, PREL 83.5%. BWAT Completed. SHTOL 2xTBTI+HCI expected 7/21; 17x board data 7/17. Delay due to Bug 6370301: anomalous low per-core Fmax at 650mV (T240). TB500-M (A01Z): CIP2 boards delayed; boot issue due to Micron version under debug. SHTOL pushed 8/14, WAT 8/7. Control Run (chip PREL long pole) trending 8/28 -- SOCAMM delays. -- [Prior 7/7]: NVL72 P-rel complete. P-pkg BWAT Ph2 done. -- [Prior 6/23]: P pkg P-Rel 98%; PS FGI done. M-pkg FGI ~7/31. CR SMT build 07/05; CR/PS SLT Diag 07/17.',
+    anno: '[Jul 20] P-Rel ~1 week behind. SBIOS FW 0.6 complete; 12 blockers in scrub. PS 0.8 features in progress.',
     meetings: [
       {time:'4:00 PM', title:'TB500 Bringup Meeting', pill:'pill-g'},
     ],
@@ -2508,9 +2726,9 @@ const CHIP_DB = {
       {p:'h',t:'Bug 6447327 [C2G4 Strata]: Sockets out of sync during shutdown -- one boots from L1, other from L2 reset causing hang; BPMP team debugging (7/20 email)'},
     ],
     checklist: [
-      {t:'PS SBIOS release ~6/2',owner:'Sowjanya',done:true},
-      {t:'MODS V8.0 RC cut 6/4; target release 6/11',owner:'Sowjanya',done:false},
-      {t:'M-pkg FinalCWAT parts arriving 6/11; SW cutoff 6/3',owner:'Sowjanya',done:false},
+      {t:'PS SBIOS release ~6/2',owner:'Roopa Ranganathan',done:true},
+      {t:'MODS V8.0 RC cut 6/4; target release 6/11',owner:'Roopa Ranganathan',done:false},
+      {t:'M-pkg FinalCWAT parts arriving 6/11; SW cutoff 6/3',owner:'Roopa Ranganathan',done:false},
       {t:'P-boards BWAT Final WAT Phase-1 complete 6/15',owner:'HW team',done:true},
       {t:'DCPOR QS features (4 remaining) close by 6/5',owner:'SW team',done:false},
     ],
@@ -2547,7 +2765,7 @@ const CHIP_DB = {
     sub: 'Pre-Silicon · SW CM: Hui Fu · SCSIM FD Boot In Progress · NVPOR Alignment · 1NL Trending 8/17',
     wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/TCS',
     pills: [['pill-b','PRE-SILICON'],['pill-a','SCSIM FD BOOT WIP']],
-    anno: 'TB600/Rosa (7/20 Email Roopa): SCSIM front door boot in progress. Aligning NVPOR and test plan improvements with wider team. -- TB600 (7/13 Confluence: SOC Padring Status): SFNL RTL completed. 1NL trending to 8/17/2026. MEM pad revB changes for 1NL snap released to channel team. MEM IO padorder replication issue WIP (Bug 6398187). -- (7/13 PSET): SW kickoff held 7/8. R1.5 Simulator released 7/12 -- starting SW bringup this week. Buildroot boots to console in Backdoor boot. Frontdoor boot unblocked with patched bpmp-fw (Bug 6286429). GVS sanity test pools ready, starting ap_sim_systemsw_dc. Naming convention discussion for CPU/GPU/NIC dielets vs TB500. -- [Prior]: ES target Q4 2026. ATE Verif (Jun 22): 3 open regressions tracked.',
+    anno: '[Jul 20] SCSIM front-door boot in progress. SFNL RTL complete. Aligning NVPOR and test plan with wider team.',
     meetings: [],
     risks: [
       {p:'m',t:'Gathering simulation requirements from SW teams -- IAS and GFD reviews ongoing'},
@@ -2576,7 +2794,7 @@ const CHIP_DB = {
     sub: 'Post-Silicon · SW CM: Mayank Kapoor · CS Done · MNB 8/5 · RA WAT 7/24 · Full WAT On Hold (V/F Pending)',
     wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/TCS/pages/2872182184/T268+SW',
     pills: [['pill-g','CS ACHIEVED'],['pill-a','MNB SLIPPED 8/5']],
-    anno: 'T268 (7/20 Email Roopa): RA+QS WAT trending 7/24. Full WAT on hold waiting for updated V/F curve (ETA TBD). WAT testing coverage improved 70→80%, pass rate 30→55%. No HW issues sighted. AAR consolidation in progress — plan to host end of July. MNB milestone: 8/5. -- T268 (7/13 PSET): QS Qual incremental image 1.4 created, validated, and released to SCG teams. Working with Arch team to re-classify privacy settings for HW registers -- proposed new header release flow. -- [Prior 7/7]: QS+WA WAT testing in progress — failures across WarmBoot, ColdBoot, SC7, Concurrency, GPU MODS under debug. MODS IFT+RA gated on (1) Bug 5648656 Test525 (waiting SCG review) and (2) Bug 6404289 PeakTops (V/F curve issue; SCG sign-off needed). HWQA MNB: Coverage 99.24%, Pass 89.43%. SOC-EQOS vs FSI-EQOS gap under discussion. AAR mid-July planned. — T268 (6/23): CS milestone achieved. MNB/MG dates revised: MNB 6/13→8/5, MG 7/11→9/2 to accommodate Thor-Z RA/liquid-cool (420 TOPS / 84.3W POR). MODS IFT-RA ETA 6/30. MODS QS Qual package released to SIT; Cold/Warm boot runs initiated. HWQA MNB coverage 99.08%, pass 88.75%. Thor-Z Max-P SW implementation in progress. AAR consolidation in progress. T268 BL Weekly Sync (Jun 17 Confluence): Jira tasks created for NVBugs tracking; Inline PLC flashing/boot support in progress (Shankar). T268 MB1 Binary Releases page updated Jun 17. CP rev0.7 trending 6/29 (new VNM patterns). NVCAL DTS released 6/16 (Fmax w/o VNM ISINK); DTS with VNM ISINK for RA trending 7/10. POR: 360->420 TOPS (+11W). BNB Declared 5/28. ATS Nightly Jun 17 (Build #1090): linux_dev_nsr 488/510 passed; qnx_debug_sr 470/486 passed. Escalations ongoing: PwrCtrl, TMON, VMON, ASILNA, NFW flash, OTA. HSIO MNB electrical coverage blocked on CPrev0.4 (unfused OPT_PHY_PLL_SPEEDO_TRIM_NVHS); ~30 locally fused CPrev0.5/FTrev0.6 units as MNB mitigation. QS Qual L4T image released; dev-t268 branch repurposed from bringup to MODS stable branch for SCG/SLT releases.',
+    anno: '[Jul 20] WAT coverage 80%, pass rate 55%. Full WAT on hold pending V/F curve update. No HW issues sighted.',
     meetings: [],
     risks: [
       {p:'h',t:'POR updated 360→420 TOPS (+11W: 73.3W→84.3W) -- dual RAM assist modes required; MNB schedule under review pending Liquid-Cool/Read-Assist mode timelines'},
@@ -2630,7 +2848,7 @@ const CHIP_DB = {
     sub: 'Pre-Silicon · SW CM: Madhura · 1NL Delivered 6/17 · PFNL Target 10/16/2026',
     wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/FEYNMANGPUHOST',
     pills: [['pill-g','1NL DONE'],['pill-a','PFNL OCT 2026']],
-    anno: 'FN10x (7/16 Pre-Sil Sync): AXL Sanity planning for FMODEL underway: P-State mods (VBIOS parsing, RM/GFW devinit, driver load/unload). GR10x learnings: table updates/missing settings delayed enabling; AXL runtime 7+ hr. GR150 took 2 hr (settings from GR100); Feynman RM & GFW to build on GR150 process. FMODEL CI/CD regression path (RM Golden + running vbios cycles) being set up. -- [Prior 7/15 Confluence]: FC Sanity Breaks total 119 bugs (auto-generated, 7/15 04:52). Pre-Silicon FW Floorsweep Sequence for prv_devinit: design in review (owner: Sneha Negi). Feynman-0096 Native USB for management: PLC-L0 epic in progress. PFNL PNR set-4 quick place PV for RN102G chiplet in progress. -- [Prior Jun 22 HWPM Status]: All 1NL blocker bugs resolved -- 0 blockers. All three verification environments up: GTH, CCUTB, HESTB. Total open bugs 283 (down from 290). 1NL HWPM readiness delivered 6/17 (vs 5/7 target). PFNL HWPM target 10/16/2026 (vs 11/2/2026 POR). USSR: HEM unit 1 failure; CAU/CCU/PMA/PMM clean. FN10x SCSIM R1 boots to console in Backdoor mode as of 6/15. SCS and chip-POR review ongoing for PFNL/FNL load balancing. PRI integration (NVBug 6131608) and SM integration (NVBug 5711939) into mainline pending.',
+    anno: '[Jul 16] AXL Sanity planning underway. P-State mods in progress. Leveraging GR10x lessons for enabling sequence.',
     meetings: [],
     risks: [
       {p:'h',t:'PRI_HUB delays (>1 month) blocking Phase 23/24'},
@@ -2656,7 +2874,7 @@ const CHIP_DB = {
     sub: 'Pre-Silicon · SW CM: Vivek Desikan · SOC FDI DONE · T354G FNL 7/23 · SW Signoff 7/30 · GPU TO Oct 17',
     wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/TCS/pages/3228994147/T354+SW+AAR',
     pills: [['pill-a','SW SIGNOFF 7/30'],['pill-g','SOC FDI DONE']],
-    anno: 'N2x (7/20 Email Roopa): All teams unblocked on FPGA, making progress toward checkout by 7/30. T354G FNL 7/23. GB21B FNL snapped; SM IP FNL pushed to 9/21 (2b Trellis POR update). S-Die L0: 63% (was 58), L1: 45% (was 37) / G-Die L0: 67% (was 56), L1: 39% (was 29). Risk: USB/DP Tunneling blocked on Hybrid IPP bringup — daily debug ongoing. GFW L0:50%, L1:0% — PTimer regressions debug in progress. Windows: WinVOS w/ hypervisor up, GPU enumerated; DLA next. NVPOR: 474 total (3 Done; 225 committed; 19 in planning; 45 to-do). IAS/GFD pending 0.7 and 1.0 reviews — 24 open. -- N2x SoCV Infra (7/15 Confluence): Cosim DVALL milestone 7/24 -- X-Prop bring-up WIP trending 7/20 (Bug 6209326, initial tests passing but tars regression issues). C2C R4.2 release to Jade 7/24 (unblocks D3 Power Scenario verification; D3 verif expected close October). SysPV performance gap: N2X cosim BW lower than ESL in Store/Mix tests -- bugs 6107216, 6408971 in active debug with Jade. FPGA board now free for Nitro test runs (Bug 5868670). -- N2x Video SW (7/15 Confluence): L0 95% (538P/607T), L1 55% (1190P/2158T). FNL signed off with medium-risk items: NVDEC1/NVENC1 not yet tested on system FPGA (H3+NET06 booting -- pending workload tests); VPR support blocked Bug 5779834; GPU timer issue Bug 6182956 still present on H3. GPU Tapeout 10/17/2026, GPU Power-On 3/11/2027. -- Emulation (7/16): H4 Release tentative from Jade 07/20; H3 all configs (SoC_Trim/Full, SoC+GPU 111/Full) released to SW and HW teams. -- [7/14-15 EMU]: miniSOC G-die 97.94% pass rate (2775 pass, 77 fail). S-die+G-die: 93.88% pass rate. TOT tegrashell broken for emulation (Bug 6426896; fix WIP). Onslaught coherency 67.69%; multi-core support (Bug 6225515) ETA mid-July. H3+NET06-PFNL functional on QT and HAPS. -- [7/13 PSET]: Sim V7 released -- HFRP ticker perf issue; Jade SW fix provided. GPU fmodel integrated. Boot from NVMe switching to Marlin model. TinyLinux 6.14→6.18 LTS migration in progress. BaseOS sanity enabled dev-main and mod*. -- [7/7]: SOC FDI SNAPPED. SW signoff trending 7/30. D3 Cold approved; SOC tapeout targeting end of December. GB21B FNL 7/6. Windows multicore fixed; hypervisor gated on Bug 6339277. NVPOR: 474 total (226 committed). GFX FPGA testplan L0 86%, L1 99.8%.',
+    anno: '[Jul 20] All teams unblocked on FPGA; checkout target Jul 30. SM IP FNL pushed to Sep 21. S-Die L0: 63%.',
     meetings: [],
     risks: [
       {p:'h',t:'Display bring-up on H2 blocked by Jade HW bug -- fix expected this week'},
@@ -2694,7 +2912,7 @@ const CHIP_DB = {
     sub: 'Pre-Silicon · SW CM: Roopa · Emulation Config Active · Testplan Alignment',
     wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/TCS',
     pills: [['pill-m','SETUP']],
-    anno: 'TCX10 (7/13 Confluence: SOC Padring Status): FirstNL RTL completed. FirstNL snapped ~7/16/2026. PL0_UPHY pad updates and POR cell type updates for IOPL and nvmobile UPHY done. -- Emulation configuration underway. SOC/GPU/TCX10 testplan alignment discussions active. FN100 CodeComplete targeted 06/18/26; TCX10 Chip Unit targeted 12/31/26 per latest DV milestones.',
+    anno: '[Jul 13] FirstNL RTL complete; snapped ~Jul 16. UPHY pad updates done. Emulation configuration in progress.',
     meetings: [],
     risks: [
       {p:'m',t:'Emulation configuration alignment ongoing between SOC/GPU/TCX10 teams -- testplan dependencies not yet fully resolved'},
@@ -2715,7 +2933,7 @@ const CHIP_DB = {
     sub: 'Program Wind-Down · SW CM: Vivek Desikan · BMW→Qualcomm · Closing SW Toward TO Validation',
     wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/TCS',
     pills: [['pill-r','BMW→QUALCOMM'],['pill-a','SW WIND-DOWN']],
-    anno: 'T257/Monet (7/20 Email Roopa): BMW IVI program awarded to Qualcomm. Guidance: close all SW activities toward TO validation on T257 before putting on shelf. -- T257 (Monet): BMW design award pending; tapeout decision deferred to July 10 (7/7 status email). FPGA validation framework active.',
+    anno: '[Jul 20] BMW IVI awarded to Qualcomm. Guidance: close SW activities toward TO validation before shelf.',
     meetings: [],
     risks: [
       {p:'h',t:'BMW IVI program awarded to Qualcomm (7/20) -- SW wind-down in progress; close all activities toward TO validation before shelving'},
@@ -2735,7 +2953,7 @@ const CHIP_DB = {
     sub: 'Pre-Silicon · SW CM: Roopa · Arch Readouts Ongoing · POR Target Past (6/30)',
     wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/TCS',
     pills: [['pill-m','SETUP']],
-    anno: 'T294 Magni (7/13 PSET): Arch holding wide Chip POR reviews; few items still pending to call POR complete. C2C Modeling requirements: Arch pushing back due to bandwidth constraints; escalating to Rich for prioritization. -- [Prior 7/7]: Arch investigations and readouts ongoing; POR completion targeted 6/30. C2C pushed out of TB600. Safety design verification HIGH risk (HSR dependency Feb 2028).',
+    anno: '[Jul 13] Chip POR review in progress; few items pending. C2C modeling requirements under bandwidth constraint.',
     meetings: [],
     risks: [
       {p:'h',t:'Safety design verification HIGH risk -- HSR dependency Feb 2028; concept assessment ~1 month before tapeout'},
@@ -2759,7 +2977,7 @@ const CHIP_DB = {
     sub: 'Pre-Silicon · SW CM: Roopa · 10-12wk FPGA Validation Risk · Weekly Plan w/ Iris',
     wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/TCS',
     pills: [['pill-a','POST-SI']],
-    anno: 'T374/Beacon (7/20 Email Roopa): Pre-silicon remains the top risk — 10-12 weeks of FPGA validation. Key risks shared with Iris team; working on weekly execution plan to improve coordination across dependencies. -- T374/Beacon (7/13 PSET): Bringup in progress on Intel (N-1) CRB and PTL+GB207 platforms (Bug 6269597). RTX PRO 4000 SFF Blackwell successfully validated with Intel CRB/PTL platforms. Beacon RVP requirements drafting started, targeting delivery to Iris by end of July. FPGA Automation API requirements presented to Iris and NV FPGA teams -- workflow under scoping. Buildroot vs LiteLinux for SLT screening flow under assessment. -- [Prior 7/7]: SW pre-si window compressed to ~10-12 weeks due to late FPGA availability. Teams triaging Lx test plans.',
+    anno: '[Jul 20] 10-12 weeks FPGA validation is top risk. Weekly execution plan in place with Iris team coordination.',
     meetings: [],
     risks: [
       {p:'h',t:'SW pre-silicon validation window compressed to ~10-12 weeks due to late FPGA availability (7/7) -- teams triaging Lx test plans to prioritize critical coverage before tapeout signoff'},
@@ -3213,5 +3431,227 @@ if(document.getElementById('v-cc') && document.getElementById('v-cc').style.disp
 })();
 
 </script>
+
+<!-- ═══════════════════════════════════════ CHIP PILOT GUIDED TOUR ═══ -->
+<style>
+#cpt-mask{position:fixed;inset:0;z-index:9000;display:none;}
+#cpt-mask.on{display:block;}
+#cpt-bg{position:absolute;inset:0;background:rgba(0,0,0,.6);cursor:pointer;}
+#cpt-spot{
+  position:fixed;z-index:9002;border-radius:8px;
+  box-shadow:0 0 0 9999px rgba(0,0,0,.6);
+  border:2px solid rgba(118,185,0,.7);
+  transition:top .3s,left .3s,width .3s,height .3s;
+  pointer-events:none;
+}
+#cpt-card{
+  position:fixed;z-index:9003;width:310px;
+  background:#17201a;border:1px solid rgba(118,185,0,.35);
+  border-radius:12px;padding:18px 18px 14px;
+  box-shadow:0 16px 48px rgba(0,0,0,.7);
+  transition:top .3s,left .3s;font-family:inherit;
+}
+#cpt-badge{font-size:9px;font-weight:800;letter-spacing:1px;color:var(--nv-green);text-transform:uppercase;margin-bottom:5px;}
+#cpt-title{font-size:14px;font-weight:800;color:#eee;margin-bottom:7px;line-height:1.3;}
+#cpt-body{font-size:12px;color:#aaa;line-height:1.6;margin-bottom:14px;}
+#cpt-body strong{color:#ddd;}
+#cpt-nav{display:flex;align-items:center;gap:7px;}
+#cpt-dots{display:flex;gap:4px;flex:1;}
+.cpt-dot{width:6px;height:6px;border-radius:50%;background:rgba(118,185,0,.22);transition:background .2s;}
+.cpt-dot.on{background:var(--nv-green);}
+.cpt-btn{padding:6px 13px;border-radius:6px;border:none;font-size:11px;font-weight:800;cursor:pointer;font-family:inherit;}
+#cpt-prev{background:rgba(255,255,255,.08);color:#aaa;}
+#cpt-next{background:var(--nv-green);color:#000;}
+#cpt-skip{background:rgba(255,255,255,.08);color:#aaa;}
+#cp-tour-help{
+  display:flex;align-items:center;justify-content:center;
+  width:28px;height:28px;border-radius:50%;
+  border:1.5px solid rgba(118,185,0,.5);
+  background:transparent;color:var(--nv-green);
+  font-size:13px;font-weight:800;cursor:pointer;
+  transition:all .2s;font-family:inherit;flex-shrink:0;
+}
+#cp-tour-help:hover{background:rgba(118,185,0,.12);border-color:var(--nv-green);}
+body.light #cpt-card{background:#fff;border-color:rgba(118,185,0,.4);}
+body.light #cpt-title{color:#111;}
+body.light #cpt-body{color:#555;}
+body.light #cpt-body strong{color:#222;}
+body.light #cpt-prev,body.light #cpt-skip{background:rgba(0,0,0,.08);color:#666;}
+</style>
+
+<div id="cpt-mask">
+  <div id="cpt-bg"></div>
+  <div id="cpt-spot"></div>
+  <div id="cpt-card">
+    <div id="cpt-badge"></div>
+    <div id="cpt-title"></div>
+    <div id="cpt-body"></div>
+    <div id="cpt-nav">
+      <div id="cpt-dots"></div>
+      <button class="cpt-btn" id="cpt-prev" onclick="cptPrev()">← Back</button>
+      <button class="cpt-btn" id="cpt-next" onclick="cptNext()">Next →</button>
+      <button class="cpt-btn" id="cpt-skip" onclick="cptEnd()">✕ Skip</button>
+    </div>
+  </div>
+</div>
+
+<script>
+var CPT = {
+  step: 0,
+  steps: [
+    {
+      sel: '#hdr',
+      title: 'Welcome to ChipPilot 🚀',
+      body: 'Your <strong>real-time command center</strong> for all chip programs. <br><br>Click the <strong>avatar (top-right)</strong> to sign in as a Chip Manager — the dashboard then personalizes to your chips.',
+      pos: 'below',
+      go: function(){ showView('cockpit',null,document.getElementById('tab-cockpit')); }
+    },
+    {
+      sel: '#v-cockpit',
+      title: 'Cockpit — Portfolio at a Glance',
+      body: 'All 12 chip programs in one view. Each card shows phase, risk level, and key signals.<br><br><strong>Green = on track · Amber = at risk · Red = critical.</strong><br><br>Click any card to drill in.',
+      pos: 'center',
+      go: function(){ showView('cockpit',null,document.getElementById('tab-cockpit')); }
+    },
+    {
+      sel: '.chip-card',
+      title: 'Chip Cards',
+      body: 'Shows <strong>phase, open blockers, Slack channel,</strong> and the latest executive summary.<br><br>Click a card → full detail view with risks, schedule trend, and live signals.',
+      pos: 'right',
+      go: function(){ showView('cockpit',null,document.getElementById('tab-cockpit')); }
+    },
+    {
+      sel: '#tab-cc',
+      title: 'CM Checklist',
+      body: 'Your personal gate-by-gate <strong>readiness tracker</strong>. Sign in first, then select your chip to see all checklist items per milestone.<br><br>Check off items, add notes, and save progress locally.',
+      pos: 'below',
+      go: function(){ showView('cc',null,document.getElementById('tab-cc')); }
+    },
+    {
+      sel: '#tab-radar',
+      title: 'Risk Radar',
+      body: 'All P1/P2 issues <strong>across every chip in one table</strong>, sorted by severity.<br><br>Use this for leadership reviews or war-room stand-ups when you need a cross-program risk snapshot.',
+      pos: 'below',
+      go: function(){ showView('radar',null,document.getElementById('tab-radar')); }
+    },
+    {
+      sel: '#tab-pm',
+      title: 'PM Assistant',
+      body: 'Quick-reference table: phase, dates, owners, and status for all chips.<br><br>Ideal for executive reviews — fast lookup without drilling into individual cards.',
+      pos: 'below',
+      go: function(){ showView('pm',null,document.getElementById('tab-pm')); }
+    },
+    {
+      sel: '#tab-settings',
+      title: '⚙ Settings — Dashboard Updater',
+      body: 'Configure each chip\'s connectors: <strong>Slack channels, Confluence space, email senders, NVBugs.</strong><br><br>Click <strong>"⚙ Update Dashboard"</strong> → copies a rich prompt → paste into Claude or any AI with those connectors.',
+      pos: 'below-left',
+      go: function(){ showView('settings',null,document.getElementById('tab-settings')); }
+    },
+    {
+      sel: '#tab-settings',
+      title: '✅ You\'re all set!',
+      body: '<strong>Daily workflow:</strong><br>1. Open ChipPilot → sign in<br>2. Cockpit → spot red/amber chips<br>3. CM Checklist → gate status<br>4. Settings → Update Dashboard → copy prompt<br>5. Paste into Claude<br><br><em>Tip: ask Claude "Catch me up on NR10X"</em>',
+      pos: 'below-left',
+      last: true,
+      go: function(){ showView('settings',null,document.getElementById('tab-settings')); }
+    }
+  ]
+};
+
+function cptRect(sel) {
+  if (!sel) return null;
+  var el = document.querySelector(sel);
+  if (!el) return null;
+  var r = el.getBoundingClientRect();
+  return {top:r.top, left:r.left, w:r.width, h:r.height};
+}
+
+function cptPosition(rect, pos) {
+  var card = document.getElementById('cpt-card');
+  var cw = 310, ch = card.offsetHeight || 240;
+  var vw = window.innerWidth, vh = window.innerHeight;
+  var pad = 14, gap = 12;
+  var t, l;
+  if (!rect || pos === 'center') {
+    t = Math.max(pad, (vh - ch) / 2);
+    l = Math.max(pad, (vw - cw) / 2);
+  } else if (pos === 'below') {
+    t = rect.top + rect.h + gap;
+    l = Math.max(pad, rect.left);
+  } else if (pos === 'below-left') {
+    t = rect.top + rect.h + gap;
+    l = Math.max(pad, rect.left + rect.w - cw);
+  } else if (pos === 'right') {
+    t = Math.max(pad, rect.top);
+    l = rect.left + rect.w + gap;
+    if (l + cw > vw - pad) l = Math.max(pad, rect.left - cw - gap);
+  } else {
+    t = rect.top + rect.h + gap;
+    l = Math.max(pad, rect.left);
+  }
+  if (l + cw > vw - pad) l = vw - cw - pad;
+  if (t + ch > vh - pad) t = vh - ch - pad;
+  if (t < pad) t = pad; if (l < pad) l = pad;
+  card.style.top = t + 'px'; card.style.left = l + 'px';
+}
+
+function cptSpot(rect) {
+  var sp = document.getElementById('cpt-spot');
+  if (!rect) { sp.style.display = 'none'; return; }
+  var p = 8;
+  sp.style.display = 'block';
+  sp.style.top    = (rect.top  - p) + 'px';
+  sp.style.left   = (rect.left - p) + 'px';
+  sp.style.width  = (rect.w + p*2) + 'px';
+  sp.style.height = (rect.h + p*2) + 'px';
+}
+
+function cptRender(idx) {
+  var s = CPT.steps[idx];
+  if (s.go) s.go();
+  setTimeout(function(){
+    var rect = cptRect(s.sel);
+    document.getElementById('cpt-badge').textContent = 'Step ' + (idx+1) + ' of ' + CPT.steps.length;
+    document.getElementById('cpt-title').textContent = s.title;
+    document.getElementById('cpt-body').innerHTML    = s.body;
+    document.getElementById('cpt-dots').innerHTML    = CPT.steps.map(function(_,i){
+      return '<div class="cpt-dot'+(i===idx?' on':'')+'"></div>';
+    }).join('');
+    document.getElementById('cpt-next').textContent = s.last ? '✓ Done' : 'Next →';
+    document.getElementById('cpt-prev').style.visibility = idx===0 ? 'hidden' : 'visible';
+    if (rect && s.pos !== 'center') { cptSpot(rect); }
+    else { document.getElementById('cpt-spot').style.display = 'none'; }
+    setTimeout(function(){ cptPosition(rect, s.pos); }, 40);
+  }, 200);
+}
+
+window.cptStart = function() {
+  CPT.step = 0;
+  document.getElementById('cpt-mask').classList.add('on');
+  cptRender(0);
+};
+window.cptNext = function() {
+  if (CPT.step >= CPT.steps.length - 1) { cptEnd(); return; }
+  CPT.step++; cptRender(CPT.step);
+};
+window.cptPrev = function() {
+  if (CPT.step <= 0) return;
+  CPT.step--; cptRender(CPT.step);
+};
+window.cptEnd = function() {
+  document.getElementById('cpt-mask').classList.remove('on');
+  document.getElementById('cpt-spot').style.display = 'none';
+  showView('cockpit', null, document.getElementById('tab-cockpit'));
+};
+// Close on backdrop click
+document.getElementById('cpt-bg').addEventListener('click', function(){ cptEnd(); });
+// Keyboard
+document.addEventListener('keydown', function(e){
+  if (!document.getElementById('cpt-mask').classList.contains('on')) return;
+  if (e.key==='ArrowRight'||e.key==='Enter') cptNext();
+  if (e.key==='ArrowLeft') cptPrev();
+  if (e.key==='Escape') cptEnd();
+});
+</script>
 </body>
-</html>
