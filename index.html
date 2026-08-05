@@ -932,8 +932,8 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
       </div>
 
 
-      <div class="sec-lbl">Program Health — 12 Active Programs</div>
-      <div class="chips-grid">
+      <div class="sec-lbl" id="cockpit-lbl">Program Health — 12 Active Programs</div>
+      <div class="chips-grid" id="chips-grid">
         <div class="chip-card cc-amber" onclick="showView('chip','nr10x')" style="cursor:pointer">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px">
             <span class="chip-card-name">NR10x</span><span class="pill pill-a">FNL AT RISK</span>
@@ -1312,9 +1312,117 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
 
     <!-- ================ SETTINGS ================ -->
     <div id="v-settings" style="display:none;padding:20px 0">
-      <div class="sec-lbl" style="margin-bottom:14px">⚙ Settings &amp; Dashboard Configuration</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+        <div class="sec-lbl">⚙ Settings &amp; Dashboard Configuration</div>
+        <button onclick="ncOpen()" style="display:flex;align-items:center;gap:6px;padding:7px 16px;border-radius:7px;border:1.5px solid var(--nv-green);background:rgba(118,185,0,.08);color:var(--nv-green);font-size:11px;font-weight:800;cursor:pointer;font-family:inherit;transition:all .15s" onmouseover="this.style.background='rgba(118,185,0,.18)'" onmouseout="this.style.background='rgba(118,185,0,.08)'">➕ New Chip</button>
+      </div>
       <div id="cm-config-panel">
         <div style="color:var(--muted);font-size:12px;padding:20px 0">Sign in to configure your chip dashboard updates.</div>
+      </div>
+    </div>
+
+    <!-- ═══ NEW CHIP MODAL ═══ -->
+    <div id="nc-overlay" style="display:none;position:fixed;inset:0;z-index:8000;background:rgba(0,0,0,.65)" onclick="if(event.target===this)ncClose()">
+      <div id="nc-modal" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:560px;max-height:90vh;overflow-y:auto;background:var(--bg2);border:1px solid rgba(118,185,0,.3);border-radius:14px;padding:28px 28px 22px;font-family:inherit">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+          <div>
+            <div style="font-size:15px;font-weight:800;color:var(--text)">➕ New Chip Program</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:2px">Adds the chip to the Cockpit and Settings for this session</div>
+          </div>
+          <button onclick="ncClose()" style="background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer;padding:4px 8px;line-height:1">✕</button>
+        </div>
+
+        <!-- Form grid -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <!-- Chip ID -->
+          <div style="grid-column:1/2">
+            <div class="nc-lbl">Chip ID <span style="color:var(--red)">*</span></div>
+            <input id="nc-id" class="nc-inp" placeholder="e.g. n3x" maxlength="8"
+              oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9]/g,'');ncPreview()">
+            <div style="font-size:9px;color:var(--muted);margin-top:3px">Lowercase, no spaces (e.g. nr10x, gr15x)</div>
+          </div>
+          <!-- Display name -->
+          <div style="grid-column:2/3">
+            <div class="nc-lbl">Display Name <span style="color:var(--red)">*</span></div>
+            <input id="nc-name" class="nc-inp" placeholder="e.g. N3X" oninput="ncPreview()">
+          </div>
+          <!-- Phase -->
+          <div>
+            <div class="nc-lbl">Phase</div>
+            <select id="nc-phase" class="nc-inp" onchange="ncPreview()">
+              <option value="Pre-Silicon">Pre-Silicon</option>
+              <option value="Post-Silicon">Post-Silicon</option>
+              <option value="Tape-Out">Tape-Out</option>
+              <option value="FNL">FNL</option>
+              <option value="Power-On">Power-On</option>
+              <option value="P-Rel">P-Rel</option>
+            </select>
+          </div>
+          <!-- CM Name -->
+          <div>
+            <div class="nc-lbl">Chip Manager</div>
+            <input id="nc-cm" class="nc-inp" placeholder="e.g. Roopa Ranganathan" oninput="ncPreview()">
+          </div>
+          <!-- Full title -->
+          <div style="grid-column:1/-1">
+            <div class="nc-lbl">Full Title</div>
+            <input id="nc-title" class="nc-inp" placeholder="e.g. NVIDIA · N3X · Next-Gen Platform" oninput="ncPreview()">
+          </div>
+          <!-- Executive summary -->
+          <div style="grid-column:1/-1">
+            <div class="nc-lbl">Executive Summary</div>
+            <textarea id="nc-anno" class="nc-inp" rows="2" placeholder="One-line status: what's happening now, key dates, blockers." style="resize:vertical" oninput="ncPreview()"></textarea>
+          </div>
+          <!-- Slack -->
+          <div>
+            <div class="nc-lbl">💬 Slack Channels</div>
+            <input id="nc-slack" class="nc-inp" placeholder="#channel-name">
+          </div>
+          <!-- Confluence -->
+          <div>
+            <div class="nc-lbl">📄 Confluence Space</div>
+            <input id="nc-confluence" class="nc-inp" placeholder="SpaceKey">
+          </div>
+          <!-- Email -->
+          <div>
+            <div class="nc-lbl">📧 Email Senders</div>
+            <input id="nc-email" class="nc-inp" placeholder="alias or sender name">
+          </div>
+          <!-- NVBugs -->
+          <div>
+            <div class="nc-lbl">🐛 NVBugs Component</div>
+            <input id="nc-nvbugs" class="nc-inp" placeholder="ComponentName">
+          </div>
+          <!-- Risk level -->
+          <div>
+            <div class="nc-lbl">Risk Level</div>
+            <select id="nc-risk" class="nc-inp">
+              <option value="g">Green — On Track</option>
+              <option value="a">Amber — At Risk</option>
+              <option value="r">Red — Critical</option>
+            </select>
+          </div>
+          <!-- Blockers -->
+          <div>
+            <div class="nc-lbl">Open Blockers</div>
+            <input id="nc-blockers" class="nc-inp" type="number" min="0" value="0" placeholder="0">
+          </div>
+        </div>
+
+        <!-- Preview -->
+        <div style="margin-top:16px;padding:12px;background:var(--bg3);border:1px solid var(--border);border-radius:8px">
+          <div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Preview</div>
+          <div id="nc-preview-card" style="font-size:11px;color:var(--text2)">Fill in Chip ID and Display Name to preview.</div>
+        </div>
+
+        <!-- Error -->
+        <div id="nc-error" style="display:none;margin-top:10px;padding:8px 12px;background:rgba(255,60,60,.1);border:1px solid rgba(255,60,60,.3);border-radius:6px;font-size:11px;color:#ff6b6b"></div>
+
+        <!-- Actions -->
+        <div style="display:flex;gap:10px;margin-top:18px;justify-content:flex-end">
+          <button onclick="ncClose()" class="nc-btn-sec">Cancel</button>
+          <button onclick="ncSubmit()" class="nc-btn-pri">➕ Add Chip to Dashboard</button>
+        </div>
       </div>
     </div>
 
@@ -2550,9 +2658,12 @@ const CHIP_DB = {
     sub: 'Pre-Silicon · SW CM: Ranjani · FNL Jun 29, 2026 · PON Apr 2027',
     wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/NBS/overview?homepageId=2520514562',
     pills: [['pill-a','FNL AT RISK'],['pill-a','CO-EMU UNBLOCKING']],
-    anno: '[Jul 24] ECO window closes today. IAS 1.0 sign-off blocked. 3 open P1 bugs. Post-silicon debug readiness in progress.',
+    anno: '[Jul 25] FNL snapped. SW Sign-off pending (at risk). TO_Ready at risk — IAS 1.0 sign-off blocked, 3 open P1 bugs.',
     trend: [
-      {d:'Jul 24',  e:'ECO Window Close',    s:'today'},
+      {d:'Jul 24',  e:'ECO Window Close',    s:'tracking'},
+    {d:'Jul 25',  e:'FNL Snapped',            s:'tracking'},
+    {d:'TBD',     e:'SW Sign-off',             s:'at risk'},
+    {d:'TBD',     e:'TO_Ready',                s:'at risk'},
       {d:'Nov 10',  e:'TO Freeze',           s:'tracking'},
       {d:'Nov 20',  e:'Code Lock',           s:'tracking'},
       {d:'Nov 30',  e:'Tape-Out',            s:'target'},
@@ -2571,6 +2682,8 @@ const CHIP_DB = {
       {comp:'TREX Integration',delivery:'Source',repo:'Internal',status:'r',s:'Slip to Aug'},
     ],
     risks: [
+      {p:'h',t:'TO_Ready AT RISK — SW sign-off pending; IAS 1.0 blocked on Suhas & Xiaoyang (Bug 5662018)'},
+      {p:'h',t:'SW Sign-off pending: NR10↔QM4 co-emu model spin needed (DME clock issue, nvbug 6075676)'},
       {p:'h',t:'PON slipped Jan-2027 → Apr 2027 per DFP Progress tracker (Confluence, Jun 11) -- schedule cascade risk under review'},
       {p:'h',t:'QM4 TREX may slip past FNL RTL snap (Jun 29) -- SW teams reviewing critical path to de-risk'},
       {p:'h',t:'QM4 <-> NR10 emulation link bring-up blocking FM testing -- MSE/NetIR loopback up but not talking to QM4; In Debug'},
@@ -3477,6 +3590,16 @@ body.light #cpt-title{color:#111;}
 body.light #cpt-body{color:#555;}
 body.light #cpt-body strong{color:#222;}
 body.light #cpt-prev,body.light #cpt-skip{background:rgba(0,0,0,.08);color:#666;}
+
+/* ── New Chip Modal ── */
+.nc-lbl{font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;}
+.nc-inp{width:100%;padding:7px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:12px;font-family:inherit;box-sizing:border-box;transition:border-color .15s;}
+.nc-inp:focus{outline:none;border-color:var(--nv-green);}
+.nc-btn-pri{padding:8px 20px;border-radius:7px;border:none;background:var(--nv-green);color:#000;font-size:12px;font-weight:800;cursor:pointer;font-family:inherit;transition:opacity .15s;}
+.nc-btn-pri:hover{opacity:.85;}
+.nc-btn-sec{padding:8px 16px;border-radius:7px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;}
+.nc-btn-sec:hover{background:var(--bg3);}
+body.light #nc-modal{background:#fff;}
 </style>
 
 <div id="cpt-mask">
@@ -3653,5 +3776,161 @@ document.addEventListener('keydown', function(e){
   if (e.key==='ArrowLeft') cptPrev();
   if (e.key==='Escape') cptEnd();
 });
+</script>
+
+<script>
+/* ══ NEW CHIP MODAL ══════════════════════════════════════════════════════ */
+function ncOpen() {
+  document.getElementById('nc-overlay').style.display = 'block';
+  document.getElementById('nc-id').focus();
+}
+function ncClose() {
+  document.getElementById('nc-overlay').style.display = 'none';
+  document.getElementById('nc-error').style.display = 'none';
+}
+
+function ncPreview() {
+  const id    = (document.getElementById('nc-id').value || '').toUpperCase();
+  const name  = document.getElementById('nc-name').value || '';
+  const phase = document.getElementById('nc-phase').value;
+  const cm    = document.getElementById('nc-cm').value || '—';
+  const anno  = document.getElementById('nc-anno').value || 'No summary yet.';
+  const el    = document.getElementById('nc-preview-card');
+  if (!id) { el.innerHTML = 'Fill in Chip ID and Display Name to preview.'; return; }
+  el.innerHTML = `<span style="font-weight:800;color:var(--nv-green)">${id}</span>`
+    + ` <span style="color:var(--muted);font-size:10px">${name}</span>`
+    + ` &nbsp;<span style="padding:1px 7px;border-radius:10px;background:rgba(118,185,0,.1);color:var(--nv-green);font-size:9px;font-weight:700">${phase.toUpperCase()}</span>`
+    + `<br><span style="color:var(--muted);font-size:10px">CM: ${cm}</span>`
+    + `<br><span style="color:var(--text2);font-size:10px;margin-top:4px;display:block">${anno}</span>`;
+}
+
+function ncSubmit() {
+  const id        = document.getElementById('nc-id').value.trim().toLowerCase();
+  const name      = document.getElementById('nc-name').value.trim();
+  const phase     = document.getElementById('nc-phase').value;
+  const cm        = document.getElementById('nc-cm').value.trim();
+  const title     = document.getElementById('nc-title').value.trim() || ('NVIDIA · ' + id.toUpperCase());
+  const anno      = document.getElementById('nc-anno').value.trim() || 'New chip program.';
+  const slack     = document.getElementById('nc-slack').value.trim();
+  const confluence= document.getElementById('nc-confluence').value.trim();
+  const email     = document.getElementById('nc-email').value.trim();
+  const nvbugs    = document.getElementById('nc-nvbugs').value.trim();
+  const risk      = document.getElementById('nc-risk').value;
+  const blockers  = parseInt(document.getElementById('nc-blockers').value) || 0;
+
+  const errEl = document.getElementById('nc-error');
+  errEl.style.display = 'none';
+
+  if (!id)   { errEl.textContent = 'Chip ID is required.';    errEl.style.display='block'; return; }
+  if (!name) { errEl.textContent = 'Display Name is required.'; errEl.style.display='block'; return; }
+  if (CHIP_DB[id]) { errEl.textContent = `Chip "${id}" already exists.`; errEl.style.display='block'; return; }
+
+  // Pill color based on risk
+  const pillColor = risk === 'r' ? 'pill-r' : risk === 'a' ? 'pill-a' : 'pill-g';
+
+  // Build chip entry
+  CHIP_DB[id] = {
+    title: title,
+    sub:   `${phase} · SW CM: ${cm || '—'} · Custom chip`,
+    anno:  anno,
+    phase: phase,
+    risks: [],
+    trend: [],
+    stack: [],
+    emails:[],
+    slack: slack || '#' + id + '-sw',
+    prog:  0,
+    pills: [{ label: phase.toUpperCase(), cls: pillColor }],
+    wikiUrl: '',
+    checklist: [],
+  };
+
+  // Save connector config
+  saveChipCfg(id, { slack, confluence, email, nvbugs });
+
+  // Persist custom chips to localStorage
+  try {
+    const saved = JSON.parse(localStorage.getItem('cp2_custom_chips') || '{}');
+    saved[id] = CHIP_DB[id];
+    localStorage.setItem('cp2_custom_chips', JSON.stringify(saved));
+  } catch(e) {}
+
+  // Append card to cockpit grid and update settings
+  ncAddChipCard(id);
+  buildCMConfigPanel();
+
+  ncClose();
+  ncReset();
+
+  // Navigate to cockpit so user can see the new card
+  showView('cockpit', null, document.getElementById('tab-cockpit'));
+
+  // Flash a success banner
+  const banner = document.createElement('div');
+  banner.style.cssText = 'position:fixed;top:60px;left:50%;transform:translateX(-50%);z-index:9999;'
+    + 'background:rgba(118,185,0,.15);border:1px solid var(--nv-green);border-radius:8px;'
+    + 'padding:10px 22px;font-size:12px;font-weight:700;color:var(--nv-green);pointer-events:none;';
+  banner.textContent = '✅ ' + id.toUpperCase() + ' added to dashboard!';
+  document.body.appendChild(banner);
+  setTimeout(() => banner.remove(), 2800);
+}
+
+
+function ncAddChipCard(id) {
+  const d = CHIP_DB[id];
+  if (!d) return;
+  const grid = document.getElementById('chips-grid');
+  if (!grid) return;
+
+  const riskClass = (d.pills && d.pills[0])
+    ? (d.pills[0].cls === 'pill-r' ? 'cc-red' : d.pills[0].cls === 'pill-a' ? 'cc-amber' : 'cc-green')
+    : 'cc-green';
+  const borderColor = riskClass === 'cc-red' ? 'var(--red)' : riskClass === 'cc-amber' ? 'var(--amber)' : 'var(--nv-green)';
+
+  const card = document.createElement('div');
+  card.className = 'chip-card ' + riskClass;
+  card.style.cssText = 'border-left:3px solid ' + borderColor + ';cursor:pointer';
+  card.setAttribute('onclick', "showView('chip','" + id + "',null)");
+  card.innerHTML = `
+    <div class="cc-hdr">
+      <span class="cc-id">${id.toUpperCase()}</span>
+      <span class="pill ${(d.pills&&d.pills[0])?d.pills[0].cls:'pill-g'}" style="font-size:9px">${d.phase.toUpperCase()}</span>
+    </div>
+    <div class="cc-title">${d.title}</div>
+    <div class="cc-anno">${d.anno}</div>
+    <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-top:6px">
+      <span>${d.slack || ''}</span>
+      <span style="color:var(--nv-green)">✦ New</span>
+    </div>`;
+  grid.appendChild(card);
+
+  // Update label count
+  const lbl = document.getElementById('cockpit-lbl');
+  if (lbl) {
+    const total = Object.keys(CHIP_DB).length;
+    lbl.textContent = 'Program Health — ' + total + ' Active Programs';
+  }
+}
+
+function ncReset() {
+  ['nc-id','nc-name','nc-cm','nc-title','nc-anno','nc-slack','nc-confluence','nc-email','nc-nvbugs'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  document.getElementById('nc-risk').value = 'g';
+  document.getElementById('nc-blockers').value = '0';
+  document.getElementById('nc-phase').value = 'Pre-Silicon';
+  document.getElementById('nc-preview-card').innerHTML = 'Fill in Chip ID and Display Name to preview.';
+}
+
+// Restore custom chips from localStorage on page load
+(function restoreCustomChips() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('cp2_custom_chips') || '{}');
+    Object.keys(saved).forEach(id => {
+      if (!CHIP_DB[id]) CHIP_DB[id] = saved[id];
+    });
+  } catch(e) {}
+})();
 </script>
 </body>
