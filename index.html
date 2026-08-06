@@ -1409,6 +1409,42 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
           </div>
         </div>
 
+        <!-- Confluence Page Creation -->
+        <div style="margin-top:16px;padding:14px;background:rgba(118,185,0,.05);border:1px solid rgba(118,185,0,.2);border-radius:8px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+            <div style="display:flex;align-items:center;gap:8px">
+              <span style="font-size:13px">📄</span>
+              <span style="font-size:12px;font-weight:700;color:var(--text)">Create Confluence Landing Page</span>
+            </div>
+            <label style="display:flex;align-items:center;gap:6px;cursor:pointer">
+              <input type="checkbox" id="nc-conf-toggle" onchange="ncToggleConf(this.checked)"
+                style="width:14px;height:14px;accent-color:var(--nv-green)">
+              <span style="font-size:10px;color:var(--muted)">Enable</span>
+            </label>
+          </div>
+          <div id="nc-conf-fields" style="display:none;grid-template-columns:1fr 1fr;gap:10px">
+            <div>
+              <div class="nc-lbl">Confluence Space Key <span style="color:var(--red)">*</span></div>
+              <input id="nc-conf-space" class="nc-inp" placeholder="e.g. NBS, RubinSW, TCS">
+              <div style="font-size:9px;color:var(--muted);margin-top:2px">The space where the page will be created</div>
+            </div>
+            <div>
+              <div class="nc-lbl">Page Title</div>
+              <input id="nc-conf-title" class="nc-inp" placeholder="Auto-filled from chip name">
+            </div>
+            <div style="grid-column:1/-1">
+              <div class="nc-lbl">Parent Page ID <span style="color:var(--muted)">(optional)</span></div>
+              <input id="nc-conf-parent" class="nc-inp" placeholder="e.g. 2872182006 — leave blank for space root">
+              <div style="font-size:9px;color:var(--muted);margin-top:2px">Find the ID in the page URL: /wiki/spaces/KEY/pages/<strong>ID</strong>/...</div>
+            </div>
+            <div style="grid-column:1/-1">
+              <div style="font-size:9px;color:var(--nv-green);padding:6px 8px;background:rgba(118,185,0,.08);border-radius:5px">
+                ✦ When you submit, Claude will create the Confluence page directly and show you the link.
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Preview -->
         <div style="margin-top:16px;padding:12px;background:var(--bg3);border:1px solid var(--border);border-radius:8px">
           <div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Preview</div>
@@ -1421,7 +1457,7 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
         <!-- Actions -->
         <div style="display:flex;gap:10px;margin-top:18px;justify-content:flex-end">
           <button onclick="ncClose()" class="nc-btn-sec">Cancel</button>
-          <button onclick="ncSubmit()" class="nc-btn-pri">➕ Add Chip to Dashboard</button>
+          <button onclick="ncSubmit()" id="nc-submit-btn" class="nc-btn-pri">➕ Add Chip to Dashboard</button>
         </div>
       </div>
     </div>
@@ -3862,17 +3898,65 @@ function ncSubmit() {
   ncClose();
   ncReset();
 
-  // Navigate to cockpit so user can see the new card
-  showView('cockpit', null, document.getElementById('tab-cockpit'));
-
-  // Flash a success banner
-  const banner = document.createElement('div');
-  banner.style.cssText = 'position:fixed;top:60px;left:50%;transform:translateX(-50%);z-index:9999;'
-    + 'background:rgba(118,185,0,.15);border:1px solid var(--nv-green);border-radius:8px;'
-    + 'padding:10px 22px;font-size:12px;font-weight:700;color:var(--nv-green);pointer-events:none;';
-  banner.textContent = '✅ ' + id.toUpperCase() + ' added to dashboard!';
-  document.body.appendChild(banner);
-  setTimeout(() => banner.remove(), 2800);
+  // Handle Confluence page request
+  const confToggle = document.getElementById('nc-conf-toggle');
+  if (confToggle && confToggle.checked) {
+    const confSpace  = (document.getElementById('nc-conf-space')  || {}).value || '';
+    const confTitle  = (document.getElementById('nc-conf-title')  || {}).value || (id.toUpperCase() + ' — Chip Program Home');
+    const confParent = (document.getElementById('nc-conf-parent') || {}).value || '';
+    // Store request for Claude to action
+    const confReq = {
+      chipId: id, chipName: name, phase, cm, anno, slack, confluence: confSpace,
+      email, nvbugs, confTitle, confParent, confSpace,
+      requestedAt: new Date().toISOString()
+    };
+    try { localStorage.setItem('cp2_pending_conf_' + id, JSON.stringify(confReq)); } catch(e){}
+    // Copy prompt for Claude
+    const prompt = [
+      'Create a Confluence landing page for a new chip program with these details:',
+      '- Chip ID: ' + id.toUpperCase(),
+      '- Display Name: ' + name,
+      '- Phase: ' + phase,
+      '- Chip Manager: ' + (cm || '—'),
+      '- Confluence Space: ' + confSpace,
+      '- Page Title: ' + confTitle,
+      confParent ? '- Parent Page ID: ' + confParent : '- Parent: space root',
+      '- Executive Summary: ' + anno,
+      '- Slack: ' + (slack || '—'),
+      '- Email Contacts: ' + (email || '—'),
+      '- NVBugs Component: ' + (nvbugs || '—'),
+      '',
+      'Use the Confluence MCP to create the page at nvidia.atlassian.net with sections for:',
+      '  1. Program Overview (phase, CM, summary)',
+      '  2. Key Contacts (Slack, email)',
+      '  3. Schedule & Milestones (placeholder table)',
+      '  4. Open Risks (placeholder table)',
+      '  5. Data Sources (Confluence space, NVBugs, Slack channels)',
+      '',
+      'After creating, reply with the direct Confluence page URL.'
+    ].join('\n');
+    navigator.clipboard.writeText(prompt).catch(() => {});
+    // Show Confluence request banner
+    const banner = document.createElement('div');
+    banner.style.cssText = 'position:fixed;top:60px;left:50%;transform:translateX(-50%);z-index:9999;width:420px;'
+      + 'background:#1a2a1a;border:1px solid var(--nv-green);border-radius:8px;'
+      + 'padding:12px 18px;font-size:11px;color:var(--text);box-shadow:0 8px 24px rgba(0,0,0,.5)';
+    banner.innerHTML = '<div style="font-weight:800;color:var(--nv-green);margin-bottom:4px">✅ ' + id.toUpperCase() + ' added to dashboard!</div>'
+      + '<div style="color:var(--muted)">📋 Confluence page prompt copied to clipboard.</div>'
+      + '<div style="color:var(--muted);margin-top:3px">Paste it in this chat → Claude will create the page and return the link.</div>';
+    document.body.appendChild(banner);
+    setTimeout(() => banner.remove(), 5000);
+  } else {
+    // Navigate to cockpit so user can see the new card
+    showView('cockpit', null, document.getElementById('tab-cockpit'));
+    const banner = document.createElement('div');
+    banner.style.cssText = 'position:fixed;top:60px;left:50%;transform:translateX(-50%);z-index:9999;'
+      + 'background:rgba(118,185,0,.15);border:1px solid var(--nv-green);border-radius:8px;'
+      + 'padding:10px 22px;font-size:12px;font-weight:700;color:var(--nv-green);pointer-events:none;';
+    banner.textContent = '✅ ' + id.toUpperCase() + ' added to dashboard!';
+    document.body.appendChild(banner);
+    setTimeout(() => banner.remove(), 2800);
+  }
 }
 
 
@@ -3912,15 +3996,37 @@ function ncAddChipCard(id) {
   }
 }
 
+function ncToggleConf(on) {
+  const fields = document.getElementById('nc-conf-fields');
+  if (fields) {
+    fields.style.display = on ? 'grid' : 'none';
+  }
+  const btn = document.getElementById('nc-submit-btn');
+  if (btn) {
+    btn.textContent = on ? '➕ Add Chip + Create Confluence Page' : '➕ Add Chip to Dashboard';
+  }
+  // Auto-fill Confluence page title from chip name
+  if (on) {
+    const nameEl = document.getElementById('nc-name');
+    const titleEl = document.getElementById('nc-conf-title');
+    if (titleEl && nameEl && !titleEl.value) {
+      titleEl.value = (nameEl.value || '') + ' — Chip Program Home';
+    }
+  }
+}
+
 function ncReset() {
-  ['nc-id','nc-name','nc-cm','nc-title','nc-anno','nc-slack','nc-confluence','nc-email','nc-nvbugs'].forEach(id => {
-    const el = document.getElementById(id);
+  ['nc-id','nc-name','nc-cm','nc-title','nc-anno','nc-slack','nc-confluence','nc-email','nc-nvbugs',
+   'nc-conf-space','nc-conf-title','nc-conf-parent'].forEach(fid => {
+    const el = document.getElementById(fid);
     if (el) el.value = '';
   });
   document.getElementById('nc-risk').value = 'g';
   document.getElementById('nc-blockers').value = '0';
   document.getElementById('nc-phase').value = 'Pre-Silicon';
   document.getElementById('nc-preview-card').innerHTML = 'Fill in Chip ID and Display Name to preview.';
+  const ct = document.getElementById('nc-conf-toggle');
+  if (ct) { ct.checked = false; ncToggleConf(false); }
 }
 
 // Restore custom chips from localStorage on page load
