@@ -740,6 +740,9 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
 .cl-toast{position:fixed;bottom:14px;right:14px;background:var(--bg2);border:1px solid var(--nv-green);color:var(--nv-green);padding:6px 12px;border-radius:6px;font-size:11px;z-index:9999;opacity:0;transition:opacity .2s;pointer-events:none;box-shadow:var(--shadow-sm);}
 
 </style>
+<!-- MSAL.js — Microsoft Authentication Library for Azure AD SSO -->
+<!-- Remove or comment out this line if SSO is not needed -->
+<script src="https://alcdn.msauth.net/browser/3.22.0/js/msal-browser.min.js" crossorigin="anonymous" defer></script>
 </head>
 <body>
 <div id="app">
@@ -782,6 +785,13 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
   <div class="id-card">
     <h2>Who are you?</h2>
     <p>ChipPilot will personalize to show your chips and your program view. Stored locally — no login required.</p>
+    <!-- SSO button — shown only when Azure AD app is configured -->
+    <div id="id-sso-row" style="display:none;margin-bottom:12px">
+      <button class="id-mgmt-btn" onclick="cpSsoLogin()" style="background:linear-gradient(135deg,#0078d4,#005a9e);color:#fff;border-color:#0078d4">
+        🔐 Sign in with Microsoft (NVIDIA SSO)
+      </button>
+      <div style="font-size:10px;color:var(--muted);text-align:center;margin-top:4px">Automatically detects your identity</div>
+    </div>
     <div class="id-grid" id="id-cm-grid"><!-- populated by JS --></div>
     <div class="id-divider">or</div>
     <button class="id-mgmt-btn" onclick="pickIdentity({name:'Portfolio View',email:'',initials:'◈',tag:''})">⊞ View All Programs &nbsp;·&nbsp; Portfolio / Management</button>
@@ -910,7 +920,7 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
     <div class="tab" id="tab-radar" onclick="showView('radar',null,this)">📡 Risk Radar</div>
     <div class="tab" id="tab-pm" onclick="showView('pm',null,this)">🤖 PM Assistant</div>
     <div class="tab" id="tab-chip" onclick="showView('chip',null,this)">🔬 Chip Detail</div>
-    <div class="tab" id="tab-settings" onclick="showView('settings',null,this)" style="margin-left:auto">⚙ Settings</div>
+    <div class="tab" id="tab-settings" onclick="showView('settings',null,this);cmRegRender()" style="margin-left:auto">⚙ Settings</div>
   </div>
 
   <div id="content">
@@ -1319,6 +1329,30 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
       <div id="cm-config-panel">
         <div style="color:var(--muted);font-size:12px;padding:20px 0">Sign in to configure your chip dashboard updates.</div>
       </div>
+
+      <!-- ── CM Registry Editor ── -->
+      <div class="cmr-section">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+          <div>
+            <div class="sec-lbl" style="margin:0">👥 CM Registry</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:3px">Update email addresses used for SSO sign-in matching and notifications</div>
+          </div>
+          <div style="display:flex;align-items:center">
+            <span class="cmr-toast" id="cmr-toast">✓ Saved</span>
+            <button class="cmr-save-btn" onclick="cmRegSave()">💾 Save Changes</button>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:36px 1fr 1fr auto;gap:10px;padding:0 0 6px;border-bottom:1px solid var(--border)">
+          <div></div>
+          <div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">Name</div>
+          <div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">Email (NVIDIA alias)</div>
+          <div></div>
+        </div>
+        <div id="cmr-rows"><!-- populated by cmRegRender() --></div>
+        <div style="margin-top:10px;font-size:10px;color:var(--muted)">
+          💡 Changes are saved to your browser and persist across sessions. Format: <code style="color:var(--nv-green)">firstname.lastname@nvidia.com</code>
+        </div>
+      </div>
     </div>
 
     <!-- ═══ NEW CHIP MODAL ═══ -->
@@ -1476,15 +1510,16 @@ let CURRENT_USER = {name:'Portfolio View',email:'',initials:'◈',tag:'',role:'m
 let MY_CHIPS = [];
 
 const CM_REGISTRY = [
-  {name:'Ranjani V',     email:'ssriranjani@nvidia.com', initials:'RV', tag:'Ranjani'},
-  {name:'Madhura',       email:'',                        initials:'M',  tag:'Madhura'},
-  {name:'Vinay Sharma',  email:'',                        initials:'VS', tag:'Vinay Sharma'},
-  {name:'Anshul Gupta',  email:'',                        initials:'AG', tag:'Anshul Gupta'},
-  {name:'Hui Fu',        email:'',                        initials:'HF', tag:'Hui Fu'},
-  {name:'Mayank Kapoor', email:'',                        initials:'MK', tag:'Mayank Kapoor'},
-  {name:'Vivek Desikan', email:'',                        initials:'VD', tag:'Vivek Desikan'},
-  {name:'Roopa Ranganathan', email:'',                     initials:'RR', tag:'Roopa'},
+  {name:'Ranjani V',          email:'ssriranjani@nvidia.com',       initials:'RV', tag:'Ranjani'},
+  {name:'Madhura Sankararama',email:'madhura.sankararama@nvidia.com', initials:'MS', tag:'Madhura'},
+  {name:'Vinay Sharma',       email:'vinay.sharma@nvidia.com',       initials:'VS', tag:'Vinay Sharma'},
+  {name:'Anshul Gupta',       email:'anshul.gupta@nvidia.com',       initials:'AG', tag:'Anshul Gupta'},
+  {name:'Hui Fu',             email:'hui.fu@nvidia.com',             initials:'HF', tag:'Hui Fu'},
+  {name:'Mayank Kapoor',      email:'mayank.kapoor@nvidia.com',      initials:'MK', tag:'Mayank Kapoor'},
+  {name:'Vivek Desikan',      email:'vivek.desikan@nvidia.com',      initials:'VD', tag:'Vivek Desikan'},
+  {name:'Roopa Ranganathan',  email:'roopa.ranganathan@nvidia.com',  initials:'RR', tag:'Roopa'},
 ];
+// ── NOTE: Madhura's last name unknown — update that email if different ──
 
 function buildCMConfigPanel() {
   const panel = document.getElementById('cm-config-panel');
@@ -1699,6 +1734,56 @@ function hideIdentityPicker() {
   modal.classList.remove('show');
   setTimeout(()=>{ modal.style.display='none'; }, 250);
 }
+
+// ── CM Registry Editor ──────────────────────────────────────────────────────
+function cmRegRender() {
+  const rows = document.getElementById('cmr-rows');
+  if (!rows) return;
+  rows.innerHTML = CM_REGISTRY.map((cm, i) => `
+    <div class="cmr-row">
+      <div class="cmr-av">${cm.initials}</div>
+      <div class="cmr-name">${cm.name}</div>
+      <input class="cmr-inp" id="cmr-email-${i}" type="email"
+             value="${cm.email || ''}"
+             placeholder="firstname.lastname@nvidia.com"
+             oninput="cmRegMarkDirty(${i})">
+      <div class="cmr-ok" id="cmr-ok-${i}">✓</div>
+    </div>
+  `).join('');
+}
+
+function cmRegMarkDirty(i) {
+  const ok = document.getElementById('cmr-ok-' + i);
+  if (ok) ok.style.display = 'none';
+}
+
+function cmRegSave() {
+  CM_REGISTRY.forEach((cm, i) => {
+    const el = document.getElementById('cmr-email-' + i);
+    if (!el) return;
+    cm.email = el.value.trim();
+    const ok = document.getElementById('cmr-ok-' + i);
+    if (ok) { ok.style.display = 'flex'; }
+  });
+  localStorage.setItem('cp2_cm_registry', JSON.stringify(CM_REGISTRY));
+  const toast = document.getElementById('cmr-toast');
+  if (toast) {
+    toast.style.opacity = '1';
+    setTimeout(() => { toast.style.opacity = '0'; }, 2500);
+  }
+}
+
+// Load any previously saved registry overrides
+(function() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('cp2_cm_registry') || 'null');
+    if (saved && Array.isArray(saved)) {
+      saved.forEach((s, i) => {
+        if (CM_REGISTRY[i] && s.email !== undefined) CM_REGISTRY[i].email = s.email;
+      });
+    }
+  } catch(e) {}
+})();
 
 const PHASE_DATA={
   pre:[
@@ -3147,16 +3232,116 @@ const CHIP_DB = {
   }
 };
 
-// -- User chip detection (runs after CHIP_DB is defined) -----------
-// -- Identity bootstrap ----------------------------------------------
+// ══════════════════════════════════════════════════════════════════════════════
+//  AZURE AD SSO  —  MSAL.js integration
+//  After IT registers the ChipPilot Azure AD app, fill in clientId + tenantId.
+//  While the values still start with "PASTE_", SSO is silently skipped and
+//  the manual identity picker is used as fallback.
+// ══════════════════════════════════════════════════════════════════════════════
+const CP_SSO_CONFIG = {
+  clientId:    'PASTE_CLIENT_ID_HERE',   // e.g. "a1b2c3d4-e5f6-7890-ab12-cd3456ef7890"
+  tenantId:    'PASTE_TENANT_ID_HERE',   // e.g. "nvidia.com"  or  a GUID
+  redirectUri: window.location.origin + window.location.pathname,
+};
+
+function cpSsoConfigured() {
+  return typeof CP_SSO_CONFIG.clientId === 'string' &&
+         CP_SSO_CONFIG.clientId.length > 10 &&
+         !CP_SSO_CONFIG.clientId.startsWith('PASTE');
+}
+
+// Try to silently sign in and match the returned email to CM_REGISTRY.
+// Returns true if a CM was found and applyIdentity() was called.
+async function cpSsoInit() {
+  if (!cpSsoConfigured() || typeof msal === 'undefined') return false;
+  try {
+    const pca = new msal.PublicClientApplication({
+      auth: {
+        clientId:    CP_SSO_CONFIG.clientId,
+        authority:   'https://login.microsoftonline.com/' + CP_SSO_CONFIG.tenantId,
+        redirectUri: CP_SSO_CONFIG.redirectUri,
+      },
+      cache: { cacheLocation: 'sessionStorage', storeAuthStateInCookie: false },
+    });
+    await pca.initialize();
+    window._cpMsal = pca;
+
+    // Show "Sign in with Microsoft" button in the picker now that SSO is ready
+    const ssoRow = document.getElementById('id-sso-row');
+    if (ssoRow) ssoRow.style.display = 'block';
+
+    // Check for an already-cached account (e.g. from a previous tab)
+    const accounts = pca.getAllAccounts();
+    const account  = accounts.length > 0 ? accounts[0] : null;
+
+    // Attempt silent SSO (succeeds when user has active NVIDIA AD session in browser)
+    const silentReq = { scopes: ['openid', 'email', 'profile'], ...(account ? {account} : {}) };
+    const resp = await pca.ssoSilent(silentReq).catch(() => null);
+    if (resp && resp.account) {
+      return cpSsoMatchEmail(resp.account.username);
+    }
+  } catch(e) {
+    console.info('ChipPilot: MSAL silent auth not available —', e.message);
+  }
+  return false;
+}
+
+// Match an email address to a CM_REGISTRY entry and apply it.
+function cpSsoMatchEmail(email) {
+  if (!email) return false;
+  const cm = CM_REGISTRY.find(c => c.email && c.email.toLowerCase() === email.toLowerCase());
+  if (!cm) return false;
+  applyIdentity(cm);
+  localStorage.setItem('cp2_identity', JSON.stringify(cm));
+  // Decorate avatar with SSO indicator
+  const av = document.getElementById('hdr-avatar');
+  if (av) {
+    av.title = cm.name + ' · signed in via NVIDIA SSO (click to switch)';
+    av.style.boxShadow = '0 0 0 2px #0078d4';
+  }
+  return true;
+}
+
+// Called from the "Sign in with Microsoft" button in the identity picker
+window.cpSsoLogin = async function() {
+  if (!window._cpMsal) {
+    alert('SSO is not yet configured. Ask IT to register the ChipPilot Azure AD app and fill in CP_SSO_CONFIG.');
+    return;
+  }
+  try {
+    const resp = await window._cpMsal.loginPopup({ scopes: ['openid', 'email', 'profile'] });
+    if (resp && resp.account) {
+      const matched = cpSsoMatchEmail(resp.account.username);
+      if (matched) {
+        hideIdentityPicker();
+      } else {
+        alert(
+          'Signed in as ' + resp.account.username + '\n\n' +
+          'This email is not in the CM registry. Ask Ranjani to add it, or select your identity manually below.'
+        );
+      }
+    }
+  } catch(e) {
+    if (e.errorCode !== 'user_cancelled') console.warn('ChipPilot SSO login error:', e.message);
+  }
+};
+
+// -- Identity bootstrap (SSO-first, manual picker fallback) --
 (function(){
   const saved = localStorage.getItem('cp2_identity');
-  if(saved){
-    try{ applyIdentity(JSON.parse(saved)); }
-    catch(e){ localStorage.removeItem('cp2_identity'); }
-  } else {
-    setTimeout(showIdentityPicker, 150);
+  if (saved) {
+    try { applyIdentity(JSON.parse(saved)); }
+    catch(e) { localStorage.removeItem('cp2_identity'); }
+    // Silently re-validate in background (updates avatar SSO ring if session exists)
+    cpSsoInit().catch(()=>{});
+    return;
   }
+  // No saved identity — try SSO first, then fall back to manual picker
+  cpSsoInit().then(matched => {
+    if (!matched) setTimeout(showIdentityPicker, 150);
+  }).catch(() => {
+    setTimeout(showIdentityPicker, 150);
+  });
 })();
 
 
@@ -3631,6 +3816,17 @@ body.light #cpt-prev,body.light #cpt-skip{background:rgba(0,0,0,.08);color:#666;
 .nc-lbl{font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;}
 .nc-inp{width:100%;padding:7px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:12px;font-family:inherit;box-sizing:border-box;transition:border-color .15s;}
 .nc-inp:focus{outline:none;border-color:var(--nv-green);}
+/* CM Registry editor */
+.cmr-section{margin-top:28px;border-top:1px solid var(--border);padding-top:20px;}
+.cmr-row{display:grid;grid-template-columns:36px 1fr 1fr auto;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04);}
+.cmr-av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--nv-green-dark),var(--nv-green));display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#000;flex-shrink:0;}
+.cmr-name{font-size:12px;font-weight:600;color:var(--text);}
+.cmr-inp{padding:6px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:11px;font-family:inherit;width:100%;box-sizing:border-box;transition:border-color .15s;}
+.cmr-inp:focus{outline:none;border-color:var(--nv-green);}
+.cmr-ok{width:16px;height:16px;border-radius:50%;background:var(--nv-green);display:none;align-items:center;justify-content:center;font-size:9px;color:#000;flex-shrink:0;}
+.cmr-save-btn{padding:8px 18px;border-radius:7px;border:1.5px solid var(--nv-green);background:rgba(118,185,0,.08);color:var(--nv-green);font-size:11px;font-weight:800;cursor:pointer;font-family:inherit;transition:all .15s;}
+.cmr-save-btn:hover{background:rgba(118,185,0,.2);}
+.cmr-toast{font-size:11px;color:var(--nv-green);opacity:0;transition:opacity .3s;margin-left:12px;}
 .nc-btn-pri{padding:8px 20px;border-radius:7px;border:none;background:var(--nv-green);color:#000;font-size:12px;font-weight:800;cursor:pointer;font-family:inherit;transition:opacity .15s;}
 .nc-btn-pri:hover{opacity:.85;}
 .nc-btn-sec{padding:8px 16px;border-radius:7px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;}
