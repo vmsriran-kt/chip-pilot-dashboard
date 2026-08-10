@@ -920,7 +920,7 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
     <div class="tab" id="tab-radar" onclick="showView('radar',null,this)">📡 Risk Radar</div>
     <div class="tab" id="tab-pm" onclick="showView('pm',null,this)">🤖 PM Assistant</div>
     <div class="tab" id="tab-chip" onclick="showView('chip',null,this)">🔬 Chip Detail</div>
-    <div class="tab" id="tab-settings" onclick="showView('settings',null,this);cmRegRender()" style="margin-left:auto">⚙ Settings</div>
+    <div class="tab" id="tab-settings" onclick="showView('settings',null,this);cmRegRender();confPagePopulateChips()" style="margin-left:auto">⚙ Settings</div>
   </div>
 
   <div id="content">
@@ -1330,6 +1330,43 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
         <div style="color:var(--muted);font-size:12px;padding:20px 0">Sign in to configure your chip dashboard updates.</div>
       </div>
 
+      <!-- ── Confluence Page Creator ── -->
+      <div class="cmr-section">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+          <div>
+            <div class="sec-lbl" style="margin:0">📄 Create Confluence Landing Page</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:3px">Generate a Confluence program page for any chip — new or existing</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span class="cmr-toast" id="conf-toast">📋 Prompt copied!</span>
+            <button class="cmr-save-btn" onclick="confPageCreate()">📄 Generate &amp; Copy Prompt</button>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div>
+            <div class="nc-lbl">Chip Program <span style="color:var(--red)">*</span></div>
+            <select id="conf-chip-sel" class="nc-inp">
+              <option value="">— select chip —</option>
+            </select>
+          </div>
+          <div>
+            <div class="nc-lbl">Confluence Space Key <span style="color:var(--red)">*</span></div>
+            <input id="conf-space" class="nc-inp" placeholder="e.g. NBS, RubinSW, TCS">
+          </div>
+          <div>
+            <div class="nc-lbl">Page Title</div>
+            <input id="conf-title" class="nc-inp" placeholder="Auto-filled from chip name">
+          </div>
+          <div>
+            <div class="nc-lbl">Parent Page ID <span style="color:var(--muted)">(optional)</span></div>
+            <input id="conf-parent" class="nc-inp" placeholder="leave blank for space root">
+          </div>
+        </div>
+        <div style="margin-top:10px;font-size:10px;color:var(--muted)">
+          💡 Click <strong>Generate &amp; Copy Prompt</strong> → paste into this Claude chat → Claude creates the page and returns the link.
+        </div>
+      </div>
+
       <!-- ── CM Registry Editor ── -->
       <div class="cmr-section">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
@@ -1443,41 +1480,6 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
           </div>
         </div>
 
-        <!-- Confluence Page Creation -->
-        <div style="margin-top:16px;padding:14px;background:rgba(118,185,0,.05);border:1px solid rgba(118,185,0,.2);border-radius:8px">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-            <div style="display:flex;align-items:center;gap:8px">
-              <span style="font-size:13px">📄</span>
-              <span style="font-size:12px;font-weight:700;color:var(--text)">Create Confluence Landing Page</span>
-            </div>
-            <label style="display:flex;align-items:center;gap:6px;cursor:pointer">
-              <input type="checkbox" id="nc-conf-toggle" onchange="ncToggleConf(this.checked)"
-                style="width:14px;height:14px;accent-color:var(--nv-green)">
-              <span style="font-size:10px;color:var(--muted)">Enable</span>
-            </label>
-          </div>
-          <div id="nc-conf-fields" style="display:none;grid-template-columns:1fr 1fr;gap:10px">
-            <div>
-              <div class="nc-lbl">Confluence Space Key <span style="color:var(--red)">*</span></div>
-              <input id="nc-conf-space" class="nc-inp" placeholder="e.g. NBS, RubinSW, TCS">
-              <div style="font-size:9px;color:var(--muted);margin-top:2px">The space where the page will be created</div>
-            </div>
-            <div>
-              <div class="nc-lbl">Page Title</div>
-              <input id="nc-conf-title" class="nc-inp" placeholder="Auto-filled from chip name">
-            </div>
-            <div style="grid-column:1/-1">
-              <div class="nc-lbl">Parent Page ID <span style="color:var(--muted)">(optional)</span></div>
-              <input id="nc-conf-parent" class="nc-inp" placeholder="e.g. 2872182006 — leave blank for space root">
-              <div style="font-size:9px;color:var(--muted);margin-top:2px">Find the ID in the page URL: /wiki/spaces/KEY/pages/<strong>ID</strong>/...</div>
-            </div>
-            <div style="grid-column:1/-1">
-              <div style="font-size:9px;color:var(--nv-green);padding:6px 8px;background:rgba(118,185,0,.08);border-radius:5px">
-                ✦ When you submit, Claude will create the Confluence page directly and show you the link.
-              </div>
-            </div>
-          </div>
-        </div>
 
         <!-- Preview -->
         <div style="margin-top:16px;padding:12px;background:var(--bg3);border:1px solid var(--border);border-radius:8px">
@@ -1733,6 +1735,71 @@ function hideIdentityPicker() {
   if(!modal) return;
   modal.classList.remove('show');
   setTimeout(()=>{ modal.style.display='none'; }, 250);
+}
+
+// ── Confluence Page Creator (standalone) ────────────────────────────────────
+function confPagePopulateChips() {
+  const sel = document.getElementById('conf-chip-sel');
+  if (!sel || sel.options.length > 1) return; // already populated
+  Object.keys(CHIP_DB).forEach(id => {
+    const opt = document.createElement('option');
+    opt.value = id;
+    opt.textContent = (CHIP_DB[id].title || id.toUpperCase()).split('·')[0].trim() + ' (' + id.toUpperCase() + ')';
+    sel.appendChild(opt);
+  });
+  // Auto-fill title when chip changes
+  sel.addEventListener('change', function() {
+    const titleEl = document.getElementById('conf-title');
+    if (titleEl && this.value && CHIP_DB[this.value]) {
+      const d = CHIP_DB[this.value];
+      titleEl.placeholder = (d.title || this.value.toUpperCase()) + ' — Chip Program Home';
+    }
+  });
+}
+
+function confPageCreate() {
+  const chipId  = (document.getElementById('conf-chip-sel') || {}).value || '';
+  const space   = ((document.getElementById('conf-space')   || {}).value || '').trim();
+  const titleEl = document.getElementById('conf-title');
+  const parent  = ((document.getElementById('conf-parent')  || {}).value || '').trim();
+
+  if (!chipId) { alert('Please select a chip program.'); return; }
+  if (!space)  { alert('Please enter a Confluence Space Key.'); return; }
+
+  const d = CHIP_DB[chipId] || {};
+  const chipName = (d.title || chipId.toUpperCase()).split('·')[0].trim();
+  const cmMatch  = d.sub && d.sub.match(/SW CM[s]?:\s*([^·]+)/);
+  const cm       = cmMatch ? cmMatch[1].trim() : '—';
+  const title    = (titleEl && titleEl.value.trim()) || (chipName + ' — Chip Program Home');
+  const cfg      = loadChipCfg(chipId);
+
+  const prompt = [
+    'Create a Confluence landing page for a chip program with these details:',
+    '- Chip ID: ' + chipId.toUpperCase(),
+    '- Display Name: ' + chipName,
+    '- Phase: ' + (d.phase || '—'),
+    '- Chip Manager: ' + cm,
+    '- Confluence Space: ' + space,
+    '- Page Title: ' + title,
+    parent ? '- Parent Page ID: ' + parent : '- Parent: space root (no parent page)',
+    '- Executive Summary: ' + (d.anno || '—'),
+    '- Slack Channels: ' + (cfg.slack || d.slack || '—'),
+    '- Email Contacts: ' + (cfg.email || d.emails || '—'),
+    '- NVBugs Component: ' + (cfg.nvbugs || '—'),
+    '',
+    'Use the Confluence MCP (cloudId: nvidia.atlassian.net) to create the page with these sections:',
+    '  1. Program Overview — phase, CM, executive summary',
+    '  2. Key Contacts — Slack channels, email DLs',
+    '  3. Schedule & Milestones — placeholder table (Milestone | Target Date | Status)',
+    '  4. Open Risks — placeholder table (Risk | Priority | Mitigation)',
+    '  5. Data Sources — Confluence space, NVBugs component, Slack channels',
+    '',
+    'After creating, reply with the direct Confluence page URL.',
+  ].join('\n');
+
+  navigator.clipboard.writeText(prompt).catch(() => {});
+  const toast = document.getElementById('conf-toast');
+  if (toast) { toast.style.opacity = '1'; setTimeout(() => toast.style.opacity = '0', 2500); }
 }
 
 // ── CM Registry Editor ──────────────────────────────────────────────────────
