@@ -742,8 +742,8 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
 </style>
 <!-- MSAL.js — Microsoft Authentication Library for Azure AD SSO -->
 <!-- Remove or comment out this line if SSO is not needed -->
-<script src="https://alcdn.msauth.net/browser/3.22.0/js/msal-browser.min.js" crossorigin="anonymous" onerror="document.getElementById('msal-fallback-load').src='https://cdn.jsdelivr.net/npm/@azure/msal-browser@3.22.0/lib/msal-browser.min.js'"></script>
-<script id="msal-fallback-load"></script>
+<!-- MSAL bundled locally — no CDN dependency -->
+<script src="./msal-browser.min.js"></script>
 </head>
 <body>
 <div id="app">
