@@ -784,23 +784,22 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
 </header>
 
 <div id="nav-overlay" onclick="toggleNav()"></div>
-<div id="identity-modal" role="dialog" aria-modal="true" aria-label="Choose your identity" style="display:none">
-  <div class="id-card">
-    <h2>Who are you?</h2>
-    <p>ChipPilot will personalize to show your chips and your program view. Stored locally — no login required.</p>
-    <!-- SSO button — shown only when Azure AD app is configured -->
-    <div id="id-sso-row" style="display:none;margin-bottom:12px">
-      <button class="id-mgmt-btn" onclick="cpSsoLogin()" style="background:linear-gradient(135deg,#0078d4,#005a9e);color:#fff;border-color:#0078d4">
-        🔐 Sign in with Microsoft (NVIDIA SSO)
+<div id="identity-modal" role="dialog" aria-modal="true" aria-label="Sign in" style="display:none">
+  <div class="id-card" style="max-width:420px;text-align:center">
+    <div style="font-size:40px;margin-bottom:12px">🔐</div>
+    <h2 style="margin-bottom:6px">Sign in to ChipPilot</h2>
+    <p style="margin-bottom:24px">Use your NVIDIA Microsoft account. ChipPilot will detect your identity from the CM registry.</p>
+    <div id="id-sso-row">
+      <button class="id-mgmt-btn" onclick="cpSsoLogin()" style="background:linear-gradient(135deg,#0078d4,#005a9e);color:#fff;border-color:#0078d4;width:100%;justify-content:center;font-size:14px;padding:12px 20px">
+        Sign in with Microsoft (NVIDIA SSO)
       </button>
-      <div style="font-size:10px;color:var(--muted);text-align:center;margin-top:4px">Automatically detects your identity</div>
     </div>
-    <div class="id-grid" id="id-cm-grid"><!-- populated by JS --></div>
-    <div class="id-divider">or</div>
-    <button class="id-mgmt-btn" onclick="pickIdentity({name:'Portfolio View',email:'',initials:'◈',tag:''})">⊞ View All Programs &nbsp;·&nbsp; Portfolio / Management</button>
-    <div style="margin-top:16px;text-align:center;border-top:1px solid var(--border);padding-top:14px">
-      <button onclick="cpSsoLogout()" style="background:transparent;border:none;color:var(--muted);font-size:11px;cursor:pointer;text-decoration:underline;padding:4px 8px" title="Clear saved identity and sign out of Microsoft SSO">
-        Sign out / switch account
+    <div style="margin-top:20px;border-top:1px solid var(--border);padding-top:16px">
+      <button class="id-mgmt-btn" onclick="pickIdentity({name:'Portfolio View',email:'',initials:'◈',tag:''})" style="width:100%;justify-content:center">⊞ Portfolio / Management view</button>
+    </div>
+    <div style="margin-top:10px">
+      <button onclick="cpSsoLogout()" style="background:transparent;border:none;color:var(--muted);font-size:11px;cursor:pointer;text-decoration:underline;padding:4px 8px">
+        Sign out / clear session
       </button>
     </div>
   </div>
@@ -1724,22 +1723,6 @@ function pickIdentity(cm) {
 function showIdentityPicker() {
   const modal = document.getElementById('identity-modal');
   if(!modal) return;
-  const grid = document.getElementById('id-cm-grid');
-  if(grid && typeof CHIP_DB !== 'undefined') {
-    grid.innerHTML = CM_REGISTRY.map(cm => {
-      const chips = Object.keys(CHIP_DB).filter(id => {
-        const d = CHIP_DB[id], tag = cm.tag.toLowerCase();
-        return (d.sub && d.sub.toLowerCase().includes(tag)) ||
-               (d.checklist && d.checklist.some(c => c.owner && c.owner.toLowerCase().includes(tag)));
-      });
-      const cmJson = JSON.stringify(cm).replace(/'/g,'&#39;');
-      return `<button class="id-btn" onclick='pickIdentity(${cmJson})'>
-        <div class="id-av">${cm.initials}</div>
-        <div class="id-name">${cm.name}</div>
-        <div class="id-chips">${chips.length} chip${chips.length!==1?'s':''}: ${chips.map(c=>c.toUpperCase()).join(', ')||'—'}</div>
-      </button>`;
-    }).join('');
-  }
   modal.style.display = 'flex';
   requestAnimationFrame(()=>modal.classList.add('show'));
 }
@@ -1820,17 +1803,49 @@ function confPageCreate() {
 function cmRegRender() {
   const rows = document.getElementById('cmr-rows');
   if (!rows) return;
+  const isAdmin = CURRENT_USER.role === 'admin';
   rows.innerHTML = CM_REGISTRY.map((cm, i) => `
-    <div class="cmr-row">
+    <div class="cmr-row" id="cmr-row-${i}">
       <div class="cmr-av">${cm.initials}</div>
-      <div class="cmr-name">${cm.name}</div>
+      ${isAdmin
+        ? `<input class="cmr-inp" style="font-weight:600;width:140px" id="cmr-name-${i}" type="text" value="${cm.name}" placeholder="Full Name" oninput="cmRegMarkDirty(${i})">`
+        : `<div class="cmr-name">${cm.name}</div>`}
       <input class="cmr-inp" id="cmr-email-${i}" type="email"
              value="${cm.email || ''}"
              placeholder="firstname.lastname@nvidia.com"
              oninput="cmRegMarkDirty(${i})">
       <div class="cmr-ok" id="cmr-ok-${i}">✓</div>
+      ${isAdmin ? `<button onclick="cmRegRemove(${i})" title="Remove CM" style="background:transparent;border:none;color:#e05;cursor:pointer;font-size:14px;padding:0 4px">✕</button>` : ''}
     </div>
   `).join('');
+
+  // Admin-only: Add CM button
+  if (isAdmin) {
+    rows.insertAdjacentHTML('beforeend', `
+      <div style="margin-top:10px">
+        <button class="id-mgmt-btn" onclick="cmRegAddRow()" style="background:rgba(118,185,0,.1);border-color:var(--nv-green);color:var(--nv-green)">
+          ＋ Add Chip Manager
+        </button>
+      </div>
+    `);
+  }
+}
+
+function cmRegAddRow() {
+  const newCm = { name: '', email: '', initials: '?', tag: '' };
+  CM_REGISTRY.push(newCm);
+  cmRegRender();
+  // Focus on the new name field
+  const i = CM_REGISTRY.length - 1;
+  const nameEl = document.getElementById('cmr-name-' + i);
+  if (nameEl) nameEl.focus();
+}
+
+function cmRegRemove(i) {
+  if (!confirm('Remove ' + CM_REGISTRY[i].name + ' from CM registry?')) return;
+  CM_REGISTRY.splice(i, 1);
+  cmRegSave();
+  cmRegRender();
 }
 
 function cmRegMarkDirty(i) {
@@ -1840,9 +1855,15 @@ function cmRegMarkDirty(i) {
 
 function cmRegSave() {
   CM_REGISTRY.forEach((cm, i) => {
-    const el = document.getElementById('cmr-email-' + i);
-    if (!el) return;
-    cm.email = el.value.trim();
+    const emailEl = document.getElementById('cmr-email-' + i);
+    if (emailEl) cm.email = emailEl.value.trim();
+    const nameEl = document.getElementById('cmr-name-' + i);
+    if (nameEl) {
+      cm.name = nameEl.value.trim();
+      // Auto-generate initials from name (e.g. "Hui Fu" → "HF")
+      cm.initials = cm.name.split(' ').filter(Boolean).map(w=>w[0].toUpperCase()).join('').slice(0,2) || '?';
+      cm.tag = cm.name.split(' ')[0] || '';
+    }
     const ok = document.getElementById('cmr-ok-' + i);
     if (ok) { ok.style.display = 'flex'; }
   });
@@ -1854,14 +1875,21 @@ function cmRegSave() {
   }
 }
 
-// Load any previously saved registry overrides
+// Load any previously saved registry overrides (full replacement if saved has names)
 (function() {
   try {
     const saved = JSON.parse(localStorage.getItem('cp2_cm_registry') || 'null');
-    if (saved && Array.isArray(saved)) {
-      saved.forEach((s, i) => {
-        if (CM_REGISTRY[i] && s.email !== undefined) CM_REGISTRY[i].email = s.email;
-      });
+    if (saved && Array.isArray(saved) && saved.length > 0) {
+      if (saved[0].name) {
+        // Full registry saved by admin — replace entirely
+        CM_REGISTRY.length = 0;
+        saved.forEach(s => CM_REGISTRY.push(s));
+      } else {
+        // Legacy: only emails were saved — patch by index
+        saved.forEach((s, i) => {
+          if (CM_REGISTRY[i] && s.email !== undefined) CM_REGISTRY[i].email = s.email;
+        });
+      }
     }
   } catch(e) {}
 })();
@@ -3454,9 +3482,9 @@ window.cpSsoLogout = async function() {
     cpSsoInit().catch(()=>{});
     return;
   }
-  // No saved identity — try SSO first, then fall back to manual picker
+  // No saved identity — try SSO silent auth; always show sign-in modal if not matched
   cpSsoInit().then(matched => {
-    if (!matched) setTimeout(showIdentityPicker, 150);
+    if (!matched) setTimeout(showIdentityPicker, 150); // shows SSO-only modal
   }).catch(() => {
     setTimeout(showIdentityPicker, 150);
   });
