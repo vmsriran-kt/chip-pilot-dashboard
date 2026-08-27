@@ -1395,7 +1395,13 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
         </div>
         <div id="cmr-rows"><!-- populated by cmRegRender() --></div>
         <div style="margin-top:10px;font-size:10px;color:var(--muted)">
-          💡 Changes are saved to your browser and persist across sessions. Format: <code style="color:var(--nv-green)">firstname.lastname@nvidia.com</code>
+          💡 Changes saved here apply to <strong>your browser only</strong>. To publish for all users, click <strong>Export → copy the code → paste into the HTML file → push to GitHub</strong>.
+        </div>
+        <div id="cmr-export-row" style="display:none;margin-top:10px">
+          <button onclick="cmRegExport()" style="font-size:11px;padding:5px 12px;border-radius:6px;border:1px solid var(--nv-green);background:rgba(118,185,0,.08);color:var(--nv-green);cursor:pointer;font-family:inherit;font-weight:700">
+            📤 Export Registry Code
+          </button>
+          <span id="cmr-export-toast" style="opacity:0;transition:opacity .3s;margin-left:8px;font-size:10px;color:var(--nv-green)">✓ Copied — paste into chip-pilot-dashboard-fixed.html and push to GitHub</span>
         </div>
       </div>
     </div>
@@ -1549,9 +1555,11 @@ function buildCMConfigPanel() {
     { id:'calendar',   label:'📅 Calendar'   },
   ];
 
-  function buildRichPrompt(chipId) {
+  // Expose globally so onclick handlers in generated HTML can call it
+  window.buildRichPrompt = function buildRichPrompt(chipId) {
+    const DEFAULT_SRC = ['slack','confluence','email','nvbugs'];
     const cfg  = loadChipCfg(chipId);
-    const src  = window._cmcpState[chipId] ? [...window._cmcpState[chipId]] : DEFAULT_SOURCES;
+    const src  = window._cmcpState && window._cmcpState[chipId] ? [...window._cmcpState[chipId]] : DEFAULT_SRC;
     const chip = CHIP_DB[chipId];
     const lines = [`Update the ChipPilot dashboard for ${chipId.toUpperCase()} (${chip ? chip.phase : ''}):`];
     if (src.includes('slack') && cfg.slack)
@@ -1566,7 +1574,7 @@ function buildCMConfigPanel() {
       lines.push(`• Calendar: check upcoming sync meetings for ${chipId.toUpperCase()}`);
     lines.push(`\nSummarise: top risks, schedule status, open blockers, and update the ${chipId.toUpperCase()} dashboard card.`);
     return lines.join('\n');
-  }
+  };
 
   function renderRow(chipId) {
     const chip   = CHIP_DB[chipId];
@@ -1820,7 +1828,8 @@ function cmRegRender() {
     </div>
   `).join('');
 
-  // Admin-only: Add CM button
+  // Admin-only: Add CM + Export buttons
+  const exportRow = document.getElementById('cmr-export-row');
   if (isAdmin) {
     rows.insertAdjacentHTML('beforeend', `
       <div style="margin-top:10px">
@@ -1829,6 +1838,9 @@ function cmRegRender() {
         </button>
       </div>
     `);
+    if (exportRow) exportRow.style.display = 'block';
+  } else {
+    if (exportRow) exportRow.style.display = 'none';
   }
 }
 
@@ -1847,6 +1859,22 @@ function cmRegRemove(i) {
   CM_REGISTRY.splice(i, 1);
   cmRegSave();
   cmRegRender();
+}
+
+function cmRegExport() {
+  // Generate the CM_REGISTRY code block ready to paste into the HTML source
+  const lines = CM_REGISTRY.map(cm => {
+    const flags = cm.admin ? ', admin:true' : '';
+    return `  {name:'${cm.name}', email:'${cm.email||''}', initials:'${cm.initials||'?'}', tag:'${cm.tag||cm.name.split(' ')[0]||''}'${flags}}`;
+  });
+  const code = `const CM_REGISTRY = [\n${lines.join(',\n')},\n];`;
+  navigator.clipboard.writeText(code).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = code; ta.style.cssText = 'position:fixed;opacity:0';
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+  });
+  const toast = document.getElementById('cmr-export-toast');
+  if (toast) { toast.style.opacity = '1'; setTimeout(() => toast.style.opacity = '0', 4000); }
 }
 
 function cmRegMarkDirty(i) {
@@ -2810,7 +2838,7 @@ const CHIP_CFG_DEFAULTS = {
   gr15x:  { slack:'#swgpu-chips-gfw-gr15x', confluence:'RubinSW', email:'vinay', nvbugs:'GR15x' },
   fn10x:  { slack:'#swgpu-chips-gfw-fn10x', confluence:'FeynmanSW', email:'madhura', nvbugs:'FN10x' },
   thorz:  { slack:'#thorz-bringup, #cpu-ps-bringup', confluence:'ThorSW', email:'mayank', nvbugs:'ThorZ' },
-  tb500:  { slack:'#tb500-sw-bringup', confluence:'VeraSW', email:'sowjanya, sruskamp', nvbugs:'TB500' },
+  tb500:  { slack:'#tb500-sw-bringup', confluence:'VeraSW', email:'roopa.ranganathan, sruskamp', nvbugs:'TB500' },
   tb600:  { slack:'#tb600-sw-bringup', confluence:'VeraSW', email:'huifu', nvbugs:'TB600' },
   n2x:    { slack:'#n2x-sw-bringup, #n2x-fpga', confluence:'N2xSW', email:'vivek, desikan', nvbugs:'N2x' },
   tcx10:  { slack:'#tcx10-sw', confluence:'TCX10SW', email:'roopa', nvbugs:'TCX10' },
