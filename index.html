@@ -1382,9 +1382,13 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
             <div class="sec-lbl" style="margin:0">👥 CM Registry</div>
             <div style="font-size:10px;color:var(--muted);margin-top:3px">Update email addresses used for SSO sign-in matching and notifications</div>
           </div>
-          <div style="display:flex;align-items:center">
+          <div style="display:flex;align-items:center;gap:8px">
             <span class="cmr-toast" id="cmr-toast">✓ Saved</span>
             <button class="cmr-save-btn" onclick="cmRegSave()">💾 Save Changes</button>
+            <button id="cmr-export-btn" onclick="cmRegExport()" style="display:none;font-size:11px;padding:5px 12px;border-radius:6px;border:1px solid var(--nv-green);background:rgba(118,185,0,.08);color:var(--nv-green);cursor:pointer;font-family:inherit;font-weight:700" title="Copy CM_REGISTRY code — paste into the HTML file and push to GitHub to publish for all users">
+              📤 Export to Code
+            </button>
+            <span id="cmr-export-toast" style="opacity:0;transition:opacity .3s;font-size:10px;color:var(--nv-green)">✓ Copied — paste into HTML &amp; push</span>
           </div>
         </div>
         <div style="display:grid;grid-template-columns:36px 1fr 1fr auto;gap:10px;padding:0 0 6px;border-bottom:1px solid var(--border)">
@@ -1395,13 +1399,7 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
         </div>
         <div id="cmr-rows"><!-- populated by cmRegRender() --></div>
         <div style="margin-top:10px;font-size:10px;color:var(--muted)">
-          💡 Changes saved here apply to <strong>your browser only</strong>. To publish for all users, click <strong>Export → copy the code → paste into the HTML file → push to GitHub</strong>.
-        </div>
-        <div id="cmr-export-row" style="display:none;margin-top:10px">
-          <button onclick="cmRegExport()" style="font-size:11px;padding:5px 12px;border-radius:6px;border:1px solid var(--nv-green);background:rgba(118,185,0,.08);color:var(--nv-green);cursor:pointer;font-family:inherit;font-weight:700">
-            📤 Export Registry Code
-          </button>
-          <span id="cmr-export-toast" style="opacity:0;transition:opacity .3s;margin-left:8px;font-size:10px;color:var(--nv-green)">✓ Copied — paste into chip-pilot-dashboard-fixed.html and push to GitHub</span>
+          💡 Changes saved here apply to <strong>your browser only</strong>. Admins: use <strong>📤 Export to Code</strong> → paste into the HTML → push to GitHub to publish for all users.
         </div>
       </div>
     </div>
@@ -1833,8 +1831,8 @@ function cmRegRender() {
     </div>
   `).join('');
 
-  // Admin-only: Add CM + Export buttons
-  const exportRow = document.getElementById('cmr-export-row');
+  // Admin-only: Add CM button + show Export button in header
+  const exportBtn = document.getElementById('cmr-export-btn');
   if (isAdmin) {
     rows.insertAdjacentHTML('beforeend', `
       <div style="margin-top:10px">
@@ -1843,9 +1841,9 @@ function cmRegRender() {
         </button>
       </div>
     `);
-    if (exportRow) exportRow.style.display = 'block';
+    if (exportBtn) exportBtn.style.display = '';
   } else {
-    if (exportRow) exportRow.style.display = 'none';
+    if (exportBtn) exportBtn.style.display = 'none';
   }
 }
 
