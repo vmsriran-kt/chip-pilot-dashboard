@@ -1512,16 +1512,15 @@ let CURRENT_USER = {name:'Portfolio View',email:'',initials:'◈',tag:'',role:'m
 let MY_CHIPS = [];
 
 const CM_REGISTRY = [
-  {name:'Ranjani V',          email:'ssriranjani@nvidia.com',       initials:'RV', tag:'Ranjani'},
+  {name:'Ranjani V',          email:'ssriranjani@nvidia.com',        initials:'RV', tag:'Ranjani',      admin:true},
+  {name:'Roopa Ranganathan',  email:'roopa.ranganathan@nvidia.com',  initials:'RR', tag:'Roopa',        admin:true},
   {name:'Madhura Sankararama',email:'madhura.sankararama@nvidia.com', initials:'MS', tag:'Madhura'},
   {name:'Vinay Sharma',       email:'vinay.sharma@nvidia.com',       initials:'VS', tag:'Vinay Sharma'},
   {name:'Anshul Gupta',       email:'anshul.gupta@nvidia.com',       initials:'AG', tag:'Anshul Gupta'},
   {name:'Hui Fu',             email:'hui.fu@nvidia.com',             initials:'HF', tag:'Hui Fu'},
   {name:'Mayank Kapoor',      email:'mayank.kapoor@nvidia.com',      initials:'MK', tag:'Mayank Kapoor'},
   {name:'Vivek Desikan',      email:'vivek.desikan@nvidia.com',      initials:'VD', tag:'Vivek Desikan'},
-  {name:'Roopa Ranganathan',  email:'roopa.ranganathan@nvidia.com',  initials:'RR', tag:'Roopa'},
 ];
-// ── NOTE: Madhura's last name unknown — update that email if different ──
 
 function buildCMConfigPanel() {
   const panel = document.getElementById('cm-config-panel');
@@ -1668,7 +1667,12 @@ function applyIdentity(cm) {
     return (d.sub && d.sub.toLowerCase().includes(tag)) ||
            (d.checklist && d.checklist.some(c => c.owner && c.owner.toLowerCase().includes(tag)));
   }) : [];
-  CURRENT_USER.role = MY_CHIPS.length > 0 ? 'cm' : 'mgmt';
+  if (cm.admin) {
+    CURRENT_USER.role = 'admin';
+    MY_CHIPS = Object.keys(CHIP_DB); // full access to all chips
+  } else {
+    CURRENT_USER.role = MY_CHIPS.length > 0 ? 'cm' : 'mgmt';
+  }
   window.ACTIVE_CHIP = MY_CHIPS[0] || Object.keys(CHIP_DB)[0];
   buildCMConfigPanel();
   const av = document.getElementById('hdr-avatar');
@@ -1676,7 +1680,9 @@ function applyIdentity(cm) {
   const navAv = document.getElementById('nav-user-avatar');
   if(navAv) navAv.textContent = CURRENT_USER.initials;
   const navName = document.getElementById('nav-user-name');
-  if(navName) navName.textContent = CURRENT_USER.name + ' · ' + (CURRENT_USER.role === 'cm' ? 'SW CM' : 'Portfolio');
+  const roleLabel = CURRENT_USER.role === 'admin' ? '★ Admin' : CURRENT_USER.role === 'cm' ? 'SW CM' : 'Portfolio';
+  if(navName) navName.textContent = CURRENT_USER.name + ' · ' + roleLabel;
+  if(av && CURRENT_USER.role === 'admin') av.style.boxShadow = '0 0 0 2px #76b900, 0 0 0 4px rgba(118,185,0,.3)';
   // Refresh cockpit chip-card CM labels from CHIP_DB
   document.querySelectorAll('[onclick*="showView(\'chip\'"]').forEach(card => {
     const m = card.getAttribute('onclick').match(/showView\('chip','(\w+)'\)/);
