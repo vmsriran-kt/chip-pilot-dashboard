@@ -742,7 +742,7 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
 </style>
 <!-- MSAL.js — Microsoft Authentication Library for Azure AD SSO -->
 <!-- Remove or comment out this line if SSO is not needed -->
-<script src="https://alcdn.msauth.net/browser/3.22.0/js/msal-browser.min.js" crossorigin="anonymous" defer></script>
+<script src="https://alcdn.msauth.net/browser/3.22.0/js/msal-browser.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <div id="app">
@@ -777,7 +777,10 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
   <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn" title="Toggle theme" aria-label="Toggle theme">
     <span id="theme-icon">🌙</span>
   </button>
-  <div class="hdr-avatar" id="hdr-avatar" title="Ranjani V (click to switch)" onclick="showIdentityPicker()">RV</div>
+  <div style="display:flex;align-items:center;gap:6px">
+    <div class="hdr-avatar" id="hdr-avatar" title="Ranjani V (click to switch)" onclick="showIdentityPicker()">RV</div>
+    <button onclick="cpSsoLogout()" id="hdr-signout" title="Sign out" style="background:transparent;border:none;color:var(--muted);font-size:10px;cursor:pointer;padding:2px 4px;opacity:.6;white-space:nowrap" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.6">↩ Sign out</button>
+  </div>
 </header>
 
 <div id="nav-overlay" onclick="toggleNav()"></div>
@@ -795,6 +798,11 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
     <div class="id-grid" id="id-cm-grid"><!-- populated by JS --></div>
     <div class="id-divider">or</div>
     <button class="id-mgmt-btn" onclick="pickIdentity({name:'Portfolio View',email:'',initials:'◈',tag:''})">⊞ View All Programs &nbsp;·&nbsp; Portfolio / Management</button>
+    <div style="margin-top:16px;text-align:center;border-top:1px solid var(--border);padding-top:14px">
+      <button onclick="cpSsoLogout()" style="background:transparent;border:none;color:var(--muted);font-size:11px;cursor:pointer;text-decoration:underline;padding:4px 8px" title="Clear saved identity and sign out of Microsoft SSO">
+        Sign out / switch account
+      </button>
+    </div>
   </div>
 </div>
 
@@ -3397,6 +3405,25 @@ window.cpSsoLogin = async function() {
   } catch(e) {
     if (e.errorCode !== 'user_cancelled') console.warn('ChipPilot SSO login error:', e.message);
   }
+};
+
+// Sign out: clear saved identity, end MSAL session if active, show picker
+window.cpSsoLogout = async function() {
+  localStorage.removeItem('cp2_identity');
+  if (window._cpMsal) {
+    try {
+      const accounts = window._cpMsal.getAllAccounts();
+      if (accounts.length > 0) {
+        await window._cpMsal.logoutPopup({ account: accounts[0] }).catch(() => {});
+      }
+    } catch(e) { /* ignore */ }
+    window._cpMsal = null;
+  }
+  // Reset UI
+  const av = document.getElementById('hdr-avatar');
+  if (av) { av.style.boxShadow = ''; av.title = 'Click to choose identity'; }
+  CURRENT_USER.name = ''; CURRENT_USER.email = ''; CURRENT_USER.initials = '?';
+  showIdentityPicker();
 };
 
 // -- Identity bootstrap (SSO-first, manual picker fallback) --
