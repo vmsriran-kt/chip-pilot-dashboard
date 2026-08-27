@@ -1375,8 +1375,8 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
         </div>
       </div>
 
-      <!-- ── CM Registry Editor ── -->
-      <div class="cmr-section">
+      <!-- ── CM Registry Editor — Admin only ── -->
+      <div class="cmr-section" id="cmr-section">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
           <div>
             <div class="sec-lbl" style="margin:0">👥 CM Registry</div>
@@ -1813,6 +1813,11 @@ function cmRegRender() {
   const rows = document.getElementById('cmr-rows');
   if (!rows) return;
   const isAdmin = CURRENT_USER.role === 'admin';
+
+  // Entire CM Registry section is admin-only
+  const section = document.getElementById('cmr-section');
+  if (section) section.style.display = isAdmin ? '' : 'none';
+  if (!isAdmin) return;
   rows.innerHTML = CM_REGISTRY.map((cm, i) => `
     <div class="cmr-row" id="cmr-row-${i}">
       <div class="cmr-av">${cm.initials}</div>
