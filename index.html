@@ -3335,6 +3335,11 @@ function cpSsoConfigured() {
 // Returns true if a CM was found and applyIdentity() was called.
 async function cpSsoInit() {
   if (!cpSsoConfigured() || typeof msal === 'undefined') return false;
+
+  // Show SSO button immediately if clientId is configured — don't wait for init
+  const ssoRow = document.getElementById('id-sso-row');
+  if (ssoRow) ssoRow.style.display = 'block';
+
   try {
     const pca = new msal.PublicClientApplication({
       auth: {
@@ -3344,12 +3349,10 @@ async function cpSsoInit() {
       },
       cache: { cacheLocation: 'sessionStorage', storeAuthStateInCookie: false },
     });
-    await pca.initialize();
-    window._cpMsal = pca;
 
-    // Show "Sign in with Microsoft" button in the picker now that SSO is ready
-    const ssoRow = document.getElementById('id-sso-row');
-    if (ssoRow) ssoRow.style.display = 'block';
+    // Set _cpMsal before initialize() so loginPopup is always available
+    window._cpMsal = pca;
+    await pca.initialize();
 
     // Check for an already-cached account (e.g. from a previous tab)
     const accounts = pca.getAllAccounts();
@@ -3386,7 +3389,7 @@ function cpSsoMatchEmail(email) {
 // Called from the "Sign in with Microsoft" button in the identity picker
 window.cpSsoLogin = async function() {
   if (!window._cpMsal) {
-    alert('SSO is not yet configured. Ask IT to register the ChipPilot Azure AD app and fill in CP_SSO_CONFIG.');
+    alert('MSAL not initialised yet — wait a moment and try again, or check browser console for errors.');
     return;
   }
   try {
@@ -3403,7 +3406,15 @@ window.cpSsoLogin = async function() {
       }
     }
   } catch(e) {
-    if (e.errorCode !== 'user_cancelled') console.warn('ChipPilot SSO login error:', e.message);
+    if (e.errorCode === 'user_cancelled') return;
+    // Show the real MSAL error so it's visible without opening DevTools
+    alert(
+      'SSO error: ' + (e.errorCode || e.name || 'unknown') + '\n\n' +
+      (e.errorMessage || e.message || '') + '\n\n' +
+      'Common fix: In Azure portal → App registrations → ChipPilot → Authentication, ensure ' +
+      'https://vmsriran-kt.github.io/chip-pilot-dashboard/ is listed as a Single-page application (SPA) redirect URI.'
+    );
+    console.error('ChipPilot SSO error:', e);
   }
 };
 
@@ -3419,11 +3430,18 @@ window.cpSsoLogout = async function() {
     } catch(e) { /* ignore */ }
     window._cpMsal = null;
   }
-  // Reset UI
+  // Reset UI — don't auto-open picker; user clicks avatar when ready
   const av = document.getElementById('hdr-avatar');
-  if (av) { av.style.boxShadow = ''; av.title = 'Click to choose identity'; }
+  if (av) { av.style.boxShadow = ''; av.title = 'Signed out — click to choose identity'; av.textContent = '?'; }
   CURRENT_USER.name = ''; CURRENT_USER.email = ''; CURRENT_USER.initials = '?';
-  showIdentityPicker();
+  const navName = document.getElementById('nav-user-name');
+  if (navName) navName.textContent = 'Signed out';
+  // Brief toast confirmation
+  const toast = document.createElement('div');
+  toast.textContent = 'Signed out';
+  toast.style.cssText = 'position:fixed;bottom:24px;right:24px;background:#333;color:#fff;padding:10px 18px;border-radius:8px;font-size:13px;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,.4)';
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 2500);
 };
 
 // -- Identity bootstrap (SSO-first, manual picker fallback) --
