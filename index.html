@@ -979,7 +979,7 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
     <span id="nav-user-name">ChipPilot</span>
   </div>
   <div class="nav-item" onclick="showView('chip','nr10x')">
-    <div class="nav-chip-code"><span>NR10x <span class="status-dot dot-a"></span></span><span style="font-size:9px;color:var(--amber);font-weight:700">FNL RISK</span></div>
+    <div class="nav-chip-code"><span>NR10x <span class="status-dot dot-a"></span></span></div>
     <div class="nav-chip-sub">NVLink Fusion</div>
     <div class="nav-prog"><div class="nav-prog-fill" style="width:35%"></div></div>
   </div>
@@ -998,7 +998,7 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
     <div class="nav-prog"><div class="nav-prog-fill" style="width:78%"></div></div>
   </div>
   <div class="nav-item" onclick="showView('chip','tb500')">
-    <div class="nav-chip-code"><span>TB500 <span class="status-dot dot-a"></span></span><span style="font-size:9px;color:var(--amber);font-weight:700">P-REL BEHIND</span></div>
+    <div class="nav-chip-code"><span>TB500 <span class="status-dot dot-a"></span></span></div>
     <div class="nav-chip-sub">Vera · Roopa Ranganathan</div>
     <div class="nav-prog"><div class="nav-prog-fill" style="width:93%"></div></div>
   </div>
@@ -1017,8 +1017,8 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
     <div class="nav-chip-sub">Roopa</div>
     <div class="nav-prog"><div class="nav-prog-fill" style="width:8%;background:var(--muted)"></div></div>
   </div>
-  <div class="nav-item" onclick="showView('chip','t257')">
-    <div class="nav-chip-code"><span>T257 <span class="status-dot dot-a"></span></span><span style="font-size:9px;color:var(--muted);font-weight:700">SETUP</span></div>
+  <div class="nav-item" onclick="showView('chip','t257')" style="display:none">
+    <div class="nav-chip-code"><span>T257 <span class="status-dot dot-a"></span></span><span style="font-size:9px;color:var(--muted);font-weight:700">ARCHIVED</span></div>
     <div class="nav-chip-sub">Monet · Vivek Desikan</div>
     <div class="nav-prog"><div class="nav-prog-fill" style="width:10%;background:var(--muted)"></div></div>
   </div>
@@ -1032,7 +1032,7 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
   <div class="nav-section">Fusion Chips</div>
 
   <div class="nav-item" onclick="showView('chip','nr10x')">
-    <div class="nav-chip-code"><span>NR10x <span class="status-dot dot-a"></span></span><span style="font-size:9px;color:var(--amber);font-weight:700">FNL RISK</span></div>
+    <div class="nav-chip-code"><span>NR10x <span class="status-dot dot-a"></span></span></div>
     <div class="nav-chip-sub">NVLink Fusion · Ranjani</div>
     <div class="nav-prog"><div class="nav-prog-fill" style="width:35%"></div></div>
   </div>
@@ -1106,7 +1106,7 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
       <div class="chips-grid" id="chips-grid">
         <div class="chip-card cc-amber" onclick="showView('chip','nr10x')" style="cursor:pointer">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px">
-            <span class="chip-card-name">NR10x</span><span class="pill pill-a">FNL AT RISK</span>
+            <span class="chip-card-name">NR10x</span>
           </div>
           <div class="chip-card-sub">NVLink Fusion · Pre-silicon · CM: Ranjani V</div>
           <div class="chip-prog"><div style="height:100%;width:35%;border-radius:2px" class="cp-a"></div></div>
@@ -1166,7 +1166,7 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
         </div>
         <div class="chip-card cc-amber" onclick="showView('chip','tb500')" style="cursor:pointer">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px">
-            <span class="chip-card-name">TB500</span><span class="pill pill-a">P-REL BEHIND</span>
+            <span class="chip-card-name">TB500</span>
           </div>
           <div class="chip-card-sub">Vera · CPU · Post-silicon · CM: Roopa Ranganathan</div>
           <div class="chip-prog"><div style="height:100%;width:88%;border-radius:2px" class="cp-a"></div></div>
@@ -1202,16 +1202,6 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
           <div class="chip-prog"><div style="height:100%;width:8%;border-radius:2px;background:var(--muted)"></div></div>
           <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted)">
             <span>POR Discussions Active</span><span>8%</span>
-          </div>
-        </div>
-        <div class="chip-card cc-amber" onclick="showView('chip','t257')" style="cursor:pointer">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px">
-            <span class="chip-card-name">T257</span><span class="pill pill-r">BMW→QUALCOMM</span>
-          </div>
-          <div class="chip-card-sub">Monet · CPU · Pre-silicon · CM: Vivek Desikan</div>
-          <div class="chip-prog"><div style="height:100%;width:10%;border-radius:2px" class="cp-a"></div></div>
-          <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted)">
-            <span>BMW→QC · SW wind-down to TO Validation · Then Shelf</span><span>10%</span>
           </div>
         </div>
         <div class="chip-card" style="border-left:3px solid var(--muted);cursor:pointer" onclick="showView('chip','t294')">
@@ -1658,14 +1648,22 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
       <!-- Chip Info Form -->
       <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:20px">
         <div style="font-size:11px;font-weight:700;color:var(--nv-green);text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px">① Chip Program Info</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;margin-bottom:12px">
           <div>
             <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px">Chip Code / ID</div>
-            <input id="ncs-chip-id" class="settings-inp" placeholder="e.g. nr10x, t294, gr15x" oninput="ncsSync()" style="width:100%"/>
+            <input id="ncs-chip-id" class="settings-inp" placeholder="e.g. t294, gr15x" oninput="ncsSync()" style="width:100%"/>
           </div>
           <div>
-            <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px">Full Name</div>
-            <input id="ncs-chip-name" class="settings-inp" placeholder="e.g. Magni CPU" oninput="ncsSync()" style="width:100%"/>
+            <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px">Codename</div>
+            <input id="ncs-chip-name" class="settings-inp" placeholder="e.g. Magni, Rubin" oninput="ncsSync()" style="width:100%"/>
+          </div>
+          <div>
+            <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px">Chip Family</div>
+            <select id="ncs-family" class="settings-inp" onchange="ncsSync()" style="width:100%">
+              <option value="tegra">Tegra / CPU</option>
+              <option value="gpu">GPU</option>
+              <option value="custom">Custom / Other</option>
+            </select>
           </div>
           <div>
             <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px">Phase</div>
@@ -1719,8 +1717,12 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
             <div id="ncs-conf-preview" class="ncs-preview">Fill in chip info above to generate preview…</div>
             <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
               <button class="ncs-btn-primary" onclick="ncsConfluenceOpen()">🔗 Open in Confluence</button>
-              <button class="ncs-btn-secondary" onclick="ncsCopy('conf-preview')">📋 Copy Page Content</button>
-              <button class="ncs-btn-secondary" onclick="ncsCopy('conf-agent-prompt')">🤖 Copy AI Agent Prompt</button>
+              <button class="ncs-btn-secondary" onclick="ncsCopy('conf-preview',this)">📋 Copy Page Content</button>
+              <button class="ncs-btn-secondary" onclick="ncsCopy('conf-agent-prompt',this)">🤖 Copy AI Agent Prompt</button>
+            </div>
+            <div id="ncs-conf-links" style="display:none;margin-top:12px;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;font-size:11px;color:var(--muted);word-break:break-all;line-height:1.7">
+              <div>Create page: <a id="ncs-conf-url" href="#" target="_blank" rel="noopener" style="color:var(--nv-green)"></a></div>
+              <div style="margin-top:4px">If that 404s, the space key is wrong — browse the space: <a id="ncs-conf-space-url" href="#" target="_blank" rel="noopener" style="color:var(--nv-green)"></a></div>
             </div>
             <div id="ncs-conf-agent-prompt" style="display:none"></div>
             <button class="ncs-done-btn" onclick="ncsMark('confluence')">✓ Mark Done</button>
@@ -1746,14 +1748,15 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
             <div class="ncs-lbl">Recommended channels for <span id="ncs-sl-phase-label">your phase</span></div>
             <div id="ncs-slack-channels" class="ncs-preview" style="font-family:monospace;font-size:12px;line-height:1.8">Fill in chip info above…</div>
             <div style="background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.2);border-radius:8px;padding:10px 12px;margin-top:10px;font-size:11px;color:var(--text2);line-height:1.5">
-              ⚠️ NVIDIA uses protected Slack namespaces. Channels with the <code style="background:rgba(255,255,255,.08);padding:1px 5px;border-radius:3px">sw-</code> prefix require approval via the
-              <a href="https://nvidia.sharepoint.com/sites/Slack/Lists/Protected%20Namespaces/AllItems.aspx" target="_blank" style="color:var(--nv-green)">Protected Namespaces list</a>.
-              Use the AI Agent prompt to request channel creation or create manually via Slack.
+              ⚠️ Names are patterned on existing programs — <b style="color:var(--text2)">TB500</b> for Tegra/CPU, <b style="color:var(--text2)">GR10x</b> for GPU.
+              Some prefixes are reserved: check the
+              <a href="https://nvidia.sharepoint.com/sites/Slack/Lists/Protected%20Namespaces/AllItems.aspx" target="_blank" rel="noopener" style="color:var(--nv-green)">Protected Namespaces list</a>
+              before creating. Shared channels (e.g. <code style="background:rgba(255,255,255,.08);padding:1px 5px;border-radius:3px">#cpu-ps-bringup</code>, <code style="background:rgba(255,255,255,.08);padding:1px 5px;border-radius:3px">#swdl-execution</code>) already exist — join, don't create.
             </div>
             <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
               <button class="ncs-btn-primary" onclick="window.open('https://nvidia.enterprise.slack.com/','_blank')">🔗 Open Slack</button>
-              <button class="ncs-btn-secondary" onclick="ncsCopy('slack-channels')">📋 Copy Channel List</button>
-              <button class="ncs-btn-secondary" onclick="ncsCopy('slack-agent-prompt')">🤖 Copy AI Agent Prompt</button>
+              <button class="ncs-btn-secondary" onclick="ncsCopy('slack-channels',this)">📋 Copy Channel List</button>
+              <button class="ncs-btn-secondary" onclick="ncsCopy('slack-agent-prompt',this)">🤖 Copy AI Agent Prompt</button>
             </div>
             <div id="ncs-slack-agent-prompt" style="display:none"></div>
             <button class="ncs-done-btn" onclick="ncsMark('slack')">✓ Mark Done</button>
@@ -1782,8 +1785,8 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
             <div id="ncs-email-draft" class="ncs-preview" style="font-size:12px;line-height:1.6">Fill in chip info above…</div>
             <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
               <button class="ncs-btn-primary" onclick="window.open('https://itcatalog.nvidia.com','_blank')">🔗 IT Catalog</button>
-              <button class="ncs-btn-secondary" onclick="ncsCopy('email-draft')">📋 Copy IT Request</button>
-              <button class="ncs-btn-secondary" onclick="ncsCopy('email-agent-prompt')">🤖 Copy AI Agent Prompt</button>
+              <button class="ncs-btn-secondary" onclick="ncsCopy('email-draft',this)">📋 Copy IT Request</button>
+              <button class="ncs-btn-secondary" onclick="ncsCopy('email-agent-prompt',this)">🤖 Copy AI Agent Prompt</button>
             </div>
             <div id="ncs-email-agent-prompt" style="display:none"></div>
             <button class="ncs-done-btn" onclick="ncsMark('email')">✓ Mark Done</button>
@@ -1812,8 +1815,8 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
             <div id="ncs-nvbugs-wiki" class="ncs-preview" style="font-size:12px;line-height:1.6">Fill in chip info above…</div>
             <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
               <button class="ncs-btn-primary" onclick="ncsNvbugsOpen()">🔗 Open NVBugs</button>
-              <button class="ncs-btn-secondary" onclick="ncsCopy('nvbugs-wiki')">📋 Copy Wiki Content</button>
-              <button class="ncs-btn-secondary" onclick="ncsCopy('nvbugs-agent-prompt')">🤖 Copy AI Agent Prompt</button>
+              <button class="ncs-btn-secondary" onclick="ncsCopy('nvbugs-wiki',this)">📋 Copy Wiki Content</button>
+              <button class="ncs-btn-secondary" onclick="ncsCopy('nvbugs-agent-prompt',this)">🤖 Copy AI Agent Prompt</button>
             </div>
             <div id="ncs-nvbugs-agent-prompt" style="display:none"></div>
             <button class="ncs-done-btn" onclick="ncsMark('nvbugs')">✓ Mark Done</button>
@@ -1834,6 +1837,24 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
           </div>
         </div>
         <div id="ncs-progress-label" style="font-size:13px;font-weight:700;color:var(--muted)">0 / 4 complete</div>
+      </div>
+
+      <!-- Manual copy fallback (used when the iframe blocks clipboard/popups) -->
+      <div id="ncs-manual-overlay" style="display:none;position:fixed;inset:0;z-index:9500;background:rgba(0,0,0,.7);align-items:center;justify-content:center" onclick="if(event.target===this)ncsManualClose()">
+        <div style="background:var(--bg2);border:1px solid rgba(118,185,0,.3);border-radius:14px;padding:22px 24px;width:min(680px,92%);max-height:85vh;display:flex;flex-direction:column">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+            <div style="font-size:14px;font-weight:800;color:var(--text)">Copy manually</div>
+            <button onclick="ncsManualClose()" style="background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer;padding:2px 6px;line-height:1">✕</button>
+          </div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:12px;line-height:1.5">
+            Your browser blocked automatic copying (this happens when the dashboard runs inside an iframe).
+            The text below is already selected — press <b style="color:var(--text2)">Ctrl+C</b> to copy it.
+          </div>
+          <textarea id="ncs-manual-text" readonly style="flex:1;min-height:240px;width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text2);font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:1.55;padding:12px 14px;resize:vertical;outline:none"></textarea>
+          <div style="display:flex;justify-content:flex-end;margin-top:14px">
+            <button class="ncs-btn-primary" onclick="ncsManualClose()">Done</button>
+          </div>
+        </div>
       </div>
     </div><!-- /v-setup -->
 
@@ -2220,12 +2241,20 @@ function confPageCreate() {
   const title    = (titleEl && titleEl.value.trim()) || (chipName + ' — Chip Program Home');
 
   // Build Confluence create-page URL (deep link to the right space)
-  var url = 'https://nvidia.atlassian.net/wiki/spaces/' + encodeURIComponent(space) + '/pages/create';
-  var params = ['title=' + encodeURIComponent(title)];
-  if (parent) params.push('parentPageId=' + encodeURIComponent(parent));
-  url += '?' + params.join('&');
+  var url = confCreateUrl(space, title, parent);
 
-  window.open(url, '_blank');
+  // window.open() is blocked when the dashboard is iframed (chippilot.nvidia.com),
+  // so click a real anchor instead and fall back to showing the URL.
+  var opened = false;
+  try {
+    var a = document.createElement('a');
+    a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+    a.style.display = 'none';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    opened = true;
+  } catch(e) { opened = false; }
+  if (!opened) { try { opened = !!window.open(url, '_blank', 'noopener'); } catch(e){} }
+  if (!opened && typeof ncsManual === 'function') ncsManual(url);
 
   const toast = document.getElementById('conf-toast');
   if (toast) { toast.style.opacity = '1'; setTimeout(() => toast.style.opacity = '0', 2000); }
@@ -3089,7 +3118,6 @@ const RISK_DATA = [
   ['tb600',  'TB600 · Vera Ultra', 'm','m','m','l','l'],
   ['n2x',    'N2x · CPU',          'h','m','m','l','l'],
   ['tcx10',  'TCX10 · CPU',        'm','m','l','l','l'],
-  ['t257',   'T257 · Monet',       'm','m','l','l','l'],
   ['t294',   'T294 · Magni',       'm','m','l','m','h'],
 ];
 function buildHeatmap(){
@@ -3259,20 +3287,43 @@ function renderChipView(chipId) {
     </div>`;
 }
 
+// ── Confluence URL helpers ──────────────────────────────────────────────────
+// NVIDIA runs Atlassian Cloud at nvidia.atlassian.net/wiki (verified: real pages
+// resolve as /wiki/spaces/{KEY}/pages/{id}, e.g. .../spaces/ProgOps/pages/2561867837).
+// The create-page endpoint is the legacy `createpage.action` route, which Cloud
+// still honours and which is the only one that accepts a prefilled title.
+const CONF_BASE = 'https://nvidia.atlassian.net/wiki';
+
+function confCreateUrl(spaceKey, title, parentId) {
+  if (!spaceKey) return '';
+  var u = CONF_BASE + '/pages/createpage.action?spaceKey=' + encodeURIComponent(spaceKey);
+  if (title)    u += '&title=' + encodeURIComponent(title);
+  if (parentId) u += '&fromPageId=' + encodeURIComponent(parentId);
+  return u;
+}
+function confSpaceUrl(spaceKey) {
+  if (!spaceKey) return CONF_BASE;
+  return CONF_BASE + '/spaces/' + encodeURIComponent(spaceKey);
+}
+
 // Per-chip connector config defaults (editable in Settings)
 const CHIP_CFG_DEFAULTS = {
-  nr10x:  { slack:'#nvlink-fusion-sw, #nr10-bringup', confluence:'NBS', email:'sonawen, dachiang, glu, aaingaran', nvbugs:'NR10' },
-  gr10x:  { slack:'#swgpu-chips-gfw-rubin, #swdl-execution', confluence:'RubinSW', email:'mshastri, ssriranjani, hagrawal', nvbugs:'GR10x' },
-  gr15x:  { slack:'#swgpu-chips-gfw-gr15x', confluence:'RubinSW', email:'vinay', nvbugs:'GR15x' },
-  fn10x:  { slack:'#swgpu-chips-gfw-fn10x', confluence:'FeynmanSW', email:'madhura', nvbugs:'FN10x' },
-  thorz:  { slack:'#thorz-bringup, #cpu-ps-bringup', confluence:'ThorSW', email:'mayank', nvbugs:'ThorZ' },
-  tb500:  { slack:'#tb500-sw-bringup', confluence:'VeraSW', email:'roopa.ranganathan, sruskamp', nvbugs:'TB500' },
-  tb600:  { slack:'#tb600-sw-bringup', confluence:'VeraSW', email:'huifu', nvbugs:'TB600' },
-  n2x:    { slack:'#n2x-sw-bringup, #n2x-fpga', confluence:'N2xSW', email:'vivek, desikan', nvbugs:'N2x' },
-  tcx10:  { slack:'#tcx10-sw', confluence:'TCX10SW', email:'roopa', nvbugs:'TCX10' },
-  t374:   { slack:'#t374-bringup', confluence:'BeaconSW', email:'roopa', nvbugs:'T374' },
-  t257:   { slack:'#t257-monet-sw', confluence:'MonetSW', email:'vivek', nvbugs:'T257' },
-  t294:   { slack:'#t294-magni-sw', confluence:'MagniSW', email:'mayank.kapoor', nvbugs:'T294' },
+  // Confluence spaces verified against live search 2026-09-15. The previous
+  // per-chip spaces (NBS, VeraSW, ThorSW, N2xSW, FeynmanSW, TCX10SW, BeaconSW,
+  // MonetSW, MagniSW) do not exist — most Tegra SW content lives in the shared
+  // TCS space. `slackOk:false` means the channel is not in this account's Slack
+  // membership, so the Slack tile has no data source — not that it is quiet.
+  nr10x:  { slack:'#nvlink-fusion-sw, #nr10-bringup', slackOk:false, confluence:'DPS',      confluenceAlt:'GM, NvlbridgeProjectHome', email:'sonawen, dachiang, glu, aaingaran', nvbugs:'NR10' },
+  gr10x:  { slack:'#swgpu-chips-gfw-rubin, #swdl-execution', slackOk:false, confluence:'RubinSW', confluenceAlt:'RUBIN', email:'mshastri, ssriranjani, hagrawal', nvbugs:'GR10x' },
+  gr15x:  { slack:'GR15x GPU Chip Mgmt (C0BPUA1LD41)', slackOk:true,  confluence:'RubinSW', confluenceAlt:'RUBIN, SCGGroup', email:'vinay', nvbugs:'GR15x' },
+  fn10x:  { slack:'#swgpu-chips-gfw-fn10x', slackOk:false, confluence:'GFWFN10x', confluenceAlt:'PCIEGEN6', email:'madhura', nvbugs:'FN10x' },
+  thorz:  { slack:'#thorz-bringup, #cpu-ps-bringup', slackOk:false, confluence:'T26xSSG',  confluenceAlt:'TCS', email:'mayank', nvbugs:'ThorZ' },
+  tb500:  { slack:'#tb500-sw-bringup', slackOk:false, confluence:'TB50x',   confluenceAlt:'TCS, BPMPFW, ProgOps', email:'roopa.ranganathan, sruskamp', nvbugs:'TB500' },
+  tb600:  { slack:'#tb600-sw-bringup', slackOk:false, confluence:'TB60x',   confluenceAlt:'TCS, TGM', email:'huifu', nvbugs:'TB600' },
+  n2x:    { slack:'#n2x-sw-bringup, #n2x-fpga', slackOk:false, confluence:'TCS',     confluenceAlt:'WOA', email:'vivek, desikan', nvbugs:'N2x' },
+  tcx10:  { slack:'#tcx10-sw', slackOk:false, confluence:'UPTB',    confluenceAlt:'TCS, DPS', email:'roopa', nvbugs:'TCX10' },
+  t374:   { slack:'#t374-bringup', slackOk:false, confluence:'TCS',     confluenceAlt:'linux', email:'roopa', nvbugs:'T374' },
+  t294:   { slack:'#t294-magni-sw', slackOk:false, confluence:'TCS',     confluenceAlt:'BPMPFW, T29x', email:'mayank.kapoor', nvbugs:'T294' },
 };
 // Load saved overrides from localStorage
 function loadChipCfg(chipId) {
@@ -3346,7 +3397,7 @@ const CHIP_DB = {
     title: 'NR10x · NVLink Fusion',
     sub: 'Pre-Silicon · SW CM: Ranjani · FNL Jun 29, 2026 · PON Apr 2027',
     wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/NBS/overview?homepageId=2520514562',
-    pills: [['pill-a','FNL AT RISK'],['pill-a','CO-EMU UNBLOCKING']],
+    pills: [['pill-a','CO-EMU UNBLOCKING']],
     anno: '[Jul 25] FNL snapped. SW Sign-off pending (at risk). TO_Ready at risk — IAS 1.0 sign-off blocked, 3 open P1 bugs.',
     trend: [
       {d:'Jul 24',  e:'ECO Window Close',    s:'tracking'},
@@ -3413,9 +3464,10 @@ const CHIP_DB = {
   },
   gr10x: {
     title: 'GR10x · Rubin GPU',
-    sub: 'Post-Silicon · SW CM: Ranjani · 99.6% Coverage · CWAT+BWAT DONE · No P0 Blockers · PRel Gated Control Run',
-    wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/RubinSW/pages/2598145065',
-    pills: [['pill-g','CWAT+BWAT DONE'],['pill-a','PRel GATED CTRL RUN']],
+    sub: 'Post-Silicon · SW CM: Ranjani · CWAT+BWAT DONE · TIM1 WAR Active · P0 6536073 Open',
+    wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/RubinSW/pages/2598144427',
+    pills: [['pill-g','CWAT+BWAT DONE'],['pill-r','P0 6536073 OPEN'],['pill-a','9/16 CLOSE AT RISK']],
+    anno: '[Sep 15] TIM1-void WAR path unblocked — VBIOS 0.8 / ROM 99.00.16.47.0A released — but FieldDiag was run on the wrong ROM (…47.06) and must be partially redone, putting the 9/16 test-plan close at risk. P0 6536073 (Sev 1 system crash, TPC Repair for TIM1 voids) still open.',
     trend: [
       {d:'Jul 28',  e:'v0.6 QS SW Full Drop',  s:'slipped'},
       {d:'Aug 17',  e:'v0.8 Dev Drop',          s:'slipped'},
@@ -3475,9 +3527,9 @@ const CHIP_DB = {
   gr15x: {
     title: 'GR15x · Next GPU',
     sub: 'Post-Silicon · SW CMs: Vinay Sharma · Anshul Gupta · A01 Power-On Early Aug 2026',
-    wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/RubinSW/pages/3529740918/GR15x+SW+Bringup',
-    pills: [['pill-g','POWER-ON'],['pill-g','TAPEOUT DONE']],
-    anno: '[Jul] A01P power-on Jan 2027. Tapeout Jun 2 complete. SW bringup in progress; early bring-up TV only in Aug 2026.',
+    wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/RUBIN/pages/3117215696',
+    pills: [['pill-g','TAPEOUT DONE'],['pill-r','4 BLOCKER BUGS'],['pill-a','DFP SIGN-OFF LATE']],
+    anno: '[Sep 15] Four blocker-tagged bugs open across the A01TV BaseBless, A01TV FE_0.1 and FirstSilicon gates (6648330, 6587209, 6656482, 6700314). IO Electrical DFP Rev 1.1 sign-off (6681186) is past its stated 9/4 review ETA with no engineer assigned.',
     meetings: [
       {time:'7:00 PM', title:'GR15x Physical Data review', pill:'pill-g'},
     ],
@@ -3593,10 +3645,10 @@ const CHIP_DB = {
   },
   thorz: {
     title: 'ThorZ · CPU',
-    sub: 'Post-Silicon · SW CM: Mayank Kapoor · CS Done · MNB 8/5 · RA WAT 7/24 · Full WAT On Hold (V/F Pending)',
-    wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/TCS/pages/2872182184/T268+SW',
-    pills: [['pill-g','CS ACHIEVED'],['pill-a','MNB SLIPPED 8/5']],
-    anno: '[Jul 20] WAT coverage 80%, pass rate 55%. Full WAT on hold pending V/F curve update. No HW issues sighted.',
+    sub: 'Post-Silicon · SW CM: Mayank Kapoor · MNB+MG Declared 9/3 · Full WAT SIT Running · QS Gate 10/22',
+    wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/T26xSSG/pages/3893410894',
+    pills: [['pill-a','WAT 47% / 26% PASS'],['pill-r','2 P0 BLOCKERS'],['pill-a','QS 10/22']],
+    anno: '[Sep 14] WAT Phase 1 at 47% coverage (up from 28%), but only 26% pass and 21% hard fail. QS gate 10/22 has no schedule margin. Two P0 blockers open: 6696490 (FMON clock faults) and 6693768 (SC7 resume failure).',
     meetings: [],
     risks: [
       {p:'h',t:'POR updated 360→420 TOPS (+11W: 73.3W→84.3W) -- dual RAM assist modes required; MNB schedule under review pending Liquid-Cool/Read-Assist mode timelines'},
@@ -3673,10 +3725,10 @@ const CHIP_DB = {
   },
   n2x: {
     title: 'N2x · CPU',
-    sub: 'Pre-Silicon · SW CM: Vivek Desikan · SOC FDI DONE · T354G FNL 7/23 · SW Signoff 7/30 · GPU TO Oct 17',
-    wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/TCS/pages/3228994147/T354+SW+AAR',
-    pills: [['pill-a','SW SIGNOFF 7/30'],['pill-g','SOC FDI DONE']],
-    anno: '[Jul 20] All teams unblocked on FPGA; checkout target Jul 30. SM IP FNL pushed to Sep 21. S-Die L0: 63%.',
+    sub: 'Pre-Silicon · SW CM: Vivek Desikan · ECO Freeze 9/20 (S) / 9/17 (G) · Tapeout 12/30',
+    wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/TCS/pages/2872182179',
+    pills: [['pill-r','ECO FREEZE 9/20'],['pill-r','S-DIE L1 FLAT 56%'],['pill-r','L2 NOT STARTED']],
+    anno: '[Sep 14] ECO Freeze 9/20 with four open risks whose ETAs land on or after the gate. S-Die L0 87% / L1 56% (flat week-over-week) / L2 0%. G-Die L0 90% / L1 85% / L2 62%. USB/DP tunnelling trending 9/18; QA/USB module at 2% L0.',
     meetings: [],
     risks: [
       {p:'h',t:'Display bring-up on H2 blocked by Jade HW bug -- fix expected this week'},
@@ -3730,12 +3782,17 @@ const CHIP_DB = {
     slack: [],
     prog: 8, phase:'Pre-Silicon'
   },
+  // ARCHIVED 2026-09-15 — BMW IVI awarded to Qualcomm (Jul 2026); guidance was to
+  // close all SW activities. No activity in any source for ~7 weeks and the chip
+  // no longer appears in the weekly Tegra SW CM roll-up. Hidden from nav and
+  // cockpit; entry retained so historical links still resolve.
   t257: {
-    title: 'T257 · Monet CPU',
-    sub: 'Program Wind-Down · SW CM: Vivek Desikan · BMW→Qualcomm · Closing SW Toward TO Validation',
-    wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/TCS',
-    pills: [['pill-r','BMW→QUALCOMM'],['pill-a','SW WIND-DOWN']],
-    anno: '[Jul 20] BMW IVI awarded to Qualcomm. Guidance: close SW activities toward TO validation before shelf.',
+    archived: true,
+    title: 'T257 · Monet CPU (Archived)',
+    sub: 'ARCHIVED · Program Closed · SW CM: Vivek Desikan · BMW→Qualcomm',
+    wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/SCGGroup',
+    pills: [['pill-r','ARCHIVED'],['pill-r','PROGRAM CLOSED']],
+    anno: '[Archived 2026-09-15] BMW IVI awarded to Qualcomm (Jul 2026). Guidance was to close all SW activities. No source activity in ~7 weeks; dropped from the weekly Tegra SW CM roll-up.',
     meetings: [],
     risks: [
       {p:'h',t:'BMW IVI program awarded to Qualcomm (7/20) -- SW wind-down in progress; close all activities toward TO validation before shelving'},
@@ -3776,10 +3833,10 @@ const CHIP_DB = {
   },
   t374: {
     title: 'T374 · Beacon',
-    sub: 'Pre-Silicon · SW CM: Roopa · 10-12wk FPGA Validation Risk · Weekly Plan w/ Iris',
-    wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/TCS',
-    pills: [['pill-a','POST-SI']],
-    anno: '[Jul 20] 10-12 weeks FPGA validation is top risk. Weekly execution plan in place with Iris team coordination.',
+    sub: 'Pre-Silicon · SW CM: Roopa · QT NL Cannot Boot iGPU · SW-usable NL Jan \'27 · FPGA end Feb \'27',
+    wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/TCS/pages/2997387271',
+    pills: [['pill-r','iGPU BOOT BLOCKER'],['pill-r','NL SLIP TO JAN 27']],
+    anno: '[Sep 14] Risk escalated from generic schedule exposure to a concrete blocker: the first QT netlist will not boot the iGPU, pushing SW-usable QT NL to Jan 2027 and FPGA to end Feb 2027. Zero NVBugs and zero Slack coverage — issues surface only via the weekly email.',
     meetings: [],
     risks: [
       {p:'h',t:'SW pre-silicon validation window compressed to ~10-12 weeks due to late FPGA availability (7/7) -- teams triaging Lx test plans to prioritize critical coverage before tapeout signoff'},
@@ -4184,10 +4241,37 @@ window.cpSsoLogout = function() {
   var _done = {};
   var _open = {};
 
-  var SLACK_CHANNELS = {
-    'pre-si':   ['sw-{chip}-arch','sw-{chip}-pre-si','sw-{chip}-sim','sw-{chip}-tools','sw-{chip}-cm'],
-    'bringup':  ['sw-{chip}-bringup','sw-{chip}-debug','sw-{chip}-triage','sw-{chip}-cm','sw-{chip}-alerts'],
-    'post-si':  ['sw-{chip}-qa','sw-{chip}-releases','sw-{chip}-war-room','sw-{chip}-perf','sw-{chip}-cm']
+  // Slack channel naming derived from existing NVIDIA chip programs.
+  // Tegra/CPU reference: TB500 → #tb500-sw-bringup  (also n2x, t294, thorz)
+  // GPU reference:       GR10x → #swgpu-chips-gfw-rubin  (also gr15x, fn10x)
+  var SLACK_REF = {
+    tegra: {
+      refChip: 'TB500',
+      refChannels: ['#tb500-sw-bringup'],
+      shared: ['#cpu-ps-bringup'],
+      build: function(c, code, ph) {
+        var out = ['#' + c + '-sw-bringup'];
+        if (code) out.push('#' + c + '-' + code + '-sw');
+        if (ph === 'pre-si')  out.push('#' + c + '-fpga', '#' + c + '-sw-arch');
+        if (ph === 'bringup') out.push('#' + c + '-sw-debug', '#' + c + '-fpga');
+        if (ph === 'post-si') out.push('#' + c + '-sw-debug', '#' + c + '-sw-releases');
+        out.push('#cpu-ps-bringup');
+        return out;
+      }
+    },
+    gpu: {
+      refChip: 'GR10x',
+      refChannels: ['#swgpu-chips-gfw-rubin', '#swdl-execution'],
+      shared: ['#swdl-execution'],
+      build: function(c, code, ph) {
+        var out = ['#swgpu-chips-gfw-' + c];
+        if (code) out.push('#swgpu-chips-gfw-' + code);
+        if (ph === 'bringup' || ph === 'post-si') out.push('#' + c + '-bringup');
+        if (ph === 'post-si') out.push('#' + c + '-sw-releases');
+        out.push('#swdl-execution');
+        return out;
+      }
+    }
   };
 
   function get(id){ return (document.getElementById(id)||{}).value||''; }
@@ -4195,6 +4279,7 @@ window.cpSsoLogout = function() {
   function chipUp(){ return get('ncs-chip-id').trim().toUpperCase(); }
   function name_(){ return get('ncs-chip-name').trim() || chipUp(); }
   function phase(){ return get('ncs-phase')||'pre-si'; }
+  function family(){ return get('ncs-family')||'tegra'; }
   function space(){ return get('ncs-conf-space').trim() || 'YOUR_SPACE'; }
   function cm(){ return get('ncs-cm').trim() || 'SW CM'; }
   function email(){ return get('ncs-email').trim() || 'sw-cm'; }
@@ -4229,17 +4314,59 @@ window.cpSsoLogout = function() {
     var confPrompt = 'Create a Confluence page in space "' + sp + '" titled "' + confTitle + '" with the following content:\n\n' + confContent;
     setText('ncs-conf-agent-prompt', confPrompt);
 
-    // ── Slack ──
-    var channels = (SLACK_CHANNELS[ph]||SLACK_CHANNELS['bringup']).map(function(ch){
-      return '#' + ch.replace(/{chip}/g, c);
-    });
-    setText('ncs-sl-phase-label', phaseLabel());
-    setText('ncs-slack-channels', channels.join('\n'));
-    var slackPrompt = 'Create the following Slack channels for the ' + n + ' (' + chipUp() + ') chip SW program (phase: ' + phaseLabel() + '):\n\n' +
-      channels.join('\n') + '\n\n' +
-      'Set purpose for each: "' + n + ' SW team — ' + phaseLabel() + ' phase"\n' +
-      'Add initial members: ' + email() + '@nvidia.com\n\n' +
-      'Note: Channels with sw- prefix may require Protected Namespace approval at https://nvidia.sharepoint.com/sites/Slack/Lists/Protected%20Namespaces/AllItems.aspx';
+    // ── Slack (patterned on existing NVIDIA chip programs) ──
+    var fam = family();
+    var code = get('ncs-chip-name').trim().toLowerCase().split(/\s+/)[0].replace(/[^a-z0-9]/g,'');
+    var channels, refNote, slackPrompt;
+
+    if (fam === 'custom') {
+      channels = [];
+      refNote =
+'No standard pattern for a custom chip family — pick the closest reference below,\n' +
+'then confirm the namespace is free/approved before creating.\n\n' +
+'  Tegra / CPU reference — TB500:\n' +
+'    #tb500-sw-bringup        → #' + c + '-sw-bringup\n' +
+'    #t294-magni-sw           → #' + c + (code ? '-' + code : '-<codename>') + '-sw\n' +
+'    #cpu-ps-bringup          (shared, join existing)\n\n' +
+'  GPU reference — GR10x:\n' +
+'    #swgpu-chips-gfw-rubin   → #swgpu-chips-gfw-' + c + '\n' +
+'    #swdl-execution          (shared, join existing)\n\n' +
+'Check the Protected Namespaces list before requesting →';
+      setText('ncs-slack-channels', refNote);
+      slackPrompt =
+'I need to create Slack channels for a new NVIDIA chip program that does not fit the\n' +
+'standard Tegra or GPU families.\n\n' +
+'Chip: ' + n + ' (' + chipUp() + ')\nPhase: ' + phaseLabel() + '\nSW CM: ' + cm() + ' (' + email() + '@nvidia.com)\n\n' +
+'Existing naming conventions to pattern against:\n' +
+'  Tegra/CPU (ref TB500): #tb500-sw-bringup, #t294-magni-sw, #n2x-fpga, #cpu-ps-bringup\n' +
+'  GPU (ref GR10x):       #swgpu-chips-gfw-rubin, #swgpu-chips-gfw-gr15x, #swdl-execution\n\n' +
+'Please:\n' +
+'1. Check the NVIDIA Protected Namespaces list at\n' +
+'   https://nvidia.sharepoint.com/sites/Slack/Lists/Protected%20Namespaces/AllItems.aspx\n' +
+'   to see which prefixes are reserved and which require approval.\n' +
+'2. Recommend a channel set for ' + chipUp() + ' consistent with the closest existing family.\n' +
+'3. Tell me which channels need namespace approval and which I can create directly.';
+    } else {
+      var ref = SLACK_REF[fam];
+      channels = ref.build(c, code, ph);
+      refNote = 'Patterned on ' + ref.refChip + ' (' + ref.refChannels.join(', ') + ')';
+      setText('ncs-slack-channels', channels.join('\n') + '\n\n— ' + refNote);
+      slackPrompt =
+'Create the following Slack channels for the ' + n + ' (' + chipUp() + ') chip SW program.\n\n' +
+'Family: ' + (fam === 'gpu' ? 'GPU' : 'Tegra / CPU') + '\n' +
+'Phase: ' + phaseLabel() + '\n' +
+'Naming patterned on ' + ref.refChip + ': ' + ref.refChannels.join(', ') + '\n\n' +
+'Channels to create:\n' + channels.map(function(x){
+  return '  ' + x + (ref.shared.indexOf(x) >= 0 ? '   (shared — join existing, do not create)' : '');
+}).join('\n') + '\n\n' +
+'For each new channel:\n' +
+'  Purpose: "' + n + ' (' + chipUp() + ') SW team — ' + phaseLabel() + ' phase"\n' +
+'  Invite:  ' + email() + '@nvidia.com (SW CM: ' + cm() + ')\n\n' +
+'Before creating, verify the prefix against the NVIDIA Protected Namespaces list:\n' +
+'https://nvidia.sharepoint.com/sites/Slack/Lists/Protected%20Namespaces/AllItems.aspx\n' +
+'If a namespace is protected, tell me who to request approval from instead of creating it.';
+    }
+    setText('ncs-sl-phase-label', phaseLabel() + ' · ' + (fam==='gpu'?'GPU':fam==='tegra'?'Tegra/CPU':'Custom'));
     setText('ncs-slack-agent-prompt', slackPrompt);
 
     // ── Email DL ──
@@ -4322,37 +4449,106 @@ keywords.slice(1).map(function(k){ return '* ' + k; }).join('\n') + '\n\n' +
     if(arr)  arr.textContent = '▼';
   };
 
-  window.ncsCopy = function(srcId) {
-    var src = el('ncs-'+srcId);
-    if(!src) return;
-    var text = src.textContent || src.innerText || '';
-    navigator.clipboard.writeText(text).then(function(){
-      // Brief flash feedback
-      var btn = event.target;
-      var orig = btn.textContent;
-      btn.textContent = '✓ Copied!';
-      btn.style.color = 'var(--nv-green)';
-      setTimeout(function(){ btn.textContent = orig; btn.style.color = ''; }, 1500);
-    }).catch(function(){
-      // Fallback
+  // ── Clipboard: iframe-safe. Tries execCommand (sync, works in iframes) first,
+  //    then async Clipboard API, then falls back to a manual select-and-copy box.
+  function flashBtn(btn, msg) {
+    if(!btn) return;
+    var orig = btn.textContent, origCol = btn.style.color;
+    btn.textContent = msg;
+    btn.style.color = 'var(--nv-green)';
+    setTimeout(function(){ btn.textContent = orig; btn.style.color = origCol; }, 1600);
+  }
+
+  function copyText(text, btn) {
+    if(!text || !text.trim()) { ncsManual('Nothing to copy yet — fill in the Chip Program Info above first.'); return; }
+    var ok = false;
+    try {
       var ta = document.createElement('textarea');
-      ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
-      document.body.appendChild(ta); ta.select();
-      document.execCommand('copy'); document.body.removeChild(ta);
-    });
+      ta.value = text;
+      ta.setAttribute('readonly','');
+      ta.style.cssText = 'position:fixed;top:0;left:-9999px;width:1px;height:1px;opacity:0';
+      document.body.appendChild(ta);
+      ta.focus(); ta.select();
+      try { ta.setSelectionRange(0, text.length); } catch(e){}
+      ok = document.execCommand && document.execCommand('copy');
+      document.body.removeChild(ta);
+    } catch(e) { ok = false; }
+
+    if (ok) { flashBtn(btn, '✓ Copied!'); return; }
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      try {
+        navigator.clipboard.writeText(text)
+          .then(function(){ flashBtn(btn, '✓ Copied!'); })
+          .catch(function(){ ncsManual(text); });
+        return;
+      } catch(e) { /* fall through */ }
+    }
+    ncsManual(text);
+  }
+
+  window.ncsCopy = function(srcId, btn) {
+    var src = el('ncs-'+srcId);
+    if(!src) { ncsManual('Could not find the content to copy.'); return; }
+    copyText(src.textContent || src.innerText || '', btn);
   };
 
+  // Manual copy fallback — shows a pre-selected textarea so the user can Ctrl+C
+  window.ncsManual = function(text) {
+    var ov = el('ncs-manual-overlay');
+    var ta = el('ncs-manual-text');
+    if(!ov || !ta) { alert(text); return; }
+    ta.value = text;
+    ov.style.display = 'flex';
+    setTimeout(function(){ ta.focus(); ta.select(); }, 60);
+  };
+  window.ncsManualClose = function(){
+    var ov = el('ncs-manual-overlay');
+    if(ov) ov.style.display = 'none';
+  };
+
+  // ── Opening external links: iframe-safe. window.open() is blocked in
+  //    sandboxed iframes, so use a real anchor click, then verify.
+  function openUrl(url) {
+    var opened = null;
+    try {
+      var a = document.createElement('a');
+      a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+      a.style.display = 'none';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      opened = true;
+    } catch(e) { opened = false; }
+
+    if (!opened) {
+      try { opened = !!window.open(url, '_blank', 'noopener'); } catch(e) { opened = false; }
+    }
+    // Always surface the URL so a blocked popup isn't a dead end
+    if (!opened) ncsManual(url);
+    return opened;
+  }
+  window.ncsOpenUrl = openUrl;
+
   window.ncsConfluenceOpen = function() {
-    var sp = space();
-    var title = (el('ncs-conf-title')||{}).value || name_() + ' — SW Program Home';
-    var parent = get('ncs-conf-parent');
-    var url = 'https://nvidia.atlassian.net/wiki/spaces/'+encodeURIComponent(sp)+'/pages/create?title='+encodeURIComponent(title);
-    if(parent) url += '&parentPageId='+encodeURIComponent(parent);
-    window.open(url,'_blank');
+    var sp = get('ncs-conf-space').trim();
+    if (!sp) { ncsManual('Enter a Confluence Space Key in the Chip Program Info section above, then try again.'); return; }
+    var title = ((el('ncs-conf-title')||{}).value||'').trim() || (name_() + ' — SW Program Home');
+    var parent = get('ncs-conf-parent').trim();
+    var url = confCreateUrl(sp, title, parent);
+    // Always surface both links so a wrong space key or a blocked popup is visible,
+    // not a silent no-op.
+    var lnk = el('ncs-conf-url');
+    if(lnk){ lnk.href = url; lnk.textContent = url; }
+    var sp2 = el('ncs-conf-space-url');
+    if(sp2){ sp2.href = confSpaceUrl(sp); sp2.textContent = confSpaceUrl(sp); }
+    var wrap = el('ncs-conf-links');
+    if(wrap) wrap.style.display = 'block';
+    openUrl(url);
   };
 
   window.ncsNvbugsOpen = function() {
-    window.open('https://nvbugs.nvidia.com','_blank');
+    openUrl('https://nvbugs.nvidia.com');
   };
 
   window.ncsClearAll = function() {
@@ -4400,9 +4596,23 @@ keywords.slice(1).map(function(k){ return '* ' + k; }).join('\n') + '\n\n' +
       if(ccm && !ccm.value) ccm.value = CURRENT_USER.name;
       var cemail = el('ncs-email');
       if(cemail && !cemail.value) cemail.value = CURRENT_USER.email.split('@')[0];
+      // Guess family from the chip code (GPU codes start gr/fn/nr, Tegra t/tb/n/tcx)
+      var fam = el('ncs-family');
+      if(fam && !fam._userSet) fam.value = guessFamily(chipId);
     }
+    bindTitleWatch();
     ncsSync();
   };
+
+  // GPU programs: gr10x, gr15x, fn10x, nr10x → #swgpu-chips-gfw-*
+  // Tegra/CPU:    tb500, tb600, t294, t374, n2x, thorz → #<chip>-sw-bringup
+  function guessFamily(id){
+    if(!id) return 'tegra';
+    var s = String(id).toLowerCase();
+    if(/^(gr|fn|nr|gb|gh)\d/.test(s)) return 'gpu';
+    if(/^(t|tb|n|tcx|thor)/.test(s)) return 'tegra';
+    return 'custom';
+  }
 
   function updateProgress() {
     var count = ITEMS.filter(function(k){ return _done[k]; }).length;
@@ -4419,11 +4629,21 @@ keywords.slice(1).map(function(k){ return '* ' + k; }).join('\n') + '\n\n' +
     return new Date().toISOString().slice(0,10);
   }
 
-  // Mark the conf-title as user-edited if touched
-  document.addEventListener('DOMContentLoaded', function(){
+  // Mark the conf-title as user-edited if touched.
+  // Bind immediately if the DOM is already parsed (this script runs late),
+  // otherwise wait for DOMContentLoaded.
+  function bindTitleWatch(){
     var t = el('ncs-conf-title');
-    if(t) t.addEventListener('input', function(){ t._userEdited = true; });
-  });
+    if(t && !t._watchBound){
+      t._watchBound = true;
+      t.addEventListener('input', function(){ t._userEdited = true; });
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bindTitleWatch);
+  } else {
+    bindTitleWatch();
+  }
 })();
 
 // -- Identity bootstrap (SSO-first, manual picker fallback) --
