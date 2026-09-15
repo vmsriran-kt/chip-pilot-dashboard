@@ -851,7 +851,11 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
     </div>
   </div>
 
-  <div class="id-card">
+  <div class="id-card" style="position:relative">
+    <!-- Close is only shown when someone is already signed in — otherwise
+         clicking your own avatar traps you here with no way back. -->
+    <button id="id-close-btn" onclick="hideIdentityPicker()" title="Close"
+      style="display:none;position:absolute;top:12px;right:14px;background:none;border:none;color:#bbb;font-size:20px;cursor:pointer;line-height:1;padding:2px 6px">×</button>
     <h2>Sign in</h2>
     <p>Use your NVIDIA Microsoft account to continue</p>
 
@@ -866,7 +870,18 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
       </button>
     </div>
 
+    <!-- Manual fallback: SSO popups and third-party cookies are commonly blocked
+         inside the chippilot.nvidia.com iframe. Without this a CM whose SSO fails
+         has no route to their own chips. -->
     <div style="margin-top:16px;border-top:1px solid #eee;padding-top:16px">
+      <div style="font-size:11px;color:#999;margin-bottom:8px;text-align:left">Or pick your name if sign-in doesn't work:</div>
+      <select id="id-manual-pick" onchange="pickIdentityByEmail(this.value)"
+        style="width:100%;padding:11px 12px;border-radius:10px;border:1px solid #ddd;background:#fff;color:#333;font-size:13px;cursor:pointer;font-family:inherit">
+        <option value="">— select your name —</option>
+      </select>
+    </div>
+
+    <div style="margin-top:12px">
       <button onclick="pickIdentity({name:'Portfolio View',email:'',initials:'◈',tag:''})"
         style="width:100%;padding:11px 20px;border-radius:10px;border:1px solid #ddd;background:transparent;color:#666;font-size:13px;cursor:pointer;font-family:inherit;transition:all .15s"
         onmouseover="this.style.borderColor='#bbb';this.style.color='#333'" onmouseout="this.style.borderColor='#ddd';this.style.color='#666'">
@@ -1225,20 +1240,20 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
           <div class="g-card" style="margin-bottom:14px">
             <div class="c-hdr">
               <span class="c-hdr-title">Upcoming Key Dates</span>
-              <span class="pill pill-a">Jun–Sep 2026</span>
+              <span class="pill pill-a">Sep–Dec 2026</span>
             </div>
             <div class="c-body" style="padding:0">
               <table class="s-tbl">
                 <thead><tr><th>Date</th><th>Chip</th><th>Milestone</th><th>Status</th></tr></thead>
                 <tbody>
-                  <tr><td>Jul 23</td><td>N2x</td><td>T354G FNL RTL Snap</td><td><span class="pill pill-a" style="font-size:9px">TRENDING</span></td></tr>
-                  <tr><td>Jul 24</td><td>NR10x</td><td>ECO Window Close</td><td><span class="pill pill-a" style="font-size:9px">TRACKING</span></td></tr>
-                  <tr><td>Jul 24</td><td>ThorZ</td><td>RA WAT Release Trending</td><td><span class="pill pill-a" style="font-size:9px">⚠ ON HOLD</span></td></tr>
-                  <tr><td>Jul 30</td><td>N2x</td><td>SOC FDI SW Signoff + FPGA Checkout</td><td><span class="pill pill-a" style="font-size:9px">AT RISK</span></td></tr>
-                  <tr><td>Jul 31</td><td>TB500</td><td>TB500-M PS FGI (Chip PS)</td><td><span class="pill pill-a" style="font-size:9px">~1WK LATE</span></td></tr>
-                  <tr><td>Aug 5</td><td>ThorZ</td><td>MNB Milestone</td><td><span class="pill pill-a" style="font-size:9px">TRACKING</span></td></tr>
-                  <tr><td>Aug 31</td><td>NR10x</td><td>Tapeout (planning)</td><td><span class="pill pill-a" style="font-size:9px">TRACKING</span></td></tr>
-                  <tr><td>Sep 21</td><td>N2x</td><td>SM IP FNL (pushed from orig)</td><td><span class="pill pill-a" style="font-size:9px">SLIPPED</span></td></tr>
+                  <tr><td>Sep 16</td><td>GR10x</td><td>TIM1 WAR test-plan close</td><td><span class="pill pill-r" style="font-size:9px">AT RISK</span></td></tr>
+                  <tr><td>Sep 17</td><td>N2x</td><td>ECO Freeze — T354G</td><td><span class="pill pill-a" style="font-size:9px">TRACKING</span></td></tr>
+                  <tr><td>Sep 18</td><td>N2x</td><td>USB/DP tunnelling enablement</td><td><span class="pill pill-r" style="font-size:9px">AT RISK</span></td></tr>
+                  <tr><td>Sep 20</td><td>N2x</td><td>ECO Freeze / SPO — T354S</td><td><span class="pill pill-r" style="font-size:9px">4 OPEN RISKS</span></td></tr>
+                  <tr><td>Sep 27</td><td>TB600</td><td>1st Netlist</td><td><span class="pill pill-a" style="font-size:9px">SPECS AT 0.7</span></td></tr>
+                  <tr><td>Oct 22</td><td>ThorZ</td><td>QS Gate</td><td><span class="pill pill-r" style="font-size:9px">NO MARGIN</span></td></tr>
+                  <tr><td>Oct 23</td><td>TB500</td><td>TB500-M Neutrino P-Rel</td><td><span class="pill pill-g" style="font-size:9px">ON PLAN</span></td></tr>
+                  <tr><td>Dec 30</td><td>N2x</td><td>Tapeout</td><td><span class="pill pill-a" style="font-size:9px">TRACKING</span></td></tr>
                 </tbody>
               </table>
             </div>
@@ -1385,7 +1400,9 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
     <!-- ================ RISK RADAR ================ -->
     <div id="v-radar" style="display:none">
 
-      <div class="sec-lbl">Portfolio Risk Heatmap — All 11 Programs</div>
+      <div class="sec-lbl">Portfolio Risk Heatmap — All 11 Programs
+        <span style="font-weight:400;font-size:10px;color:var(--muted);margin-left:8px">Hand-maintained · last reviewed 2026-09-15</span>
+      </div>
       <div class="g-card" style="margin-bottom:16px">
         <div class="c-body" style="overflow-x:auto">
           <table style="border-collapse:separate;border-spacing:4px;min-width:600px;width:100%">
@@ -1404,40 +1421,40 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
 
       <div class="three-col">
         <div class="g-card"><div class="c-hdr"><span class="c-hdr-title" style="color:var(--red)">&#x1f534; High Risk</span></div><div class="c-body" style="padding:10px">
-          <div class="risk-row"><div class="rd rd-h"></div><span><strong>NR10x:</strong> QM4 T-Rex FNL long pole — slip to Aug</span></div>
-          <div class="risk-row"><div class="rd rd-h"></div><span><strong>NR10x:</strong> QM4↔NR10 emulation link not working</span></div>
-          <div class="risk-row"><div class="rd rd-h"></div><span><strong>N2x:</strong> FDI Jun 30 at risk — FPGA H2.07 validation</span></div>
-          <div class="risk-row" style="border:none"><div class="rd rd-h"></div><span><strong>T294:</strong> Safety design verification HIGH — HSR dependency Feb 2028</span></div>
+          <div class="risk-row"><div class="rd rd-h"></div><span><strong>ThorZ:</strong> WAT 47% coverage / 26% pass · two P0 blockers open · QS gate 10/22 with no margin</span></div>
+          <div class="risk-row"><div class="rd rd-h"></div><span><strong>T374:</strong> First QT netlist cannot boot iGPU — SW-usable NL slips to Jan '27</span></div>
+          <div class="risk-row"><div class="rd rd-h"></div><span><strong>N2x:</strong> ECO Freeze 9/20 · S-Die L1 flat at 56% · L2 not started</span></div>
+          <div class="risk-row" style="border:none"><div class="rd rd-h"></div><span><strong>GR10x:</strong> P0 6536073 (Sev 1) open · FieldDiag rerun puts 9/16 close at risk</span></div>
         </div></div>
         <div class="g-card"><div class="c-hdr"><span class="c-hdr-title" style="color:var(--amber)">&#x1f7e1; Medium Risk</span></div><div class="c-body" style="padding:10px">
-          <div class="risk-row"><div class="rd rd-m"></div><span><strong>NR10x:</strong> NetIR release Jun 24 on critical path</span></div>
-          <div class="risk-row"><div class="rd rd-m"></div><span><strong>TB600:</strong> CM Hui Fu OOO Jun 11-16 — active IAS/GFD reviews</span></div>
-          <div class="risk-row"><div class="rd rd-m"></div><span><strong>ThorZ:</strong> MCU regression suite — ASILNA, PwrCtrl, VMON failures</span></div>
-          <div class="risk-row"><div class="rd rd-m"></div><span><strong>FN10x:</strong> Multi-dielet RTL — 43 open issues</span></div>
-          <div class="risk-row" style="border:none"><div class="rd rd-m"></div><span><strong>T294:</strong> FI FMEDA timeline — base done Dec-Jan, 3 months to complete</span></div>
+          <div class="risk-row"><div class="rd rd-m"></div><span><strong>GR15x:</strong> Four blocker-tagged bugs across A01TV and FirstSilicon gates · DFP sign-off past 9/4 ETA</span></div>
+          <div class="risk-row"><div class="rd rd-m"></div><span><strong>TB600:</strong> 1st netlist 9/27 · four IAS specs still at Arch-Complete 0.7 · NVPOR rollout blocked on tooling</span></div>
+          <div class="risk-row"><div class="rd rd-m"></div><span><strong>T294:</strong> Magni-X vs Magni-S scope undecided — SW POR cannot be locked until it closes</span></div>
+          <div class="risk-row"><div class="rd rd-m"></div><span><strong>TCX10:</strong> Bug 6595274 tagged Gate-Tapeout + P0 still open · RTF validation ownership unresolved</span></div>
+          <div class="risk-row" style="border:none"><div class="rd rd-m"></div><span><strong>TB500:</strong> Recurring Mellanox mlx5Gen bridge finding across consecutive LKG runs, no owner assigned</span></div>
         </div></div>
         <div class="g-card"><div class="c-hdr"><span class="c-hdr-title" style="color:var(--nv-green)">&#x1f7e2; Low / On Track</span></div><div class="c-body" style="padding:10px">
-          <div class="risk-row"><div class="rd rd-g"></div><span><strong>GR10x:</strong> QS done — PRel Jun 22, branch approval pending</span></div>
-          <div class="risk-row"><div class="rd rd-g"></div><span><strong>TB500:</strong> VR NVL72 SW 0.6 active — BWAT ~Jun 15</span></div>
-          <div class="risk-row"><div class="rd rd-g"></div><span><strong>GR15x:</strong> Tapeout Jun 2 done — Power-on active</span></div>
-          <div class="risk-row" style="border:none"><div class="rd rd-g"></div><span><strong>NR10x:</strong> GFD reviews done 6/6, SystemSim model available</span></div>
+          <div class="risk-row"><div class="rd rd-g"></div><span><strong>NR10x:</strong> SystemSim NVLink Fusion v3.0.0 released · branching opened · no P1/P2 escalations this week</span></div>
+          <div class="risk-row"><div class="rd rd-g"></div><span><strong>TB500:</strong> Sustaining · SBIOS LKG sanity running daily · UEFI PCIe bug 6726649 fixed</span></div>
+          <div class="risk-row"><div class="rd rd-g"></div><span><strong>FN10x:</strong> SCSIM R2 backdoor and frontdoor boot working · SW changes merged to TOT</span></div>
+          <div class="risk-row" style="border:none"><div class="rd rd-g"></div><span><strong>TCX10:</strong> Verification flow healthy · 56 open bugs tracking normally</span></div>
         </div></div>
       </div>
 
     </div><!-- /radar -->
 <!-- ================ PM ASSISTANT ================ -->
     <div id="v-pm" style="display:none">
-      <div class="anno">💡 PM Assistant — Cross-program priorities for week of Jun 22, 2026 · Generated from Slack + Email signals</div>
+      <div class="anno" style="background:rgba(245,166,35,.08);border-color:rgba(245,166,35,.25)">⚠️ PM Assistant — this panel is <strong>hand-maintained, not generated</strong>. Content below was last written for the week of Jun 22, 2026 and is out of date. Use the Cockpit's Top Risks and Live Signals for current status.</div>
       <div class="three-col">
         <div class="g-card"><div class="c-hdr"><span class="c-hdr-title" style="color:var(--red)">🚨 Urgent — This Week</span></div><div class="c-body" style="padding:10px">
           <div class="risk-row"><div class="rd rd-h"></div><span><strong>NR10x:</strong> Resolve QM4↔NR10 emulation link-up — unblocks FNL Jun 29</span></div>
           <div class="risk-row"><div class="rd rd-h"></div><span><strong>NR10x:</strong> Confirm NetIR release Jun 24 — critical path for emulator</span></div>
           <div class="risk-row"><div class="rd rd-h"></div><span><strong>NR10x:</strong> Finalize branching plan — input from SW PICs needed (Aman A, Gus, Kunle)</span></div>
           <div class="risk-row"><div class="rd rd-h"></div><span><strong>N2x:</strong> FPGA H2.07 validation — FDI Jun 30 at risk, escalate now</span></div>
-          <div class="risk-row" style="border:none"><div class="rd rd-h"></div><span><strong>GR10x:</strong> Approve RM branch request (270087, Nishant Patel) — pending &gt;1 day</span></div>
+          <div class="risk-row" style="border:none"><div class="rd rd-h"></div><span><strong>GR10x:</strong> RM branch request 270087 awaiting approval</span></div>
         </div></div>
         <div class="g-card"><div class="c-hdr"><span class="c-hdr-title" style="color:var(--amber)">📌 This Sprint</span></div><div class="c-body" style="padding:10px">
-          <div class="risk-row"><div class="rd rd-m"></div><span><strong>TB600:</strong> Arrange review coverage while Hui Fu OOO (Jun 11-16) — IAS/GFD active</span></div>
+          <div class="risk-row"><div class="rd rd-m"></div><span><strong>TB600:</strong> Ensure review coverage for active IAS/GFD reviews</span></div>
           <div class="risk-row"><div class="rd rd-m"></div><span><strong>ThorZ:</strong> Triage MCU regressions — ASILNA, PwrCtrl (29), VMON (30) failures</span></div>
           <div class="risk-row"><div class="rd rd-m"></div><span><strong>NR10x:</strong> CAGUID init-vector fix for QM4-ready SystemSim release</span></div>
           <div class="risk-row"><div class="rd rd-m"></div><span><strong>T294:</strong> Review safety plan timeline — HSR and FMEDA critical path</span></div>
@@ -2197,9 +2214,34 @@ function pickIdentity(cm) {
   renderCC();
 }
 
+// Pick an identity from the manual dropdown (SSO-failure fallback)
+function pickIdentityByEmail(email) {
+  if(!email) return;
+  const cm = CM_REGISTRY.find(c => c.email === email);
+  if(cm) pickIdentity(cm);
+}
+
 function showIdentityPicker() {
   const modal = document.getElementById('identity-modal');
   if(!modal) return;
+
+  // Populate the manual fallback list from the registry
+  const sel = document.getElementById('id-manual-pick');
+  if(sel && sel.options.length <= 1) {
+    CM_REGISTRY.forEach(cm => {
+      if(!cm.email) return;
+      const o = document.createElement('option');
+      o.value = cm.email;
+      o.textContent = cm.name + (cm.admin ? ' (admin)' : '');
+      sel.appendChild(o);
+    });
+  }
+  if(sel) sel.value = '';
+
+  // Only offer a close button if there's a signed-in user to return to
+  const closeBtn = document.getElementById('id-close-btn');
+  if(closeBtn) closeBtn.style.display = CURRENT_USER.email ? 'block' : 'none';
+
   modal.style.display = 'flex';
   requestAnimationFrame(()=>modal.classList.add('show'));
 }
@@ -3110,18 +3152,23 @@ function setChipFilter(chipId,el){
 }
 
 // Risk data: [chip, label, schedule, sw, hw, partner, safety]
+// Ratings reconciled against the Cockpit risk panel on 2026-09-15.
+// Columns: Schedule | SW Risk | HW Risk | Partner | Safety
+// Keep this in sync with the Top Risks list — they were previously
+// independent tables and disagreed (GR10x rated all-green while the
+// Cockpit reported an open Sev 1 P0).
 const RISK_DATA = [
-  ['nr10x',  'NR10x · Fusion',     'h','h','m','m','l'],
-  ['t374',   'T374 · Beacon',      'm','m','l','l','l'],
-  ['gr10x',  'GR10x · Rubin GPU',  'l','l','l','l','l'],
-  ['gr15x',  'GR15x · Next GPU',   'l','m','l','l','l'],
-  ['fn10x',  'FN10x · Feynman',    'm','m','m','l','l'],
-  ['thorz',  'ThorZ · CPU',        'm','m','l','l','m'],
-  ['tb500',  'TB500 · Vera',       'l','l','l','l','l'],
-  ['tb600',  'TB600 · Vera Ultra', 'm','m','m','l','l'],
-  ['n2x',    'N2x · CPU',          'h','m','m','l','l'],
-  ['tcx10',  'TCX10 · CPU',        'm','m','l','l','l'],
-  ['t294',   'T294 · Magni',       'm','m','l','m','h'],
+  ['thorz',  'ThorZ · CPU',        'h','h','h','l','m'],
+  ['n2x',    'N2x · CPU',          'h','h','m','h','l'],
+  ['t374',   'T374 · Beacon',      'h','h','h','m','l'],
+  ['gr10x',  'GR10x · Rubin GPU',  'm','h','h','l','l'],
+  ['gr15x',  'GR15x · Next GPU',   'm','h','m','l','l'],
+  ['tb600',  'TB600 · Vera Ultra', 'h','m','m','l','l'],
+  ['t294',   'T294 · Magni',       'm','m','m','m','m'],
+  ['tcx10',  'TCX10 · CPU',        'm','m','h','l','l'],
+  ['nr10x',  'NR10x · Fusion',     'l','m','l','m','l'],
+  ['tb500',  'TB500 · Vera',       'l','l','m','l','l'],
+  ['fn10x',  'FN10x · Feynman',    'l','m','l','l','l'],
 ];
 function buildHeatmap(){
   const b=document.getElementById('hm-body');if(!b)return;
@@ -3487,7 +3534,7 @@ const CHIP_DB = {
       {p:'h',t:'GR10x OVERT/LDIV Thermal Gap -- WAR: 3ms OVERT filter un-gates production but runs GPU above 118°C; requires thermal-sim validation'},
       {p:'h',t:'Chip PREL gated by Control Run -- SHTOL Run2 2xTBTI+HCI trending 8/14; 13x part data 8/2'},
       {p:'m',t:'Strata/NVL72 cracked vias in VGT PCBs -- flash-plate process switch + DOE underway'},
-      {p:'h',t:'NVDEC Bug 5881444 HEVC GPTimer -- SW WAR approved FREL_1; r615 fix submission pending (Hemant on leave)'},
+      {p:'h',t:'NVDEC Bug 5881444 HEVC GPTimer -- SW WAR approved FREL_1; r615 fix submission pending'},
       {p:'m',t:'Fractal support scoping WIP -- plans to finalize this week'},
       {p:'h',t:'MSE boot fails after setting PORT disable mask for nvlink -- blocking 0.6 QA activities (Jul 17)'},
       {p:'h',t:'VR NVL72 v0.6 SW Full Drop slipped to 7/28 (confirmed 7/22 DL Exec); 48 SW blockers open as of 7/21; v0.8 Dev Drop moved 8/10→8/17; v0.8 Full Drop moved 9/4→9/8; DLFW-Rubin AT RISK (Fractal runner instability + TS2 board no ETA Bug 6441264)'},
@@ -4000,7 +4047,11 @@ window.cpSsoLogout = function() {
   var _tasks = [], _filter = 'all';
   function key(){ return 'cp2_tasks_' + (CURRENT_USER.email || 'guest'); }
   function load(){
-    try { var s=localStorage.getItem(key()); if(s) _tasks=JSON.parse(s); } catch(e){}
+    // Must reset to [] when the new user has no saved tasks — otherwise the
+    // previous user's list stays in memory and gets written under this user's key.
+    try { var s=localStorage.getItem(key()); _tasks = s ? JSON.parse(s) : []; }
+    catch(e){ _tasks = []; }
+    if(!Array.isArray(_tasks)) _tasks = [];
   }
   function save(){
     try { localStorage.setItem(key(), JSON.stringify(_tasks)); } catch(e){}
@@ -4768,9 +4819,16 @@ keywords.slice(1).map(function(k){ return '* ' + k; }).join('\n') + '\n\n' +
 //  CM CHECKLIST — embedded panel
 // ══════════════════════════════════════════════════════════════════════════════
 (function(){
-const CL_TODAY = new Date('2026-07-24');
+// Live date, normalised to local midnight so day-deltas are whole days.
+// (Was previously hardcoded to 2026-07-24, which silently froze every
+//  "TODAY" / "Nd ago" countdown on this tab.)
+function clToday(){
+  var d = new Date();
+  d.setHours(0,0,0,0);
+  return d;
+}
 
-function clDays(d){ if(!d) return null; return Math.round((new Date(d)-CL_TODAY)/86400000); }
+function clDays(d){ if(!d) return null; return Math.round((new Date(d)-clToday())/86400000); }
 function clFmt(d){ if(!d) return 'TBD'; return new Date(d).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); }
 function clDelta(n){ if(n===null) return ''; if(n<0) return Math.abs(n)+'d ago'; if(n===0) return 'TODAY'; return n+'d'; }
 function clEsc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
@@ -5487,9 +5545,13 @@ function ncSubmit() {
     trend: [],
     stack: [],
     emails:[],
-    slack: slack || '#' + id + '-sw',
+    // NOTE: both of these must match the shape the renderers expect.
+    // slack is an array of {ch,msg,...} objects (renderChipView maps over it);
+    // pills is an array of [cssClass, label] pairs, NOT {label,cls} objects.
+    // The channel name itself is stored via saveChipCfg below.
+    slack: [],
     prog:  0,
-    pills: [{ label: phase.toUpperCase(), cls: pillColor }],
+    pills: [[pillColor, phase.toUpperCase()]],
     wikiUrl: '',
     checklist: [],
   };
