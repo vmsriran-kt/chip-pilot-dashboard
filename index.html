@@ -1614,7 +1614,8 @@ function buildCMConfigPanel() {
         var state=window._cmcpState['${chipId}'];if(!state)return;
         if(!wasOn){state.add('${s.id}');}else{state.delete('${s.id}');}
         var prev=document.getElementById('cmcp-preview-${chipId}');
-        if(prev&&prev.parentNode.classList.contains('expanded'))
+        var row=document.getElementById('cmcp-row-${chipId}');
+        if(prev&&row&&row.classList.contains('expanded'))
           prev.textContent=buildRichPrompt('${chipId}');
       })(this,event)">${s.label}</label>`;
     }).join('');
@@ -1638,6 +1639,10 @@ function buildCMConfigPanel() {
             var open=cfg.style.display!=='none';
             cfg.style.display=open?'none':'block';
             row.classList.toggle('expanded',!open);
+            if(!open){
+              var prev=document.getElementById('cmcp-preview-${chipId}');
+              if(prev) prev.textContent=buildRichPrompt('${chipId}');
+            }
           })()">✏ Configure</button>
         <button class="cmcp-update-btn" id="cmcp-upd-${chipId}"
           onclick="(function(btn){
