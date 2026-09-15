@@ -460,8 +460,9 @@ select.settings-inp{cursor:pointer}
 .ncs-body{padding:0 18px 18px;border-top:1px solid var(--border)}
 .ncs-lbl{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
 .ncs-preview{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 14px;color:var(--text2);white-space:pre-wrap;word-break:break-word;max-height:180px;overflow-y:auto;font-size:12px;line-height:1.55}
-.ncs-btn-primary{background:var(--nv-green);color:#000;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap}
-.ncs-btn-primary:hover{background:var(--nv-green-lite)}
+.ncs-btn-primary{background:var(--nv-green);color:#000;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap;display:inline-block;text-decoration:none;line-height:1.4}
+.ncs-btn-primary:hover{background:var(--nv-green-lite);color:#000}
+.ncs-btn-primary.disabled{background:var(--border);color:var(--muted);cursor:not-allowed;pointer-events:none}
 .ncs-btn-secondary{background:none;border:1px solid var(--border);color:var(--text2);border-radius:8px;padding:8px 14px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all .15s}
 .ncs-btn-secondary:hover{border-color:var(--nv-green);color:var(--nv-green)}
 .ncs-done-btn{margin-top:14px;background:none;border:1px dashed var(--border);color:var(--muted);border-radius:8px;padding:7px 16px;font-size:11px;cursor:pointer;font-family:inherit;transition:all .15s;float:right}
@@ -820,13 +821,13 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
       </svg>
       <div class="cp-logo-text">
         <span class="cp-logo-name">Chip Pilot</span>
-        <span class="cp-logo-sub">PROGRAM CONTROL</span>
+        <span class="cp-logo-sub"></span>
       </div>
     </div>
   </div>
   <div class="hdr-spacer"></div>
   <div class="hdr-badge bd-danger" onclick="showView('cockpit')">⬟ 3 Critical</div>
-  <div class="hdr-badge bd-info">⬡ 12 Programs</div>
+  <div class="hdr-badge bd-info">⬡ 11 Programs</div>
   <button id="cp-tour-help" onclick="cptStart()" title="Start guided tour">?</button>
   <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn" title="Toggle theme" aria-label="Toggle theme">
     <span id="theme-icon">🌙</span>
@@ -1092,17 +1093,17 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
       <!-- Attention strip -->
       <div class="attn">
         <span class="attn-lbl">⬟ Needs Attention</span>
-        <div class="attn-pill"><span style="color:var(--red)">●</span> GR10x · v0.6 slipped 7/28 · v0.8 Dev Drop 8/17 · 48 SW blockers</div>
-        <div class="attn-pill"><span style="color:var(--amber)">●</span> ThorZ · Full WAT on hold — V/F curve ETA TBD</div>
-        <div class="attn-pill"><span style="color:var(--amber)">●</span> TB500 · PS FGI ~7/31 · P-Rel ~1wk behind · Bug 6447327 active</div>
-        <div class="attn-pill"><span style="color:var(--red)">●</span> T257/Monet · BMW → Qualcomm · SW wind-down</div>
-        <div class="attn-pill"><span style="color:var(--amber)">●</span> N2x · SW Signoff 7/30 · USB/DP blocked on Hybrid IPP</div>
-        <div class="attn-pill"><span style="color:var(--amber)">●</span> T374/Beacon · 10-12wk pre-si FPGA risk</div>
-        <div class="attn-pill"><span style="color:var(--amber)">●</span> T294 · Safety plan HIGH risk</div>
+        <div class="attn-pill"><span style="color:var(--red)">●</span> GR10x · P0 6536073 open · FieldDiag rerun on wrong ROM · 9/16 close at risk</div>
+        <div class="attn-pill"><span style="color:var(--red)">●</span> ThorZ · WAT 47% cov / 26% pass · 2 P0 blockers · QS gate 10/22</div>
+        <div class="attn-pill"><span style="color:var(--red)">●</span> N2x · ECO Freeze 9/20 · S-Die L1 flat 56% · L2 not started</div>
+        <div class="attn-pill"><span style="color:var(--red)">●</span> T374/Beacon · QT netlist cannot boot iGPU · NL slips to Jan '27</div>
+        <div class="attn-pill"><span style="color:var(--amber)">●</span> GR15x · 4 blocker-tagged bugs · DFP sign-off past 9/4 ETA</div>
+        <div class="attn-pill"><span style="color:var(--amber)">●</span> TB600 · 1NL 9/27 · 4 IAS specs still at 0.7 · NVPOR blocked</div>
+        <div class="attn-pill"><span style="color:var(--amber)">●</span> T294 · Magni-X vs Magni-S undecided · PVA P0 blockers</div>
       </div>
 
 
-      <div class="sec-lbl" id="cockpit-lbl">Program Health — 12 Active Programs</div>
+      <div class="sec-lbl" id="cockpit-lbl">Program Health — 11 Active Programs</div>
       <div class="chips-grid" id="chips-grid">
         <div class="chip-card cc-amber" onclick="showView('chip','nr10x')" style="cursor:pointer">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px">
@@ -1116,12 +1117,12 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
         </div>
         <div class="chip-card cc-amber" onclick="showView('chip','t374')" style="cursor:pointer">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px">
-            <span class="chip-card-name">T374</span><span class="pill pill-a">POST-SI</span>
+            <span class="chip-card-name">T374</span><span class="pill pill-r">iGPU BOOT BLOCKER</span>
           </div>
           <div class="chip-card-sub">Beacon · Fusion · CM: Roopa</div>
           <div class="chip-prog"><div style="height:100%;width:5%;border-radius:2px" class="cp-a"></div></div>
           <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted)">
-            <span>10-12wk FPGA Risk · Weekly Plan w/ Iris Team</span><span>5%</span>
+            <span>QT NL cannot boot iGPU · SW-usable NL Jan '27 · FPGA end Feb '27</span><span style="color:var(--red)">5%</span>
           </div>
         </div>
         <div class="chip-card cc-green" onclick="showView('chip','gr10x')" style="cursor:pointer">
@@ -1131,7 +1132,7 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
           <div class="chip-card-sub">Rubin GPU · Post-silicon · CM: Ranjani · Madhura</div>
           <div class="chip-prog"><div style="height:100%;width:95%;border-radius:2px" class="cp-g"></div></div>
           <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted)">
-            <span>QS Done &#x2705; · PRel 6/22 · RM sync today 3:15pm</span><span>95%</span>
+            <span>TIM1 WAR active · P0 6536073 open · FieldDiag rerun · 9/16 at risk</span><span>95%</span>
           </div>
         </div>
         <div class="chip-card cc-green" onclick="showView('chip','gr15x')" style="cursor:pointer">
@@ -1141,7 +1142,7 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
           <div class="chip-card-sub">Next GPU · Post-silicon · CM: Vinay · Anshul</div>
           <div class="chip-prog"><div style="height:100%;width:20%;border-radius:2px" class="cp-g"></div></div>
           <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted)">
-            <span>Tapeout 6/2 &#x2705; · Physical data review today 7pm</span><span>20%</span>
+            <span>Tapeout done · 4 blocker bugs open · DFP sign-off past 9/4 ETA</span><span>20%</span>
           </div>
         </div>
         <div class="chip-card cc-amber" onclick="showView('chip','fn10x')" style="cursor:pointer">
@@ -1156,12 +1157,12 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
         </div>
         <div class="chip-card cc-amber" onclick="showView('chip','thorz')" style="cursor:pointer">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px">
-            <span class="chip-card-name">ThorZ</span><span class="pill pill-a">WAT FOCUS</span>
+            <span class="chip-card-name">ThorZ</span><span class="pill pill-r">2 P0 · QS 10/22</span>
           </div>
           <div class="chip-card-sub">CPU · Post-silicon · CM: Mayank Kapoor</div>
           <div class="chip-prog"><div style="height:100%;width:80%;border-radius:2px" class="cp-a"></div></div>
           <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted)">
-            <span>RA WAT 7/24 · Full WAT On Hold (V/F) · Cov 80% / Pass 55%</span><span>80%</span>
+            <span>Full WAT SIT running · Cov 47% / Pass 26% · 2 P0 open · QS 10/22</span><span style="color:var(--red)">47%</span>
           </div>
         </div>
         <div class="chip-card cc-amber" onclick="showView('chip','tb500')" style="cursor:pointer">
@@ -1171,7 +1172,7 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
           <div class="chip-card-sub">Vera · CPU · Post-silicon · CM: Roopa Ranganathan</div>
           <div class="chip-prog"><div style="height:100%;width:88%;border-radius:2px" class="cp-a"></div></div>
           <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted)">
-            <span>PS FGI ~7/31 · P-Rel ~1wk Behind · M-pkg SLT Done</span><span>88%</span>
+            <span>Sustaining · SBIOS LKG sanity daily · Mellanox bridge finding open</span><span>88%</span>
           </div>
         </div>
         <div class="chip-card cc-blue" onclick="showView('chip','tb600')" style="cursor:pointer">
@@ -1186,12 +1187,12 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
         </div>
         <div class="chip-card cc-amber" onclick="showView('chip','n2x')" style="cursor:pointer">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px">
-            <span class="chip-card-name">N2x</span><span class="pill pill-a">FPGA BU 7/30</span>
+            <span class="chip-card-name">N2x</span><span class="pill pill-r">ECO FREEZE 9/20</span>
           </div>
           <div class="chip-card-sub">CPU · Pre-silicon · CM: Vivek Desikan</div>
           <div class="chip-prog"><div style="height:100%;width:35%;border-radius:2px" class="cp-a"></div></div>
           <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted)">
-            <span>SOC FDI Done · T354G FNL 7/23 · SW Signoff 7/30 · USB/DP blocked</span><span style="color:var(--amber)">⚠</span>
+            <span>ECO Freeze 9/20 · S-Die L1 56% (flat) · L2 0% · USB/DP trending 9/18</span><span style="color:var(--red)">⚠</span>
           </div>
         </div>
         <div class="chip-card" style="border-left:3px solid var(--muted);cursor:pointer" onclick="showView('chip','tcx10')">
@@ -1249,12 +1250,13 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
           <div class="g-card" style="margin-bottom:14px">
             <div class="c-hdr"><span class="c-hdr-title">Top Risks Across Programs</span></div>
             <div class="c-body" style="padding:10px">
-              <div class="risk-row"><div class="rd rd-h"></div><span><strong>ThorZ:</strong> Full WAT on hold — V/F curve changes pending, ETA TBD (Bug 6404289)</span></div>
-              <div class="risk-row"><div class="rd rd-h"></div><span><strong>T257/Monet:</strong> BMW IVI program awarded to Qualcomm — SW wind-down to TO validation underway</span></div>
-              <div class="risk-row"><div class="rd rd-h"></div><span><strong>T294:</strong> Safety design verification HIGH risk — HSR dependency Feb 2028</span></div>
-              <div class="risk-row"><div class="rd rd-m"></div><span><strong>TB500:</strong> PS FGI ~7/31 but P-Rel ~1 week behind; 23 blocker bugs for SBIOS 0.8 (Bug 6447327 active)</span></div>
-              <div class="risk-row"><div class="rd rd-m"></div><span><strong>N2x:</strong> USB/DP Tunneling blocked on Hybrid IPP bringup; SOC FDI SW signoff gated on validation coverage</span></div>
-              <div class="risk-row"><div class="rd rd-m"></div><span><strong>T374/Beacon:</strong> Pre-silicon top risk — 10-12wk FPGA validation window; weekly plan alignment with Iris</span></div>
+              <div class="risk-row"><div class="rd rd-h"></div><span><strong>ThorZ:</strong> WAT at 47% coverage but only 26% pass / 21% hard fail; two P0 blockers open (6696490 FMON clock fault, 6693768 SC7 resume) against a QS gate of 10/22 with no margin</span></div>
+              <div class="risk-row"><div class="rd rd-h"></div><span><strong>T374/Beacon:</strong> First QT netlist cannot boot the iGPU — SW-usable NL slips to Jan 2027, FPGA to end Feb 2027</span></div>
+              <div class="risk-row"><div class="rd rd-h"></div><span><strong>N2x:</strong> ECO Freeze 9/20 with four open risks whose ETAs land on or after the gate; S-Die L1 flat at 56% week-over-week, L2 not started</span></div>
+              <div class="risk-row"><div class="rd rd-h"></div><span><strong>GR10x:</strong> P0 6536073 (Sev 1 system crash) open; FieldDiag run on the wrong VBIOS ROM must be redone, putting the 9/16 test-plan close at risk</span></div>
+              <div class="risk-row"><div class="rd rd-m"></div><span><strong>GR15x:</strong> Four blocker-tagged bugs across A01TV BaseBless, FE_0.1 and FirstSilicon gates; IO Electrical DFP sign-off past its 9/4 ETA with no engineer assigned</span></div>
+              <div class="risk-row"><div class="rd rd-m"></div><span><strong>TB600:</strong> 1st netlist 9/27 while four IAS/chip specs sit at Arch-Complete 0.7; NVPOR rollout blocked on tooling</span></div>
+              <div class="risk-row"><div class="rd rd-m"></div><span><strong>T294:</strong> Magni-X vs Magni-S scope undecided — SW POR and leads list cannot be locked until it closes</span></div>
             </div>
           </div>
 
@@ -1262,24 +1264,24 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
             <div class="c-hdr"><span class="c-hdr-title">📡 Live Signals Today</span></div>
             <div class="c-body" style="padding:10px;display:flex;flex-direction:column;gap:10px">
               <div style="border-left:2px solid var(--red);padding-left:10px">
-                <div style="font-size:10px;color:var(--muted)">📧 Top N Things Tegra SW CM (07/20/26) · Roopa Ranganathan · Jul 21</div>
-                <div style="font-size:12px;color:var(--text2)">T257/Monet: BMW IVI program awarded to Qualcomm. Guidance to close all SW towards TO validation before shelving.</div>
+                <div style="font-size:10px;color:var(--muted)">📧 Top N Things - Tegra SW Chip Management (09/14/26) · Roopa Ranganathan · Sep 15</div>
+                <div style="font-size:12px;color:var(--text2)">T374 (Beacon): first QT NL will not boot iGPU — SW-usable QT NL Jan '27, FPGA end Feb '27. ThorZ QS 10/22, full WAT SIT at 47% coverage / 26% pass.</div>
+              </div>
+              <div style="border-left:2px solid var(--red);padding-left:10px">
+                <div style="font-size:10px;color:var(--muted)">📧 T354/N2x Chip SW Status Report · Vivek Desikan · Sep 15</div>
+                <div style="font-size:12px;color:var(--text2)">ECO Freeze 9/20 (T354S) / 9/17 (T354G), tapeout 12/30. Four open risks all ETA 9/18–9/20. S-Die L1 flat at 56%, L2 not started.</div>
+              </div>
+              <div style="border-left:2px solid var(--red);padding-left:10px">
+                <div style="font-size:10px;color:var(--muted)">💬 GR100 TIM1 Hourly Watch · automated digest · Sep 15 07:10 UTC</div>
+                <div style="font-size:12px;color:var(--text2)">TIM1 WAR at risk: ROM 99.00.16.47.0A shipped but FieldDiag was run on …47.06, so cases must be redone. Main threat to the 9/16 close. TC18 FAIL.</div>
               </div>
               <div style="border-left:2px solid var(--amber);padding-left:10px">
-                <div style="font-size:10px;color:var(--muted)">📧 TB500 · Roopa · Jul 21</div>
-                <div style="font-size:12px;color:var(--text2)">M-pkg PS SLT MODS released. PS FGI ~7/31, P-Rel ~1wk behind. SBIOS 0.8 cutoff 7/20 with ~23 blockers.</div>
-              </div>
-              <div style="border-left:2px solid var(--nv-green);padding-left:10px">
-                <div style="font-size:10px;color:var(--muted)">📧 TB500 KIST Status · sruskamp · 10:35am</div>
-                <div style="font-size:12px;color:var(--text2)">VR NVL72 SW 0.6 release for KIST. PS SBIOS 6/2 done. BWAT target ~6/15.</div>
-              </div>
-              <div style="border-left:2px solid var(--nv-green);padding-left:10px">
-                <div style="font-size:10px;color:var(--muted)">📧 MODS Golden frel_1 · Alan Lee · 1:46pm</div>
-                <div style="font-size:12px;color:var(--text2)">MODS Golden posted for gr100, gr102, gb202 — frel_1_256_2.31.</div>
+                <div style="font-size:10px;color:var(--muted)">📧 [B] 6700314 frel_2 enablement blocker · vikasa@nvidia.com · Sep 15</div>
+                <div style="font-size:12px;color:var(--text2)">CUDA NVJPG workload throws CUDA_ERROR_NOT_SUPPORTED. Tagged SWGPU_GR15x_FirstSilicon_Blocker; ARB escalation raised.</div>
               </div>
               <div style="border-left:2px solid var(--amber);padding-left:10px">
-                <div style="font-size:10px;color:var(--muted)">📧 Branch Approval Pending · sw-cm-notifications · 4:15am</div>
-                <div style="font-size:12px;color:var(--text2)">GR10x RM branch pending &gt;1 day (270087, Nishant Patel). Action required.</div>
+                <div style="font-size:10px;color:var(--muted)">📧 SWQA SBIOS dev-tb500 TOT LKG Sanity · yuanhengw@nvidia.com · Sep 15</div>
+                <div style="font-size:12px;color:var(--text2)">Both DUTs report Unsupported Request on four Mellanox mlx5Gen bridges — recurring across the 09/13 and 09/14 runs, no owner assigned.</div>
               </div>
             </div>
           </div>
@@ -1383,7 +1385,7 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
     <!-- ================ RISK RADAR ================ -->
     <div id="v-radar" style="display:none">
 
-      <div class="sec-lbl">Portfolio Risk Heatmap — All 12 Programs</div>
+      <div class="sec-lbl">Portfolio Risk Heatmap — All 11 Programs</div>
       <div class="g-card" style="margin-bottom:16px">
         <div class="c-body" style="overflow-x:auto">
           <table style="border-collapse:separate;border-spacing:4px;min-width:600px;width:100%">
@@ -1489,7 +1491,9 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
           </div>
           <div style="display:flex;align-items:center;gap:8px">
             <span class="cmr-toast" id="conf-toast">✓ Opening Confluence…</span>
-            <button class="cmr-save-btn" onclick="confPageCreate()">📄 Open in Confluence</button>
+            <button class="cmr-save-btn" onclick="confPageCreate()">📄 Build Confluence link</button>
+            <a id="conf-open-link" href="#" target="_blank" rel="noopener noreferrer"
+               style="display:none;margin-left:10px;padding:7px 14px;border-radius:7px;background:var(--nv-green);color:#000;font-size:11px;font-weight:700;text-decoration:none"></a>
           </div>
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
@@ -1716,7 +1720,7 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
             <div class="ncs-lbl" style="margin-bottom:8px">Page Template Preview</div>
             <div id="ncs-conf-preview" class="ncs-preview">Fill in chip info above to generate preview…</div>
             <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
-              <button class="ncs-btn-primary" onclick="ncsConfluenceOpen()">🔗 Open in Confluence</button>
+              <a id="ncs-conf-open" class="ncs-btn-primary disabled" href="#" target="_blank" rel="noopener noreferrer">🔗 Open in Confluence</a>
               <button class="ncs-btn-secondary" onclick="ncsCopy('conf-preview',this)">📋 Copy Page Content</button>
               <button class="ncs-btn-secondary" onclick="ncsCopy('conf-agent-prompt',this)">🤖 Copy AI Agent Prompt</button>
             </div>
@@ -1754,7 +1758,7 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
               before creating. Shared channels (e.g. <code style="background:rgba(255,255,255,.08);padding:1px 5px;border-radius:3px">#cpu-ps-bringup</code>, <code style="background:rgba(255,255,255,.08);padding:1px 5px;border-radius:3px">#swdl-execution</code>) already exist — join, don't create.
             </div>
             <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
-              <button class="ncs-btn-primary" onclick="window.open('https://nvidia.enterprise.slack.com/','_blank')">🔗 Open Slack</button>
+              <a class="ncs-btn-primary" href="https://nvidia.enterprise.slack.com/" target="_blank" rel="noopener noreferrer">🔗 Open Slack</a>
               <button class="ncs-btn-secondary" onclick="ncsCopy('slack-channels',this)">📋 Copy Channel List</button>
               <button class="ncs-btn-secondary" onclick="ncsCopy('slack-agent-prompt',this)">🤖 Copy AI Agent Prompt</button>
             </div>
@@ -1784,7 +1788,7 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
             <div class="ncs-lbl" style="margin-top:12px;margin-bottom:8px">IT request draft</div>
             <div id="ncs-email-draft" class="ncs-preview" style="font-size:12px;line-height:1.6">Fill in chip info above…</div>
             <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
-              <button class="ncs-btn-primary" onclick="window.open('https://itcatalog.nvidia.com','_blank')">🔗 IT Catalog</button>
+              <a class="ncs-btn-primary" href="https://itcatalog.nvidia.com" target="_blank" rel="noopener noreferrer">🔗 IT Catalog</a>
               <button class="ncs-btn-secondary" onclick="ncsCopy('email-draft',this)">📋 Copy IT Request</button>
               <button class="ncs-btn-secondary" onclick="ncsCopy('email-agent-prompt',this)">🤖 Copy AI Agent Prompt</button>
             </div>
@@ -1814,7 +1818,7 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
             <div class="ncs-lbl" style="margin-top:12px;margin-bottom:8px">Wiki page content (paste into Confluence)</div>
             <div id="ncs-nvbugs-wiki" class="ncs-preview" style="font-size:12px;line-height:1.6">Fill in chip info above…</div>
             <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
-              <button class="ncs-btn-primary" onclick="ncsNvbugsOpen()">🔗 Open NVBugs</button>
+              <a class="ncs-btn-primary" href="https://nvbugs.nvidia.com" target="_blank" rel="noopener noreferrer">🔗 Open NVBugs</a>
               <button class="ncs-btn-secondary" onclick="ncsCopy('nvbugs-wiki',this)">📋 Copy Wiki Content</button>
               <button class="ncs-btn-secondary" onclick="ncsCopy('nvbugs-agent-prompt',this)">🤖 Copy AI Agent Prompt</button>
             </div>
@@ -2244,17 +2248,16 @@ function confPageCreate() {
   var url = confCreateUrl(space, title, parent);
 
   // window.open() is blocked when the dashboard is iframed (chippilot.nvidia.com),
-  // so click a real anchor instead and fall back to showing the URL.
-  var opened = false;
-  try {
-    var a = document.createElement('a');
-    a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer';
-    a.style.display = 'none';
-    document.body.appendChild(a); a.click(); document.body.removeChild(a);
-    opened = true;
-  } catch(e) { opened = false; }
-  if (!opened) { try { opened = !!window.open(url, '_blank', 'noopener'); } catch(e){} }
-  if (!opened && typeof ncsManual === 'function') ncsManual(url);
+  // Do NOT navigate programmatically here. Inside the chippilot.nvidia.com iframe,
+  // a synthetic a.click()/window.open is sandboxed — the popup inherits the sandbox
+  // or the frame navigates to itself, and Confluence renders blank. Instead expose
+  // the URL on a real anchor and let the user click it.
+  const openLink = document.getElementById('conf-open-link');
+  if (openLink) {
+    openLink.href = url;
+    openLink.textContent = '🔗 Open create-page form for ' + space;
+    openLink.style.display = 'inline-block';
+  }
 
   const toast = document.getElementById('conf-toast');
   if (toast) { toast.style.opacity = '1'; setTimeout(() => toast.style.opacity = '0', 2000); }
@@ -4419,6 +4422,9 @@ keywords.slice(1).map(function(k){ return '* ' + k; }).join('\n') + '\n\n' +
     setText('ncs-nvbugs-wiki', wikiContent);
     var nvbugsPrompt = 'Create a Confluence page titled "' + n + ' NVBugs Keywords & Taxonomy" in space "' + sp + '" with the following content:\n\n' + wikiContent + '\n\nAlso, in NVBugs (https://nvbugs.nvidia.com), register the following keywords under a new component for ' + n + ':\n' + keywords.join(', ');
     setText('ncs-nvbugs-agent-prompt', nvbugsPrompt);
+
+    // Refresh the Confluence anchor so it always points at the current form state
+    ncsSyncConfLink();
   };
 
   window.ncsToggle = function(key) {
@@ -4507,49 +4513,38 @@ keywords.slice(1).map(function(k){ return '* ' + k; }).join('\n') + '\n\n' +
     if(ov) ov.style.display = 'none';
   };
 
-  // ── Opening external links: iframe-safe. window.open() is blocked in
-  //    sandboxed iframes, so use a real anchor click, then verify.
-  function openUrl(url) {
-    var opened = null;
-    try {
-      var a = document.createElement('a');
-      a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer';
-      a.style.display = 'none';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      opened = true;
-    } catch(e) { opened = false; }
+  // NOTE: there is deliberately no openUrl()/window.open() helper here any more.
+  // Every external link in this tab is a real <a target="_blank"> that the user
+  // clicks directly — see the comment on ncsSyncConfLink below for why.
 
-    if (!opened) {
-      try { opened = !!window.open(url, '_blank', 'noopener'); } catch(e) { opened = false; }
-    }
-    // Always surface the URL so a blocked popup isn't a dead end
-    if (!opened) ncsManual(url);
-    return opened;
-  }
-  window.ncsOpenUrl = openUrl;
-
-  window.ncsConfluenceOpen = function() {
-    var sp = get('ncs-conf-space').trim();
-    if (!sp) { ncsManual('Enter a Confluence Space Key in the Chip Program Info section above, then try again.'); return; }
-    var title = ((el('ncs-conf-title')||{}).value||'').trim() || (name_() + ' — SW Program Home');
+  // Keep the Confluence anchor's href in sync with the form.
+  // IMPORTANT: this must stay a real <a> that the user clicks. Navigating
+  // programmatically (a.click() / window.open) from inside the chippilot.nvidia.com
+  // iframe gets sandboxed — the popup either inherits the sandbox or falls back to
+  // navigating the frame itself, and Confluence (which refuses to be framed)
+  // renders blank. A genuine user click on an anchor is not subject to that.
+  function ncsSyncConfLink() {
+    var sp     = get('ncs-conf-space').trim();
+    var title  = ((el('ncs-conf-title')||{}).value||'').trim() || (name_() + ' — SW Program Home');
     var parent = get('ncs-conf-parent').trim();
+    var open   = el('ncs-conf-open');
+    var wrap   = el('ncs-conf-links');
+
+    if (!sp) {
+      if(open){ open.href = '#'; open.classList.add('disabled'); open.title = 'Enter a Confluence Space Key first'; }
+      if(wrap) wrap.style.display = 'none';
+      return;
+    }
     var url = confCreateUrl(sp, title, parent);
-    // Always surface both links so a wrong space key or a blocked popup is visible,
-    // not a silent no-op.
+    if(open){ open.href = url; open.classList.remove('disabled'); open.title = 'Opens the Confluence create-page form in a new tab'; }
+
     var lnk = el('ncs-conf-url');
     if(lnk){ lnk.href = url; lnk.textContent = url; }
     var sp2 = el('ncs-conf-space-url');
     if(sp2){ sp2.href = confSpaceUrl(sp); sp2.textContent = confSpaceUrl(sp); }
-    var wrap = el('ncs-conf-links');
     if(wrap) wrap.style.display = 'block';
-    openUrl(url);
-  };
+  }
 
-  window.ncsNvbugsOpen = function() {
-    openUrl('https://nvbugs.nvidia.com');
-  };
 
   window.ncsClearAll = function() {
     if(!confirm('Reset setup state for this chip?')) return;
