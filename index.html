@@ -3675,12 +3675,19 @@ window.cpSsoLogout = function() {
     list.innerHTML=html;
   };
 
+  var _dragId = null;
+
   function ttCard(t){
     var pc={high:'tt-p-high',medium:'tt-p-medium',low:'tt-p-low'}[t.priority];
     var pl={high:'High',medium:'Medium',low:'Low'}[t.priority];
     var ds=new Date(t.created).toLocaleDateString('en-US',{month:'short',day:'numeric'});
     var txt=t.text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-    return '<div class="tt-card'+(t.done?' done':'')+'">'+
+    return '<div class="tt-card'+(t.done?' done':'')+'" draggable="true" data-id="'+t.id+'"'+
+      ' ondragstart="window._ttDragStart('+t.id+',this)"'+
+      ' ondragover="event.preventDefault();this.style.borderColor=\'var(--nv-green)\'"'+
+      ' ondragleave="this.style.borderColor=\'\'"'+
+      ' ondrop="window._ttDrop('+t.id+',this)">'+
+      '<span style="cursor:grab;color:var(--muted);padding:0 6px 0 0;font-size:14px;user-select:none" title="Drag to reorder">⠿</span>'+
       '<button class="tt-check'+(t.done?' on':'')+'" onclick="ttToggle('+t.id+')"></button>'+
       '<div style="flex:1;min-width:0">'+
         '<div style="font-size:14px;color:var(--text);line-height:1.4'+(t.done?';text-decoration:line-through;color:var(--muted)':'')+'">'+txt+'</div>'+
@@ -3692,6 +3699,19 @@ window.cpSsoLogout = function() {
       '<button onclick="ttDelete('+t.id+')" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px;padding:2px 6px;border-radius:4px" onmouseover="this.style.color=\'var(--red)\'" onmouseout="this.style.color=\'var(--muted)\'">×</button>'+
     '</div>';
   }
+
+  window._ttDragStart = function(id){ _dragId = id; };
+  window._ttDrop = function(targetId, el){
+    el.style.borderColor = '';
+    if(_dragId === null || _dragId === targetId) return;
+    var fromIdx = _tasks.findIndex(function(t){return t.id===_dragId;});
+    var toIdx   = _tasks.findIndex(function(t){return t.id===targetId;});
+    if(fromIdx===-1||toIdx===-1) return;
+    var moved = _tasks.splice(fromIdx,1)[0];
+    _tasks.splice(toIdx,0,moved);
+    _dragId = null;
+    save(); ttRender();
+  };
 })();
 
 // -- Identity bootstrap (SSO-first, manual picker fallback) --
