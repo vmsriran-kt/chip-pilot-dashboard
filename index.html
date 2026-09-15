@@ -871,12 +871,12 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
   </div>
   <div class="nav-item" onclick="showView('chip','nr10x')">
     <div class="nav-chip-code"><span>NR10x <span class="status-dot dot-a"></span></span><span style="font-size:9px;color:var(--amber);font-weight:700">FNL RISK</span></div>
-    <div class="nav-chip-sub">NVLink Fusion <span class="nav-my-badge">MY CHIP</span></div>
+    <div class="nav-chip-sub">NVLink Fusion</div>
     <div class="nav-prog"><div class="nav-prog-fill" style="width:35%"></div></div>
   </div>
   <div class="nav-item" onclick="showView('chip','gr10x')">
     <div class="nav-chip-code"><span>GR10x <span class="status-dot dot-a"></span></span><span style="font-size:9px;color:var(--amber);font-weight:700">PS/PREL</span></div>
-    <div class="nav-chip-sub">Rubin GPU <span class="nav-my-badge">MY CHIP</span></div>
+    <div class="nav-chip-sub">Rubin GPU</div>
     <div class="nav-prog"><div class="nav-prog-fill" style="width:95%"></div></div>
   </div>
 
@@ -1789,7 +1789,7 @@ function applyIdentity(cm) {
   }) : [];
   if (cm.admin) {
     CURRENT_USER.role = 'admin';
-    MY_CHIPS = Object.keys(CHIP_DB); // full access to all chips
+    // Admins see all chips but MY CHIP badge stays tag-based (not all chips)
   } else {
     CURRENT_USER.role = MY_CHIPS.length > 0 ? 'cm' : 'mgmt';
   }
@@ -3412,7 +3412,7 @@ const CHIP_DB = {
   },
   t294: {
     title: 'T294 · Magni CPU',
-    sub: 'Pre-Silicon · SW CM: Roopa · Arch Readouts Ongoing · POR Target Past (6/30)',
+    sub: 'Pre-Silicon · SW CM: Mayank Kapoor · Arch Readouts Ongoing · POR Target Past (6/30)',
     wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/TCS',
     pills: [['pill-m','SETUP']],
     anno: '[Jul 13] Chip POR review in progress; few items pending. C2C modeling requirements under bandwidth constraint.',
