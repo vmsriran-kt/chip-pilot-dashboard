@@ -432,6 +432,22 @@ body.light .cmcp-src.on{border-color:#76b900;background:rgba(118,185,0,.07);colo
 .c-hdr-title{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted)}
 .c-body{padding:16px}
 
+/* -- MY TASKS -- */
+.tt-filter{background:var(--bg2);border:1px solid var(--border);color:var(--muted);border-radius:6px;padding:5px 14px;font-size:12px;cursor:pointer;font-family:inherit;transition:all .15s}
+.tt-filter:hover{border-color:var(--text2);color:var(--text)}
+.tt-filter.on{background:rgba(118,185,0,.12);border-color:var(--nv-green);color:var(--nv-green)}
+.tt-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:flex-start;gap:12px;transition:border-color .15s}
+.tt-card:hover{border-color:var(--text2)}
+.tt-card.done{opacity:.45}
+.tt-check{width:20px;height:20px;border-radius:50%;border:2px solid var(--muted);background:transparent;cursor:pointer;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.tt-check:hover{border-color:var(--nv-green)}
+.tt-check.on{background:var(--nv-green);border-color:var(--nv-green)}
+.tt-check.on::after{content:'✓';font-size:11px;color:#000;font-weight:900}
+.tt-p-high{background:#7f1d1d;color:#fca5a5;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;text-transform:uppercase}
+.tt-p-medium{background:#78350f;color:#fcd34d;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;text-transform:uppercase}
+.tt-p-low{background:#14532d;color:#86efac;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;text-transform:uppercase}
+.tt-sec{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin:14px 0 8px}
+
 /* -- SECTION LABEL -- */
 .sec-lbl{display:flex;align-items:center;gap:8px;font-size:9px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);padding-bottom:12px;border-bottom:1px solid var(--border);margin-bottom:14px}
 .sec-lbl::before{content:'';width:3px;height:14px;background:var(--nv-green);border-radius:2px;flex-shrink:0}
@@ -899,7 +915,7 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
   </div>
   <div class="nav-item" onclick="showView('chip','t294')">
     <div class="nav-chip-code"><span>T294 <span class="status-dot dot-a"></span></span><span style="font-size:9px;color:var(--muted);font-weight:700">SETUP</span></div>
-    <div class="nav-chip-sub">Magni · Roopa</div>
+    <div class="nav-chip-sub">Magni · Mayank Kapoor</div>
     <div class="nav-prog"><div class="nav-prog-fill" style="width:8%;background:var(--muted)"></div></div>
   </div>
 
@@ -940,6 +956,7 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
   <div class="nav-section">Tools</div>
   <div class="nav-home" onclick="showView('pm')">🤖 PM Assistant</div>
   <div class="nav-home" onclick="showView('cc')">✅ CM Checklist</div>
+  <div class="nav-home" id="nav-tasks" onclick="showView('tasks')">📋 My Tasks</div>
 </nav>
 
 <!-- === MAIN === -->
@@ -1090,7 +1107,7 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px">
             <span class="chip-card-name">T294</span><span class="pill" style="background:rgba(128,128,128,.1);color:var(--muted);border:1px solid rgba(128,128,128,.2)">SETUP</span>
           </div>
-          <div class="chip-card-sub">Magni · CPU · Pre-silicon · CM: Roopa</div>
+          <div class="chip-card-sub">Magni · CPU · Pre-silicon · CM: Mayank Kapoor</div>
           <div class="chip-prog"><div style="height:100%;width:8%;border-radius:2px;background:var(--muted)"></div></div>
           <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted)">
             <span>Arch + Safety Plan Review</span><span>8%</span>
@@ -1426,6 +1443,65 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
           💡 Changes saved here apply to <strong>your browser only</strong>. Admins: use <strong>📤 Export to Code</strong> → paste into the HTML → push to GitHub to publish for all users.
         </div>
       </div>
+    </div>
+
+    <!-- ================ MY TASKS ================ -->
+    <div id="v-tasks" style="display:none;padding:20px 0">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+        <div class="sec-lbl">📋 My Tasks</div>
+        <div style="display:flex;gap:8px">
+          <select id="tt-priority" style="background:var(--bg2);border:1px solid var(--border);border-radius:7px;color:var(--text);padding:7px 10px;font-size:12px;font-family:inherit;cursor:pointer">
+            <option value="high">🔴 High</option>
+            <option value="medium" selected>🟡 Medium</option>
+            <option value="low">🟢 Low</option>
+          </select>
+          <input id="tt-input" type="text" placeholder="Add a task…" onkeydown="if(event.key==='Enter')ttAdd()"
+            style="background:var(--bg2);border:1px solid var(--border);border-radius:7px;color:var(--text);padding:7px 14px;font-size:13px;font-family:inherit;width:280px;outline:none"
+            onfocus="this.style.borderColor='var(--nv-green)'" onblur="this.style.borderColor='var(--border)'">
+          <button onclick="ttAdd()" style="background:var(--nv-green);color:#000;border:none;border-radius:7px;padding:7px 18px;font-size:12px;font-weight:800;cursor:pointer;font-family:inherit">+ Add</button>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div style="display:flex;gap:10px;margin-bottom:16px">
+        <div style="flex:1;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px 16px">
+          <div id="tt-stat-total" style="font-size:22px;font-weight:700;color:var(--nv-green)">0</div>
+          <div style="font-size:11px;color:var(--muted)">Total</div>
+        </div>
+        <div style="flex:1;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px 16px">
+          <div id="tt-stat-open" style="font-size:22px;font-weight:700;color:var(--amber)">0</div>
+          <div style="font-size:11px;color:var(--muted)">Open</div>
+        </div>
+        <div style="flex:1;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px 16px">
+          <div id="tt-stat-done" style="font-size:22px;font-weight:700;color:var(--blue)">0</div>
+          <div style="font-size:11px;color:var(--muted)">Done</div>
+        </div>
+        <div style="flex:1;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px 16px">
+          <div id="tt-stat-high" style="font-size:22px;font-weight:700;color:var(--red)">0</div>
+          <div style="font-size:11px;color:var(--muted)">High Priority</div>
+        </div>
+      </div>
+
+      <!-- Progress bar -->
+      <div style="margin-bottom:16px">
+        <div id="tt-prog-label" style="font-size:11px;color:var(--muted);margin-bottom:5px">0% complete</div>
+        <div style="background:var(--bg3);border-radius:4px;height:6px;overflow:hidden">
+          <div id="tt-prog-bar" style="background:linear-gradient(90deg,#4a7800,#76b900);height:100%;border-radius:4px;transition:width .4s ease;width:0%"></div>
+        </div>
+      </div>
+
+      <!-- Filters -->
+      <div style="display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap">
+        <button class="tt-filter on" onclick="ttFilter('all',this)">All</button>
+        <button class="tt-filter" onclick="ttFilter('open',this)">Open</button>
+        <button class="tt-filter" onclick="ttFilter('done',this)">Done</button>
+        <button class="tt-filter" onclick="ttFilter('high',this)">High Priority</button>
+        <button class="tt-filter" onclick="ttFilter('medium',this)">Medium</button>
+        <button class="tt-filter" onclick="ttFilter('low',this)">Low</button>
+      </div>
+
+      <!-- Task list -->
+      <div id="tt-list"></div>
     </div>
 
     <!-- ═══ NEW CHIP MODAL ═══ -->
@@ -2877,7 +2953,7 @@ const CHIP_CFG_DEFAULTS = {
   tcx10:  { slack:'#tcx10-sw', confluence:'TCX10SW', email:'roopa', nvbugs:'TCX10' },
   t374:   { slack:'#t374-bringup', confluence:'BeaconSW', email:'roopa', nvbugs:'T374' },
   t257:   { slack:'#t257-monet-sw', confluence:'MonetSW', email:'vivek', nvbugs:'T257' },
-  t294:   { slack:'#t294-magni-sw', confluence:'MagniSW', email:'roopa', nvbugs:'T294' },
+  t294:   { slack:'#t294-magni-sw', confluence:'MagniSW', email:'mayank.kapoor', nvbugs:'T294' },
 };
 // Load saved overrides from localStorage
 function loadChipCfg(chipId) {
@@ -2893,9 +2969,10 @@ function saveChipCfg(chipId, cfg) {
 window.ACTIVE_CHIP = null;
 function showView(id,chipId,tabEl){
   if(chipId) window.ACTIVE_CHIP=chipId;
-  ['cockpit','cc','radar','pm','chip','settings'].forEach(v=>{
+  ['cockpit','cc','radar','pm','chip','settings','tasks'].forEach(v=>{
     document.getElementById('v-'+v).style.display=v===id?'block':'none';
   });
+  if(id==='tasks') ttRender();
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
   const t=tabEl||document.getElementById('tab-'+id);
   if(t)t.classList.add('on');
@@ -3537,6 +3614,104 @@ window.cpSsoLogout = function() {
   // Show sign-in screen
   showIdentityPicker();
 };
+
+// ── My Tasks ────────────────────────────────────────────────────────────────
+(function(){
+  var _tasks = [], _filter = 'all';
+  function key(){ return 'cp2_tasks_' + (CURRENT_USER.email || 'guest'); }
+  function load(){
+    try { var s=localStorage.getItem(key()); if(s) _tasks=JSON.parse(s); } catch(e){}
+  }
+  function save(){
+    try { localStorage.setItem(key(), JSON.stringify(_tasks)); } catch(e){}
+  }
+
+  window.ttAdd = function(){
+    var input=document.getElementById('tt-input');
+    var text=(input?input.value.trim():'');
+    if(!text) return;
+    var pri=(document.getElementById('tt-priority')||{}).value||'medium';
+    _tasks.unshift({id:Date.now(),text:text,priority:pri,done:false,created:new Date().toISOString()});
+    if(input) input.value='';
+    save(); ttRender();
+  };
+
+  window.ttToggle = function(id){
+    var t=_tasks.find(function(x){return x.id===id;});
+    if(t){t.done=!t.done; save(); ttRender();}
+  };
+
+  window.ttDelete = function(id){
+    _tasks=_tasks.filter(function(x){return x.id!==id;});
+    save(); ttRender();
+  };
+
+  window.ttFilter = function(f, btn){
+    _filter=f;
+    document.querySelectorAll('.tt-filter').forEach(function(b){b.classList.remove('on');});
+    if(btn) btn.classList.add('on');
+    ttRender();
+  };
+
+  window.ttRender = function(){
+    load(); // reload in case user changed (e.g. after login)
+    var total=_tasks.length;
+    var done=_tasks.filter(function(t){return t.done;}).length;
+    var open=total-done;
+    var high=_tasks.filter(function(t){return t.priority==='high'&&!t.done;}).length;
+    var pct=total?Math.round(done/total*100):0;
+    var el=function(id){return document.getElementById(id);};
+    if(el('tt-stat-total')) el('tt-stat-total').textContent=total;
+    if(el('tt-stat-open'))  el('tt-stat-open').textContent=open;
+    if(el('tt-stat-done'))  el('tt-stat-done').textContent=done;
+    if(el('tt-stat-high'))  el('tt-stat-high').textContent=high;
+    if(el('tt-prog-bar'))   el('tt-prog-bar').style.width=pct+'%';
+    if(el('tt-prog-label')) el('tt-prog-label').textContent=pct+'% complete';
+
+    var visible=_tasks;
+    if(_filter==='open')   visible=_tasks.filter(function(t){return !t.done;});
+    if(_filter==='done')   visible=_tasks.filter(function(t){return t.done;});
+    if(_filter==='high')   visible=_tasks.filter(function(t){return t.priority==='high';});
+    if(_filter==='medium') visible=_tasks.filter(function(t){return t.priority==='medium';});
+    if(_filter==='low')    visible=_tasks.filter(function(t){return t.priority==='low';});
+
+    var list=el('tt-list'); if(!list) return;
+    if(visible.length===0){
+      list.innerHTML='<div style="text-align:center;padding:48px 0;color:var(--muted);font-size:14px">✓ No tasks here</div>';
+      return;
+    }
+    var openT=visible.filter(function(t){return !t.done;});
+    var doneT=visible.filter(function(t){return t.done;});
+    var html='';
+    if(openT.length){
+      if(_filter==='all') html+='<div class="tt-sec">Open · '+openT.length+'</div>';
+      openT.forEach(function(t){html+=ttCard(t);});
+    }
+    if(doneT.length){
+      if(_filter==='all'||_filter==='done') html+='<div class="tt-sec">Completed · '+doneT.length+'</div>';
+      doneT.forEach(function(t){html+=ttCard(t);});
+    }
+    list.innerHTML=html;
+  };
+
+  function ttCard(t){
+    var pc={high:'tt-p-high',medium:'tt-p-medium',low:'tt-p-low'}[t.priority];
+    var pl={high:'High',medium:'Medium',low:'Low'}[t.priority];
+    var ds=new Date(t.created).toLocaleDateString('en-US',{month:'short',day:'numeric'});
+    var txt=t.text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    return '<div class="tt-card'+(t.done?' done':'')+'">'+
+      '<button class="tt-check'+(t.done?' on':'')+'" onclick="ttToggle('+t.id+')"></button>'+
+      '<div style="flex:1;min-width:0">'+
+        '<div style="font-size:14px;color:var(--text);line-height:1.4'+(t.done?';text-decoration:line-through;color:var(--muted)':'')+'">'+txt+'</div>'+
+        '<div style="display:flex;gap:8px;margin-top:6px;align-items:center">'+
+          '<span class="'+pc+'">'+pl+'</span>'+
+          '<span style="font-size:11px;color:var(--muted)">'+ds+'</span>'+
+        '</div>'+
+      '</div>'+
+      '<button onclick="ttDelete('+t.id+')" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px;padding:2px 6px;border-radius:4px" onmouseover="this.style.color=\'var(--red)\'" onmouseout="this.style.color=\'var(--muted)\'">×</button>'+
+    '</div>';
+  }
+})();
 
 // -- Identity bootstrap (SSO-first, manual picker fallback) --
 (function(){
