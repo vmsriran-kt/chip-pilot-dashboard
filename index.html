@@ -4244,6 +4244,54 @@ window.cpSsoLogout = function() {
   var _done = {};
   var _open = {};
 
+  // Confluence page structure, read from the real reference pages on
+  // nvidia.atlassian.net (verified 2026-09-15). Tegra pages are structured
+  // landing/index pages; GPU pages are live bring-up dashboards with release
+  // tables. The two are genuinely different shapes, so we keep both.
+  var CONF_REF = {
+    tegra: {
+      refTitle: 'T294 (Magni) SW',
+      refUrl:   'https://nvidia.atlassian.net/wiki/spaces/TCS/pages/3115505496',
+      sections: [
+        ['Top links block', ['{C} Home (POR)','{C} Proj Mgmt','{C} Architecture',
+                             '{C} GFD/IAS Specification Signoff Process',
+                             '{C} Hardware Documentation','{C} Arch Readouts']],
+        ['Chip Soul', []],
+        ['Chip POR', ['HW POR','Decoder Ring','SW Kick-off Slides','NVPOR Guidance to teams']],
+        ['Schedule/Milestones', ['{C} HW Schedule','{C} SW Schedule']],
+        ['Scope', []],
+        ['PICs', ['{C} SW PICs','{C} HW PICs']],
+        ['Software', ['Chip SW Development (PLC-L1) Process','SW Team pages','{C} Kernel']],
+        ['Simulation', []],
+        ['Emulation/FPGA', ['{C} Emulation Roadmap']],
+        ['Bug Management', ['Filing bugs','Software Keywords','Hardware Bug']],
+        ['Communication/Slack Channel', []],
+        ['DLs', ['{c}-sw — all SW engineers working on {C}',
+                 '{c}-sw-leads — all PICs for modules on {C}',
+                 '{c}-swarch-pics — all SW arch PICs on {C}']],
+        ['Guardwords', []],
+        ['Links', ['P4 Link — //sw/mobile/docs/hw/{C}','Google Drive folder']]
+      ]
+    },
+    gpu: {
+      refTitle: 'GR10x (GR100/GR102) Bringup SW Dashboard',
+      refUrl:   'https://nvidia.atlassian.net/wiki/spaces/RubinSW/pages/2598144427',
+      sections: [
+        ['Latest Announcements', ['Table: Date Announced | Announcement | Announced By']],
+        ['Overall Schedule', ['ASIC-tracked timeline across SW, SSG, MED, Arch, SLT']],
+        ['Chips SW "SOL" Schedule', ['SW-specific SOL schedule']],
+        ['Chip POR and Architecture Overview', []],
+        ['Bringup Working Configuration', ['{C} Bringup Working Configuration','SW NPI {C} Board Summary']],
+        ['Platform Versions Source-of-Truth', ['Table: Component | Version | Link | Date updated',
+                                               'SW Driver: Linux','SW Driver: Windows','MODS','VBIOS',
+                                               'NVFlash (Windows/Linux)','CUDA Toolkit']],
+        ['RM/VBIOS and NVFlash/VBIOS Revlocks', []],
+        ['SW Team Pages', ['GFW','MODS','RM','CUDA','Devtools','UVM','vGPU','Compiler','Video']],
+        ['SW Leads', ['Table: Team | Leads','SW Management help: sw-chips-CMPM@exchange.nvidia.com']]
+      ]
+    }
+  };
+
   // Slack channel naming derived from existing NVIDIA chip programs.
   // Tegra/CPU reference: TB500 → #tb500-sw-bringup  (also n2x, t294, thorz)
   // GPU reference:       GR10x → #swgpu-chips-gfw-rubin  (also gr15x, fn10x)
@@ -4295,26 +4343,80 @@ window.cpSsoLogout = function() {
     var c = chip(), n = name_(), ph = phase(), sp = space();
     if (!c) return; // don't render until we have at least a chip id
 
-    // ── Confluence ──
-    var confTitle = n + ' — SW Program Home';
-    var confInp = el('ncs-conf-title');
+    // ── Confluence (structure mirrored from the real reference page) ──
+    var famC      = family();
+    var confTitle = n + ' (' + chipUp() + ') SW';
+    var confInp   = el('ncs-conf-title');
     if(confInp && !confInp._userEdited) confInp.value = confTitle;
-    var confContent =
-'= ' + n + ' (' + chipUp() + ') — SW Program Home =\n\n' +
+
+    function expand(s){
+      return s.replace(/\{C\}/g, chipUp()).replace(/\{c\}/g, c);
+    }
+    function renderSections(ref){
+      return ref.sections.map(function(sec){
+        var head = '== ' + expand(sec[0]) + ' ==';
+        if(!sec[1].length) return head + '\n  TBD — owner: ' + cm();
+        return head + '\n' + sec[1].map(function(x){ return '  * ' + expand(x); }).join('\n');
+      }).join('\n\n');
+    }
+
+    var confContent, confPrompt;
+
+    if (famC === 'custom') {
+      confContent =
+'= ' + n + ' (' + chipUp() + ') SW =\n\n' +
+'No standard structure for a custom chip family. Pick the closest reference:\n\n' +
+'  Tegra / CPU  → ' + CONF_REF.tegra.refTitle + '\n                 ' + CONF_REF.tegra.refUrl + '\n' +
+'  GPU          → ' + CONF_REF.gpu.refTitle + '\n                 ' + CONF_REF.gpu.refUrl + '\n\n' +
+'Then mirror that page\'s section structure for ' + chipUp() + '.';
+      confPrompt =
+'Populate the Confluence page "' + confTitle + '" in space ' + sp + '.\n\n' +
+'This chip does not fit the standard Tegra or GPU families, so first decide which\n' +
+'existing reference page is the closest fit, then mirror its structure:\n\n' +
+'  Tegra / CPU reference: ' + CONF_REF.tegra.refTitle + '\n    ' + CONF_REF.tegra.refUrl + '\n' +
+'  GPU reference:         ' + CONF_REF.gpu.refTitle + '\n    ' + CONF_REF.gpu.refUrl + '\n\n' +
+'Chip facts:\n' +
+'  Chip code:        ' + chipUp() + '\n' +
+'  Codename:         ' + (get('ncs-chip-name').trim() || '—') + '\n' +
+'  Phase:            ' + phaseLabel() + '\n' +
+'  SW CM:            ' + cm() + ' (' + email() + '@nvidia.com)\n' +
+'  Confluence space: ' + sp + '\n' +
+'  NVBugs keyword:   ' + chipUp() + '\n\n' +
+'Read the reference page you choose, mirror its section structure and heading order,\n' +
+'and tell me which reference you picked and why.\n\n' +
+'For any item where you do not have the real value, insert a clearly marked placeholder\n' +
+'such as "TBD — owner: ' + cm() + '" rather than guessing a link, date, or name.';
+    } else {
+      var ref = CONF_REF[famC];
+      confContent =
+'= ' + n + ' (' + chipUp() + ') SW =\n\n' +
 'SW CM: ' + cm() + ' (' + email() + '@nvidia.com)\n' +
-'Phase: ' + phaseLabel() + '\n' +
-'Confluence Space: ' + sp + '\n\n' +
-'== Overview ==\nBrief description of the ' + n + ' chip program and SW scope.\n\n' +
-'== Key Links ==\n' +
-'* NVBugs: https://nvbugs.nvidia.com (Keyword: ' + chipUp() + ')\n' +
-'* Slack: #sw-' + c + '-bringup\n' +
-'* Email DL: sw-' + c + '-all@nvidia.com\n\n' +
-'== Milestone Tracker ==\n[Link to milestone dashboard]\n\n' +
-'== Team ==\n| Role | Name | Email |\n|------|------|-------|\n| SW CM | ' + cm() + ' | ' + email() + '@nvidia.com |\n\n' +
-'== NVBug Keywords ==\n[See NVBugs Keywords & Taxonomy section]\n\n' +
-'== Change Log ==\n| Date | Author | Change |\n|------|--------|--------|\n| ' + today() + ' | ' + cm() + ' | Page created |';
+'Phase: ' + phaseLabel() + '   Space: ' + sp + '   NVBugs keyword: ' + chipUp() + '\n' +
+'Structure mirrored from: ' + ref.refTitle + '\n' + ref.refUrl + '\n\n' +
+renderSections(ref);
+
+      confPrompt =
+'Populate the Confluence page "' + confTitle + '" in space ' + sp + '.\n\n' +
+'Model it on the existing reference page for this chip family:\n' +
+'  Reference: ' + ref.refTitle + '\n  ' + ref.refUrl + '\n\n' +
+'Read that page first and mirror its section structure and heading order.\n' +
+'Do not invent sections it does not have, and do not drop sections it does.\n\n' +
+'Chip facts to fill in:\n' +
+'  Chip code:        ' + chipUp() + '\n' +
+'  Codename:         ' + (get('ncs-chip-name').trim() || '—') + '\n' +
+'  Family:           ' + (famC === 'gpu' ? 'GPU' : 'Tegra / CPU') + '\n' +
+'  Phase:            ' + phaseLabel() + '\n' +
+'  SW CM:            ' + cm() + ' (' + email() + '@nvidia.com)\n' +
+'  Confluence space: ' + sp + '\n' +
+'  NVBugs keyword:   ' + chipUp() + '\n\n' +
+'Sections to create, following the reference:\n\n' +
+renderSections(ref).split('\n').map(function(l){ return '  ' + l; }).join('\n') + '\n\n' +
+'For any item where you do not have the real value, insert a clearly marked\n' +
+'placeholder such as "TBD — owner: ' + cm() + '" rather than guessing a link,\n' +
+'date, or name. Leave the structure complete and the unknowns visible.';
+    }
+
     setText('ncs-conf-preview', confContent);
-    var confPrompt = 'Create a Confluence page in space "' + sp + '" titled "' + confTitle + '" with the following content:\n\n' + confContent;
     setText('ncs-conf-agent-prompt', confPrompt);
 
     // ── Slack (patterned on existing NVIDIA chip programs) ──
