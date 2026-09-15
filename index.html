@@ -1387,8 +1387,8 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
             <div style="font-size:10px;color:var(--muted);margin-top:3px">Generate a Confluence program page for any chip — new or existing</div>
           </div>
           <div style="display:flex;align-items:center;gap:8px">
-            <span class="cmr-toast" id="conf-toast">📋 Prompt copied!</span>
-            <button class="cmr-save-btn" onclick="confPageCreate()">📄 Generate &amp; Copy Prompt</button>
+            <span class="cmr-toast" id="conf-toast">✓ Opening Confluence…</span>
+            <button class="cmr-save-btn" onclick="confPageCreate()">📄 Open in Confluence</button>
           </div>
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
@@ -1412,7 +1412,7 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
           </div>
         </div>
         <div style="margin-top:10px;font-size:10px;color:var(--muted)">
-          💡 Click <strong>Generate &amp; Copy Prompt</strong> → paste into this Claude chat → Claude creates the page and returns the link.
+          💡 Select a chip → click <strong>Open in Confluence</strong> → lands you on the Confluence create-page form with the right space pre-selected.
         </div>
       </div>
 
@@ -1878,38 +1878,18 @@ function confPageCreate() {
 
   const d = CHIP_DB[chipId] || {};
   const chipName = (d.title || chipId.toUpperCase()).split('·')[0].trim();
-  const cmMatch  = d.sub && d.sub.match(/SW CM[s]?:\s*([^·]+)/);
-  const cm       = cmMatch ? cmMatch[1].trim() : '—';
   const title    = (titleEl && titleEl.value.trim()) || (chipName + ' — Chip Program Home');
-  const cfg      = loadChipCfg(chipId);
 
-  const prompt = [
-    'Create a Confluence landing page for a chip program with these details:',
-    '- Chip ID: ' + chipId.toUpperCase(),
-    '- Display Name: ' + chipName,
-    '- Phase: ' + (d.phase || '—'),
-    '- Chip Manager: ' + cm,
-    '- Confluence Space: ' + space,
-    '- Page Title: ' + title,
-    parent ? '- Parent Page ID: ' + parent : '- Parent: space root (no parent page)',
-    '- Executive Summary: ' + (d.anno || '—'),
-    '- Slack Channels: ' + (cfg.slack || d.slack || '—'),
-    '- Email Contacts: ' + (cfg.email || d.emails || '—'),
-    '- NVBugs Component: ' + (cfg.nvbugs || '—'),
-    '',
-    'Use the Confluence MCP (cloudId: nvidia.atlassian.net) to create the page with these sections:',
-    '  1. Program Overview — phase, CM, executive summary',
-    '  2. Key Contacts — Slack channels, email DLs',
-    '  3. Schedule & Milestones — placeholder table (Milestone | Target Date | Status)',
-    '  4. Open Risks — placeholder table (Risk | Priority | Mitigation)',
-    '  5. Data Sources — Confluence space, NVBugs component, Slack channels',
-    '',
-    'After creating, reply with the direct Confluence page URL.',
-  ].join('\n');
+  // Build Confluence create-page URL (deep link to the right space)
+  var url = 'https://nvidia.atlassian.net/wiki/spaces/' + encodeURIComponent(space) + '/pages/create';
+  var params = ['title=' + encodeURIComponent(title)];
+  if (parent) params.push('parentPageId=' + encodeURIComponent(parent));
+  url += '?' + params.join('&');
 
-  navigator.clipboard.writeText(prompt).catch(() => {});
+  window.open(url, '_blank');
+
   const toast = document.getElementById('conf-toast');
-  if (toast) { toast.style.opacity = '1'; setTimeout(() => toast.style.opacity = '0', 2500); }
+  if (toast) { toast.style.opacity = '1'; setTimeout(() => toast.style.opacity = '0', 2000); }
 }
 
 // ── CM Registry Editor ──────────────────────────────────────────────────────
