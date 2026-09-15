@@ -443,9 +443,31 @@ body.light .cmcp-src.on{border-color:#76b900;background:rgba(118,185,0,.07);colo
 .ftue-dot{width:8px;height:8px;border-radius:50%;background:var(--border)}
 .ftue-dot.on{background:var(--nv-green)}
 .ftue-lbl{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
-.ftue-inp{width:100%;padding:9px 12px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:13px;font-family:inherit;box-sizing:border-box;outline:none}
-.ftue-inp:focus{border-color:var(--nv-green)}
+.ftue-inp,.settings-inp{width:100%;padding:9px 12px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:13px;font-family:inherit;box-sizing:border-box;outline:none}
+.ftue-inp:focus,.settings-inp:focus{border-color:var(--nv-green)}
+select.settings-inp{cursor:pointer}
 .ftue-actions{display:flex;justify-content:space-between;align-items:center;margin-top:28px}
+
+/* -- NEW CHIP SETUP -- */
+.ncs-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color .15s}
+.ncs-card:hover{border-color:rgba(118,185,0,.2)}
+.ncs-card-hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;cursor:pointer;user-select:none}
+.ncs-card-hdr:hover{background:rgba(255,255,255,.02)}
+.ncs-num{width:28px;height:28px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--muted);flex-shrink:0}
+.ncs-card.done .ncs-num{background:var(--nv-green);border-color:var(--nv-green);color:#000}
+.ncs-status{font-size:10px;font-weight:700;padding:3px 10px;border-radius:10px;background:rgba(255,255,255,.06);color:var(--muted);text-transform:uppercase;letter-spacing:.4px;white-space:nowrap}
+.ncs-card.done .ncs-status{background:rgba(118,185,0,.15);color:var(--nv-green)}
+.ncs-body{padding:0 18px 18px;border-top:1px solid var(--border)}
+.ncs-lbl{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.ncs-preview{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 14px;color:var(--text2);white-space:pre-wrap;word-break:break-word;max-height:180px;overflow-y:auto;font-size:12px;line-height:1.55}
+.ncs-btn-primary{background:var(--nv-green);color:#000;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap}
+.ncs-btn-primary:hover{background:var(--nv-green-lite)}
+.ncs-btn-secondary{background:none;border:1px solid var(--border);color:var(--text2);border-radius:8px;padding:8px 14px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all .15s}
+.ncs-btn-secondary:hover{border-color:var(--nv-green);color:var(--nv-green)}
+.ncs-done-btn{margin-top:14px;background:none;border:1px dashed var(--border);color:var(--muted);border-radius:8px;padding:7px 16px;font-size:11px;cursor:pointer;font-family:inherit;transition:all .15s;float:right}
+.ncs-done-btn:hover{border-color:var(--nv-green);color:var(--nv-green)}
+.ncs-prog-dot{display:inline-block;width:12px;height:12px;border-radius:50%;border:2px solid var(--border);background:transparent;transition:all .2s}
+.ncs-prog-dot.done{background:var(--nv-green);border-color:var(--nv-green)}
 
 /* -- MY TASKS -- */
 .tt-filter{background:var(--bg2);border:1px solid var(--border);color:var(--muted);border-radius:6px;padding:5px 14px;font-size:12px;cursor:pointer;font-family:inherit;transition:all .15s}
@@ -1057,6 +1079,7 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
     <div class="tab" id="tab-pm" onclick="showView('pm',null,this)">🤖 PM Assistant</div>
     <div class="tab" id="tab-chip" onclick="showView('chip',null,this)">🔬 Chip Detail</div>
     <div class="tab" id="tab-tasks" onclick="showView('tasks',null,this)">📋 My Tasks</div>
+    <div class="tab" id="tab-setup" onclick="showView('setup',null,this)">🛠 New Chip Setup</div>
     <div class="tab" id="tab-settings" onclick="showView('settings',null,this);cmRegRender();confPagePopulateChips()" style="margin-left:auto">⚙ Settings</div>
   </div>
 
@@ -1621,6 +1644,198 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
       <!-- Task list -->
       <div id="tt-list"></div>
     </div>
+
+    <!-- ================ NEW CHIP SETUP ================ -->
+    <div id="v-setup" style="display:none;padding:20px 0">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+        <div>
+          <div class="sec-lbl">🛠 New Chip Setup</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:3px">One-stop checklist to stand up infrastructure for a new chip program</div>
+        </div>
+        <button onclick="ncsClearAll()" style="background:none;border:1px solid var(--border);color:var(--muted);border-radius:7px;padding:6px 14px;font-size:11px;cursor:pointer;font-family:inherit">↺ Reset</button>
+      </div>
+
+      <!-- Chip Info Form -->
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:20px">
+        <div style="font-size:11px;font-weight:700;color:var(--nv-green);text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px">① Chip Program Info</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px">
+          <div>
+            <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px">Chip Code / ID</div>
+            <input id="ncs-chip-id" class="settings-inp" placeholder="e.g. nr10x, t294, gr15x" oninput="ncsSync()" style="width:100%"/>
+          </div>
+          <div>
+            <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px">Full Name</div>
+            <input id="ncs-chip-name" class="settings-inp" placeholder="e.g. Magni CPU" oninput="ncsSync()" style="width:100%"/>
+          </div>
+          <div>
+            <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px">Phase</div>
+            <select id="ncs-phase" class="settings-inp" onchange="ncsSync()" style="width:100%">
+              <option value="pre-si">Pre-Silicon</option>
+              <option value="bringup">Bring-Up</option>
+              <option value="post-si">Post-Silicon</option>
+            </select>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+          <div>
+            <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px">Confluence Space Key</div>
+            <input id="ncs-conf-space" class="settings-inp" placeholder="e.g. NBS, T294SW" oninput="ncsSync()" style="width:100%"/>
+          </div>
+          <div>
+            <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px">SW CM</div>
+            <input id="ncs-cm" class="settings-inp" placeholder="e.g. Mayank Kapoor" oninput="ncsSync()" style="width:100%"/>
+          </div>
+          <div>
+            <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px">CM Email</div>
+            <input id="ncs-email" class="settings-inp" placeholder="e.g. mayank.kapoor" oninput="ncsSync()" style="width:100%"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Checklist -->
+      <div style="display:flex;flex-direction:column;gap:12px" id="ncs-checklist">
+
+        <!-- Card 1: Confluence -->
+        <div class="ncs-card" id="ncs-c-confluence">
+          <div class="ncs-card-hdr" onclick="ncsToggle('confluence')">
+            <div style="display:flex;align-items:center;gap:12px">
+              <div class="ncs-num">1</div>
+              <div>
+                <div style="font-size:14px;font-weight:700;color:var(--text)">Create Confluence Program Home</div>
+                <div style="font-size:11px;color:var(--muted);margin-top:2px">Set up the SW program home page in your Confluence space</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <div class="ncs-status" id="ncs-st-confluence">To Do</div>
+              <div style="color:var(--muted);font-size:14px" id="ncs-arr-confluence">▼</div>
+            </div>
+          </div>
+          <div class="ncs-body" id="ncs-b-confluence" style="display:none">
+            <div class="ncs-lbl">Page Title</div>
+            <input class="settings-inp" id="ncs-conf-title" style="width:100%;margin-bottom:12px" placeholder="Will auto-fill from chip name"/>
+            <div class="ncs-lbl">Parent Page ID <span style="font-weight:400;color:var(--muted)">(optional)</span></div>
+            <input class="settings-inp" id="ncs-conf-parent" style="width:100%;margin-bottom:14px" placeholder="Confluence parent page ID"/>
+            <div class="ncs-lbl" style="margin-bottom:8px">Page Template Preview</div>
+            <div id="ncs-conf-preview" class="ncs-preview">Fill in chip info above to generate preview…</div>
+            <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
+              <button class="ncs-btn-primary" onclick="ncsConfluenceOpen()">🔗 Open in Confluence</button>
+              <button class="ncs-btn-secondary" onclick="ncsCopy('conf-preview')">📋 Copy Page Content</button>
+              <button class="ncs-btn-secondary" onclick="ncsCopy('conf-agent-prompt')">🤖 Copy AI Agent Prompt</button>
+            </div>
+            <div id="ncs-conf-agent-prompt" style="display:none"></div>
+            <button class="ncs-done-btn" onclick="ncsMark('confluence')">✓ Mark Done</button>
+          </div>
+        </div>
+
+        <!-- Card 2: Slack -->
+        <div class="ncs-card" id="ncs-c-slack">
+          <div class="ncs-card-hdr" onclick="ncsToggle('slack')">
+            <div style="display:flex;align-items:center;gap:12px">
+              <div class="ncs-num">2</div>
+              <div>
+                <div style="font-size:14px;font-weight:700;color:var(--text)">Create Slack Channels</div>
+                <div style="font-size:11px;color:var(--muted);margin-top:2px">Phase-appropriate channels for the SW team</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <div class="ncs-status" id="ncs-st-slack">To Do</div>
+              <div style="color:var(--muted);font-size:14px" id="ncs-arr-slack">▼</div>
+            </div>
+          </div>
+          <div class="ncs-body" id="ncs-b-slack" style="display:none">
+            <div class="ncs-lbl">Recommended channels for <span id="ncs-sl-phase-label">your phase</span></div>
+            <div id="ncs-slack-channels" class="ncs-preview" style="font-family:monospace;font-size:12px;line-height:1.8">Fill in chip info above…</div>
+            <div style="background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.2);border-radius:8px;padding:10px 12px;margin-top:10px;font-size:11px;color:var(--text2);line-height:1.5">
+              ⚠️ NVIDIA uses protected Slack namespaces. Channels with the <code style="background:rgba(255,255,255,.08);padding:1px 5px;border-radius:3px">sw-</code> prefix require approval via the
+              <a href="https://nvidia.sharepoint.com/sites/Slack/Lists/Protected%20Namespaces/AllItems.aspx" target="_blank" style="color:var(--nv-green)">Protected Namespaces list</a>.
+              Use the AI Agent prompt to request channel creation or create manually via Slack.
+            </div>
+            <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
+              <button class="ncs-btn-primary" onclick="window.open('https://nvidia.enterprise.slack.com/','_blank')">🔗 Open Slack</button>
+              <button class="ncs-btn-secondary" onclick="ncsCopy('slack-channels')">📋 Copy Channel List</button>
+              <button class="ncs-btn-secondary" onclick="ncsCopy('slack-agent-prompt')">🤖 Copy AI Agent Prompt</button>
+            </div>
+            <div id="ncs-slack-agent-prompt" style="display:none"></div>
+            <button class="ncs-done-btn" onclick="ncsMark('slack')">✓ Mark Done</button>
+          </div>
+        </div>
+
+        <!-- Card 3: Email DL -->
+        <div class="ncs-card" id="ncs-c-email">
+          <div class="ncs-card-hdr" onclick="ncsToggle('email')">
+            <div style="display:flex;align-items:center;gap:12px">
+              <div class="ncs-num">3</div>
+              <div>
+                <div style="font-size:14px;font-weight:700;color:var(--text)">Create Email Distribution List</div>
+                <div style="font-size:11px;color:var(--muted);margin-top:2px">Request IT to create the chip SW team DL</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <div class="ncs-status" id="ncs-st-email">To Do</div>
+              <div style="color:var(--muted);font-size:14px" id="ncs-arr-email">▼</div>
+            </div>
+          </div>
+          <div class="ncs-body" id="ncs-b-email" style="display:none">
+            <div class="ncs-lbl" style="margin-bottom:8px">Suggested DL names</div>
+            <div id="ncs-email-dls" class="ncs-preview" style="font-family:monospace;font-size:12px;line-height:1.8">Fill in chip info above…</div>
+            <div class="ncs-lbl" style="margin-top:12px;margin-bottom:8px">IT request draft</div>
+            <div id="ncs-email-draft" class="ncs-preview" style="font-size:12px;line-height:1.6">Fill in chip info above…</div>
+            <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
+              <button class="ncs-btn-primary" onclick="window.open('https://itcatalog.nvidia.com','_blank')">🔗 IT Catalog</button>
+              <button class="ncs-btn-secondary" onclick="ncsCopy('email-draft')">📋 Copy IT Request</button>
+              <button class="ncs-btn-secondary" onclick="ncsCopy('email-agent-prompt')">🤖 Copy AI Agent Prompt</button>
+            </div>
+            <div id="ncs-email-agent-prompt" style="display:none"></div>
+            <button class="ncs-done-btn" onclick="ncsMark('email')">✓ Mark Done</button>
+          </div>
+        </div>
+
+        <!-- Card 4: NVBugs -->
+        <div class="ncs-card" id="ncs-c-nvbugs">
+          <div class="ncs-card-hdr" onclick="ncsToggle('nvbugs')">
+            <div style="display:flex;align-items:center;gap:12px">
+              <div class="ncs-num">4</div>
+              <div>
+                <div style="font-size:14px;font-weight:700;color:var(--text)">Set Up NVBugs Keywords & Wiki</div>
+                <div style="font-size:11px;color:var(--muted);margin-top:2px">Define bug keywords/components and publish them to Confluence</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <div class="ncs-status" id="ncs-st-nvbugs">To Do</div>
+              <div style="color:var(--muted);font-size:14px" id="ncs-arr-nvbugs">▼</div>
+            </div>
+          </div>
+          <div class="ncs-body" id="ncs-b-nvbugs" style="display:none">
+            <div class="ncs-lbl" style="margin-bottom:8px">Suggested NVBugs keyword taxonomy</div>
+            <div id="ncs-nvbugs-keywords" class="ncs-preview" style="font-family:monospace;font-size:12px;line-height:1.8">Fill in chip info above…</div>
+            <div class="ncs-lbl" style="margin-top:12px;margin-bottom:8px">Wiki page content (paste into Confluence)</div>
+            <div id="ncs-nvbugs-wiki" class="ncs-preview" style="font-size:12px;line-height:1.6">Fill in chip info above…</div>
+            <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
+              <button class="ncs-btn-primary" onclick="ncsNvbugsOpen()">🔗 Open NVBugs</button>
+              <button class="ncs-btn-secondary" onclick="ncsCopy('nvbugs-wiki')">📋 Copy Wiki Content</button>
+              <button class="ncs-btn-secondary" onclick="ncsCopy('nvbugs-agent-prompt')">🤖 Copy AI Agent Prompt</button>
+            </div>
+            <div id="ncs-nvbugs-agent-prompt" style="display:none"></div>
+            <button class="ncs-done-btn" onclick="ncsMark('nvbugs')">✓ Mark Done</button>
+          </div>
+        </div>
+
+      </div><!-- /checklist -->
+
+      <!-- Progress summary -->
+      <div style="margin-top:20px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-size:12px;color:var(--muted);margin-bottom:4px">Setup Progress</div>
+          <div style="display:flex;gap:6px" id="ncs-progress-dots">
+            <span class="ncs-prog-dot" id="ncs-pd-confluence"></span>
+            <span class="ncs-prog-dot" id="ncs-pd-slack"></span>
+            <span class="ncs-prog-dot" id="ncs-pd-email"></span>
+            <span class="ncs-prog-dot" id="ncs-pd-nvbugs"></span>
+          </div>
+        </div>
+        <div id="ncs-progress-label" style="font-size:13px;font-weight:700;color:var(--muted)">0 / 4 complete</div>
+      </div>
+    </div><!-- /v-setup -->
 
     <!-- ═══ NEW CHIP MODAL ═══ -->
     <div id="nc-overlay" style="display:none;position:fixed;inset:0;z-index:8000;background:rgba(0,0,0,.65)" onclick="if(event.target===this)ncClose()">
@@ -3073,10 +3288,11 @@ function saveChipCfg(chipId, cfg) {
 window.ACTIVE_CHIP = null;
 function showView(id,chipId,tabEl){
   if(chipId) window.ACTIVE_CHIP=chipId;
-  ['cockpit','cc','radar','pm','chip','settings','tasks'].forEach(v=>{
+  ['cockpit','cc','radar','pm','chip','settings','tasks','setup'].forEach(v=>{
     document.getElementById('v-'+v).style.display=v===id?'block':'none';
   });
   if(id==='tasks') ttRender();
+  if(id==='setup') ncSetupRefresh();
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
   const t=tabEl||document.getElementById('tab-'+id);
   if(t)t.classList.add('on');
@@ -3960,6 +4176,254 @@ window.cpSsoLogout = function() {
   }
 
   function escFtue(s){ return String(s).replace(/"/g,'&quot;'); }
+})();
+
+// ── New Chip Setup ───────────────────────────────────────────────────────────
+(function(){
+  var ITEMS = ['confluence','slack','email','nvbugs'];
+  var _done = {};
+  var _open = {};
+
+  var SLACK_CHANNELS = {
+    'pre-si':   ['sw-{chip}-arch','sw-{chip}-pre-si','sw-{chip}-sim','sw-{chip}-tools','sw-{chip}-cm'],
+    'bringup':  ['sw-{chip}-bringup','sw-{chip}-debug','sw-{chip}-triage','sw-{chip}-cm','sw-{chip}-alerts'],
+    'post-si':  ['sw-{chip}-qa','sw-{chip}-releases','sw-{chip}-war-room','sw-{chip}-perf','sw-{chip}-cm']
+  };
+
+  function get(id){ return (document.getElementById(id)||{}).value||''; }
+  function chip(){ return get('ncs-chip-id').trim().toLowerCase().replace(/\s+/g,'-'); }
+  function chipUp(){ return get('ncs-chip-id').trim().toUpperCase(); }
+  function name_(){ return get('ncs-chip-name').trim() || chipUp(); }
+  function phase(){ return get('ncs-phase')||'pre-si'; }
+  function space(){ return get('ncs-conf-space').trim() || 'YOUR_SPACE'; }
+  function cm(){ return get('ncs-cm').trim() || 'SW CM'; }
+  function email(){ return get('ncs-email').trim() || 'sw-cm'; }
+
+  function el(id){ return document.getElementById(id); }
+  function setText(id,v){ var e=el(id); if(e) e.textContent=v; }
+  function setHtml(id,v){ var e=el(id); if(e) e.innerHTML=v; }
+
+  window.ncsSync = function() {
+    var c = chip(), n = name_(), ph = phase(), sp = space();
+    if (!c) return; // don't render until we have at least a chip id
+
+    // ── Confluence ──
+    var confTitle = n + ' — SW Program Home';
+    var confInp = el('ncs-conf-title');
+    if(confInp && !confInp._userEdited) confInp.value = confTitle;
+    var confContent =
+'= ' + n + ' (' + chipUp() + ') — SW Program Home =\n\n' +
+'SW CM: ' + cm() + ' (' + email() + '@nvidia.com)\n' +
+'Phase: ' + phaseLabel() + '\n' +
+'Confluence Space: ' + sp + '\n\n' +
+'== Overview ==\nBrief description of the ' + n + ' chip program and SW scope.\n\n' +
+'== Key Links ==\n' +
+'* NVBugs: https://nvbugs.nvidia.com (Keyword: ' + chipUp() + ')\n' +
+'* Slack: #sw-' + c + '-bringup\n' +
+'* Email DL: sw-' + c + '-all@nvidia.com\n\n' +
+'== Milestone Tracker ==\n[Link to milestone dashboard]\n\n' +
+'== Team ==\n| Role | Name | Email |\n|------|------|-------|\n| SW CM | ' + cm() + ' | ' + email() + '@nvidia.com |\n\n' +
+'== NVBug Keywords ==\n[See NVBugs Keywords & Taxonomy section]\n\n' +
+'== Change Log ==\n| Date | Author | Change |\n|------|--------|--------|\n| ' + today() + ' | ' + cm() + ' | Page created |';
+    setText('ncs-conf-preview', confContent);
+    var confPrompt = 'Create a Confluence page in space "' + sp + '" titled "' + confTitle + '" with the following content:\n\n' + confContent;
+    setText('ncs-conf-agent-prompt', confPrompt);
+
+    // ── Slack ──
+    var channels = (SLACK_CHANNELS[ph]||SLACK_CHANNELS['bringup']).map(function(ch){
+      return '#' + ch.replace(/{chip}/g, c);
+    });
+    setText('ncs-sl-phase-label', phaseLabel());
+    setText('ncs-slack-channels', channels.join('\n'));
+    var slackPrompt = 'Create the following Slack channels for the ' + n + ' (' + chipUp() + ') chip SW program (phase: ' + phaseLabel() + '):\n\n' +
+      channels.join('\n') + '\n\n' +
+      'Set purpose for each: "' + n + ' SW team — ' + phaseLabel() + ' phase"\n' +
+      'Add initial members: ' + email() + '@nvidia.com\n\n' +
+      'Note: Channels with sw- prefix may require Protected Namespace approval at https://nvidia.sharepoint.com/sites/Slack/Lists/Protected%20Namespaces/AllItems.aspx';
+    setText('ncs-slack-agent-prompt', slackPrompt);
+
+    // ── Email DL ──
+    var dls = [
+      'sw-' + c + '-all@nvidia.com   (full SW team)',
+      'sw-' + c + '-cm@nvidia.com    (CM leads only)',
+      'sw-' + c + '-leads@nvidia.com (tech leads)',
+    ];
+    setText('ncs-email-dls', dls.join('\n'));
+    var emailDraft =
+'Hi IT Team,\n\nPlease create the following email distribution lists for the ' + n + ' (' + chipUp() + ') chip SW program:\n\n' +
+'1. sw-' + c + '-all@nvidia.com\n   Description: ' + n + ' SW team all-hands DL\n   Owner: ' + email() + '@nvidia.com\n\n' +
+'2. sw-' + c + '-cm@nvidia.com\n   Description: ' + n + ' SW chip managers\n   Owner: ' + email() + '@nvidia.com\n\n' +
+'3. sw-' + c + '-leads@nvidia.com\n   Description: ' + n + ' SW tech leads\n   Owner: ' + email() + '@nvidia.com\n\n' +
+'Business justification: New chip program (' + n + ') requires dedicated communication channels for SW team coordination.\n\n' +
+'Please confirm once created.\n\nThanks,\n' + cm();
+    setText('ncs-email-draft', emailDraft);
+    var emailPrompt = 'Draft an IT service request to create email DLs for the ' + n + ' chip SW program:\n\n' + emailDraft;
+    setText('ncs-email-agent-prompt', emailPrompt);
+
+    // ── NVBugs ──
+    var keywords = [
+      chipUp(),
+      chipUp() + '-SW',
+      chipUp() + '-SW-Bringup',
+      chipUp() + '-SW-Power',
+      chipUp() + '-SW-Perf',
+      chipUp() + '-SW-Security',
+      chipUp() + '-SW-Boot',
+      chipUp() + '-SW-Drivers',
+      chipUp() + '-SW-Tools',
+    ];
+    setText('ncs-nvbugs-keywords', keywords.join('\n'));
+    var wikiContent =
+'= ' + n + ' NVBugs Keywords & Taxonomy =\n\n' +
+'This page documents the NVBugs keyword taxonomy for the ' + n + ' (' + chipUp() + ') chip SW program.\n\n' +
+'== Primary Keyword ==\n' + chipUp() + '\n\n' +
+'== SW Subsystem Keywords ==\n' +
+keywords.slice(1).map(function(k){ return '* ' + k; }).join('\n') + '\n\n' +
+'== How to File a Bug ==\n' +
+'1. Go to https://nvbugs.nvidia.com\n' +
+'2. Select Component: SW > ' + n + '\n' +
+'3. Add keyword: ' + chipUp() + ' + relevant subsystem keyword\n' +
+'4. Assign to: ' + email() + '@nvidia.com (CM) or module owner\n\n' +
+'== Triage Process ==\n' +
+'* P1 bugs: Page SW CM (' + email() + ') within 1 hour\n' +
+'* P2 bugs: Review in weekly war-room\n' +
+'* P3/P4 bugs: Track in monthly review\n\n' +
+'== Contacts ==\n| Role | Name | NVBugs Handle |\n|------|------|---------------|\n| SW CM | ' + cm() + ' | ' + email() + ' |';
+    setText('ncs-nvbugs-wiki', wikiContent);
+    var nvbugsPrompt = 'Create a Confluence page titled "' + n + ' NVBugs Keywords & Taxonomy" in space "' + sp + '" with the following content:\n\n' + wikiContent + '\n\nAlso, in NVBugs (https://nvbugs.nvidia.com), register the following keywords under a new component for ' + n + ':\n' + keywords.join(', ');
+    setText('ncs-nvbugs-agent-prompt', nvbugsPrompt);
+  };
+
+  window.ncsToggle = function(key) {
+    var body = el('ncs-b-'+key);
+    var arr  = el('ncs-arr-'+key);
+    if(!body) return;
+    var isOpen = body.style.display !== 'none';
+    body.style.display = isOpen ? 'none' : 'block';
+    if(arr) arr.textContent = isOpen ? '▼' : '▲';
+    _open[key] = !isOpen;
+  };
+
+  window.ncsMark = function(key) {
+    _done[key] = true;
+    var card = el('ncs-c-'+key);
+    var st   = el('ncs-st-'+key);
+    var pd   = el('ncs-pd-'+key);
+    if(card) card.classList.add('done');
+    if(st)   st.textContent = 'Done ✓';
+    if(pd)   pd.classList.add('done');
+    // Save to localStorage
+    try{ localStorage.setItem('cp2_ncs_done_'+key, '1'); }catch(e){}
+    updateProgress();
+    // Collapse the card
+    var body = el('ncs-b-'+key);
+    var arr  = el('ncs-arr-'+key);
+    if(body) body.style.display = 'none';
+    if(arr)  arr.textContent = '▼';
+  };
+
+  window.ncsCopy = function(srcId) {
+    var src = el('ncs-'+srcId);
+    if(!src) return;
+    var text = src.textContent || src.innerText || '';
+    navigator.clipboard.writeText(text).then(function(){
+      // Brief flash feedback
+      var btn = event.target;
+      var orig = btn.textContent;
+      btn.textContent = '✓ Copied!';
+      btn.style.color = 'var(--nv-green)';
+      setTimeout(function(){ btn.textContent = orig; btn.style.color = ''; }, 1500);
+    }).catch(function(){
+      // Fallback
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.select();
+      document.execCommand('copy'); document.body.removeChild(ta);
+    });
+  };
+
+  window.ncsConfluenceOpen = function() {
+    var sp = space();
+    var title = (el('ncs-conf-title')||{}).value || name_() + ' — SW Program Home';
+    var parent = get('ncs-conf-parent');
+    var url = 'https://nvidia.atlassian.net/wiki/spaces/'+encodeURIComponent(sp)+'/pages/create?title='+encodeURIComponent(title);
+    if(parent) url += '&parentPageId='+encodeURIComponent(parent);
+    window.open(url,'_blank');
+  };
+
+  window.ncsNvbugsOpen = function() {
+    window.open('https://nvbugs.nvidia.com','_blank');
+  };
+
+  window.ncsClearAll = function() {
+    if(!confirm('Reset setup state for this chip?')) return;
+    ITEMS.forEach(function(k){
+      _done[k]=false; _open[k]=false;
+      var card=el('ncs-c-'+k); if(card) card.classList.remove('done');
+      var st=el('ncs-st-'+k); if(st) st.textContent='To Do';
+      var pd=el('ncs-pd-'+k); if(pd) pd.classList.remove('done');
+      var body=el('ncs-b-'+k); if(body) body.style.display='none';
+      var arr=el('ncs-arr-'+k); if(arr) arr.textContent='▼';
+      try{ localStorage.removeItem('cp2_ncs_done_'+k); }catch(e){}
+    });
+    updateProgress();
+  };
+
+  window.ncSetupRefresh = function() {
+    // Restore done state
+    ITEMS.forEach(function(k){
+      try{
+        if(localStorage.getItem('cp2_ncs_done_'+k)){
+          _done[k]=true;
+          var card=el('ncs-c-'+k); if(card) card.classList.add('done');
+          var st=el('ncs-st-'+k); if(st) st.textContent='Done ✓';
+          var pd=el('ncs-pd-'+k); if(pd) pd.classList.add('done');
+        }
+      }catch(e){}
+    });
+    updateProgress();
+    // Pre-fill chip info from current user's primary chip
+    if(CURRENT_USER.email && MY_CHIPS.length) {
+      var chipId = MY_CHIPS[0];
+      var chipData = CHIP_DB[chipId]||{};
+      var cid = el('ncs-chip-id');
+      if(cid && !cid.value) cid.value = chipId;
+      var cname = el('ncs-chip-name');
+      if(cname && !cname.value) {
+        var nameFromTitle = (chipData.title||'').split('·')[1]||'';
+        if(nameFromTitle.trim()) cname.value = nameFromTitle.trim();
+      }
+      var cfg = typeof loadChipCfg==='function' ? loadChipCfg(chipId) : {};
+      var cspace = el('ncs-conf-space');
+      if(cspace && !cspace.value && cfg.confluence) cspace.value = cfg.confluence;
+      var ccm = el('ncs-cm');
+      if(ccm && !ccm.value) ccm.value = CURRENT_USER.name;
+      var cemail = el('ncs-email');
+      if(cemail && !cemail.value) cemail.value = CURRENT_USER.email.split('@')[0];
+    }
+    ncsSync();
+  };
+
+  function updateProgress() {
+    var count = ITEMS.filter(function(k){ return _done[k]; }).length;
+    var lbl = el('ncs-progress-label');
+    if(lbl) lbl.textContent = count + ' / ' + ITEMS.length + ' complete';
+    if(lbl) lbl.style.color = count===ITEMS.length ? 'var(--nv-green)' : 'var(--muted)';
+  }
+
+  function phaseLabel(){
+    var m = {'pre-si':'Pre-Silicon','bringup':'Bring-Up','post-si':'Post-Silicon'};
+    return m[phase()] || phase();
+  }
+  function today(){
+    return new Date().toISOString().slice(0,10);
+  }
+
+  // Mark the conf-title as user-edited if touched
+  document.addEventListener('DOMContentLoaded', function(){
+    var t = el('ncs-conf-title');
+    if(t) t.addEventListener('input', function(){ t._userEdited = true; });
+  });
 })();
 
 // -- Identity bootstrap (SSO-first, manual picker fallback) --
