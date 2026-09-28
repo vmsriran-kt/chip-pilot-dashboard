@@ -1730,9 +1730,10 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
           </div>
           <div class="ncs-body" id="ncs-b-confluence" style="display:none">
             <div class="ncs-lbl">Page Title</div>
-            <input class="settings-inp" id="ncs-conf-title" style="width:100%;margin-bottom:12px" placeholder="Will auto-fill from chip name"/>
+            <input class="settings-inp" id="ncs-conf-title" oninput="this._userEdited=true;ncsSync()" style="width:100%;margin-bottom:12px" placeholder="Will auto-fill from chip name"/>
             <div class="ncs-lbl">Parent Page ID <span style="font-weight:400;color:var(--muted)">(optional)</span></div>
-            <input class="settings-inp" id="ncs-conf-parent" style="width:100%;margin-bottom:14px" placeholder="Confluence parent page ID"/>
+            <input class="settings-inp" id="ncs-conf-parent" oninput="ncsSync()" style="width:100%;margin-bottom:6px" placeholder="Page ID or paste the full Confluence page URL"/>
+            <div id="ncs-parent-echo" style="display:none;font-size:11px;color:var(--nv-green);margin-bottom:14px"></div>
             <div class="ncs-lbl" style="margin-bottom:8px">Page Template Preview</div>
             <div id="ncs-conf-preview" class="ncs-preview">Fill in chip info above to generate preview…</div>
             <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
@@ -1744,7 +1745,10 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
               <div>Create page: <a id="ncs-conf-url" href="#" target="_blank" rel="noopener" style="color:var(--nv-green)"></a></div>
               <div style="margin-top:4px">If that 404s, the space key is wrong — browse the space: <a id="ncs-conf-space-url" href="#" target="_blank" rel="noopener" style="color:var(--nv-green)"></a></div>
             </div>
-            <div id="ncs-conf-agent-prompt" style="display:none"></div>
+            <div style="margin-top:14px">
+              <div class="ncs-lbl">AI Agent Prompt <span style="font-weight:400;color:var(--muted);text-transform:none;letter-spacing:0">— editable; the copy button takes whatever is here</span></div>
+              <textarea id="ncs-conf-agent-prompt" spellcheck="false" style="width:100%;min-height:150px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text2);font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11.5px;line-height:1.55;padding:10px 12px;resize:vertical;outline:none;box-sizing:border-box" onfocus="this.style.borderColor='var(--nv-green)'" onblur="this.style.borderColor='var(--border)'" oninput="this._userEdited=true"></textarea>
+            </div>
             <button class="ncs-done-btn" onclick="ncsMark('confluence')">✓ Mark Done</button>
           </div>
         </div>
@@ -1778,7 +1782,10 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
               <button class="ncs-btn-secondary" onclick="ncsCopy('slack-channels',this)">📋 Copy Channel List</button>
               <button class="ncs-btn-secondary" onclick="ncsCopy('slack-agent-prompt',this)">🤖 Copy AI Agent Prompt</button>
             </div>
-            <div id="ncs-slack-agent-prompt" style="display:none"></div>
+            <div style="margin-top:14px">
+              <div class="ncs-lbl">AI Agent Prompt <span style="font-weight:400;color:var(--muted);text-transform:none;letter-spacing:0">— editable; the copy button takes whatever is here</span></div>
+              <textarea id="ncs-slack-agent-prompt" spellcheck="false" style="width:100%;min-height:150px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text2);font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11.5px;line-height:1.55;padding:10px 12px;resize:vertical;outline:none;box-sizing:border-box" onfocus="this.style.borderColor='var(--nv-green)'" onblur="this.style.borderColor='var(--border)'" oninput="this._userEdited=true"></textarea>
+            </div>
             <button class="ncs-done-btn" onclick="ncsMark('slack')">✓ Mark Done</button>
           </div>
         </div>
@@ -1808,7 +1815,10 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
               <button class="ncs-btn-secondary" onclick="ncsCopy('email-draft',this)">📋 Copy IT Request</button>
               <button class="ncs-btn-secondary" onclick="ncsCopy('email-agent-prompt',this)">🤖 Copy AI Agent Prompt</button>
             </div>
-            <div id="ncs-email-agent-prompt" style="display:none"></div>
+            <div style="margin-top:14px">
+              <div class="ncs-lbl">AI Agent Prompt <span style="font-weight:400;color:var(--muted);text-transform:none;letter-spacing:0">— editable; the copy button takes whatever is here</span></div>
+              <textarea id="ncs-email-agent-prompt" spellcheck="false" style="width:100%;min-height:150px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text2);font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11.5px;line-height:1.55;padding:10px 12px;resize:vertical;outline:none;box-sizing:border-box" onfocus="this.style.borderColor='var(--nv-green)'" onblur="this.style.borderColor='var(--border)'" oninput="this._userEdited=true"></textarea>
+            </div>
             <button class="ncs-done-btn" onclick="ncsMark('email')">✓ Mark Done</button>
           </div>
         </div>
@@ -1838,7 +1848,10 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
               <button class="ncs-btn-secondary" onclick="ncsCopy('nvbugs-wiki',this)">📋 Copy Wiki Content</button>
               <button class="ncs-btn-secondary" onclick="ncsCopy('nvbugs-agent-prompt',this)">🤖 Copy AI Agent Prompt</button>
             </div>
-            <div id="ncs-nvbugs-agent-prompt" style="display:none"></div>
+            <div style="margin-top:14px">
+              <div class="ncs-lbl">AI Agent Prompt <span style="font-weight:400;color:var(--muted);text-transform:none;letter-spacing:0">— editable; the copy button takes whatever is here</span></div>
+              <textarea id="ncs-nvbugs-agent-prompt" spellcheck="false" style="width:100%;min-height:150px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text2);font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11.5px;line-height:1.55;padding:10px 12px;resize:vertical;outline:none;box-sizing:border-box" onfocus="this.style.borderColor='var(--nv-green)'" onblur="this.style.borderColor='var(--border)'" oninput="this._userEdited=true"></textarea>
+            </div>
             <button class="ncs-done-btn" onclick="ncsMark('nvbugs')">✓ Mark Done</button>
           </div>
         </div>
@@ -2156,12 +2169,18 @@ function applyIdentity(cm) {
   CURRENT_USER.email    = cm.email || '';
   CURRENT_USER.initials = cm.initials;
   CURRENT_USER.tag      = cm.tag || '';
-  MY_CHIPS = cm.tag ? Object.keys(CHIP_DB).filter(id => {
-    const d = CHIP_DB[id], tag = cm.tag.toLowerCase();
-    if (d.archived) return false;   // never badge an archived program as MY CHIP
-    return (d.sub && d.sub.toLowerCase().includes(tag)) ||
-           (d.checklist && d.checklist.some(c => c.owner && c.owner.toLowerCase().includes(tag)));
-  }) : [];
+  // An explicit chips[] list (set in Settings → CM Registry) wins. Otherwise fall
+  // back to tag-matching against chip data, so pre-existing entries keep working.
+  if (Array.isArray(cm.chips)) {
+    MY_CHIPS = cm.chips.filter(id => CHIP_DB[id] && !CHIP_DB[id].archived);
+  } else {
+    MY_CHIPS = cm.tag ? Object.keys(CHIP_DB).filter(id => {
+      const d = CHIP_DB[id], tag = cm.tag.toLowerCase();
+      if (d.archived) return false;   // never badge an archived program as MY CHIP
+      return (d.sub && d.sub.toLowerCase().includes(tag)) ||
+             (d.checklist && d.checklist.some(c => c.owner && c.owner.toLowerCase().includes(tag)));
+    }) : [];
+  }
   if (cm.admin) {
     CURRENT_USER.role = 'admin';
     // Admins see all chips but MY CHIP badge stays tag-based (not all chips)
@@ -2328,6 +2347,10 @@ function cmRegRender() {
       <div class="cmr-ok" id="cmr-ok-${i}">✓</div>
       ${isAdmin ? `<button onclick="cmRegRemove(${i})" title="Remove CM" style="background:transparent;border:none;color:#e05;cursor:pointer;font-size:14px;padding:0 4px">✕</button>` : ''}
     </div>
+    <div style="margin:-2px 0 10px 42px;display:flex;flex-wrap:wrap;gap:5px;align-items:center">
+      <span style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-right:2px">Chips</span>
+      ${cmRegChipToggles(cm, i)}
+    </div>
   `).join('');
 
   // Admin-only: Add CM button + show Export button in header
@@ -2367,7 +2390,11 @@ function cmRegExport() {
   // Generate the CM_REGISTRY code block ready to paste into the HTML source
   const lines = CM_REGISTRY.map(cm => {
     const flags = cm.admin ? ', admin:true' : '';
-    return `  {name:'${cm.name}', email:'${cm.email||''}', initials:'${cm.initials||'?'}', tag:'${cm.tag||cm.name.split(' ')[0]||''}'${flags}}`;
+    // Emit the explicit chip assignment so it survives the paste-and-push
+    const chips = Array.isArray(cm.chips)
+      ? `, chips:[${cm.chips.map(c => `'${c}'`).join(',')}]`
+      : '';
+    return `  {name:'${cm.name}', email:'${cm.email||''}', initials:'${cm.initials||'?'}', tag:'${cm.tag||cm.name.split(' ')[0]||''}'${chips}${flags}}`;
   });
   const code = `const CM_REGISTRY = [\n${lines.join(',\n')},\n];`;
   navigator.clipboard.writeText(code).catch(() => {
@@ -2384,6 +2411,50 @@ function cmRegMarkDirty(i) {
   if (ok) ok.style.display = 'none';
 }
 
+// ── Chip assignment, per CM ──────────────────────────────────────────────────
+// Chip ownership is matched by finding a CM's tag inside CHIP_DB[id].sub, so
+// "adding a CM" alone leaves them with no chips. These toggles write an explicit
+// cm.chips[] list, which applyIdentity() prefers over tag-matching when present.
+function cmRegChipToggles(cm, i) {
+  const assigned = cmChipsFor(cm);
+  return Object.keys(CHIP_DB)
+    .filter(id => !CHIP_DB[id].archived)
+    .map(id => {
+      const on = assigned.indexOf(id) >= 0;
+      return `<button onclick="cmRegToggleChip(${i},'${id}')" title="${(CHIP_DB[id].title||id)}"
+        style="font-size:10px;font-weight:700;padding:3px 9px;border-radius:11px;cursor:pointer;font-family:inherit;
+               border:1px solid ${on?'var(--nv-green)':'var(--border)'};
+               background:${on?'rgba(118,185,0,.14)':'transparent'};
+               color:${on?'var(--nv-green)':'var(--muted)'}">${id.toUpperCase()}</button>`;
+    }).join('');
+}
+
+// Resolve a CM's chips: explicit list wins, otherwise fall back to tag matching
+// so existing entries keep working without migration.
+function cmChipsFor(cm) {
+  if (Array.isArray(cm.chips)) return cm.chips;
+  if (!cm.tag) return [];
+  const t = cm.tag.toLowerCase();
+  return Object.keys(CHIP_DB).filter(id => {
+    const d = CHIP_DB[id];
+    if (d.archived) return false;
+    return (d.sub && d.sub.toLowerCase().includes(t)) ||
+           (d.checklist && d.checklist.some(c => c.owner && c.owner.toLowerCase().includes(t)));
+  });
+}
+
+function cmRegToggleChip(i, chipId) {
+  const cm = CM_REGISTRY[i];
+  if (!cm) return;
+  if (!Array.isArray(cm.chips)) cm.chips = cmChipsFor(cm).slice();
+  const at = cm.chips.indexOf(chipId);
+  if (at >= 0) cm.chips.splice(at, 1); else cm.chips.push(chipId);
+  cmRegMarkDirty(i);
+  cmRegRender();
+  // Reflect immediately if the admin is editing their own row
+  if (cm.email && CURRENT_USER.email === cm.email) applyIdentity(cm);
+}
+
 function cmRegSave() {
   CM_REGISTRY.forEach((cm, i) => {
     const emailEl = document.getElementById('cmr-email-' + i);
@@ -2393,8 +2464,11 @@ function cmRegSave() {
       cm.name = nameEl.value.trim();
       // Auto-generate initials from name (e.g. "Hui Fu" → "HF")
       cm.initials = cm.name.split(' ').filter(Boolean).map(w=>w[0].toUpperCase()).join('').slice(0,2) || '?';
-      cm.tag = cm.name.split(' ')[0] || '';
+      // Use the full name as the tag — a first-name-only tag makes a future
+      // "Vinay Kumar" silently inherit "Vinay Sharma"'s chips.
+      cm.tag = cm.name;
     }
+    // cm.chips is set by the chip toggles; leave it untouched here.
     const ok = document.getElementById('cmr-ok-' + i);
     if (ok) { ok.style.display = 'flex'; }
   });
@@ -4387,7 +4461,32 @@ window.cpSsoLogout = function() {
   function email(){ return get('ncs-email').trim() || 'sw-cm'; }
 
   function el(id){ return document.getElementById(id); }
-  function setText(id,v){ var e=el(id); if(e) e.textContent=v; }
+  // Textarea-aware. Prompt fields are editable <textarea>s — write to .value,
+  // and never clobber text the user has edited by hand.
+  function setText(id,v){
+    var e=el(id); if(!e) return;
+    if (e.tagName === 'TEXTAREA' || e.tagName === 'INPUT') {
+      if (e._userEdited) return;
+      e.value = v;
+    } else {
+      e.textContent = v;
+    }
+  }
+  function getText(id){
+    var e=el(id); if(!e) return '';
+    return (e.tagName==='TEXTAREA'||e.tagName==='INPUT') ? e.value : (e.textContent||'');
+  }
+
+  // Accept either a bare page ID or a pasted Confluence URL.
+  // .../wiki/spaces/TCS/pages/2872183795/TB500+Tegra+SW+Platforms  -> 2872183795
+  // .../wiki/pages/viewpage.action?pageId=2872183795               -> 2872183795
+  function parentPageId(raw){
+    var s = (raw||'').trim();
+    if (!s) return '';
+    if (/^\d+$/.test(s)) return s;
+    var m = s.match(/\/pages\/(\d+)/) || s.match(/[?&]pageId=(\d+)/);
+    return m ? m[1] : '';
+  }
   function setHtml(id,v){ var e=el(id); if(e) e.innerHTML=v; }
 
   window.ncsSync = function() {
@@ -4452,6 +4551,9 @@ renderSections(ref);
 '  Reference: ' + ref.refTitle + '\n  ' + ref.refUrl + '\n\n' +
 'Read that page first and mirror its section structure and heading order.\n' +
 'Do not invent sections it does not have, and do not drop sections it does.\n\n' +
+(parentPageId(get('ncs-conf-parent'))
+  ? 'Nest the new page under parent page ID ' + parentPageId(get('ncs-conf-parent')) + '.\n\n'
+  : 'Create the page at the root of the space (no parent specified).\n\n') +
 'Chip facts to fill in:\n' +
 '  Chip code:        ' + chipUp() + '\n' +
 '  Codename:         ' + (get('ncs-chip-name').trim() || '—') + '\n' +
@@ -4649,7 +4751,12 @@ keywords.slice(1).map(function(k){ return '* ' + k; }).join('\n') + '\n\n' +
   window.ncsCopy = function(srcId, btn) {
     var src = el('ncs-'+srcId);
     if(!src) { ncsManual('Could not find the content to copy.'); return; }
-    copyText(src.textContent || src.innerText || '', btn);
+    // Prompt fields are editable textareas — copy what the user actually sees,
+    // including any edits they made by hand.
+    var text = (src.tagName==='TEXTAREA'||src.tagName==='INPUT')
+      ? src.value
+      : (src.textContent || src.innerText || '');
+    copyText(text, btn);
   };
 
   // Manual copy fallback — shows a pre-selected textarea so the user can Ctrl+C
@@ -4678,10 +4785,21 @@ keywords.slice(1).map(function(k){ return '* ' + k; }).join('\n') + '\n\n' +
   // renders blank. A genuine user click on an anchor is not subject to that.
   function ncsSyncConfLink() {
     var sp     = get('ncs-conf-space').trim();
-    var title  = ((el('ncs-conf-title')||{}).value||'').trim() || (name_() + ' — SW Program Home');
-    var parent = get('ncs-conf-parent').trim();
+    var title  = ((el('ncs-conf-title')||{}).value||'').trim() || (name_() + ' (' + chipUp() + ') SW');
+    var rawP   = get('ncs-conf-parent');
+    var parent = parentPageId(rawP);
     var open   = el('ncs-conf-open');
     var wrap   = el('ncs-conf-links');
+
+    // Confirm back what we actually parsed, so a pasted URL isn't silently dropped
+    var echo = el('ncs-parent-echo');
+    if (echo) {
+      if (!rawP.trim())      { echo.style.display='none'; }
+      else if (parent)       { echo.style.display='block'; echo.style.color='var(--nv-green)';
+                               echo.textContent='✓ Parent page ID '+parent+' — will nest under this page'; }
+      else                   { echo.style.display='block'; echo.style.color='var(--amber)';
+                               echo.textContent='⚠ Could not find a page ID in that value — page will be created at space root'; }
+    }
 
     if (!sp) {
       if(open){ open.href = '#'; open.classList.add('disabled'); open.title = 'Enter a Confluence Space Key first'; }
