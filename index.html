@@ -4019,6 +4019,20 @@ function cpSsoConfigured() {
 
 // Try to silently sign in and match the returned email to CM_REGISTRY.
 // Returns true if a CM was found and applyIdentity() was called.
+// MSAL refuses a second interactive call while one is "in progress", and it
+// tracks that with an interaction.status key in storage. A popup that was closed
+// mid-flow, or a page reload during sign-in, leaves that key behind and blocks
+// every later attempt with interaction_in_progress. Clear it before interacting.
+function cpClearInteractionFlag() {
+  try {
+    [sessionStorage, localStorage].forEach(function(store){
+      Object.keys(store)
+        .filter(function(k){ return k.indexOf('interaction.status') >= 0; })
+        .forEach(function(k){ store.removeItem(k); });
+    });
+  } catch(e) {}
+}
+
 async function cpSsoInit() {
   if (!cpSsoConfigured()) return false;
   // Wait for the fallback loader if the local MSAL copy was missing
@@ -4051,9 +4065,12 @@ async function cpSsoInit() {
     const accounts = pca.getAllAccounts();
     const account  = accounts.length > 0 ? accounts[0] : null;
 
-    // Attempt silent SSO (succeeds when user has active NVIDIA AD session in browser)
+    // Attempt silent SSO (succeeds when user has active NVIDIA AD session in browser).
+    // Track it so an interactive sign-in can wait rather than colliding with it.
     const silentReq = { scopes: ['openid', 'email', 'profile'], ...(account ? {account} : {}) };
-    const resp = await pca.ssoSilent(silentReq).catch(() => null);
+    window._cpSsoSilentInFlight = pca.ssoSilent(silentReq).catch(() => null);
+    const resp = await window._cpSsoSilentInFlight;
+    window._cpSsoSilentInFlight = null;
     if (resp && resp.account) {
       return cpSsoMatchEmail(resp.account.username);
     }
@@ -4115,7 +4132,28 @@ window.cpSsoLogin = async function() {
     }
   }
   try {
-    const resp = await window._cpMsal.loginPopup({ scopes: ['openid', 'email', 'profile'] });
+    // Don't collide with the silent attempt fired on page load
+    if (window._cpSsoSilentInFlight) {
+      if (btn) { btn.textContent = 'Checking existing session…'; btn.disabled = true; }
+      try { await window._cpSsoSilentInFlight; } catch(e) {}
+      if (btn) { btn.textContent = 'Sign in with Microsoft'; btn.disabled = false; }
+      if (CURRENT_USER.email) { hideIdentityPicker(); return; }  // silent auth won
+    }
+    cpClearInteractionFlag();
+
+    let resp;
+    try {
+      resp = await window._cpMsal.loginPopup({ scopes: ['openid', 'email', 'profile'] });
+    } catch (err) {
+      // A stale flag can survive the clear above; wipe and retry exactly once.
+      if (err && err.errorCode === 'interaction_in_progress') {
+        cpClearInteractionFlag();
+        await new Promise(r => setTimeout(r, 250));
+        resp = await window._cpMsal.loginPopup({ scopes: ['openid', 'email', 'profile'] });
+      } else {
+        throw err;
+      }
+    }
     if (resp && resp.account) {
       const matched = cpSsoMatchEmail(resp.account.username);
       if (matched) {
@@ -4146,13 +4184,18 @@ window.cpSsoLogin = async function() {
 window.cpSsoLogout = function() {
   // Clear ChipPilot identity
   localStorage.removeItem('cp2_identity');
-  // Clear MSAL cache silently — no popup, no Microsoft dialog
+  // Clear MSAL cache silently — no popup, no Microsoft dialog.
+  // Sweep both stores, and include interaction.status so a stuck
+  // interaction_in_progress can always be cleared from the UI.
   try {
-    Object.keys(sessionStorage)
-      .filter(k => k.startsWith('msal.') || k.includes('login.microsoftonline'))
-      .forEach(k => sessionStorage.removeItem(k));
+    [sessionStorage, localStorage].forEach(function(store){
+      Object.keys(store)
+        .filter(k => k.startsWith('msal.') || k.includes('login.microsoftonline') || k.indexOf('interaction.status') >= 0)
+        .forEach(k => store.removeItem(k));
+    });
   } catch(e) {}
   window._cpMsal = null;
+  window._cpSsoSilentInFlight = null;
   // Reset current user state
   CURRENT_USER.name = ''; CURRENT_USER.email = ''; CURRENT_USER.initials = '?'; CURRENT_USER.role = '';
   // Show sign-in screen
