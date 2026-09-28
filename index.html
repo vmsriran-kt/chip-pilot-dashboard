@@ -1108,9 +1108,9 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
       <!-- Attention strip -->
       <div class="attn">
         <span class="attn-lbl">⬟ Needs Attention</span>
-        <div class="attn-pill"><span style="color:var(--red)">●</span> GR10x · P0 6536073 open · FieldDiag rerun on wrong ROM · 9/16 close at risk</div>
-        <div class="attn-pill"><span style="color:var(--red)">●</span> ThorZ · WAT 47% cov / 26% pass · 2 P0 blockers · QS gate 10/22</div>
-        <div class="attn-pill"><span style="color:var(--red)">●</span> N2x · ECO Freeze 9/20 · S-Die L1 flat 56% · L2 not started</div>
+        <div class="attn-pill"><span style="color:var(--red)">●</span> N2x · 6811448 showstopper blocks CL9 · ECO gate 9/29</div>
+        <div class="attn-pill"><span style="color:var(--red)">●</span> ThorZ · WAT 62% cov / 44% pass · ~10 P0 gating · QS 10/22</div>
+        <div class="attn-pill"><span style="color:var(--red)">●</span> GR15x · A01 silicon bring-up live · P0 6700314 open</div>
         <div class="attn-pill"><span style="color:var(--red)">●</span> T374/Beacon · QT netlist cannot boot iGPU · NL slips to Jan '27</div>
         <div class="attn-pill"><span style="color:var(--amber)">●</span> GR15x · 4 blocker-tagged bugs · DFP sign-off past 9/4 ETA</div>
         <div class="attn-pill"><span style="color:var(--amber)">●</span> TB600 · 1NL 9/27 · 4 IAS specs still at 0.7 · NVPOR blocked</div>
@@ -1147,7 +1147,7 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
           <div class="chip-card-sub">Rubin GPU · Post-silicon · CM: Ranjani · Madhura</div>
           <div class="chip-prog"><div style="height:100%;width:95%;border-radius:2px" class="cp-g"></div></div>
           <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted)">
-            <span>TIM1 WAR active · P0 6536073 open · FieldDiag rerun · 9/16 at risk</span><span>95%</span>
+            <span>TIM1 WAR active · 9/16 test-plan close missed · gate moved to 1.0 drop</span><span>95%</span>
           </div>
         </div>
         <div class="chip-card cc-green" onclick="showView('chip','gr15x')" style="cursor:pointer">
@@ -1172,12 +1172,12 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
         </div>
         <div class="chip-card cc-amber" onclick="showView('chip','thorz')" style="cursor:pointer">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px">
-            <span class="chip-card-name">ThorZ</span><span class="pill pill-r">2 P0 · QS 10/22</span>
+            <span class="chip-card-name">ThorZ</span><span class="pill pill-r">~10 P0 · QS 10/22</span>
           </div>
           <div class="chip-card-sub">CPU · Post-silicon · CM: Mayank Kapoor</div>
           <div class="chip-prog"><div style="height:100%;width:80%;border-radius:2px" class="cp-a"></div></div>
           <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted)">
-            <span>Full WAT SIT running · Cov 47% / Pass 26% · 2 P0 open · QS 10/22</span><span style="color:var(--red)">47%</span>
+            <span>Full WAT SIT running · Cov 62% / Pass 44% · ~10 P0 gating · QS 10/22</span><span style="color:var(--red)">62%</span>
           </div>
         </div>
         <div class="chip-card cc-amber" onclick="showView('chip','tb500')" style="cursor:pointer">
@@ -1202,12 +1202,12 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
         </div>
         <div class="chip-card cc-amber" onclick="showView('chip','n2x')" style="cursor:pointer">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px">
-            <span class="chip-card-name">N2x</span><span class="pill pill-r">ECO FREEZE 9/20</span>
+            <span class="chip-card-name">N2x</span><span class="pill pill-r">ECO FREEZE 9/29</span>
           </div>
           <div class="chip-card-sub">CPU · Pre-silicon · CM: Vivek Desikan</div>
           <div class="chip-prog"><div style="height:100%;width:35%;border-radius:2px" class="cp-a"></div></div>
           <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted)">
-            <span>ECO Freeze 9/20 · S-Die L1 56% (flat) · L2 0% · USB/DP trending 9/18</span><span style="color:var(--red)">⚠</span>
+            <span>T354S ECO closed · T354G pushed to 9/29 · G-Die L2 99% · S-Die L2 0%</span><span style="color:var(--red)">⚠</span>
           </div>
         </div>
         <div class="chip-card" style="border-left:3px solid var(--muted);cursor:pointer" onclick="showView('chip','tcx10')">
@@ -1227,7 +1227,7 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
           <div class="chip-card-sub">Magni · CPU · Pre-silicon · CM: Mayank Kapoor</div>
           <div class="chip-prog"><div style="height:100%;width:8%;border-radius:2px;background:var(--muted)"></div></div>
           <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted)">
-            <span>Arch + Safety Plan Review</span><span>8%</span>
+            <span>PVA blockers cleared · Magni-X vs Magni-S decision open</span><span>8%</span>
           </div>
         </div>
       </div>
@@ -1246,13 +1246,12 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
               <table class="s-tbl">
                 <thead><tr><th>Date</th><th>Chip</th><th>Milestone</th><th>Status</th></tr></thead>
                 <tbody>
-                  <tr><td>Sep 16</td><td>GR10x</td><td>TIM1 WAR test-plan close</td><td><span class="pill pill-r" style="font-size:9px">AT RISK</span></td></tr>
-                  <tr><td>Sep 17</td><td>N2x</td><td>ECO Freeze — T354G</td><td><span class="pill pill-a" style="font-size:9px">TRACKING</span></td></tr>
-                  <tr><td>Sep 18</td><td>N2x</td><td>USB/DP tunnelling enablement</td><td><span class="pill pill-r" style="font-size:9px">AT RISK</span></td></tr>
-                  <tr><td>Sep 20</td><td>N2x</td><td>ECO Freeze / SPO — T354S</td><td><span class="pill pill-r" style="font-size:9px">4 OPEN RISKS</span></td></tr>
-                  <tr><td>Sep 27</td><td>TB600</td><td>1st Netlist</td><td><span class="pill pill-a" style="font-size:9px">SPECS AT 0.7</span></td></tr>
-                  <tr><td>Oct 22</td><td>ThorZ</td><td>QS Gate</td><td><span class="pill pill-r" style="font-size:9px">NO MARGIN</span></td></tr>
-                  <tr><td>Oct 23</td><td>TB500</td><td>TB500-M Neutrino P-Rel</td><td><span class="pill pill-g" style="font-size:9px">ON PLAN</span></td></tr>
+                  <tr><td>Sep 29</td><td>N2x</td><td>ECO Freeze — T354G (pushed from 9/17)</td><td><span class="pill pill-r" style="font-size:9px">SHOWSTOPPER OPEN</span></td></tr>
+                  <tr><td>Oct 1</td><td>TB500</td><td>Neutrino Mem Qual boards ETD</td><td><span class="pill pill-a" style="font-size:9px">TRACKING</span></td></tr>
+                  <tr><td>Oct 5</td><td>GR10x</td><td>SCI Overt threshold fix (6826522)</td><td><span class="pill pill-a" style="font-size:9px">TRACKING</span></td></tr>
+                  <tr><td>Oct 9</td><td>TB500</td><td>A01Z WAT phase 2 (lab PM slip)</td><td><span class="pill pill-a" style="font-size:9px">SLIPPED</span></td></tr>
+                  <tr><td>Oct 22</td><td>ThorZ</td><td>QS Gate</td><td><span class="pill pill-r" style="font-size:9px">~10 P0 GATING</span></td></tr>
+                  <tr><td>Oct 23</td><td>TB500</td><td>TB500-M Neutrino P-Rel</td><td><span class="pill pill-a" style="font-size:9px">UNCONFIRMED</span></td></tr>
                   <tr><td>Dec 30</td><td>N2x</td><td>Tapeout</td><td><span class="pill pill-a" style="font-size:9px">TRACKING</span></td></tr>
                 </tbody>
               </table>
@@ -1267,8 +1266,8 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
             <div class="c-body" style="padding:10px">
               <div class="risk-row"><div class="rd rd-h"></div><span><strong>ThorZ:</strong> WAT at 47% coverage but only 26% pass / 21% hard fail; two P0 blockers open (6696490 FMON clock fault, 6693768 SC7 resume) against a QS gate of 10/22 with no margin</span></div>
               <div class="risk-row"><div class="rd rd-h"></div><span><strong>T374/Beacon:</strong> First QT netlist cannot boot the iGPU — SW-usable NL slips to Jan 2027, FPGA to end Feb 2027</span></div>
-              <div class="risk-row"><div class="rd rd-h"></div><span><strong>N2x:</strong> ECO Freeze 9/20 with four open risks whose ETAs land on or after the gate; S-Die L1 flat at 56% week-over-week, L2 not started</span></div>
-              <div class="risk-row"><div class="rd rd-h"></div><span><strong>GR10x:</strong> P0 6536073 (Sev 1 system crash) open; FieldDiag run on the wrong VBIOS ROM must be redone, putting the 9/16 test-plan close at risk</span></div>
+              <div class="risk-row"><div class="rd rd-h"></div><span><strong>N2x:</strong> T354S ECO closed 9/20; T354G pushed to 9/29 with 0-Showstopper 6811448 (C2C cannot access GIN registers, blocking CL9) still open on the gate</span></div>
+              <div class="risk-row"><div class="rd rd-h"></div><span><strong>GR10x:</strong> TIM1 WAR test-plan close missed on 9/16 — no agreed Linux workload to drive a faulty board to 112C/118C, unresolved since. 0.8 VBIOS blocker closed; gate has moved to the 1.0 drop</span></div>
               <div class="risk-row"><div class="rd rd-m"></div><span><strong>GR15x:</strong> Four blocker-tagged bugs across A01TV BaseBless, FE_0.1 and FirstSilicon gates; IO Electrical DFP sign-off past its 9/4 ETA with no engineer assigned</span></div>
               <div class="risk-row"><div class="rd rd-m"></div><span><strong>TB600:</strong> 1st netlist 9/27 while four IAS/chip specs sit at Arch-Complete 0.7; NVPOR rollout blocked on tooling</span></div>
               <div class="risk-row"><div class="rd rd-m"></div><span><strong>T294:</strong> Magni-X vs Magni-S scope undecided — SW POR and leads list cannot be locked until it closes</span></div>
@@ -1279,24 +1278,24 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
             <div class="c-hdr"><span class="c-hdr-title">📡 Live Signals Today</span></div>
             <div class="c-body" style="padding:10px;display:flex;flex-direction:column;gap:10px">
               <div style="border-left:2px solid var(--red);padding-left:10px">
-                <div style="font-size:10px;color:var(--muted)">📧 Top N Things - Tegra SW Chip Management (09/14/26) · Roopa Ranganathan · Sep 15</div>
-                <div style="font-size:12px;color:var(--text2)">T374 (Beacon): first QT NL will not boot iGPU — SW-usable QT NL Jan '27, FPGA end Feb '27. ThorZ QS 10/22, full WAT SIT at 47% coverage / 26% pass.</div>
+                <div style="font-size:10px;color:var(--muted)">📧 T354/N2x Chip SW Status Report · Vivek Desikan · Sep 21</div>
+                <div style="font-size:12px;color:var(--text2)">T354S ECO closed. T354G ECO pushed to 9/29, SW signoff pending. G-Die L2 jumped 62% → 99%. DP tunnelling up on Hybrid IPP; MST and DSC not yet enabled.</div>
               </div>
               <div style="border-left:2px solid var(--red);padding-left:10px">
-                <div style="font-size:10px;color:var(--muted)">📧 T354/N2x Chip SW Status Report · Vivek Desikan · Sep 15</div>
-                <div style="font-size:12px;color:var(--text2)">ECO Freeze 9/20 (T354S) / 9/17 (T354G), tapeout 12/30. Four open risks all ETA 9/18–9/20. S-Die L1 flat at 56%, L2 not started.</div>
+                <div style="font-size:10px;color:var(--muted)">🐛 NVBug 6811448 · 0-Showstopper · Open</div>
+                <div style="font-size:12px;color:var(--text2)">C2C cannot access GIN registers in iGPU — blocking CL9. HW weighing an ECO against a SW WAR. Lands directly on the 9/29 T354G gate.</div>
               </div>
               <div style="border-left:2px solid var(--red);padding-left:10px">
-                <div style="font-size:10px;color:var(--muted)">💬 GR100 TIM1 Hourly Watch · automated digest · Sep 15 07:10 UTC</div>
-                <div style="font-size:12px;color:var(--text2)">TIM1 WAR at risk: ROM 99.00.16.47.0A shipped but FieldDiag was run on …47.06, so cases must be redone. Main threat to the 9/16 close. TC18 FAIL.</div>
+                <div style="font-size:10px;color:var(--muted)">📧 Top N Things - Tegra SW Chip Management (09/21/26) · Roopa Ranganathan · Sep 21</div>
+                <div style="font-size:12px;color:var(--text2)">ThorZ WAT now 62% coverage / 44% pass, ~10 P0 SW issues gating QS 10/22 — close to the customer sample date. T374 iGPU boot blocker unchanged. ROSA NVPOR still stalled on tooling.</div>
               </div>
               <div style="border-left:2px solid var(--amber);padding-left:10px">
-                <div style="font-size:10px;color:var(--muted)">📧 [B] 6700314 frel_2 enablement blocker · vikasa@nvidia.com · Sep 15</div>
-                <div style="font-size:12px;color:var(--text2)">CUDA NVJPG workload throws CUDA_ERROR_NOT_SUPPORTED. Tagged SWGPU_GR15x_FirstSilicon_Blocker; ARB escalation raised.</div>
+                <div style="font-size:10px;color:var(--muted)">📧 GR150-A01 TV Bringup Power-On PSA · daily · Sep 28</div>
+                <div style="font-size:12px;color:var(--text2)">GR15x A01 silicon bring-up is live — daily power-on PSAs running, bring-up headcount last call issued. P0 6700314 and DFP sign-off 6681186 both still open.</div>
               </div>
               <div style="border-left:2px solid var(--amber);padding-left:10px">
-                <div style="font-size:10px;color:var(--muted)">📧 SWQA SBIOS dev-tb500 TOT LKG Sanity · yuanhengw@nvidia.com · Sep 15</div>
-                <div style="font-size:12px;color:var(--text2)">Both DUTs report Unsupported Request on four Mellanox mlx5Gen bridges — recurring across the 09/13 and 09/14 runs, no owner assigned.</div>
+                <div style="font-size:10px;color:var(--muted)">💬 GR100 TIM1 Hourly Watch · automated digest · Sep 18</div>
+                <div style="font-size:12px;color:var(--text2)">Test-plan close missed 9/16 — no agreed Linux workload to drive a faulty board to 112C/118C, unresolved since. 0.8 VBIOS blocker closed; gate moved to the 1.0 drop.</div>
               </div>
             </div>
           </div>
@@ -1401,7 +1400,7 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
     <div id="v-radar" style="display:none">
 
       <div class="sec-lbl">Portfolio Risk Heatmap — All 11 Programs
-        <span style="font-weight:400;font-size:10px;color:var(--muted);margin-left:8px">Hand-maintained · last reviewed 2026-09-15</span>
+        <span style="font-weight:400;font-size:10px;color:var(--muted);margin-left:8px">Hand-maintained · last reviewed 2026-09-28</span>
       </div>
       <div class="g-card" style="margin-bottom:16px">
         <div class="c-body" style="overflow-x:auto">
@@ -1421,10 +1420,10 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
 
       <div class="three-col">
         <div class="g-card"><div class="c-hdr"><span class="c-hdr-title" style="color:var(--red)">&#x1f534; High Risk</span></div><div class="c-body" style="padding:10px">
-          <div class="risk-row"><div class="rd rd-h"></div><span><strong>ThorZ:</strong> WAT 47% coverage / 26% pass · two P0 blockers open · QS gate 10/22 with no margin</span></div>
+          <div class="risk-row"><div class="rd rd-h"></div><span><strong>N2x:</strong> New 0-Showstopper 6811448 — C2C cannot access GIN registers, blocking CL9 — lands on the 9/29 G-Die ECO gate</span></div>
+          <div class="risk-row"><div class="rd rd-h"></div><span><strong>ThorZ:</strong> WAT 62% coverage / 44% pass · ~10 P0 SW issues gating QS 10/22 · close to customer sample date</span></div>
           <div class="risk-row"><div class="rd rd-h"></div><span><strong>T374:</strong> First QT netlist cannot boot iGPU — SW-usable NL slips to Jan '27</span></div>
-          <div class="risk-row"><div class="rd rd-h"></div><span><strong>N2x:</strong> ECO Freeze 9/20 · S-Die L1 flat at 56% · L2 not started</span></div>
-          <div class="risk-row" style="border:none"><div class="rd rd-h"></div><span><strong>GR10x:</strong> P0 6536073 (Sev 1) open · FieldDiag rerun puts 9/16 close at risk</span></div>
+          <div class="risk-row" style="border:none"><div class="rd rd-h"></div><span><strong>GR15x:</strong> P0 6700314 open (frel_2 enablement blocker) · DFP sign-off 6681186 now 24 days past its 9/4 ETA</span></div>
         </div></div>
         <div class="g-card"><div class="c-hdr"><span class="c-hdr-title" style="color:var(--amber)">&#x1f7e1; Medium Risk</span></div><div class="c-body" style="padding:10px">
           <div class="risk-row"><div class="rd rd-m"></div><span><strong>GR15x:</strong> Four blocker-tagged bugs across A01TV and FirstSilicon gates · DFP sign-off past 9/4 ETA</span></div>
@@ -2159,6 +2158,7 @@ function applyIdentity(cm) {
   CURRENT_USER.tag      = cm.tag || '';
   MY_CHIPS = cm.tag ? Object.keys(CHIP_DB).filter(id => {
     const d = CHIP_DB[id], tag = cm.tag.toLowerCase();
+    if (d.archived) return false;   // never badge an archived program as MY CHIP
     return (d.sub && d.sub.toLowerCase().includes(tag)) ||
            (d.checklist && d.checklist.some(c => c.owner && c.owner.toLowerCase().includes(tag)));
   }) : [];
@@ -3152,7 +3152,7 @@ function setChipFilter(chipId,el){
 }
 
 // Risk data: [chip, label, schedule, sw, hw, partner, safety]
-// Ratings reconciled against the Cockpit risk panel on 2026-09-15.
+// Ratings reconciled against the Cockpit risk panel on 2026-09-28.
 // Columns: Schedule | SW Risk | HW Risk | Partner | Safety
 // Keep this in sync with the Top Risks list — they were previously
 // independent tables and disagreed (GR10x rated all-green while the
@@ -3514,10 +3514,10 @@ const CHIP_DB = {
   },
   gr10x: {
     title: 'GR10x · Rubin GPU',
-    sub: 'Post-Silicon · SW CM: Ranjani · CWAT+BWAT DONE · TIM1 WAR Active · P0 6536073 Open',
+    sub: 'Post-Silicon · SW CM: Ranjani · CWAT+BWAT DONE · TIM1 WAR Active · Gate Moved to 1.0 Drop',
     wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/RubinSW/pages/2598144427',
-    pills: [['pill-g','CWAT+BWAT DONE'],['pill-r','P0 6536073 OPEN'],['pill-a','9/16 CLOSE AT RISK']],
-    anno: '[Sep 15] TIM1-void WAR path unblocked — VBIOS 0.8 / ROM 99.00.16.47.0A released — but FieldDiag was run on the wrong ROM (…47.06) and must be partially redone, putting the 9/16 test-plan close at risk. P0 6536073 (Sev 1 system crash, TPC Repair for TIM1 voids) still open.',
+    pills: [['pill-g','CWAT+BWAT DONE'],['pill-a','9/16 CLOSE MISSED'],['pill-a','GATE → 1.0 DROP']],
+    anno: '[Sep 28] TIM1 WAR test-plan close was missed on 9/16 — no agreed Linux workload to drive a faulty board to 112C/118C, unresolved since. The 0.8 VBIOS blocker has closed and the live gate moved to the 1.0 drop (ACR signed bins). New SCG TIM bug 6826522 (SCI Overt threshold, functional mode 128C) ETA 10/5. Status of P0 6536073 not re-verified this cycle — NVBugs lookup exceeded its response limit.',
     trend: [
       {d:'Jul 28',  e:'v0.6 QS SW Full Drop',  s:'slipped'},
       {d:'Aug 17',  e:'v0.8 Dev Drop',          s:'slipped'},
@@ -3697,8 +3697,8 @@ const CHIP_DB = {
     title: 'ThorZ · CPU',
     sub: 'Post-Silicon · SW CM: Mayank Kapoor · MNB+MG Declared 9/3 · Full WAT SIT Running · QS Gate 10/22',
     wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/T26xSSG/pages/3893410894',
-    pills: [['pill-a','WAT 47% / 26% PASS'],['pill-r','2 P0 BLOCKERS'],['pill-a','QS 10/22']],
-    anno: '[Sep 14] WAT Phase 1 at 47% coverage (up from 28%), but only 26% pass and 21% hard fail. QS gate 10/22 has no schedule margin. Two P0 blockers open: 6696490 (FMON clock faults) and 6693768 (SC7 resume failure).',
+    pills: [['pill-a','WAT 62% / 44% PASS'],['pill-r','~10 P0 GATING'],['pill-a','QS 10/22']],
+    anno: '[Sep 21] WAT now at 62% coverage / 44% pass — up from 47%/26% two weeks ago. Roughly 10 P0 SW issues are the gating items for QS. Both original P0 blockers still open: 6696490 (FMON clock faults, 0-Showstopper) and 6693768 (SC7 resume). QS 10/22 holds but sits very close to the customer QS sample date — any further WAT slip hits customer commitments.',
     meetings: [],
     risks: [
       {p:'h',t:'POR updated 360→420 TOPS (+11W: 73.3W→84.3W) -- dual RAM assist modes required; MNB schedule under review pending Liquid-Cool/Read-Assist mode timelines'},
@@ -3775,10 +3775,10 @@ const CHIP_DB = {
   },
   n2x: {
     title: 'N2x · CPU',
-    sub: 'Pre-Silicon · SW CM: Vivek Desikan · ECO Freeze 9/20 (S) / 9/17 (G) · Tapeout 12/30',
+    sub: 'Pre-Silicon · SW CM: Vivek Desikan · T354S ECO Closed · T354G Gate 9/29 · Tapeout 12/30',
     wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/TCS/pages/2872182179',
-    pills: [['pill-r','ECO FREEZE 9/20'],['pill-r','S-DIE L1 FLAT 56%'],['pill-r','L2 NOT STARTED']],
-    anno: '[Sep 14] ECO Freeze 9/20 with four open risks whose ETAs land on or after the gate. S-Die L0 87% / L1 56% (flat week-over-week) / L2 0%. G-Die L0 90% / L1 85% / L2 62%. USB/DP tunnelling trending 9/18; QA/USB module at 2% L0.',
+    pills: [['pill-r','ECO FREEZE 9/29'],['pill-r','6811448 SHOWSTOPPER'],['pill-r','S-DIE L2 0%']],
+    anno: '[Sep 28] T354S ECO Freeze closed on 9/20 as planned; T354G pushed from 9/17 to 9/29. New 0-Showstopper 6811448 — C2C cannot access GIN registers in iGPU, blocking CL9 — lands right on the G-Die gate, with HW weighing an ECO against a SW WAR. G-Die L2 jumped 62% to 99%; S-Die L1 still 56% and L2 still not started. USB/DP tunnelling slipped 9/18 to 9/28; DP is up on Hybrid IPP but MST and DSC are not enabled.',
     meetings: [],
     risks: [
       {p:'h',t:'Display bring-up on H2 blocked by Jade HW bug -- fix expected this week'},
@@ -3859,10 +3859,10 @@ const CHIP_DB = {
   },
   t294: {
     title: 'T294 · Magni CPU',
-    sub: 'Pre-Silicon · SW CM: Mayank Kapoor · Arch Readouts Ongoing · POR Target Past (6/30)',
-    wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/TCS',
-    pills: [['pill-m','SETUP']],
-    anno: '[Jul 13] Chip POR review in progress; few items pending. C2C modeling requirements under bandwidth constraint.',
+    sub: 'Pre-Silicon · SW CM: Mayank Kapoor · Magni-X vs Magni-S Open · PVA Blockers Cleared',
+    wikiUrl: 'https://nvidia.atlassian.net/wiki/spaces/TCS/pages/3115505496',
+    pills: [['pill-m','SETUP'],['pill-g','PVA BLOCKERS FIXED']],
+    anno: '[Sep 28] Both pre-silicon PVA blockers now closed as Fixed (6771031 DMA/VMEM write dropped, 6772693 CCP build errors). Magni-X vs Magni-S scope decision still open — SW POR and leads list cannot be locked until it closes. HW has proposed shortening the window from 1st netlist to tape-out.',
     meetings: [],
     risks: [
       {p:'h',t:'Safety design verification HIGH risk -- HSR dependency Feb 2028; concept assessment ~1 month before tapeout'},
@@ -4834,128 +4834,255 @@ function clDelta(n){ if(n===null) return ''; if(n<0) return Math.abs(n)+'d ago';
 function clEsc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
 const CL_CHIPS = {
-  NR10:{label:'NR10',fullName:'NVLink Fusion',color:'#5a9100',phase:'post-fnl',
+  NR10:{label:'NR10',fullName:'NVLink Fusion',color:'#5a9100',phase:'to',
     alert:'<strong>Post-FNL · In PnR/Layout.</strong> FNL Jun 29 ✅, ECO window closed Jul 24. SW baseline freeze needed by Sep 29 (BU-6M). A01 TapeOut Nov 30.',
     alertBg:'rgba(90,145,0,.07)',alertBorder:'rgba(90,145,0,.25)',
     dates:{fnl:'2026-06-29',ecoClose:'2026-07-24',toFreeze:'2026-11-10',codeLock:'2026-11-20',tapeOut:'2026-11-30',maskAppr:'2026-12-07',fabOut:'2027-02-26',powerOn:'2027-03-29',bge:'2027-04-26',esFgi:'2027-05-10',bnb:'2027-07-19',qsFgi:'2027-08-13',mnb:'2027-08-19',metalGood:'2027-09-26',prel:'2027-09-30'}},
-  GR10x:{label:'GR10x',fullName:'Rubin (GR100)',color:'#f5a623',phase:'qual',
+  GR10x:{label:'GR10x',fullName:'Rubin (GR100)',color:'#f5a623',phase:'qs',
     alert:'⚠️ <strong>QS Phase · P-Rel in progress.</strong> VR 0.6 QS SW Full Drop slipped 7/24→7/28. 48 SW blockers as of 7/21 (Core Models 15, TRT-LLM 10, PyTorch 7…). R615+CUDA 13.4 last-CL: 4 bugs still in triage. P-Rel huddle today (7/24) with Rahul. GR15x (Rubin Ultra) is a SEPARATE chip — TapeOut Jun 2, PO Jan 2027.',
     alertBg:'rgba(245,166,35,.07)',alertBorder:'rgba(245,166,35,.25)',
     dates:{fnl:'2025-03-01',ecoClose:'2025-03-10',toFreeze:'2025-03-20',codeLock:'2025-03-25',tapeOut:'2025-04-01',maskAppr:'2025-04-08',fabOut:'2025-10-01',powerOn:'2026-01-15',bge:'2026-02-15',esFgi:'2026-03-01',bnb:'2026-05-15',qsFgi:'2026-07-28',mnb:null,metalGood:null,prel:'2026-09-30'}},
-  N2x:{label:'N2x',fullName:'Tegra N2x',color:'#4d9fff',phase:'post-fnl',
+  N2x:{label:'N2x',fullName:'Tegra N2x',color:'#4d9fff',phase:'to',
     alert:'<strong>Pre-FNL → FNL Aug 25.</strong> 1NL due Aug 15. TapeOut Sep 15. Focus on SW PIC assignments and interposer strategy now.',
     alertBg:'rgba(77,159,255,.06)',alertBorder:'rgba(77,159,255,.2)',
     dates:{fnl:'2026-08-25',ecoClose:'2026-09-01',toFreeze:'2026-09-08',codeLock:'2026-09-12',tapeOut:'2026-09-15',maskAppr:'2026-09-22',fabOut:'2026-12-10',powerOn:'2027-01-20',bge:'2027-02-15',esFgi:'2027-03-01',bnb:'2027-05-15',qsFgi:'2027-06-01',mnb:'2027-06-15',metalGood:'2027-07-30',prel:'2027-08-15'}},
-  GR15x:{label:'GR15x',fullName:'Rubin Ultra (GR150)',color:'#9b59b6',phase:'fab',
+  GR15x:{label:'GR15x',fullName:'Rubin Ultra (GR150)',color:'#9b59b6',phase:'poweron',
     alert:'<strong>Fab Phase · TapeOut Jun 2, 2026 ✅</strong> Preparing for Power-On target Jan 2027. Board builds being planned.',
     alertBg:'rgba(155,89,182,.07)',alertBorder:'rgba(155,89,182,.25)',
     dates:{fnl:'2025-06-01',ecoClose:'2025-06-10',toFreeze:'2025-11-15',codeLock:'2025-11-25',tapeOut:'2026-06-02',maskAppr:'2026-06-09',fabOut:'2026-10-01',powerOn:'2027-01-01',bge:null,esFgi:null,bnb:null,qsFgi:null,mnb:null,metalGood:null,prel:null}},
-  TB600:{label:'TB600',fullName:'Tegra TB600',color:'#1abc9c',phase:'planning',
+  TB600:{label:'TB600',fullName:'Tegra TB600',color:'#1abc9c',phase:'1nl',
     alert:'<strong>Early Planning Phase.</strong> Platform POR and PIC identification in early stages. TapeOut ~18 months away.',
     alertBg:'rgba(26,188,156,.06)',alertBorder:'rgba(26,188,156,.2)',
     dates:{fnl:'2027-09-01',ecoClose:'2027-09-15',toFreeze:'2028-02-01',codeLock:'2028-02-10',tapeOut:'2028-02-20',maskAppr:'2028-02-27',fabOut:'2028-06-01',powerOn:'2028-07-15',bge:null,esFgi:null,bnb:null,qsFgi:null,mnb:null,metalGood:null,prel:null}}
 };
 
+// CM Checklist — mirrored from the authoritative page
+// https://nvidia.atlassian.net/wiki/spaces/TSS/pages/3719807160/SW+Chip+Management+Checklist
+// Source last modified Sep 23 2026 (Roopa Ranganathan). 144 chip items across 13 milestones.
+// Item counts verified against the page's own summary table.
+// Platform (40) and Fuses (37) checklists are not yet mirrored here.
 const CL_PHASE_META=[
-  {id:'planning',label:'Pre-FNL Setup',icon:'🗂️',style:'upcoming'},
-  {id:'post-fnl',label:'Post-FNL → TapeOut',icon:'📐',style:'active'},
-  {id:'fab',label:'Fab Phase',icon:'🏭',style:'upcoming'},
-  {id:'bringup',label:'Bring-Up',icon:'⚡',style:'active'},
-  {id:'validation',label:'ES Validation',icon:'🔬',style:'qual'},
-  {id:'qual',label:'Qual → P-Rel',icon:'🏁',style:'future'}
+  {id:'por',label:'POR',icon:'🎯',full:'Plan of Record',count:18,style:'upcoming'},
+  {id:'1nl',label:'1NL',icon:'📐',full:'First Netlist',count:20,style:'upcoming'},
+  {id:'pfnl',label:'PFNL',icon:'🔍',full:'Pre-Final Netlist',count:4,style:'upcoming'},
+  {id:'fnl',label:'FNL',icon:'🔒',full:'Final Netlist',count:6,style:'upcoming'},
+  {id:'eco',label:'ECO',icon:'🔧',full:'ECO Window',count:3,style:'upcoming'},
+  {id:'to',label:'TO',icon:'🏭',full:'Tape-Out',count:53,style:'upcoming'},
+  {id:'poweron',label:'PowerOn',icon:'⚡',full:'Power-On',count:7,style:'upcoming'},
+  {id:'es',label:'ES',icon:'🧪',full:'Engineering Sample',count:3,style:'upcoming'},
+  {id:'bnb',label:'BNB',icon:'📊',full:'Base Not Bad',count:8,style:'upcoming'},
+  {id:'mnb',label:'MNB',icon:'📈',full:'Metal Not Bad',count:1,style:'upcoming'},
+  {id:'mg',label:'MG',icon:'🏁',full:'Mass Growth',count:7,style:'upcoming'},
+  {id:'qs',label:'QS',icon:'✅',full:'Qualification Sample',count:10,style:'upcoming'},
+  {id:'ps',label:'PS',icon:'🚀',full:'Production Sample',count:4,style:'upcoming'},
 ];
-const CL_PHASE_ORDER=['planning','post-fnl','fab','bringup','validation','qual','prel'];
+const CL_PHASE_ORDER=['por','1nl','pfnl','fnl','eco','to','poweron','es','bnb','mnb','mg','qs','ps'];
 
 const CL_TEMPLATE={
-  planning:[
-    {gateId:'clg-pl-1',title:'Platform POR & Architecture',icon:'🏗️',dateKey:'fnl',datelabel:'Due by FNL',items:[
-      {id:'clp1',text:'Platform POR review — define all platform types (SLT, Module SLT, L4T Power, Auto, Product)',tags:['arch']},
-      {id:'clp2',text:'Identify board team PICs — Arch PICs and LDEs for all platforms',tags:['arch']},
-      {id:'clp3',text:'Identify SW PICs — Chip SW and Platform SW owners',tags:['sw']},
-      {id:'clp4',text:'Platform RFE Sheet created — SW-visible feature requests compiled',tags:['sw','arch']},
-      {id:'clp5',text:'Review Platform POR with SW team',tags:['sw']},
+  'por':[
+    {gateId:'clg-por-1',title:'Pre-PowerOn Infrastructure Setup',icon:'🏗️',dateKey:'',datelabel:'POR gate',items:[
+      {id:'cl1',text:'Assign and publish the software chip manager.',tags:['soc','gpu']},
+      {id:'cl2',text:'Add the software chip manager to the applicable WNF template and review workflow.',tags:['soc','gpu']},
+      {id:'cl3',text:'Identify and publish the software, QA, hardware, architecture, and emulation leads for the chip.',tags:['soc','gpu']},
+      {id:'cl4',text:'Create the software-leaders and chip-wide software distribution lists, archive their membership, and subscribe software leads to relevant hardware distribution lists.',tags:['soc','gpu']},
+      {id:'cl5',text:'Create the chip-specific software Confluence home page, standard Perforce directory tree, Google Drive, and SharePoint site.',tags:['soc','gpu']},
+      {id:'cl6',text:'Create, document, and communicate the chip-specific NVBug keywords and standard software bug-report templates; confirm with AEs and BU leads that all PowerOn software requests, tool needs, and RFEs are filed and tagged.',tags:['soc','gpu']},
+      {id:'cl7',text:'Create the chip entry in testDB.',tags:['soc','gpu']},
+      {id:'cl8',text:'Create and maintain the silicon errata and software-workaround tracker from program start through launch.',tags:['soc','gpu']},
+      {id:'cl9',text:'Create the chip Slack channel and add firmware and architecture owners.',tags:['soc','gpu']},
+      {id:'cl10',text:'Prepare and present the SW chip kickoff using the approved template: target OS and platform scope, SW POR gaps, validation scope, integrated HW/SW schedule.',tags:['soc','gpu']},
     ]},
-    {gateId:'clg-pl-2',title:'Interposer & PIC Alignment',icon:'🔧',dateKey:'fnl',datelabel:'Due BU-4M',items:[
-      {id:'clp6',text:'Interposer system strategy — define bring-up plan (SW + Board + System)',tags:['cross','hw']},
-      {id:'clp7',text:'Platform priority rank for bring-up — which boards get first SW attention',tags:['arch','sw']},
-      {id:'clp8',text:'NPI mailing list sign-up — CM and key SW owners enrolled',tags:['sw']},
-    ]}
+    {gateId:'clg-por-2',title:'POR & Program Definition',icon:'🎯',dateKey:'',datelabel:'POR gate',items:[
+      {id:'cl11',text:'Review prior-chip pre-silicon AARs and address carryover actions.',tags:['soc','gpu']},
+      {id:'cl12',text:'Capture AAR items throughout the program for review after major milestones.',tags:['soc','gpu']},
+      {id:'cl13',text:'Review prior-chip WNF bugs and select fixes for this chip.',tags:['soc','gpu']},
+      {id:'cl14',text:'Review prior-chip WHQL waivers and include required fixes in the chip POR.',tags:['gpu']},
+      {id:'cl15',text:'Set up NVPOR with SW Architecture, track each hardware POR feature\'s commitment, and obtain software-lead signoff.',tags:['soc','gpu']},
+      {id:'cl16',text:'Coordinate NVConfig and guardword enablement for the chip on applicable development and PowerOn branches.',tags:['soc','gpu']},
+      {id:'cl17',text:'Follow the approved PLC requirements-and-features flow for the chip.',tags:['soc','gpu']},
+      {id:'cl18',text:'Schedule and track all individual SW Module POR presentations using the approved Module POR Review template.',tags:['soc']},
+    ]},
   ],
-  'post-fnl':[
-    {gateId:'clg-pf-1',title:'SW Bring-Up Baseline Freeze',icon:'💾',dateKey:'toFreeze',datelabel:'Due by TO Freeze',items:[
-      {id:'clpf1',text:'Pinmux spreadsheet + IO MUX config tables — per-platform configs locked against FNL netlist',tags:['hw','sw']},
-      {id:'clpf2',text:'Power rails ramp delay spec — power sequencing finalized; thermal shutdown thresholds locked',tags:['hw','sw']},
-      {id:'clpf3',text:'Memory / RAM_CODE table — SKU-to-memory mapping documented',tags:['sw']},
-      {id:'clpf4',text:'Design delta doc complete — all design changes vs predecessor chip documented',tags:['arch']},
-      {id:'clpf5',text:'Ethernet MAC alignment — MAC address assignment strategy finalized',tags:['sw']},
+  '1nl':[
+    {gateId:'clg-1nl-1',title:'Architecture & Development Planning',icon:'📐',dateKey:'',datelabel:'1NL gate',items:[
+      {id:'cl19',text:'Create and maintain the Chip KPI Tracker as the single source of truth for KPI and program progress.',tags:['soc','gpu']},
+      {id:'cl20',text:'Complete IAS and applicable functional-description reviews; record versions, owners, actions, signoffs in the Chip KPI Tracker.',tags:['soc','gpu']},
+      {id:'cl21',text:'Review and track ISA differences from the previous chip; close review actions and obtain software signoff.',tags:['gpu']},
+      {id:'cl22',text:'Assign GPU Manual and Class review owners; publish schedules; complete reviews with software representation.',tags:['gpu']},
+      {id:'cl23',text:'Review and sign off the CE POR configuration for the chip lineup.',tags:['gpu']},
+      {id:'cl24',text:'Complete team-level Jira planning and publish the project and epic links in the Chip KPI Tracker.',tags:['soc','gpu']},
+      {id:'cl25',text:'Hold a weekly software-lead sync and publish consolidated status covering dates, delays, KPIs, trends, actions, blockers.',tags:['soc','gpu']},
+      {id:'cl26',text:'Plan and track design documents for key features, boot, and system software.',tags:['soc','gpu']},
+      {id:'cl27',text:'Establish boot sanity and expand simulation coverage as modules become available.',tags:['soc','gpu']},
+      {id:'cl28',text:'Define BootROM RTL test requirements and secure commitments from the responsible ASIC owners.',tags:['soc']},
     ]},
-    {gateId:'clg-pf-2',title:'HW Build Planning',icon:'🏗️',dateKey:'tapeOut',datelabel:'Due before TO',items:[
-      {id:'clpf6',text:'Primary & alternate component lists finalized — BOM with fallbacks',tags:['hw']},
-      {id:'clpf7',text:'NVPN creation — NVIDIA part numbers assigned for all components',tags:['hw']},
-      {id:'clpf8',text:'Demand collection — build quantities from HWQA, SWQA, labs, partners',tags:['hw']},
-      {id:'clpf9',text:'Component securing — long-lead item orders placed',tags:['hw']},
-      {id:'clpf10',text:'Boards planning XL published — quantities, owners, timeline per board type',tags:['hw']},
-      {id:'clpf11',text:'Platform combos vs SSG aligned — combination matrix aligned with customer commitments',tags:['cross']},
+    {gateId:'clg-1nl-2',title:'Emulation & Pre-Silicon Planning',icon:'🖥️',dateKey:'',datelabel:'1NL gate',items:[
+      {id:'cl29',text:'Hold the FModel and FSF kickoff to define requirements, target-OS scope, entry and exit criteria, and schedule.',tags:['gpu']},
+      {id:'cl30',text:'Ensure RM configures FModel DVS sanity.',tags:['gpu']},
+      {id:'cl31',text:'Run WHQL on FModel and disposition identified issues.',tags:['gpu']},
+      {id:'cl32',text:'Complete the development required to validate planned features in emulation before 1NL.',tags:['soc','gpu']},
+      {id:'cl33',text:'Create and maintain an end-to-end emulation validation plan: capacity, targets, allocation, effort, phasing, schedules, netlist priorities.',tags:['soc','gpu']},
+      {id:'cl34',text:'Review the emulation team\'s netlist bring-up plan and prerequisites before 1NL.',tags:['soc','gpu']},
+      {id:'cl35',text:'Confirm the first software-netlist entry criteria are met before 1NL.',tags:['soc','gpu']},
+      {id:'cl36',text:'Allocate FPGA, QT, and emulation capacity including HWQA; maintain daily allocations; publish reservation and handoff guidance.',tags:['soc','gpu']},
+      {id:'cl37',text:'Create and maintain the chip-specific emulation-user distribution list for emulator handoffs.',tags:['soc','gpu']},
+      {id:'cl38',text:'Review and track module pre-silicon test-plan readiness and new-feature coverage using the Firmware Hybrid Lx Test Taxonomy template.',tags:['soc','gpu']},
     ]},
-    {gateId:'clg-pf-3',title:'TapeOut / Code Lock Readiness',icon:'🔐',dateKey:'tapeOut',datelabel:'CM sign-off',items:[
-      {id:'clpf12',text:'SW bring-up package baseline locked — kernel config, DTB, CBL frozen',tags:['sw']},
-      {id:'clpf13',text:'SW feature list for customer engagement drafted',tags:['sw']},
-      {id:'clpf14',text:'CM TapeOut sign-off — CM review and sign-off before TO submission',tags:['cross']},
-    ]}
   ],
-  fab:[
-    {gateId:'clg-fab-1',title:'Board Build Kickoff',icon:'🔬',dateKey:'maskAppr',datelabel:'Post Mask Approval',items:[
-      {id:'clf1',text:'Board build order triggered — A01 build initiated with BOM confirmed',tags:['hw']},
-      {id:'clf2',text:'Android/Auto platform validation plan complete',tags:['sw']},
-      {id:'clf3',text:'Debug infrastructure ordered — JTAG probes, DAQ equipment, licenses',tags:['hw']},
-      {id:'clf4',text:'HDC/BDC/PDC bring-up planning complete',tags:['hw']},
+  'pfnl':[
+    {gateId:'clg-pfnl-1',title:'Emulation & Pre-Silicon Planning',icon:'🖥️',dateKey:'',datelabel:'PFNL gate',items:[
+      {id:'cl39',text:'Track HWQA and SWQA pre-silicon test-plan readiness; record scope, gaps, owners, completion, waivers.',tags:['soc','gpu']},
+      {id:'cl40',text:'Create and maintain the software QA regression plan through PowerOn: configurations, scope, cadence, owners, exit criteria.',tags:['soc','gpu']},
+      {id:'cl41',text:'Enable and validate AS2 protection for BootROM; link the requirement and record validation evidence.',tags:['soc']},
+      {id:'cl42',text:'Obtain and publish pre-silicon power and performance estimates for key use cases; document assumptions and gaps.',tags:['soc','gpu']},
     ]},
-    {gateId:'clg-fab-2',title:'Power-On Readiness',icon:'📬',dateKey:'fabOut',datelabel:'At Fab Out',items:[
-      {id:'clf5',text:'MODS coverage vs screening release timeline aligned',tags:['sw']},
-      {id:'clf6',text:'Chip & Board Screening plan finalized (BU-3W)',tags:['cross']},
-      {id:'clf7',text:'Bring-up team briefed — all Power-On owners onboarded with roles and lab access',tags:['sw','hw']},
-      {id:'clf8',text:'Power-On readiness review passed — CM sign-off',tags:['cross']},
-    ]}
   ],
-  bringup:[
-    {gateId:'clg-bu-1',title:'Power-On Execution',icon:'⚡',dateKey:'powerOn',datelabel:'From Power-On day',items:[
-      {id:'clbu1',text:'Board prioritization plan active — allocation priorities confirmed',tags:['hw','sw']},
-      {id:'clbu2',text:'Reworks/design changes communication — reworks communicated with mix-and-match matrix',tags:['cross']},
-      {id:'clbu3',text:'Mobile sanity coverage confirmed — HWQA/SWQA platforms available',tags:['sw']},
-      {id:'clbu4',text:'Prod Mode fused parts alignment — timeline aligned before ES boards built wide',tags:['cross']},
+  'fnl':[
+    {gateId:'clg-fnl-1',title:'Pre-Silicon Validation & Signoff',icon:'🔬',dateKey:'fnl',datelabel:'FNL gate',items:[
+      {id:'cl43',text:'Track all software teams\' L0 and L1 validation progress toward 100% completion by FNL.',tags:['soc','gpu']},
+      {id:'cl44',text:'Maintain the pre-silicon bug watchlist, flag potential hardware issues, and drive daily debug sessions as needed.',tags:['soc','gpu']},
+      {id:'cl45',text:'Complete BootROM validation by FNL.',tags:['soc']},
+      {id:'cl46',text:'Track required ECC compliance documentation and ensure it is filed at least 120 days before tape-out.',tags:['gpu']},
+      {id:'cl47',text:'Track and publish each pre-silicon netlist version and flavor with its software and firmware versions and enabled features.',tags:['soc','gpu']},
+      {id:'cl48',text:'Create and drive the Final Netlist software-signoff bug; require leads to record signoff after emulation checklists.',tags:['soc','gpu']},
     ]},
-    {gateId:'clg-bu-2',title:'Bug Triage & BGE',icon:'🐛',dateKey:'bge',datelabel:'Target: BGE gate',items:[
-      {id:'clbu5',text:'Bug triage workflow live — NVBug cadence; P1/P2 owners assigned; war-room cadence set',tags:['sw']},
-      {id:'clbu6',text:'RAM repaired parts — HWQA/SWQA boards tracked and distributed',tags:['hw']},
-      {id:'clbu7',text:'Base Good Enough (BGE) criteria met and signed off',tags:['cross']},
-    ]}
   ],
-  validation:[
-    {gateId:'clg-val-1',title:'ES Validation — ES FGI to BNB',icon:'📋',dateKey:'esFgi',datelabel:'From ES FGI',items:[
-      {id:'clv1',text:'Platform validation plan executing — all platform validation tests running',tags:['sw']},
-      {id:'clv2',text:'MODS coverage executing — MODS tests running on ES parts; weekly reports',tags:['sw']},
-      {id:'clv3',text:'Risk Wafer Start confirmed',tags:['fab']},
+  'eco':[
+    {gateId:'clg-eco-1',title:'ECO & Tape-Out Closure',icon:'🔧',dateKey:'ecoClose',datelabel:'ECO gate',items:[
+      {id:'cl49',text:'Review WNF decisions using the Chip Managers WNF process; advocate for hardware fixes when software workarounds are complex or fragile.',tags:['soc','gpu']},
+      {id:'cl50',text:'Maintain a watchlist of HW bugs found by SW or WNF; link each SW-workaround bug; track implementation, review, validation schedule, and CS/SW/HW signoff.',tags:['soc','gpu']},
+      {id:'cl51',text:'Complete the L2 checklist for tape-out.',tags:['soc','gpu']},
     ]},
-    {gateId:'clg-val-2',title:'Base Not Bad (BNB)',icon:'🏅',dateKey:'bnb',datelabel:'BNB target',items:[
-      {id:'clv4',text:'All P1 functional bugs resolved or SW WAR documented',tags:['sw']},
-      {id:'clv5',text:'SW WARs documented in errata — all workarounds published to SSG/customers',tags:['sw']},
-      {id:'clv6',text:'BNB criteria review passed — go/no-go for QS build',tags:['cross']},
-    ]}
   ],
-  qual:[
-    {gateId:'clg-q-1',title:'Qualification — QS FGI / MNB',icon:'📦',dateKey:'qsFgi',datelabel:'From QS FGI',items:[
-      {id:'clq1',text:'QS parts available — system qualification tests running',tags:['sw']},
-      {id:'clq2',text:'Metal Not Bad (MNB) criteria met',tags:['fab']},
-      {id:'clq3',text:'Customer deliverables draft ready — engineering BSP draft published for QS evaluation',tags:['sw']},
+  'to':[
+    {gateId:'clg-to-1',title:'ECO & Tape-Out Closure',icon:'🔧',dateKey:'tapeOut',datelabel:'TO gate',items:[
+      {id:'cl52',text:'Validate GPU, PCIe, audio-controller and codec device/revision IDs; ensure SW recognizes final-layout netlist IDs.',tags:['gpu']},
+      {id:'cl53',text:'Test and sign off every production-netlist flavor, including overnight GLStress and driver-stress coverage.',tags:['gpu']},
+      {id:'cl54',text:'Obtain Workstation, Notebook and Desktop stakeholder signoff on emulation test-plan coverage.',tags:['gpu']},
+      {id:'cl55',text:'For each SW workaround and functional ECO affecting production netlists, confirm validation cases and owners, then obtain dev-lead signoff.',tags:['soc','gpu']},
+      {id:'cl56',text:'Create and drive the Tape-Out software-signoff bug; confirm software Tape-Out blockers are zero.',tags:['soc','gpu']},
+      {id:'cl57',text:'Handoff released emulation capacity and outstanding allocation commitments to the next program\'s SW chip manager.',tags:['soc','gpu']},
     ]},
-    {gateId:'clg-q-2',title:'P-Rel Sign-Off',icon:'🏆',dateKey:'prel',datelabel:'P-Rel target',items:[
-      {id:'clq4',text:'All P1 bugs closed or WNF/WAR signed off by management',tags:['sw']},
-      {id:'clq5',text:'Production test signoffs complete — SLT, SCP, CP executed and signed',tags:['cross']},
-      {id:'clq6',text:'Final SW feature list published to SSG',tags:['sw']},
-      {id:'clq7',text:'Customer BSP/SDK shipped to all partner recipients',tags:['sw']},
-      {id:'clq8',text:'SOL P-Rel management sign-off — chip enters production',tags:['cross']},
-    ]}
-  ]
+    {gateId:'clg-to-2',title:'Post-TO PowerOn Readiness',icon:'⚡',dateKey:'tapeOut',datelabel:'TO gate',items:[
+      {id:'cl58',text:'Hold the POR-to-Tape-Out software AAR including development and emulation postmortem; capture follow-up actions.',tags:['soc','gpu']},
+      {id:'cl59',text:'Subscribe chip and platform SW teams to NPI communications; represent SW in NPI meetings from tape-out through PowerOn.',tags:['soc','gpu']},
+      {id:'cl60',text:'Review and close the SW NPI PowerOn checklist before silicon arrival.',tags:['soc','gpu']},
+      {id:'cl61',text:'Identify and publish GPU Marketing, Chip Solutions and Board Solutions leads for Consumer, Workstation and Notebook.',tags:['gpu']},
+      {id:'cl62',text:'Refresh and publish the post-silicon SW and QA lead roster before PowerOn; update the software-leaders DL.',tags:['soc','gpu']},
+      {id:'cl63',text:'Submit chip and board/platform requirements to System Engineering with SW NPI.',tags:['soc','gpu']},
+      {id:'cl64',text:'Assign Silicon Validation owners and document SW requirements for SLT, SHTOL, characterization, binning, memory validation and WAT.',tags:['soc','gpu']},
+      {id:'cl65',text:'Define MODS SLT test-enablement scope and release timing for ES, CS and QS releases.',tags:['soc','gpu']},
+      {id:'cl66',text:'Track post-tape-out development and PowerOn readiness to 100% before PowerOn using milestone-tagged bugs and the Chip KPI Tracker.',tags:['soc','gpu']},
+      {id:'cl67',text:'Complete outstanding FPGA and QT test plans before PowerOn.',tags:['soc','gpu']},
+      {id:'cl68',text:'Review and close cross-functional first-silicon PowerOn test plans; document high-risk and new-feature coverage, gaps, owners, branch scope.',tags:['soc','gpu']},
+      {id:'cl69',text:'Define the SWQA bug-isolation and regression policy, including reference hardware and comparison driver per active branch.',tags:['soc','gpu']},
+      {id:'cl70',text:'Establish PowerOn performance and power baselines; align Stress Farm and Power Farm profiles with approved use cases.',tags:['soc','gpu']},
+      {id:'cl71',text:'Review and publish the priority-application and launch-title validation list with Marketing and BU leadership.',tags:['gpu']},
+      {id:'cl72',text:'Review and close module-team first-silicon PowerOn test plans including stress coverage.',tags:['soc','gpu']},
+      {id:'cl73',text:'Define PowerOn and silicon-milestone exit criteria, readiness targets, and daily completion metrics.',tags:['soc','gpu']},
+      {id:'cl74',text:'Define and track the debug and profiling-tools POR (SM2, DTI, IMP where applicable); schedule training before PowerOn.',tags:['soc','gpu']},
+      {id:'cl75',text:'Complete final GPU VBIOS PowerOn reviews: SKU config, GPIO, I2C, display, fan/thermal, PLL, clock and framebuffer programming; confirm production signing.',tags:['gpu']},
+      {id:'cl76',text:'Provide a Workstation-capable VBIOS that can run on an available desktop board when no Workstation PowerOn board exists.',tags:['gpu']},
+      {id:'cl77',text:'Create the BRF validation plan with HWQA and obtain test-readiness signoff before PowerOn.',tags:['gpu']},
+      {id:'cl78',text:'Define and publish the PowerOn/sampling/productization branch and repository lifecycle, policies, builds, testing, guardword scans, IP hygiene and QS release vehicle.',tags:['soc','gpu']},
+      {id:'cl79',text:'Create and obtain HW and Solutions signoff on the GPU PowerOn feature-enablement plan, phasing schedule and milestone dates.',tags:['gpu']},
+      {id:'cl80',text:'Review RM, driver and MODS contingency plans for major silicon failures, including reduced-memory or no-framebuffer operation.',tags:['gpu']},
+      {id:'cl81',text:'Obtain consolidated MRD and POR requirements for ES, QS, PS, Prel and launch; review with SW NPI and Marketing; publish on the chip Confluence page.',tags:['gpu']},
+      {id:'cl82',text:'Review SSG branch-entry criteria at each bridge-branch or sprint transition with SSG, RM, MODS and SWQA.',tags:['gpu']},
+      {id:'cl83',text:'Publish DNI or equivalent temporary non-integration governance: approved use cases, submitters, maximum lifetime, cleanup deadlines.',tags:['soc','gpu']},
+      {id:'cl84',text:'Define the diagnostic-branch strategy including a fallback MODS branch, branch dependencies and point-fix feasibility.',tags:['soc','gpu']},
+      {id:'cl85',text:'Prepare and publish the PowerOn dashboard, team configuration pages, current SW-lead roster and readiness info on the chip SW wiki.',tags:['soc','gpu']},
+      {id:'cl86',text:'If the short-URL service is supported, request and verify the standard chip URL redirects to the PowerOn dashboard.',tags:['gpu']},
+      {id:'cl87',text:'Present the software readiness plan at the cross-functional PowerOn summit.',tags:['soc','gpu']},
+      {id:'cl88',text:'Plan, staff and publish PowerOn support rotations including travel, first-week sanity coverage and the Product PowerOn travel code.',tags:['soc','gpu']},
+      {id:'cl89',text:'Assign owners for WAT image support and daily PowerOn meeting coverage.',tags:['soc','gpu']},
+      {id:'cl90',text:'Hold module-level software PowerOn kickoff reviews using the approved Module PowerOn Kickoff template.',tags:['soc']},
+      {id:'cl91',text:'Hold the software PowerOn kickoff using the approved SW PowerOn Kickoff template.',tags:['soc','gpu']},
+      {id:'cl92',text:'Confirm first-24-hour firmware and microcode-signing coverage with the required number of authorized signers per event.',tags:['soc','gpu']},
+      {id:'cl93',text:'Confirm all applicable HULK or PSDL requirements are ready before PowerOn.',tags:['gpu']},
+      {id:'cl94',text:'Request the NPI program manager to update the installation INF for the PowerOn branch four to five days before PowerOn.',tags:['gpu']},
+      {id:'cl95',text:'Prepare the PowerOn console and ensure each team\'s PowerOn checklist is current in testDB.',tags:['soc','gpu']},
+      {id:'cl96',text:'Ensure SW NPI preconfigures PowerOn lab stations for Kernel, MODS, BootROM, Bootloader and NvFlash teams.',tags:['soc','gpu']},
+      {id:'cl97',text:'Provision remote build and host systems, including farm scratch space for shared build images.',tags:['soc','gpu']},
+      {id:'cl98',text:'Ensure SW NPI provides onsite workspace and lab-access privileges for visiting engineers supporting PowerOn.',tags:['soc','gpu']},
+      {id:'cl99',text:'Confirm SW NPI plans for Colossus and GVS capacity and the sanity-ramp schedule before PowerOn.',tags:['soc']},
+      {id:'cl100',text:'Ensure FPGA and QT systems are available for hardware debugging.',tags:['soc','gpu']},
+      {id:'cl101',text:'Schedule software PowerOn syncs at least twice weekly before PowerOn; adjust cadence as readiness changes.',tags:['soc','gpu']},
+      {id:'cl102',text:'Run SWQA and DVS sanity and regression on the PowerOn branch as a mock PowerOn two to three weeks before PowerOn.',tags:['soc','gpu']},
+      {id:'cl103',text:'Establish the critical-build change freeze and prepare PowerOn-branch automation including nightly/DVS builds and apply_cherrypicks.',tags:['soc','gpu']},
+      {id:'cl104',text:'Publish the software dependencies and timelines required for each Silicon Validation package.',tags:['soc','gpu']},
+    ]},
+  ],
+  'poweron':[
+    {gateId:'clg-poweron-1',title:'PowerOn & First-Week Execution',icon:'🔌',dateKey:'powerOn',datelabel:'PowerOn gate',items:[
+      {id:'cl105',text:'Use the approved PowerOn exit criteria to publish daily goals, assign owners and manage shift handoffs.',tags:['soc','gpu']},
+      {id:'cl106',text:'Complete target-OS boot and basic silicon checkout across each planned chip, memory and boot-device configuration.',tags:['soc','gpu']},
+      {id:'cl107',text:'Complete GVS and boot sanity on first silicon before ramping board usage.',tags:['soc']},
+      {id:'cl108',text:'Review and approve the software POR for each new board design; track board-specific actions in the Platform checklist.',tags:['soc','gpu']},
+      {id:'cl109',text:'Confirm ownership for platform validation, customer releases and demos; retain chip-team ownership of silicon validation on SLT.',tags:['soc','gpu']},
+      {id:'cl110',text:'Hold recurring post-silicon bug scrubs through launch with module leads and BU/AE/Marketing/QA stakeholders.',tags:['soc','gpu']},
+      {id:'cl111',text:'Monitor unintegrated changes and drive required integrations into the active milestone branches.',tags:['soc','gpu']},
+    ]},
+  ],
+  'es':[
+    {gateId:'clg-es-1',title:'ES Early Software Readiness',icon:'🧪',dateKey:'esFgi',datelabel:'ES gate',items:[
+      {id:'cl112',text:'File ES ratchet bugs and track firmware increments.',tags:['soc','gpu']},
+      {id:'cl113',text:'Review and close the QS software POR with Marketing, BU/OEM program managers, SW teams and HW; track QS requirement-completion metrics.',tags:['gpu']},
+      {id:'cl114',text:'Select and lock the ES software combination (graphics driver, VBIOS, MODS) and reconfirm alignment with BU requirements.',tags:['gpu']},
+    ]},
+  ],
+  'bnb':[
+    {gateId:'clg-bnb-1',title:'BNB Silicon Signoff',icon:'📊',dateKey:'bnb',datelabel:'BNB gate',items:[
+      {id:'cl115',text:'Complete HWQA and SW QA BNB signoff and Mini WAT; confirm L0/L1 complete; record lead approvals in the BNB signoff bug.',tags:['soc']},
+      {id:'cl116',text:'Drive useful PowerOn test coverage to completion or approved waiver, excluding known-broken tests.',tags:['soc']},
+      {id:'cl117',text:'Enable thermal shutdown and track TSOSC and hotspot calibration.',tags:['soc']},
+      {id:'cl118',text:'Close repaired-RAM validation gaps with HWQA and SWQA and record evidence in the Chip KPI Tracker.',tags:['soc']},
+      {id:'cl119',text:'Execute and document the PowerOn branch merge to Main.',tags:['soc']},
+      {id:'cl120',text:'Revert DNI changes and replace them with clean fixes before merge.',tags:['soc']},
+      {id:'cl121',text:'Apply all production settings required by Silicon Validation.',tags:['soc']},
+      {id:'cl122',text:'Review A02 ECO candidates and secure hardware fixes for software-critical issues.',tags:['soc']},
+    ]},
+  ],
+  'mnb':[
+    {gateId:'clg-mnb-1',title:'MG/MNB Validation & Productization',icon:'📈',dateKey:'mnb',datelabel:'MNB gate',items:[
+      {id:'cl123',text:'Complete MNB software signoff; confirm L0, L1 and L2 complete with no outstanding issues; record lead approvals in the MNB signoff bug.',tags:['soc','gpu']},
+    ]},
+  ],
+  'mg':[
+    {gateId:'clg-mg-1',title:'MG Validation & Productization',icon:'🏁',dateKey:'metalGood',datelabel:'MG gate',items:[
+      {id:'cl124',text:'Complete full WAT with Silicon Validation and HWQA MG validation.',tags:['soc','gpu']},
+      {id:'cl125',text:'Stress-test and enable every power feature in Main with documented evidence.',tags:['soc','gpu']},
+      {id:'cl126',text:'Reach full feature, KPI, QA, stress and stability coverage for MG.',tags:['soc','gpu']},
+      {id:'cl127',text:'Complete SKU support, GTM features and release QA.',tags:['soc','gpu']},
+      {id:'cl128',text:'Resolve software issues found during WAT.',tags:['soc','gpu']},
+      {id:'cl129',text:'Convert and validate board revisions for production-release silicon.',tags:['soc','gpu']},
+      {id:'cl130',text:'Update all SLT, chip and factory diagnostic packages for A02.',tags:['soc','gpu']},
+    ]},
+  ],
+  'qs':[
+    {gateId:'clg-qs-1',title:'QS & PS Production Readiness',icon:'✅',dateKey:'qsFgi',datelabel:'QS gate',items:[
+      {id:'cl131',text:'File QS ratchet bugs and track firmware increments.',tags:['soc','gpu']},
+      {id:'cl132',text:'Validate production and security-mode boot on every platform configuration.',tags:['soc','gpu']},
+      {id:'cl133',text:'Validate ECID-signed debug boot on every platform configuration.',tags:['soc']},
+      {id:'cl134',text:'Validate all board variants after QS fuse updates before signoff.',tags:['soc','gpu']},
+      {id:'cl135',text:'Confirm all committed chip features are functional and no software-solution blocking issues remain before QS.',tags:['soc','gpu']},
+      {id:'cl136',text:'Select and lock the candidate QS software package at least two weeks before QS; scrub the INF and package manifest.',tags:['gpu']},
+      {id:'cl137',text:'Request the production-ROM transition at least three weeks before QS and confirm VBIOS packaging is QS-ready.',tags:['gpu']},
+      {id:'cl138',text:'Request and complete SWQA end-game testing and HWQA testing of the final QS package.',tags:['gpu']},
+      {id:'cl139',text:'Prepare QS release notes; obtain stakeholder approval; sign off and release the QS package; update the dashboard with released versions.',tags:['gpu']},
+      {id:'cl140',text:'Review GPU press-driver Virtual Review plans with Desktop Marketing and SW BU leadership; track actions to closure.',tags:['gpu']},
+    ]},
+  ],
+  'ps':[
+    {gateId:'clg-ps-1',title:'QS & PS Production Readiness',icon:'✅',dateKey:'prel',datelabel:'PS gate',items:[
+      {id:'cl141',text:'File PS ratchet bugs and track firmware increments.',tags:['soc','gpu']},
+      {id:'cl142',text:'Validate all board variants after PS fuse updates before signoff.',tags:['soc','gpu']},
+      {id:'cl143',text:'Confirm production boot on updated fused silicon and include required factory diagnostic changes.',tags:['soc','gpu']},
+    ]},
+    {gateId:'clg-ps-2',title:'Program Handoff & AAR',icon:'🤝',dateKey:'prel',datelabel:'PS gate',items:[
+      {id:'cl144',text:'Hold the software module AAR reviews and track corrective actions, owners and due dates.',tags:['soc','gpu']},
+    ]},
+  ],
 };
 
 let clCurrentChip=null;
