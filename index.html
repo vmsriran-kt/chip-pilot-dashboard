@@ -1859,8 +1859,8 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
             <div style="display:flex;align-items:center;gap:12px">
               <div class="ncs-num">4</div>
               <div>
-                <div style="font-size:14px;font-weight:700;color:var(--text)">Set Up NVBugs Keywords & Wiki</div>
-                <div style="font-size:11px;color:var(--muted);margin-top:2px">Define bug keywords/components and publish them to Confluence</div>
+                <div style="font-size:14px;font-weight:700;color:var(--text)">Set Up NVBugs Keywords</div>
+                <div style="font-size:11px;color:var(--muted);margin-top:2px">Request the chip keyword set via NVBugs Keyword Administration</div>
               </div>
             </div>
             <div style="display:flex;align-items:center;gap:10px">
@@ -1871,11 +1871,9 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
           <div class="ncs-body" id="ncs-b-nvbugs" style="display:none">
             <div class="ncs-lbl" style="margin-bottom:8px">Suggested NVBugs keyword taxonomy</div>
             <div id="ncs-nvbugs-keywords" class="ncs-preview" style="font-family:monospace;font-size:12px;line-height:1.8">Fill in chip info above…</div>
-            <div class="ncs-lbl" style="margin-top:12px;margin-bottom:8px">Wiki page content (paste into Confluence)</div>
-            <div id="ncs-nvbugs-wiki" class="ncs-preview" style="font-size:12px;line-height:1.6">Fill in chip info above…</div>
             <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
               <a class="ncs-btn-primary" href="https://nvbugs.nvidia.com" target="_blank" rel="noopener noreferrer">🔗 Open NVBugs</a>
-              <button class="ncs-btn-secondary" onclick="ncsCopy('nvbugs-wiki',this)">📋 Copy Wiki Content</button>
+              <button class="ncs-btn-secondary" onclick="ncsCopy('nvbugs-keywords',this)">📋 Copy Keywords</button>
               <button class="ncs-btn-secondary" onclick="ncsCopy('nvbugs-agent-prompt',this)">🤖 Copy AI Agent Prompt</button>
             </div>
             <div style="margin-top:14px">
@@ -4744,24 +4742,24 @@ renderSections(ref).split('\n').map(function(l){ return '  ' + l; }).join('\n') 
       chipUp() + '-SW-Tools',
     ];
     setText('ncs-nvbugs-keywords', keywords.join('\n'));
-    var wikiContent =
-'= ' + n + ' NVBugs Keywords & Taxonomy =\n\n' +
-'This page documents the NVBugs keyword taxonomy for the ' + n + ' (' + chipUp() + ') chip SW program.\n\n' +
-'== Primary Keyword ==\n' + chipUp() + '\n\n' +
-'== SW Subsystem Keywords ==\n' +
-keywords.slice(1).map(function(k){ return '* ' + k; }).join('\n') + '\n\n' +
-'== How to File a Bug ==\n' +
-'1. Go to https://nvbugs.nvidia.com\n' +
-'2. Select Component: SW > ' + n + '\n' +
-'3. Add keyword: ' + chipUp() + ' + relevant subsystem keyword\n' +
-'4. Assign to: ' + email() + '@nvidia.com (CM) or module owner\n\n' +
-'== Triage Process ==\n' +
-'* P1 bugs: Page SW CM (' + email() + ') within 1 hour\n' +
-'* P2 bugs: Review in weekly war-room\n' +
-'* P3/P4 bugs: Track in monthly review\n\n' +
-'== Contacts ==\n| Role | Name | NVBugs Handle |\n|------|------|---------------|\n| SW CM | ' + cm() + ' | ' + email() + ' |';
-    setText('ncs-nvbugs-wiki', wikiContent);
-    var nvbugsPrompt = 'Create a Confluence page titled "' + n + ' NVBugs Keywords & Taxonomy" in space "' + sp + '" with the following content:\n\n' + wikiContent + '\n\nAlso, in NVBugs (https://nvbugs.nvidia.com), register the following keywords under a new component for ' + n + ':\n' + keywords.join(', ');
+    // Keywords are requested formally by filing against the NVBugs Keyword
+    // Administration module (id 33863) — not by publishing a wiki page.
+    var nvbugsPrompt =
+'File an NVBugs keyword request for the ' + n + ' (' + chipUp() + ') SW program.\n\n' +
+'Module:   NVBugs Keyword Administration (module_id 33863)\n' +
+'Severity: 7-Task Tracking\n' +
+'Priority: P2\n' +
+'Synopsis: [' + chipUp() + '][SW] Request: create keyword set for ' + n + ' SW program\n\n' +
+'Description:\n' +
+'Requesting creation of the NVBugs keyword set for the ' + n + ' (' + chipUp() + ') SW program,\n' +
+'which is entering ' + phaseLabel() + '. SW CM is ' + cm() + ' (' + email() + '@nvidia.com).\n\n' +
+'Primary keyword:\n  ' + chipUp() + '\n\n' +
+'SW subsystem keywords:\n' + keywords.slice(1).map(function(k){ return '  ' + k; }).join('\n') + '\n\n' +
+'Naming follows the existing per-chip convention already in use for TB500 and GR10x.\n' +
+'These will be applied to ' + chipUp() + ' SW bugs for triage routing and for the chip\n' +
+'program dashboard bug watchlist.\n\n' +
+'Please confirm once created, or advise if a different naming convention applies.\n\n' +
+'Show me the exact bug fields and wait for my approval before submitting.';
     setText('ncs-nvbugs-agent-prompt', nvbugsPrompt);
 
     // Refresh the Confluence anchor so it always points at the current form state
