@@ -806,9 +806,15 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
 <script>
 (function(){
   if (typeof msal !== 'undefined') { window._cpMsalSource = 'local'; return; }
+  // Per Microsoft's docs: "Starting from MSAL.js v3, msal-browser is no longer
+  // hosted on the CDN." The npm package for v3 ships only .cjs/.mjs for bundlers,
+  // so there is NO CDN fallback for v3 at all — a v3 build must be committed
+  // locally. These are documented-working v2 URLs, used only as a safety net.
+  // v2 lacks pca.initialize(), which is why that call is made conditionally.
+  // https://learn.microsoft.com/en-us/entra/msal/javascript/browser/cdn-usage
   var sources = [
-    ['ms-cdn',   'https://alcdn.msauth.net/browser/3.28.1/js/msal-browser.min.js'],
-    ['jsdelivr', 'https://cdn.jsdelivr.net/npm/@azure/msal-browser@3/lib/msal-browser.min.js']
+    ['ms-cdn-2.35', 'https://alcdn.msauth.net/browser/2.35.0/js/msal-browser.min.js'],
+    ['ms-cdn-2.3',  'https://alcdn.msauth.net/browser/2.3.0/js/msal-browser.min.js']
   ];
   window._cpMsalReady = new Promise(function(resolve){
     var i = 0;
@@ -4037,7 +4043,9 @@ async function cpSsoInit() {
 
     // Set _cpMsal before initialize() so loginPopup is always available
     window._cpMsal = pca;
-    await pca.initialize();
+    // initialize() exists in MSAL v3+ only. A v2 bundle is still usable, so call
+    // it conditionally rather than assuming a particular major version.
+    if (typeof pca.initialize === 'function') await pca.initialize();
 
     // Check for an already-cached account (e.g. from a previous tab)
     const accounts = pca.getAllAccounts();
