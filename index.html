@@ -2011,15 +2011,22 @@ let CURRENT_USER = {name:'Portfolio View',email:'',initials:'◈',tag:'',role:'m
 let MY_CHIPS = [];
 
 const CM_REGISTRY = [
-  {name:'Ranjani V',          email:'ssriranjani@nvidia.com',        initials:'RV', tag:'Ranjani',      admin:true},
-  {name:'Roopa Ranganathan',  email:'roopa.ranganathan@nvidia.com',  initials:'RR', tag:'Roopa',        admin:true},
-  {name:'Madhura Sankararama',email:'madhura.sankararama@nvidia.com', initials:'MS', tag:'Madhura'},
-  {name:'Vinay Sharma',       email:'vinay.sharma@nvidia.com',       initials:'VS', tag:'Vinay Sharma'},
-  {name:'Anshul Gupta',       email:'anshul.gupta@nvidia.com',       initials:'AG', tag:'Anshul Gupta'},
-  {name:'Hui Fu',             email:'hui.fu@nvidia.com',             initials:'HF', tag:'Hui Fu'},
-  {name:'Mayank Kapoor',      email:'mayank.kapoor@nvidia.com',      initials:'MK', tag:'Mayank Kapoor'},
-  {name:'Vivek Desikan',      email:'vivek.desikan@nvidia.com',      initials:'VD', tag:'Vivek Desikan'},
-  {name:'Hema Kumar',         email:'hemak@nvidia.com',              initials:'HK', tag:'Hema Kumar'},
+  // Tags are full names, so fuzzy substring matching against CHIP_DB no longer
+  // works for anyone whose chip data says only a first name ("SW CM: Ranjani").
+  // Every entry therefore carries an explicit chips[] list, which applyIdentity()
+  // uses in preference to tag matching. Assignment is now deterministic — edit it
+  // in Settings → CM Registry rather than by changing chip subtitles.
+  {name:'Ranjani V', email:'ssriranjani@nvidia.com', initials:'RV', tag:'Ranjani V', chips:['nr10x','gr10x'], admin:true},
+  // Super CM: admin gives full access to every chip; chips:[] means no MY CHIP badges.
+  {name:'Roopa Ranganathan', email:'roopa.ranganathan@nvidia.com', initials:'RR', tag:'Roopa Ranganathan', chips:[], admin:true},
+  {name:'Madhura Sankararama', email:'madhura.sankararama@nvidia.com', initials:'MS', tag:'Madhura Sankararama', chips:['fn10x']},
+  {name:'Vinay Sharma', email:'vinay.sharma@nvidia.com', initials:'VS', tag:'Vinay Sharma', chips:['gr15x']},
+  {name:'Anshul Gupta', email:'anshul.gupta@nvidia.com', initials:'AG', tag:'Anshul Gupta', chips:['gr15x']},
+  {name:'Hui Fu', email:'hui.fu@nvidia.com', initials:'HF', tag:'Hui Fu', chips:['tb600']},
+  {name:'Mayank Kapoor', email:'mayank.kapoor@nvidia.com', initials:'MK', tag:'Mayank Kapoor', chips:['thorz','t294']},
+  {name:'Vivek Desikan', email:'vivek.desikan@nvidia.com', initials:'VD', tag:'Vivek Desikan', chips:['n2x']},
+  {name:'Hema Kumar', email:'hemak@nvidia.com', initials:'HK', tag:'Hema Kumar', chips:[]},
+  {name:'Ramya V', email:'ramyav@nvidia.com', initials:'RV', tag:'Ramya V', chips:['t374']},
 ];
 
 function buildCMConfigPanel() {
