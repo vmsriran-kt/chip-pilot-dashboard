@@ -797,7 +797,37 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
 <!-- MSAL.js — Microsoft Authentication Library for Azure AD SSO -->
 <!-- Remove or comment out this line if SSO is not needed -->
 <!-- MSAL bundled locally — no CDN dependency -->
+<!-- MSAL loader with fallbacks.
+     The local copy is preferred (works offline / on locked-down networks), but it
+     is a separate file that must actually be committed alongside index.html. If it
+     is missing we fall back to Microsoft's own CDN, then jsDelivr. MSAL v3 is
+     required — the code calls pca.initialize(), which does not exist in v2. -->
 <script src="./msal-browser.min.js"></script>
+<script>
+(function(){
+  if (typeof msal !== 'undefined') { window._cpMsalSource = 'local'; return; }
+  var sources = [
+    ['ms-cdn',   'https://alcdn.msauth.net/browser/3.28.1/js/msal-browser.min.js'],
+    ['jsdelivr', 'https://cdn.jsdelivr.net/npm/@azure/msal-browser@3/lib/msal-browser.min.js']
+  ];
+  window._cpMsalReady = new Promise(function(resolve){
+    var i = 0;
+    (function next(){
+      if (i >= sources.length) { window._cpMsalSource = 'failed'; resolve(false); return; }
+      var name = sources[i][0], url = sources[i][1];
+      i++;
+      var s = document.createElement('script');
+      s.src = url;
+      s.onload  = function(){
+        if (typeof msal !== 'undefined') { window._cpMsalSource = name; resolve(true); }
+        else next();
+      };
+      s.onerror = next;
+      document.head.appendChild(s);
+    })();
+  });
+})();
+</script>
 </head>
 <body>
 <div id="app">
@@ -870,18 +900,12 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
       </button>
     </div>
 
-    <!-- Manual fallback: SSO popups and third-party cookies are commonly blocked
-         inside the chippilot.nvidia.com iframe. Without this a CM whose SSO fails
-         has no route to their own chips. -->
-    <div style="margin-top:16px;border-top:1px solid #eee;padding-top:16px">
-      <div style="font-size:11px;color:#999;margin-bottom:8px;text-align:left">Or pick your name if sign-in doesn't work:</div>
-      <select id="id-manual-pick" onchange="pickIdentityByEmail(this.value)"
-        style="width:100%;padding:11px 12px;border-radius:10px;border:1px solid #ddd;background:#fff;color:#333;font-size:13px;cursor:pointer;font-family:inherit">
-        <option value="">— select your name —</option>
-      </select>
-    </div>
+    <!-- The free-choice name picker that used to sit here was removed: it let
+         anyone sign in as any CM, which is impersonation, not authentication.
+         SSO is the only way to assume a CM identity. Portfolio view below is a
+         deliberately limited read-only role, not an identity. -->
 
-    <div style="margin-top:12px">
+    <div style="margin-top:16px;border-top:1px solid #eee;padding-top:16px">
       <button onclick="pickIdentity({name:'Portfolio View',email:'',initials:'◈',tag:''})"
         style="width:100%;padding:11px 20px;border-radius:10px;border:1px solid #ddd;background:transparent;color:#666;font-size:13px;cursor:pointer;font-family:inherit;transition:all .15s"
         onmouseover="this.style.borderColor='#bbb';this.style.color='#333'" onmouseout="this.style.borderColor='#ddd';this.style.color='#666'">
@@ -2158,7 +2182,7 @@ function buildCMConfigPanel() {
 
   const userLabel = (MY_CHIPS && MY_CHIPS.length > 0)
     ? `Logged in as ${CURRENT_USER.name} · Your chips highlighted`
-    : 'Portfolio / Management view — all 12 programs';
+    : 'Portfolio / Management view — all 11 programs';
 
   panel.innerHTML = `<div class="cmcp-card">
     <div class="cmcp-hdr">
@@ -2240,29 +2264,10 @@ function pickIdentity(cm) {
   renderCC();
 }
 
-// Pick an identity from the manual dropdown (SSO-failure fallback)
-function pickIdentityByEmail(email) {
-  if(!email) return;
-  const cm = CM_REGISTRY.find(c => c.email === email);
-  if(cm) pickIdentity(cm);
-}
-
 function showIdentityPicker() {
   const modal = document.getElementById('identity-modal');
   if(!modal) return;
 
-  // Populate the manual fallback list from the registry
-  const sel = document.getElementById('id-manual-pick');
-  if(sel && sel.options.length <= 1) {
-    CM_REGISTRY.forEach(cm => {
-      if(!cm.email) return;
-      const o = document.createElement('option');
-      o.value = cm.email;
-      o.textContent = cm.name + (cm.admin ? ' (admin)' : '');
-      sel.appendChild(o);
-    });
-  }
-  if(sel) sel.value = '';
 
   // Only offer a close button if there's a signed-in user to return to
   const closeBtn = document.getElementById('id-close-btn');
@@ -3282,7 +3287,7 @@ function renderChipView(chipId) {
       `<button onclick="window.CHIP_VIEW_MODE='collage';renderChipView(window.ACTIVE_CHIP)" style="padding:4px 10px;border-radius:5px;border:1px solid ${mode==='collage'?'var(--nv-green)':'var(--border)'};background:${mode==='collage'?'rgba(118,185,0,.15)':'var(--bg2)'};color:${mode==='collage'?'var(--nv-green)':'var(--muted)'};font-size:11px;font-weight:600;cursor:pointer;transition:all .15s">⊞ All Programs</button>`;
     } else {
       // mgmt: show role label + collage toggle
-      myPillsEl.innerHTML = `<span style="font-size:11px;color:var(--muted)">Portfolio view — all 12 programs</span>
+      myPillsEl.innerHTML = `<span style="font-size:11px;color:var(--muted)">Portfolio view — all 11 programs</span>
         <button onclick="window.CHIP_VIEW_MODE='single';renderChipView(window.ACTIVE_CHIP)" style="padding:4px 10px;border-radius:5px;border:1px solid ${mode==='single'?'var(--nv-green)':'var(--border)'};background:${mode==='single'?'rgba(118,185,0,.15)':'var(--bg2)'};color:${mode==='single'?'var(--nv-green)':'var(--muted)'};font-size:11px;cursor:pointer">≡ Single Chip</button>
         <button onclick="window.CHIP_VIEW_MODE='collage';renderChipView(window.ACTIVE_CHIP)" style="padding:4px 10px;border-radius:5px;border:1px solid ${mode==='collage'?'var(--nv-green)':'var(--border)'};background:${mode==='collage'?'rgba(118,185,0,.15)':'var(--bg2)'};color:${mode==='collage'?'var(--nv-green)':'var(--muted)'};font-size:11px;cursor:pointer">⊞ All Programs</button>`;
     }
@@ -3291,7 +3296,7 @@ function renderChipView(chipId) {
   // -- COLLAGE VIEW — all chips grid -------------------------------
   if(mode === 'collage') {
     document.getElementById('chip-title').textContent = 'Portfolio Overview';
-    document.getElementById('chip-subtitle').textContent = `All 12 programs · ${CURRENT_USER.name}`;
+    document.getElementById('chip-subtitle').textContent = `All 11 programs · ${CURRENT_USER.name}`;
     const annoElClear = document.getElementById('chip-anno');
     annoElClear.style.cssText = '';
     annoElClear.innerHTML = '';
@@ -4009,7 +4014,12 @@ function cpSsoConfigured() {
 // Try to silently sign in and match the returned email to CM_REGISTRY.
 // Returns true if a CM was found and applyIdentity() was called.
 async function cpSsoInit() {
-  if (!cpSsoConfigured() || typeof msal === 'undefined') return false;
+  if (!cpSsoConfigured()) return false;
+  // Wait for the fallback loader if the local MSAL copy was missing
+  if (typeof msal === 'undefined' && window._cpMsalReady) {
+    try { await window._cpMsalReady; } catch(e) {}
+  }
+  if (typeof msal === 'undefined') return false;
 
   // Show SSO button immediately if clientId is configured — don't wait for init
   const ssoRow = document.getElementById('id-sso-row');
@@ -4051,7 +4061,10 @@ function cpSsoMatchEmail(email) {
   const cm = CM_REGISTRY.find(c => c.email && c.email.toLowerCase() === email.toLowerCase());
   if (!cm) return false;
   applyIdentity(cm);
-  localStorage.setItem('cp2_identity', JSON.stringify(cm));
+  // Stamp the cached identity as SSO-verified. The bootstrap only restores a CM
+  // identity that carries this marker, so a stale cache from the old manual
+  // picker can no longer sign anyone in as someone else.
+  localStorage.setItem('cp2_identity', JSON.stringify(Object.assign({}, cm, {sso:true, ssoAt:Date.now()})));
   // Decorate avatar with SSO indicator
   const av = document.getElementById('hdr-avatar');
   if (av) {
@@ -4065,8 +4078,23 @@ function cpSsoMatchEmail(email) {
 window.cpSsoLogin = async function() {
   const btn = document.querySelector('#id-sso-row button');
   if (!window._cpMsal) {
+    // Give the fallback loader a chance before declaring failure
+    if (typeof msal === 'undefined' && window._cpMsalReady) {
+      if (btn) { btn.textContent = 'Loading sign-in…'; btn.disabled = true; }
+      try { await window._cpMsalReady; } catch(e) {}
+      if (btn) { btn.textContent = 'Sign in with Microsoft'; btn.disabled = false; }
+    }
     if (typeof msal === 'undefined') {
-      alert('Microsoft login library failed to load.\n\nThis usually means the CDN is blocked by your network or browser extension. Try:\n1. Disable ad blockers for this page\n2. Try on NVIDIA VPN\n3. Use a different browser');
+      alert(
+        'Microsoft sign-in library could not be loaded.\n\n' +
+        'Tried, in order:\n' +
+        '  1. ./msal-browser.min.js (local copy — is it committed next to index.html?)\n' +
+        '  2. https://alcdn.msauth.net (Microsoft CDN)\n' +
+        '  3. https://cdn.jsdelivr.net (jsDelivr)\n\n' +
+        'Most likely cause: msal-browser.min.js was never committed to the repo, and ' +
+        'outbound CDN access is blocked on this network.\n\n' +
+        'Fix: download MSAL browser v3 and commit it next to index.html, or connect to VPN.'
+      );
       return;
     }
     // MSAL loaded but init not done yet — try initialising now
@@ -4923,11 +4951,20 @@ keywords.slice(1).map(function(k){ return '* ' + k; }).join('\n') + '\n\n' +
 (function(){
   const saved = localStorage.getItem('cp2_identity');
   if (saved) {
-    try { applyIdentity(JSON.parse(saved)); }
-    catch(e) { localStorage.removeItem('cp2_identity'); }
-    // Silently re-validate in background (updates avatar SSO ring if session exists)
-    cpSsoInit().catch(()=>{});
-    return;
+    let ok = false;
+    try {
+      const id = JSON.parse(saved);
+      // Only restore a CM identity that SSO actually verified. Portfolio view
+      // (no email) is a role rather than an identity, so it may restore freely.
+      // Anything else is a stale cache from the removed manual picker — drop it.
+      if (id && (id.sso === true || !id.email)) { applyIdentity(id); ok = true; }
+      else { localStorage.removeItem('cp2_identity'); }
+    } catch(e) { localStorage.removeItem('cp2_identity'); }
+    if (ok) {
+      // Re-validate in background (refreshes the SSO ring if the session is live)
+      cpSsoInit().catch(()=>{});
+      return;
+    }
   }
   // No saved identity — try SSO silent auth; always show sign-in modal if not matched
   cpSsoInit().then(matched => {
