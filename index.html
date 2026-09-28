@@ -1763,8 +1763,11 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
             <div class="ncs-lbl">Parent Page ID <span style="font-weight:400;color:var(--muted)">(optional)</span></div>
             <input class="settings-inp" id="ncs-conf-parent" oninput="ncsSync()" style="width:100%;margin-bottom:6px" placeholder="Page ID or paste the full Confluence page URL"/>
             <div id="ncs-parent-echo" style="display:none;font-size:11px;color:var(--nv-green);margin-bottom:14px"></div>
-            <div class="ncs-lbl" style="margin-bottom:8px">Page Template Preview</div>
-            <div id="ncs-conf-preview" class="ncs-preview">Fill in chip info above to generate preview…</div>
+            <!-- The page template used to be shown here as well, but the agent
+                 prompt below already embeds it in full — same content twice.
+                 Kept hidden so "Copy Page Content" can still lift just the body
+                 for a manual paste into Confluence. -->
+            <div id="ncs-conf-preview" style="display:none"></div>
             <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
               <a id="ncs-conf-open" class="ncs-btn-primary disabled" href="#" target="_blank" rel="noopener noreferrer">🔗 Open in Confluence</a>
               <button class="ncs-btn-secondary" onclick="ncsCopy('conf-preview',this)">📋 Copy Page Content</button>
@@ -1837,8 +1840,9 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
           <div class="ncs-body" id="ncs-b-email" style="display:none">
             <div class="ncs-lbl" style="margin-bottom:8px">Suggested DL names</div>
             <div id="ncs-email-dls" class="ncs-preview" style="font-family:monospace;font-size:12px;line-height:1.8">Fill in chip info above…</div>
-            <div class="ncs-lbl" style="margin-top:12px;margin-bottom:8px">IT request draft</div>
-            <div id="ncs-email-draft" class="ncs-preview" style="font-size:12px;line-height:1.6">Fill in chip info above…</div>
+            <!-- Draft hidden: the agent prompt below embeds it verbatim.
+                 Retained so "Copy IT Request" can lift just the email body. -->
+            <div id="ncs-email-draft" style="display:none"></div>
             <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
               <a class="ncs-btn-primary" href="https://itcatalog.nvidia.com" target="_blank" rel="noopener noreferrer">🔗 IT Catalog</a>
               <button class="ncs-btn-secondary" onclick="ncsCopy('email-draft',this)">📋 Copy IT Request</button>
