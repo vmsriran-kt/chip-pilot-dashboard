@@ -1712,7 +1712,6 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
             <select id="ncs-family" class="settings-inp" onchange="ncsSync()" style="width:100%">
               <option value="tegra">Tegra / CPU</option>
               <option value="gpu">GPU</option>
-              <option value="custom">Custom / Other</option>
             </select>
           </div>
           <div>
@@ -4505,14 +4504,21 @@ window.cpSsoLogout = function() {
   // Tegra/CPU reference: TB500 → #tb500-sw-bringup  (also n2x, t294, thorz)
   // GPU reference:       GR10x → #swgpu-chips-gfw-rubin  (also gr15x, fn10x)
   var SLACK_REF = {
+    // Naming is PHASE-DEPENDENT, which is easy to get wrong:
+    //   Pre-Silicon  → #swteg-chips-{code}  (SOC)  /  #swgpu-chips-{code}  (GPU)
+    //   Bring-Up and later → the per-chip patterns used by TB500 and GR10x.
+    // {code} is the chip code as written — t25x, gr10x, tb600.
     tegra: {
       refChip: 'TB500',
       refChannels: ['#tb500-sw-bringup'],
+      preSiPrefix: '#swteg-chips-',
       shared: ['#cpu-ps-bringup'],
       build: function(c, code, ph) {
+        if (ph === 'pre-si') {
+          return ['#swteg-chips-' + c, '#' + c + '-sw-arch', '#' + c + '-fpga', '#cpu-ps-bringup'];
+        }
         var out = ['#' + c + '-sw-bringup'];
         if (code) out.push('#' + c + '-' + code + '-sw');
-        if (ph === 'pre-si')  out.push('#' + c + '-fpga', '#' + c + '-sw-arch');
         if (ph === 'bringup') out.push('#' + c + '-sw-debug', '#' + c + '-fpga');
         if (ph === 'post-si') out.push('#' + c + '-sw-debug', '#' + c + '-sw-releases');
         out.push('#cpu-ps-bringup');
@@ -4522,11 +4528,15 @@ window.cpSsoLogout = function() {
     gpu: {
       refChip: 'GR10x',
       refChannels: ['#swgpu-chips-gfw-rubin', '#swdl-execution'],
+      preSiPrefix: '#swgpu-chips-',
       shared: ['#swdl-execution'],
       build: function(c, code, ph) {
+        if (ph === 'pre-si') {
+          return ['#swgpu-chips-' + c, '#swdl-execution'];
+        }
         var out = ['#swgpu-chips-gfw-' + c];
         if (code) out.push('#swgpu-chips-gfw-' + code);
-        if (ph === 'bringup' || ph === 'post-si') out.push('#' + c + '-bringup');
+        out.push('#' + c + '-bringup');
         if (ph === 'post-si') out.push('#' + c + '-sw-releases');
         out.push('#swdl-execution');
         return out;
@@ -4539,7 +4549,9 @@ window.cpSsoLogout = function() {
   function chipUp(){ return get('ncs-chip-id').trim().toUpperCase(); }
   function name_(){ return get('ncs-chip-name').trim() || chipUp(); }
   function phase(){ return get('ncs-phase')||'pre-si'; }
-  function family(){ return get('ncs-family')||'tegra'; }
+  // Only two families are offered. Anything unrecognised falls back to Tegra
+  // rather than a 'custom' branch, so every code path has a real reference chip.
+  function family(){ var f = get('ncs-family'); return f === 'gpu' ? 'gpu' : 'tegra'; }
   function space(){ return get('ncs-conf-space').trim() || 'YOUR_SPACE'; }
   function cm(){ return get('ncs-cm').trim() || 'SW CM'; }
   function email(){ return get('ncs-email').trim() || 'sw-cm'; }
@@ -4596,40 +4608,15 @@ window.cpSsoLogout = function() {
 
     var confContent, confPrompt;
 
-    if (famC === 'custom') {
-      confContent =
-'= ' + n + ' (' + chipUp() + ') SW =\n\n' +
-'No standard structure for a custom chip family. Pick the closest reference:\n\n' +
-'  Tegra / CPU  → ' + CONF_REF.tegra.refTitle + '\n                 ' + CONF_REF.tegra.refUrl + '\n' +
-'  GPU          → ' + CONF_REF.gpu.refTitle + '\n                 ' + CONF_REF.gpu.refUrl + '\n\n' +
-'Then mirror that page\'s section structure for ' + chipUp() + '.';
-      confPrompt =
-'Populate the Confluence page "' + confTitle + '" in space ' + sp + '.\n\n' +
-'This chip does not fit the standard Tegra or GPU families, so first decide which\n' +
-'existing reference page is the closest fit, then mirror its structure:\n\n' +
-'  Tegra / CPU reference: ' + CONF_REF.tegra.refTitle + '\n    ' + CONF_REF.tegra.refUrl + '\n' +
-'  GPU reference:         ' + CONF_REF.gpu.refTitle + '\n    ' + CONF_REF.gpu.refUrl + '\n\n' +
-'Chip facts:\n' +
-'  Chip code:        ' + chipUp() + '\n' +
-'  Codename:         ' + (get('ncs-chip-name').trim() || '—') + '\n' +
-'  Phase:            ' + phaseLabel() + '\n' +
-'  SW CM:            ' + cm() + ' (' + email() + '@nvidia.com)\n' +
-'  Confluence space: ' + sp + '\n' +
-'  NVBugs keyword:   ' + chipUp() + '\n\n' +
-'Read the reference page you choose, mirror its section structure and heading order,\n' +
-'and tell me which reference you picked and why.\n\n' +
-'For any item where you do not have the real value, insert a clearly marked placeholder\n' +
-'such as "TBD — owner: ' + cm() + '" rather than guessing a link, date, or name.';
-    } else {
-      var ref = CONF_REF[famC];
-      confContent =
+        var ref = CONF_REF[famC];
+    confContent =
 '= ' + n + ' (' + chipUp() + ') SW =\n\n' +
 'SW CM: ' + cm() + ' (' + email() + '@nvidia.com)\n' +
 'Phase: ' + phaseLabel() + '   Space: ' + sp + '   NVBugs keyword: ' + chipUp() + '\n' +
 'Structure mirrored from: ' + ref.refTitle + '\n' + ref.refUrl + '\n\n' +
 renderSections(ref);
 
-      confPrompt =
+    confPrompt =
 'Populate the Confluence page "' + confTitle + '" in space ' + sp + '.\n\n' +
 'Model it on the existing reference page for this chip family:\n' +
 '  Reference: ' + ref.refTitle + '\n  ' + ref.refUrl + '\n\n' +
@@ -4651,7 +4638,7 @@ renderSections(ref).split('\n').map(function(l){ return '  ' + l; }).join('\n') 
 'For any item where you do not have the real value, insert a clearly marked\n' +
 'placeholder such as "TBD — owner: ' + cm() + '" rather than guessing a link,\n' +
 'date, or name. Leave the structure complete and the unknowns visible.';
-    }
+    
 
     setText('ncs-conf-preview', confContent);
     setText('ncs-conf-agent-prompt', confPrompt);
@@ -4661,39 +4648,13 @@ renderSections(ref).split('\n').map(function(l){ return '  ' + l; }).join('\n') 
     var code = get('ncs-chip-name').trim().toLowerCase().split(/\s+/)[0].replace(/[^a-z0-9]/g,'');
     var channels, refNote, slackPrompt;
 
-    if (fam === 'custom') {
-      channels = [];
-      refNote =
-'No standard pattern for a custom chip family — pick the closest reference below,\n' +
-'then confirm the namespace is free/approved before creating.\n\n' +
-'  Tegra / CPU reference — TB500:\n' +
-'    #tb500-sw-bringup        → #' + c + '-sw-bringup\n' +
-'    #t294-magni-sw           → #' + c + (code ? '-' + code : '-<codename>') + '-sw\n' +
-'    #cpu-ps-bringup          (shared, join existing)\n\n' +
-'  GPU reference — GR10x:\n' +
-'    #swgpu-chips-gfw-rubin   → #swgpu-chips-gfw-' + c + '\n' +
-'    #swdl-execution          (shared, join existing)\n\n' +
-'Check the Protected Namespaces list before requesting →';
-      setText('ncs-slack-channels', refNote);
-      slackPrompt =
-'I need to create Slack channels for a new NVIDIA chip program that does not fit the\n' +
-'standard Tegra or GPU families.\n\n' +
-'Chip: ' + n + ' (' + chipUp() + ')\nPhase: ' + phaseLabel() + '\nSW CM: ' + cm() + ' (' + email() + '@nvidia.com)\n\n' +
-'Existing naming conventions to pattern against:\n' +
-'  Tegra/CPU (ref TB500): #tb500-sw-bringup, #t294-magni-sw, #n2x-fpga, #cpu-ps-bringup\n' +
-'  GPU (ref GR10x):       #swgpu-chips-gfw-rubin, #swgpu-chips-gfw-gr15x, #swdl-execution\n\n' +
-'Please:\n' +
-'1. Check the NVIDIA Protected Namespaces list at\n' +
-'   https://nvidia.sharepoint.com/sites/Slack/Lists/Protected%20Namespaces/AllItems.aspx\n' +
-'   to see which prefixes are reserved and which require approval.\n' +
-'2. Recommend a channel set for ' + chipUp() + ' consistent with the closest existing family.\n' +
-'3. Tell me which channels need namespace approval and which I can create directly.';
-    } else {
-      var ref = SLACK_REF[fam];
-      channels = ref.build(c, code, ph);
-      refNote = 'Patterned on ' + ref.refChip + ' (' + ref.refChannels.join(', ') + ')';
-      setText('ncs-slack-channels', channels.join('\n') + '\n\n— ' + refNote);
-      slackPrompt =
+    var ref = SLACK_REF[fam];
+    channels = ref.build(c, code, ph);
+    refNote = (ph === 'pre-si')
+      ? 'Pre-Silicon convention: ' + ref.preSiPrefix + '{chip code}'
+      : 'Patterned on ' + ref.refChip + ' (' + ref.refChannels.join(', ') + ')';
+    setText('ncs-slack-channels', channels.join('\n') + '\n\n— ' + refNote);
+    slackPrompt =
 'Create the following Slack channels for the ' + n + ' (' + chipUp() + ') chip SW program.\n\n' +
 'Family: ' + (fam === 'gpu' ? 'GPU' : 'Tegra / CPU') + '\n' +
 'Phase: ' + phaseLabel() + '\n' +
@@ -4707,7 +4668,7 @@ renderSections(ref).split('\n').map(function(l){ return '  ' + l; }).join('\n') 
 'Before creating, verify the prefix against the NVIDIA Protected Namespaces list:\n' +
 'https://nvidia.sharepoint.com/sites/Slack/Lists/Protected%20Namespaces/AllItems.aspx\n' +
 'If a namespace is protected, tell me who to request approval from instead of creating it.';
-    }
+    
     setText('ncs-sl-phase-label', phaseLabel() + ' · ' + (fam==='gpu'?'GPU':fam==='tegra'?'Tegra/CPU':'Custom'));
     setText('ncs-slack-agent-prompt', slackPrompt);
 
@@ -4960,8 +4921,7 @@ renderSections(ref).split('\n').map(function(l){ return '  ' + l; }).join('\n') 
     if(!id) return 'tegra';
     var s = String(id).toLowerCase();
     if(/^(gr|fn|nr|gb|gh)\d/.test(s)) return 'gpu';
-    if(/^(t|tb|n|tcx|thor)/.test(s)) return 'tegra';
-    return 'custom';
+    return 'tegra';   // default: Tegra is the larger family
   }
 
   function updateProgress() {
