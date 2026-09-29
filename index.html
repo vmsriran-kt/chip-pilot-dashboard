@@ -1126,6 +1126,7 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
     <div class="tab" id="tab-chip" onclick="showView('chip',null,this)">🔬 Chip Detail</div>
     <div class="tab" id="tab-tasks" onclick="showView('tasks',null,this)">📋 My Tasks</div>
     <div class="tab" id="tab-setup" onclick="showView('setup',null,this)">🛠 New Chip Setup</div>
+    <div class="tab" id="tab-skills" onclick="showView('skills',null,this)" style="display:none">🧠 ChipMgr Skills</div>
     <div class="tab" id="tab-settings" onclick="showView('settings',null,this);cmRegRender();confPagePopulateChips()" style="margin-left:auto">⚙ Settings</div>
   </div>
 
@@ -1763,14 +1764,13 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
             <div class="ncs-lbl">Parent Page ID <span style="font-weight:400;color:var(--muted)">(optional)</span></div>
             <input class="settings-inp" id="ncs-conf-parent" oninput="ncsSync()" style="width:100%;margin-bottom:6px" placeholder="Page ID or paste the full Confluence page URL"/>
             <div id="ncs-parent-echo" style="display:none;font-size:11px;color:var(--nv-green);margin-bottom:14px"></div>
-            <!-- The page template used to be shown here as well, but the agent
-                 prompt below already embeds it in full — same content twice.
-                 Kept hidden so "Copy Page Content" can still lift just the body
-                 for a manual paste into Confluence. -->
+            <!-- Hidden: the agent prompt below embeds the full page template, so
+                 showing it here too was the same content twice. Retained only as
+                 the generation target for that template — nothing copies from it
+                 directly now that the separate copy button has gone. -->
             <div id="ncs-conf-preview" style="display:none"></div>
             <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
               <a id="ncs-conf-open" class="ncs-btn-primary disabled" href="#" target="_blank" rel="noopener noreferrer">🔗 Open in Confluence</a>
-              <button class="ncs-btn-secondary" onclick="ncsCopy('conf-preview',this)">📋 Copy Page Content</button>
               <button class="ncs-btn-secondary" onclick="ncsCopy('conf-agent-prompt',this)">🤖 Copy AI Agent Prompt</button>
             </div>
             <div id="ncs-conf-links" style="display:none;margin-top:12px;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;font-size:11px;color:var(--muted);word-break:break-all;line-height:1.7">
@@ -1903,7 +1903,29 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
         <div id="ncs-progress-label" style="font-size:13px;font-weight:700;color:var(--muted)">0 / 4 complete</div>
       </div>
 
-      <!-- Manual copy fallback (used when the iframe blocks clipboard/popups) -->
+    </div><!-- /v-setup -->
+
+    <!-- ================ CHIPMGR SKILLS (admin only) ================ -->
+    <div id="v-skills" style="display:none;padding:20px 0">
+      <div style="margin-bottom:18px">
+        <div class="sec-lbl">🧠 ChipMgr Skills</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:3px">
+          Copy a command and paste it into Cowork or Codex. The skill carries the conventions,
+          reference pages and approval gates — you don't need to re-explain them.
+        </div>
+      </div>
+
+      <div style="background:rgba(118,185,0,.06);border:1px solid rgba(118,185,0,.2);border-radius:10px;padding:12px 16px;margin-bottom:18px;font-size:12px;color:var(--text2);line-height:1.6">
+        <b style="color:var(--nv-green)">Prerequisite:</b> the ChipPilot plugin must be installed in your Cowork/Codex session.
+        Commands below assume <code style="background:rgba(255,255,255,.08);padding:1px 5px;border-radius:3px">chip-infra-setup</code> and the
+        <code style="background:rgba(255,255,255,.08);padding:1px 5px;border-radius:3px">chip-pilot</code> skills are available.
+      </div>
+
+      <div id="skl-list" style="display:flex;flex-direction:column;gap:12px"></div>
+    </div><!-- /v-skills -->
+
+      <!-- Manual copy fallback (used when the iframe blocks clipboard/popups).
+           Sits outside any view container so it can overlay from anywhere. -->
       <div id="ncs-manual-overlay" style="display:none;position:fixed;inset:0;z-index:9500;background:rgba(0,0,0,.7);align-items:center;justify-content:center" onclick="if(event.target===this)ncsManualClose()">
         <div style="background:var(--bg2);border:1px solid rgba(118,185,0,.3);border-radius:14px;padding:22px 24px;width:min(680px,92%);max-height:85vh;display:flex;flex-direction:column">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
@@ -1920,7 +1942,6 @@ body.light .cl-ptab.cl-pon{color:#5a9100;border-bottom-color:#76b900;background:
           </div>
         </div>
       </div>
-    </div><!-- /v-setup -->
 
     <!-- ═══ NEW CHIP MODAL ═══ -->
     <div id="nc-overlay" style="display:none;position:fixed;inset:0;z-index:8000;background:rgba(0,0,0,.65)" onclick="if(event.target===this)ncClose()">
@@ -2235,6 +2256,17 @@ function applyIdentity(cm) {
   const roleLabel = CURRENT_USER.role === 'admin' ? '★ Admin' : CURRENT_USER.role === 'cm' ? 'SW CM' : 'Portfolio';
   if(navName) navName.textContent = CURRENT_USER.name + ' · ' + roleLabel;
   if(av && CURRENT_USER.role === 'admin') av.style.boxShadow = '0 0 0 2px #76b900, 0 0 0 4px rgba(118,185,0,.3)';
+  // ChipMgr Skills is admin-only. If a non-admin is somehow sitting on that view
+  // when the identity changes, bounce them back to the cockpit.
+  const sklTab = document.getElementById('tab-skills');
+  if (sklTab) {
+    const isAdmin = CURRENT_USER.role === 'admin';
+    sklTab.style.display = isAdmin ? '' : 'none';
+    const sklView = document.getElementById('v-skills');
+    if (!isAdmin && sklView && sklView.style.display === 'block') {
+      showView('cockpit', null, document.getElementById('tab-cockpit'));
+    }
+  }
   // Refresh cockpit chip-card CM labels from CHIP_DB
   document.querySelectorAll('[onclick*="showView(\'chip\'"]').forEach(card => {
     const m = card.getAttribute('onclick').match(/showView\('chip','(\w+)'\)/);
@@ -3482,11 +3514,13 @@ function saveChipCfg(chipId, cfg) {
 window.ACTIVE_CHIP = null;
 function showView(id,chipId,tabEl){
   if(chipId) window.ACTIVE_CHIP=chipId;
-  ['cockpit','cc','radar','pm','chip','settings','tasks','setup'].forEach(v=>{
-    document.getElementById('v-'+v).style.display=v===id?'block':'none';
+  ['cockpit','cc','radar','pm','chip','settings','tasks','setup','skills'].forEach(v=>{
+    const el = document.getElementById('v-'+v);
+    if (el) el.style.display = v===id?'block':'none';
   });
   if(id==='tasks') ttRender();
   if(id==='setup') ncSetupRefresh();
+  if(id==='skills') sklRender();
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
   const t=tabEl||document.getElementById('tab-'+id);
   if(t)t.classList.add('on');
@@ -4006,10 +4040,25 @@ const CHIP_DB = {
 //  While the values still start with "PASTE_", SSO is silently skipped and
 //  the manual identity picker is used as fallback.
 // ══════════════════════════════════════════════════════════════════════════════
+// Redirect URI must follow whatever host is serving the page. Hardcoding it
+// meant the GitLab-hosted copy sent users back to github.io after sign-in.
+// Normalised to origin + directory with a trailing slash, because Azure matches
+// redirect URIs exactly — "/index.html" would not match a registered "/".
+//
+// EVERY host that serves this file needs its URL registered in Azure as a
+// Single-page application redirect URI (app 5fbc3bfb-efd2-4c97-ac34-a946ff7db9cc):
+//   https://vmsriran-kt.github.io/chip-pilot-dashboard/
+//   https://cpdashboard-7d456d.gitlab-master-pages.nvidia.com/
+function cpRedirectUri() {
+  var p = window.location.pathname.replace(/index\.html?$/i, '');
+  if (p.charAt(p.length - 1) !== '/') p += '/';
+  return window.location.origin + p;
+}
+
 const CP_SSO_CONFIG = {
   clientId:    '5fbc3bfb-efd2-4c97-ac34-a946ff7db9cc',
   tenantId:    '43083d15-7273-40c1-b7db-39efd9ccc17a',
-  redirectUri: 'https://vmsriran-kt.github.io/chip-pilot-dashboard/',
+  get redirectUri() { return cpRedirectUri(); },
 };
 
 function cpSsoConfigured() {
@@ -4449,6 +4498,113 @@ window.cpSsoLogout = function() {
 
   function escFtue(s){ return String(s).replace(/"/g,'&quot;'); }
 })();
+
+// ── ChipMgr Skills (admin only) ──────────────────────────────────────────────
+// A static page cannot invoke a skill, so this hands you the exact one-line
+// command to paste into Cowork or Codex. The skill itself carries the naming
+// conventions, reference pages and approval gates — no long prompt needed.
+// Consolidated set. cp-* are ChipPilot's own skills; the rest live in the
+// chip-pilot-rubin plugin. If a command is ambiguous, duplicate plugins are
+// still installed — keep only chip-pilot-rubin.
+const SKL_CATALOG = [
+  { id:'cp-help', icon:'🧭', name:'Not sure? Start here',
+    what:'Routes you to the right skill. Type it on its own and it asks what you need.',
+    exec:'router', chipArg:false,
+    cmd: () => `/cp-help` },
+  { id:'cp-setup-newchip', icon:'🛠', name:'Set up a new chip',
+    what:'Creates the Confluence program page, files the NVBugs keyword request, drafts the DL into Outlook, and hands you the Slack channel request.',
+    exec:'3 of 4 executed', chipArg:true,
+    cmd: c => `/cp-setup-newchip set up ${c.label}` },
+  { id:'dashboard-updater', icon:'🔄', name:'Update chip status',
+    what:'Pulls current status into this dashboard\'s chip data, then you push.',
+    exec:'edits this file', chipArg:true,
+    cmd: c => `/dashboard-updater refresh chip data for ${c.code}` },
+  { id:'daily-digest', icon:'📋', name:'Catch me up',
+    what:'Overnight recap across Slack, Confluence, NVBugs and email for a chip program.',
+    exec:'read-only', chipArg:true,
+    cmd: c => `/daily-digest catch me up on ${c.code}` },
+  { id:'bug-watchlist', icon:'🐛', name:'Bugs',
+    what:'Open P1/P2, WNF/WAR status and errata for a chip, with stale-bug flagging.',
+    exec:'read-only', chipArg:true,
+    cmd: c => `/bug-watchlist open P1 and P2 bugs for ${c.code}` },
+  { id:'milestone-tracker', icon:'🎯', name:'Milestones',
+    what:'Gate readiness, L0/L1/L2 completion and what is blocking the next milestone.',
+    exec:'read-only', chipArg:true,
+    cmd: c => `/milestone-tracker what milestone is ${c.code} at` },
+  { id:'review-tracker', icon:'✍️', name:'Reviews',
+    what:'IAS/GFD/SCS sign-off status and who has not reviewed yet.',
+    exec:'read-only', chipArg:true,
+    cmd: c => `/review-tracker who hasn't signed off on ${c.code}` },
+  { id:'weekly-status', icon:'📄', name:'Weekly status',
+    what:'Drafts the CM status report for leadership from live sources.',
+    exec:'drafts only', chipArg:true,
+    cmd: c => `/weekly-status draft weekly status for ${c.code}` },
+];
+
+function sklChipContext() {
+  // Prefer whatever is typed into New Chip Setup; otherwise the active chip.
+  const nid  = (document.getElementById('ncs-chip-id')   || {}).value || '';
+  const nname= (document.getElementById('ncs-chip-name') || {}).value || '';
+  if (nid.trim()) {
+    const fam  = (document.getElementById('ncs-family')||{}).value === 'gpu' ? 'GPU' : 'Tegra/CPU';
+    const phEl = (document.getElementById('ncs-phase')||{}).value || 'pre-si';
+    const ph   = {'pre-si':'Pre-Silicon','bringup':'Bring-Up','post-si':'Post-Silicon'}[phEl] || phEl;
+    const sp   = (document.getElementById('ncs-conf-space')||{}).value || '';
+    const cmn  = (document.getElementById('ncs-cm')||{}).value || CURRENT_USER.name;
+    const code = nid.trim().toUpperCase();
+    let label = `${code}${nname.trim() ? ' ('+nname.trim()+')' : ''}, ${fam}, ${ph}`;
+    if (sp.trim()) label += `, space ${sp.trim()}`;
+    if (cmn) label += `, CM ${cmn}`;
+    return { code, label, fromForm:true };
+  }
+  const active = window.ACTIVE_CHIP || MY_CHIPS[0] || Object.keys(CHIP_DB)[0];
+  return { code: (active||'').toUpperCase(), label: (active||'').toUpperCase(), fromForm:false };
+}
+
+function sklRender() {
+  const host = document.getElementById('skl-list');
+  if (!host) return;
+  const ctx = sklChipContext();
+
+  host.innerHTML =
+    `<div style="font-size:11px;color:var(--muted);margin-bottom:4px">
+       Commands target <b style="color:var(--nv-green)">${ctx.code || '—'}</b>${ctx.fromForm
+         ? ' (from the New Chip Setup form)'
+         : ' (currently selected chip — fill in New Chip Setup to target a new one)'}
+     </div>` +
+    SKL_CATALOG.map((s,i) => {
+      const cmd = s.cmd(ctx);
+      return `<div class="ncs-card">
+        <div style="padding:14px 18px">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+            <span style="font-size:17px">${s.icon}</span>
+            <span style="font-size:14px;font-weight:700;color:var(--text)">${s.name}</span>
+            <span class="ncs-status" style="margin-left:auto">${s.exec}</span>
+          </div>
+          <div style="font-size:11.5px;color:var(--muted);line-height:1.5;margin-bottom:10px">${s.what}</div>
+          <div id="skl-cmd-${i}" style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;color:var(--nv-green);word-break:break-all">${cmd}</div>
+          <button class="ncs-btn-secondary" style="margin-top:10px" onclick="sklCopy(${i},this)">📋 Copy command</button>
+        </div>
+      </div>`;
+    }).join('');
+}
+
+window.sklCopy = function(i, btn) {
+  const el = document.getElementById('skl-cmd-'+i);
+  if (!el) return;
+  if (typeof ncsCopyRaw === 'function') ncsCopyRaw(el.textContent, btn);
+  else if (typeof ncsCopy === 'function') {
+    // reuse the iframe-safe copy path
+    const tmp = document.createElement('textarea');
+    tmp.value = el.textContent;
+    tmp.style.cssText = 'position:fixed;top:0;left:-9999px;opacity:0';
+    document.body.appendChild(tmp); tmp.focus(); tmp.select();
+    try { document.execCommand('copy'); } catch(e) {}
+    document.body.removeChild(tmp);
+    const orig = btn.textContent; btn.textContent = '✓ Copied!'; btn.style.color = 'var(--nv-green)';
+    setTimeout(()=>{ btn.textContent = orig; btn.style.color=''; }, 1500);
+  }
+};
 
 // ── New Chip Setup ───────────────────────────────────────────────────────────
 (function(){
